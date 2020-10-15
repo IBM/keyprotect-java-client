@@ -66,9 +66,9 @@ To define a dependency on the entire set of services contained in the project, u
 
 ### creating key protect service
 
-import key-protect-api.jar into your project structure to access com.ibm.cloud.ibm_key_protect_api package.
-import sdk-core.jar to have IamAuthenticator . create  IamAuthenticator using IAM API key and IAM AUTH URL.
-then configure key protect service with authenticator. then run operations on service.
+Import key-protect-api.jar into your project structure to access com.ibm.cloud.ibm_key_protect_api package.
+Import sdk-core.jar to have IamAuthenticator. Create IamAuthenticator using IAM API key and IAM AUTH URL.
+Then configure key protect service with the authenticator, then run operations on service.
 
 ```import com.ibm.cloud.ibm_key_protect_api.v2.IbmKeyProtectApi;
    import com.ibm.cloud.ibm_key_protect_api.v2.model.*;
@@ -77,7 +77,7 @@ then configure key protect service with authenticator. then run operations on se
 
    import java.lang.*;
    import java.util.List;
-   public class sampleGetKeys {
+   public class sampleCreateService {
        public static void main(String[] args) {
            String bluemixInstance = <INSTANCE_ID>;
            IbmKeyProtectApi testService;
@@ -91,7 +91,9 @@ then configure key protect service with authenticator. then run operations on se
   ```
 ## Examples
 
-### creating a key
+Following examples use the service(testService) created above.
+
+### Create a key
 ```
             InputStream inputstream = new FileInputStream(<PATH_TO_Create_Key_Body>)
             CreateKeyOptions createKeyOptionsModel = new CreateKeyOptions.Builder()
@@ -105,12 +107,12 @@ then configure key protect service with authenticator. then run operations on se
             Response<Key> response = testService.createKey(createKeyOptionsModel).execute();
 ```
 
-### list keys
-               GetKeysOptions getKeysOptionsModel = new GetKeysOptions.Builder()
-                       .bluemixInstance(bluemixInstance)
-                       .build();
-               Response<ListKeys> response = testService.getKeys(getKeysOptionsModel).execute();
-               List<KeyRepresentation> keys = response.getResult().getResources();
+### List keys
+           GetKeysOptions getKeysOptionsModel = new GetKeysOptions.Builder()
+                   .bluemixInstance(bluemixInstance)
+                   .build();
+           Response<ListKeys> response = testService.getKeys(getKeysOptionsModel).execute();
+           List<KeyRepresentation> keys = response.getResult().getResources();
 
 ### Get Key Metadata
 ```
@@ -124,7 +126,7 @@ then configure key protect service with authenticator. then run operations on se
                GetKeyMetadata responseObj = response.getResult();
 ```
 
-### wrapping unwrapping a key
+### Wrap/Unwrap a key
 ```
             InputStream inputstream = new FileInputStream(<PATH_TO_Wrap_Key_Body>);
             //body has base64 encoded standard key
@@ -151,7 +153,7 @@ then configure key protect service with authenticator. then run operations on se
             response = testService.actionOnKey(unWrapKeyOptionsModel).execute();
             responseObj = response.getResult();
 ```
-### Creating/Retrieving an Import token
+### Create/Retrieve an Import token
 ```
             //Creating Import Token
             PostImportTokenOptions postImportTokenOptionsModel = new PostImportTokenOptions.Builder()
@@ -172,11 +174,10 @@ then configure key protect service with authenticator. then run operations on se
 ```
 ### List Registrations
 
-###### List registrations for keys
 ```
             // Construct an instance of the GetRegistrationsOptions model
             GetRegistrationsOptions getRegistrationsOptionsModel = new GetRegistrationsOptions.Builder()
-                     //.id(keyId)           // uncomment this to list registrations for a key in the instance
+                     //.id(keyId)          // uncomment to list registrations for a key in the instance
                     .bluemixInstance(bluemixInstance)
                     .limit(Long.valueOf("50"))
                     .totalCount(true)
@@ -187,9 +188,9 @@ then configure key protect service with authenticator. then run operations on se
             RegistrationWithTotalCount responseObj = response.getResult();
 ```
 
-### Setting(creating or updating)/Retrieving key policies
+### Set(create or update)/Retrieve key policies
 
-###### Setting automatic rotation policy for a key
+###### Set automatic rotation policy for a key
 ```
             // Construct an instance of the CollectionMetadata model
             CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
@@ -226,7 +227,7 @@ then configure key protect service with authenticator. then run operations on se
             Response<GetKeyPoliciesOneOf> response = testService.putPolicy(putPolicyOptionsModel).execute();
             GetKeyPoliciesOneOf responseObj = response.getResult();
 ```
-###### Setting dual authorization policy for a key
+###### Set dual authorization policy for a key
 ```
             // Construct an instance of the CollectionMetadata model
             CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
@@ -263,7 +264,7 @@ then configure key protect service with authenticator. then run operations on se
             Response<GetKeyPoliciesOneOf> response = testService.putPolicy(putPolicyOptionsModel).execute();
             GetKeyPoliciesOneOf responseObj = response.getResult();
 ```
-###### Setting multiple policies for a key
+###### Set multiple policies for a key
 ```
 
             // Construct an instance of the CollectionMetadata model
@@ -272,7 +273,7 @@ then configure key protect service with authenticator. then run operations on se
                     .collectionTotal(Long.valueOf("2"))
                     .build();
 
-            // Construct an list of SetMultipleKeyPoliciesResourcesItem
+            // Construct a list of SetMultipleKeyPoliciesResourcesItem
             ArrayList<SetMultipleKeyPoliciesResourcesItem> setMultipleKeyPoliciesResourcesItemList = new ArrayList<SetMultipleKeyPoliciesResourcesItem>();
 
             // Construct an instance of the KeyPolicyDualAuthDeleteDualAuthDelete model
@@ -335,9 +336,9 @@ then configure key protect service with authenticator. then run operations on se
             GetKeyPoliciesOneOf responseObj = response.getResult();
 ```
 
-### Setting(creating or updating)/Retrieving instance policies
+### Set(create or update)/Retrieve instance policies
 
-###### Setting dual authorization policy for an instance
+###### Set dual authorization policy for an instance
 
 ```
             // Construct an instance of the CollectionMetadata model
@@ -375,7 +376,7 @@ then configure key protect service with authenticator. then run operations on se
 
 ```
 
-###### Setting allowed network policy for an instance
+###### Set allowed network policy for an instance
 
 ```
             // Construct an instance of the CollectionMetadata model
@@ -418,7 +419,7 @@ then configure key protect service with authenticator. then run operations on se
             testService.putInstancePolicy(putInstancePolicyOptionsModel).execute();
 ```
 
-###### Setting allowed IP policy for an instance
+###### Set allowed IP policy for an instance
 ```
             // Construct an instance of the CollectionMetadata model
             CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
@@ -458,7 +459,7 @@ then configure key protect service with authenticator. then run operations on se
             testService.putInstancePolicy(putInstancePolicyOptionsModel).execute();
 ```
 
-###### Setting multiple policies for an instance
+###### Set multiple policies for an instance
 
 ```
             // Construct an instance of the CollectionMetadata model
@@ -469,15 +470,18 @@ then configure key protect service with authenticator. then run operations on se
 
             //Construct a list of SetMultipleInstancePoliciesResourcesItem
             ArrayList<SetMultipleInstancePoliciesResourcesItem> setMultipleInstancePoliciesResourcesItemList = new ArrayList<SetMultipleInstancePoliciesResourcesItem>();
+            
             // Construct an instance of the SetMultipleInstancePoliciesResourcesItemPolicyData model for dual authorization delete
             SetMultipleInstancePoliciesResourcesItemPolicyData setMultipleInstancePoliciesResourcesItemPolicyDataModel = new SetMultipleInstancePoliciesResourcesItemPolicyData.Builder()
                     .enabled(true)
                     .build();
+
             // Construct an instance of the SetMultipleInstancePoliciesResourcesItem model for dual authorization delete
             SetMultipleInstancePoliciesResourcesItem setMultipleInstancePoliciesResourcesItemModel = new SetMultipleInstancePoliciesResourcesItem.Builder()
                     .policyType("dualAuthDelete")
                     .policyData(setMultipleInstancePoliciesResourcesItemPolicyDataModel)
                     .build();
+
             // Add to the list
             setMultipleInstancePoliciesResourcesItemList.add(setMultipleInstancePoliciesResourcesItemModel);
 
@@ -485,16 +489,19 @@ then configure key protect service with authenticator. then run operations on se
             SetMultipleInstancePoliciesResourcesItemPolicyDataAttributes setMultipleInstancePoliciesResourcesItemPolicyDataAttributesModel = new SetMultipleInstancePoliciesResourcesItemPolicyDataAttributes.Builder()
                     .allowedNetwork("public-and-private")
                     .build();
+
             // Construct an instance of the SetMultipleInstancePoliciesResourcesItemPolicyData model for allowed network
             SetMultipleInstancePoliciesResourcesItemPolicyData setMultipleInstancePoliciesResourcesItemPolicyDataModel2 = new SetMultipleInstancePoliciesResourcesItemPolicyData.Builder()
                     .enabled(true)
                     .attributes(setMultipleInstancePoliciesResourcesItemPolicyDataAttributesModel)
                     .build();
+
             // Construct an instance of the SetMultipleInstancePoliciesResourcesItem model for allowed network
             SetMultipleInstancePoliciesResourcesItem setMultipleInstancePoliciesResourcesItemModel2 = new SetMultipleInstancePoliciesResourcesItem.Builder()
                     .policyType("allowedNetwork")
                     .policyData(setMultipleInstancePoliciesResourcesItemPolicyDataModel2)
                     .build();
+
             // Add to the list
             setMultipleInstancePoliciesResourcesItemList.add(setMultipleInstancePoliciesResourcesItemModel2);
 
