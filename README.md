@@ -101,7 +101,7 @@ then configure key protect service with authenticator. then run operations on se
                     .prefer("return=representation")
                     .build();
 
-            // Invoke operation with valid options model (positive test)
+            // Invoke operation with valid options model 
             Response<Key> response = testService.createKey(createKeyOptionsModel).execute();
 ```
 
@@ -119,7 +119,7 @@ then configure key protect service with authenticator. then run operations on se
                        .bluemixInstance(bluemixInstance)
                        .build();
 
-               // Invoke operation with valid options model (positive test)
+               // Invoke operation with valid options model
                Response<GetKeyMetadata> response = testService.getKeyMetadata(getKeyMetadataOptionsModel).execute();
                GetKeyMetadata responseObj = response.getResult();
 ```
@@ -169,6 +169,375 @@ then configure key protect service with authenticator. then run operations on se
 
             Response<GetImportToken> getResponse = testService.getImportToken(getImportTokenOptionsModel).execute();
             GetImportToken getResponseObj = getResponse.getResult();
+```
+### List Registrations
+
+###### List registrations for keys
+```
+            // Construct an instance of the GetRegistrationsOptions model
+            GetRegistrationsOptions getRegistrationsOptionsModel = new GetRegistrationsOptions.Builder()
+                     //.id(keyId)           // uncomment this to list registrations for a key in the instance
+                    .bluemixInstance(bluemixInstance)
+                    .limit(Long.valueOf("50"))
+                    .totalCount(true)
+                    .build();
+
+            // Invoke operation with valid options model
+            Response<RegistrationWithTotalCount> response = testService.getRegistrations(getRegistrationsOptionsModel).execute();
+            RegistrationWithTotalCount responseObj = response.getResult();
+```
+
+### Setting(creating or updating)/Retrieving key policies
+
+###### Setting automatic rotation policy for a key
+```
+            // Construct an instance of the CollectionMetadata model
+            CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
+                    .collectionType("application/vnd.ibm.kms.policy+json")
+                    .collectionTotal(Long.valueOf("1"))
+                    .build();
+
+            // Construct an instance of the KeyPolicyRotationRotation model
+            KeyPolicyRotationRotation keyPolicyRotationRotationModel = new KeyPolicyRotationRotation.Builder()
+                    .intervalMonth(2)
+                    .build();
+
+            // Construct an instance of the KeyPolicyRotation model
+            KeyPolicyRotation keyPolicyRotationModel = new KeyPolicyRotation.Builder()
+                    .type("application/vnd.ibm.kms.policy+json")
+                    .rotation(keyPolicyRotationRotationModel)
+                    .build();
+
+            // Construct an instance of the SetKeyPoliciesOneOfSetKeyPolicyRotation model
+            SetKeyPoliciesOneOfSetKeyPolicyRotation setKeyPoliciesOneOfModel = new SetKeyPoliciesOneOfSetKeyPolicyRotation.Builder()
+                    .metadata(collectionMetadataModel)
+                    .resources(new ArrayList<KeyPolicyRotation>(Arrays.asList(keyPolicyRotationModel)))
+                    .build();
+
+            // Construct an instance of the PutPolicyOptions model
+            PutPolicyOptions putPolicyOptionsModel = new PutPolicyOptions.Builder()
+                    .id(keyId)
+                    .bluemixInstance(bluemixInstance)
+                    .setKeyPoliciesOneOf(setKeyPoliciesOneOfModel)
+                    .policy("rotation")
+                    .build();
+
+            // Invoke operation with valid options model
+            Response<GetKeyPoliciesOneOf> response = testService.putPolicy(putPolicyOptionsModel).execute();
+            GetKeyPoliciesOneOf responseObj = response.getResult();
+```
+###### Setting dual authorization policy for a key
+```
+            // Construct an instance of the CollectionMetadata model
+            CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
+                    .collectionType("application/vnd.ibm.kms.policy+json")
+                    .collectionTotal(Long.valueOf("1"))
+                    .build();
+            
+            // Construct an instance of the KeyPolicyDualAuthDeleteDualAuthDelete model
+            KeyPolicyDualAuthDeleteDualAuthDelete keyPolicyDualAuthDeleteDualAuthDeleteModel = new KeyPolicyDualAuthDeleteDualAuthDelete.Builder()
+                    .enabled(true)
+                    .build();
+
+            // Construct an instance of the KeyPolicyDualAuthDelete model
+            KeyPolicyDualAuthDelete keyPolicyDualAuthDeleteModel = new KeyPolicyDualAuthDelete.Builder()
+                    .type("application/vnd.ibm.kms.policy+json")
+                    .dualAuthDelete(keyPolicyDualAuthDeleteDualAuthDeleteModel)
+                    .build();
+
+            // Construct an instance of the SetKeyPoliciesOneOfSetKeyPolicyDualAuthDelete model
+            SetKeyPoliciesOneOfSetKeyPolicyDualAuthDelete setKeyPoliciesOneOfModel = new SetKeyPoliciesOneOfSetKeyPolicyDualAuthDelete.Builder()
+                    .metadata(collectionMetadataModel)
+                    .resources(new ArrayList<KeyPolicyDualAuthDelete>(Arrays.asList(keyPolicyDualAuthDeleteModel)))
+                    .build();
+
+            // Construct an instance of the PutPolicyOptions model
+            PutPolicyOptions putPolicyOptionsModel = new PutPolicyOptions.Builder()
+                    .id(keyId)
+                    .bluemixInstance(bluemixInstance)
+                    .setKeyPoliciesOneOf(setKeyPoliciesOneOfModel)
+                    .policy("dualAuthDelete")
+                    .build();
+
+            // Invoke operation with valid options model (positive test)
+            Response<GetKeyPoliciesOneOf> response = testService.putPolicy(putPolicyOptionsModel).execute();
+            GetKeyPoliciesOneOf responseObj = response.getResult();
+```
+###### Setting multiple policies for a key
+```
+
+            // Construct an instance of the CollectionMetadata model
+            CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
+                    .collectionType("application/vnd.ibm.kms.policy+json")
+                    .collectionTotal(Long.valueOf("2"))
+                    .build();
+
+            // Construct an list of SetMultipleKeyPoliciesResourcesItem
+            ArrayList<SetMultipleKeyPoliciesResourcesItem> setMultipleKeyPoliciesResourcesItemList = new ArrayList<SetMultipleKeyPoliciesResourcesItem>();
+
+            // Construct an instance of the KeyPolicyDualAuthDeleteDualAuthDelete model
+            KeyPolicyDualAuthDeleteDualAuthDelete keyPolicyDualAuthDeleteDualAuthDeleteModel = new KeyPolicyDualAuthDeleteDualAuthDelete.Builder()
+                    .enabled(true)
+                    .build();
+
+            // Construct an instance of the SetMultipleKeyPoliciesResourcesItem model for dualAuthDelete
+            SetMultipleKeyPoliciesResourcesItem setMultipleKeyPoliciesResourcesItemModel = new SetMultipleKeyPoliciesResourcesItem.Builder()
+                    .type("application/vnd.ibm.kms.policy+json")
+                    .dualAuthDelete(keyPolicyDualAuthDeleteDualAuthDeleteModel)
+                    .build();
+
+            // Add to the list
+            setMultipleKeyPoliciesResourcesItemList.add(setMultipleKeyPoliciesResourcesItemModel);
+
+            // Construct an instance of the KeyPolicyRotationRotation model
+            KeyPolicyRotationRotation keyPolicyRotationRotationModel = new KeyPolicyRotationRotation.Builder()
+                    .intervalMonth(2)
+                    .build();
+
+            // Construct an instance of the SetMultipleKeyPoliciesResourcesItem model for rotation
+            SetMultipleKeyPoliciesResourcesItem setMultipleKeyPoliciesResourcesItemModel2 = new SetMultipleKeyPoliciesResourcesItem.Builder()
+                    .type("application/vnd.ibm.kms.policy+json")
+                    .rotation(keyPolicyRotationRotationModel)
+                    .build();
+
+            // Add to the list
+            setMultipleKeyPoliciesResourcesItemList.add(setMultipleKeyPoliciesResourcesItemModel2);
+
+            // Construct an instance of the SetKeyPoliciesOneOfSetMultipleKeyPolicies model
+            SetKeyPoliciesOneOfSetMultipleKeyPolicies setKeyPoliciesOneOfModel = new SetKeyPoliciesOneOfSetMultipleKeyPolicies.Builder()
+                    .metadata(collectionMetadataModel)
+                    .resources(new ArrayList<SetMultipleKeyPoliciesResourcesItem>(setMultipleKeyPoliciesResourcesItemList))
+                    .build();
+
+            // Construct an instance of the PutPolicyOptions model
+            PutPolicyOptions putPolicyOptionsModel = new PutPolicyOptions.Builder()
+                    .id(keyId)
+                    .bluemixInstance(bluemixInstance)
+                    .setKeyPoliciesOneOf(setKeyPoliciesOneOfModel)
+                    .build();
+
+            // Invoke operation with valid options model
+            Response<GetKeyPoliciesOneOf> response = testService.putPolicy(putPolicyOptionsModel).execute();
+            GetKeyPoliciesOneOf responseObj = response.getResult();
+```
+###### List policies for a key
+```
+            // Construct an instance of the GetPolicyOptions model
+            GetPolicyOptions getPolicyOptionsModel = new GetPolicyOptions.Builder()
+                    .id(id)
+                    .bluemixInstance(bluemixInstance)
+            //      .policy("dualAuthDelete")     //uncomment to get only dualAuthDelete policy
+            //      .policy("rotation")           //uncomment to get only rotation policy
+                    .build();
+
+            // Invoke operation with valid options model (positive test)
+            Response<GetKeyPoliciesOneOf> response = testService.getPolicy(getPolicyOptionsModel).execute();
+            GetKeyPoliciesOneOf responseObj = response.getResult();
+```
+
+### Setting(creating or updating)/Retrieving instance policies
+
+###### Setting dual authorization policy for an instance
+
+```
+            // Construct an instance of the CollectionMetadata model
+            CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
+                    .collectionType("application/vnd.ibm.kms.policy+json")
+                    .collectionTotal(Long.valueOf("1"))
+                    .build();
+
+            // Construct an instance of the DualAuthDeleteProperties model
+            DualAuthDeleteProperties dualAuthDeletePropertiesModel = new DualAuthDeleteProperties.Builder()
+                    .enabled(true)
+                    .build();
+
+            // Construct an instance of the SetInstancePolicyDualAuthDeleteResourcesItem model
+            SetInstancePolicyDualAuthDeleteResourcesItem setInstancePolicyDualAuthDeleteResourcesItemModel = new SetInstancePolicyDualAuthDeleteResourcesItem.Builder()
+                    .policyType("dualAuthDelete")
+                    .policyData(dualAuthDeletePropertiesModel)
+                    .build();
+
+            // Construct an instance of the SetInstancePoliciesOneOfSetInstancePolicyDualAuthDelete model
+            SetInstancePoliciesOneOfSetInstancePolicyDualAuthDelete setInstancePoliciesOneOfModel = new SetInstancePoliciesOneOfSetInstancePolicyDualAuthDelete.Builder()
+                    .metadata(collectionMetadataModel)
+                    .resources(new ArrayList<SetInstancePolicyDualAuthDeleteResourcesItem>(Arrays.asList(setInstancePolicyDualAuthDeleteResourcesItemModel)))
+                    .build();
+
+            // Construct an instance of the PutInstancePolicyOptions model
+            PutInstancePolicyOptions putInstancePolicyOptionsModel = new PutInstancePolicyOptions.Builder()
+                    .bluemixInstance(bluemixInstance)
+                    .setInstancePoliciesOneOf(setInstancePoliciesOneOfModel)
+                    .policy("dualAuthDelete")
+                    .build();
+
+            // Invoke operation with valid options model 
+            Response<Void> response = testService.putInstancePolicy(putInstancePolicyOptionsModel).execute();
+
+```
+
+###### Setting allowed network policy for an instance
+
+```
+            // Construct an instance of the CollectionMetadata model
+            CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
+                    .collectionType("application/vnd.ibm.kms.policy+json")
+                    .collectionTotal(Long.valueOf("1"))
+                    .build();
+
+            // Construct an instance of the InstancePolicyAllowedNetworkPolicyDataAttributes model
+            InstancePolicyAllowedNetworkPolicyDataAttributes instancePolicyAllowedNetworkPolicyDataAttributesModel = new InstancePolicyAllowedNetworkPolicyDataAttributes.Builder()
+                    .allowedNetwork("public-and-private")
+                    .build();
+
+            // Construct an instance of the InstancePolicyAllowedNetworkPolicyData model
+            InstancePolicyAllowedNetworkPolicyData instancePolicyAllowedNetworkPolicyDataModel = new InstancePolicyAllowedNetworkPolicyData.Builder()
+                    .enabled(true)
+                    .attributes(instancePolicyAllowedNetworkPolicyDataAttributesModel)
+                    .build();
+
+            // Construct an instance of the SetInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItem model
+            SetInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItem setInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItemModel = new SetInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItem.Builder()
+                    .policyType("allowedNetwork")
+                    .policyData(instancePolicyAllowedNetworkPolicyDataModel)
+                    .build();
+
+            // Construct an instance of the SetInstancePoliciesOneOfSetInstancePolicyAllowedNetwork model
+            SetInstancePoliciesOneOfSetInstancePolicyAllowedNetwork setInstancePoliciesOneOfModel = new SetInstancePoliciesOneOfSetInstancePolicyAllowedNetwork.Builder()
+                    .metadata(collectionMetadataModel)
+                    .resources(new ArrayList<SetInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItem>(Arrays.asList(setInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItemModel)))
+                    .build();
+
+            // Construct an instance of the PutInstancePolicyOptions model
+            PutInstancePolicyOptions putInstancePolicyOptionsModel = new PutInstancePolicyOptions.Builder()
+                    .bluemixInstance(bluemixInstance)
+                    .setInstancePoliciesOneOf(setInstancePoliciesOneOfModel)
+                    .policy("allowedNetwork")
+                    .build();
+
+            // Invoke operation with valid options model
+            testService.putInstancePolicy(putInstancePolicyOptionsModel).execute();
+```
+
+###### Setting allowed IP policy for an instance
+```
+            // Construct an instance of the CollectionMetadata model
+            CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
+                    .collectionType("application/vnd.ibm.kms.policy+json")
+                    .collectionTotal(Long.valueOf("1"))
+                    .build();
+
+            // Construct an instance of the InstancePolicyAllowedIPPolicyDataAttributes model
+            InstancePolicyAllowedIPPolicyDataAttributes instancePolicyAllowedIpPolicyDataAttributesModel = new InstancePolicyAllowedIPPolicyDataAttributes.Builder()
+                    .allowedIp(new ArrayList<String>(Arrays.asList("X.X.X.X/N", "X.X.X.X/N")))
+                    .build();
+
+            // Construct an instance of the InstancePolicyAllowedIPPolicyData model
+            InstancePolicyAllowedIPPolicyData instancePolicyAllowedIpPolicyDataModel = new InstancePolicyAllowedIPPolicyData.Builder()
+                    .enabled(true)
+                    .attributes(instancePolicyAllowedIpPolicyDataAttributesModel)
+                    .build();
+
+            // Construct an instance of the SetInstancePoliciesOneOfSetInstancePolicyAllowedIPResourcesItem model
+            SetInstancePoliciesOneOfSetInstancePolicyAllowedIPResourcesItem setInstancePoliciesOneOfSetInstancePolicyAllowedIpResourcesItemModel = new SetInstancePoliciesOneOfSetInstancePolicyAllowedIPResourcesItem.Builder()
+                    .policyType("allowedIP")
+                    .policyData(instancePolicyAllowedIpPolicyDataModel)
+                    .build();
+
+            // Construct an instance of the SetInstancePoliciesOneOfSetInstancePolicyAllowedIP model
+            SetInstancePoliciesOneOfSetInstancePolicyAllowedIP setInstancePoliciesOneOfModel = new SetInstancePoliciesOneOfSetInstancePolicyAllowedIP.Builder()
+                    .metadata(collectionMetadataModel)
+                    .resources(new ArrayList<SetInstancePoliciesOneOfSetInstancePolicyAllowedIPResourcesItem>(Arrays.asList(setInstancePoliciesOneOfSetInstancePolicyAllowedIpResourcesItemModel)))
+                    .build();
+
+            PutInstancePolicyOptions putInstancePolicyOptionsModel = new PutInstancePolicyOptions.Builder()
+                    .bluemixInstance(bluemixInstance)
+                    .setInstancePoliciesOneOf(setInstancePoliciesOneOfModel)
+                    .build();
+
+            // Invoke operation with valid options model
+            testService.putInstancePolicy(putInstancePolicyOptionsModel).execute();
+```
+
+###### Setting multiple policies for an instance
+
+```
+            // Construct an instance of the CollectionMetadata model
+            CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
+                    .collectionType("application/vnd.ibm.kms.policy+json")
+                    .collectionTotal(Long.valueOf("2"))
+                    .build();
+
+            //Construct a list of SetMultipleInstancePoliciesResourcesItem
+            ArrayList<SetMultipleInstancePoliciesResourcesItem> setMultipleInstancePoliciesResourcesItemList = new ArrayList<SetMultipleInstancePoliciesResourcesItem>();
+            // Construct an instance of the SetMultipleInstancePoliciesResourcesItemPolicyData model for dual authorization delete
+            SetMultipleInstancePoliciesResourcesItemPolicyData setMultipleInstancePoliciesResourcesItemPolicyDataModel = new SetMultipleInstancePoliciesResourcesItemPolicyData.Builder()
+                    .enabled(true)
+                    .build();
+            // Construct an instance of the SetMultipleInstancePoliciesResourcesItem model for dual authorization delete
+            SetMultipleInstancePoliciesResourcesItem setMultipleInstancePoliciesResourcesItemModel = new SetMultipleInstancePoliciesResourcesItem.Builder()
+                    .policyType("dualAuthDelete")
+                    .policyData(setMultipleInstancePoliciesResourcesItemPolicyDataModel)
+                    .build();
+            // Add to the list
+            setMultipleInstancePoliciesResourcesItemList.add(setMultipleInstancePoliciesResourcesItemModel);
+
+            // Construct an instance of the SetMultipleInstancePoliciesResourcesItemPolicyDataAttributes model for allowed network
+            SetMultipleInstancePoliciesResourcesItemPolicyDataAttributes setMultipleInstancePoliciesResourcesItemPolicyDataAttributesModel = new SetMultipleInstancePoliciesResourcesItemPolicyDataAttributes.Builder()
+                    .allowedNetwork("public-and-private")
+                    .build();
+            // Construct an instance of the SetMultipleInstancePoliciesResourcesItemPolicyData model for allowed network
+            SetMultipleInstancePoliciesResourcesItemPolicyData setMultipleInstancePoliciesResourcesItemPolicyDataModel2 = new SetMultipleInstancePoliciesResourcesItemPolicyData.Builder()
+                    .enabled(true)
+                    .attributes(setMultipleInstancePoliciesResourcesItemPolicyDataAttributesModel)
+                    .build();
+            // Construct an instance of the SetMultipleInstancePoliciesResourcesItem model for allowed network
+            SetMultipleInstancePoliciesResourcesItem setMultipleInstancePoliciesResourcesItemModel2 = new SetMultipleInstancePoliciesResourcesItem.Builder()
+                    .policyType("allowedNetwork")
+                    .policyData(setMultipleInstancePoliciesResourcesItemPolicyDataModel2)
+                    .build();
+            // Add to the list
+            setMultipleInstancePoliciesResourcesItemList.add(setMultipleInstancePoliciesResourcesItemModel2);
+
+            // Construct an instance of the SetInstancePoliciesOneOfSetMultipleInstancePolicies model
+            SetInstancePoliciesOneOfSetMultipleInstancePolicies setInstancePoliciesOneOfModel = new SetInstancePoliciesOneOfSetMultipleInstancePolicies.Builder()
+                    .metadata(collectionMetadataModel)
+                    .resources(new ArrayList<SetMultipleInstancePoliciesResourcesItem>(setMultipleInstancePoliciesResourcesItemList))
+                    .build();
+
+            // Construct an instance of the PutInstancePolicyOptions model
+            PutInstancePolicyOptions putInstancePolicyOptionsModel = new PutInstancePolicyOptions.Builder()
+                    .bluemixInstance(bluemixInstance)
+                    .setInstancePoliciesOneOf(setInstancePoliciesOneOfModel)
+                    .build();
+
+            // Invoke operation with valid options model 
+            Response<Void> response = testService.putInstancePolicy(putInstancePolicyOptionsModel).execute();
+```
+###### List policies for an instance
+```
+            // Construct an instance of the GetInstancePolicyOptions model
+            GetInstancePolicyOptions getInstancePolicyOptionsModel = new GetInstancePolicyOptions.Builder()
+                    .bluemixInstance(bluemixInstance)
+            //      .policy("allowedNetwork")       //uncomment to get only allowedNetwork policy
+            //      .policy("dualAuthDelete")       //uncomment to get only dualAuthDeletee policy
+            //      .policy("allowedIP")            //uncomment to get only allowedIP policy
+                    .build();
+
+            // Invoke operation with valid options model
+            Response<GetInstancePoliciesOneOf> response = testService.getInstancePolicy(getInstancePolicyOptionsModel).execute();
+            GetInstancePoliciesOneOf responseObj = response.getResult();
+```
+
+###### Retrieve Allowed IP Port
+```
+            // Construct an instance of the GetAllowedIPPortOptions model
+            GetAllowedIPPortOptions getAllowedIpPortOptionsModel = new GetAllowedIPPortOptions.Builder()
+                    .bluemixInstance(bluemixInstance)
+                    .build();
+
+            // Invoke operation with valid options model
+            Response<AllowedIPPort> response = testService.getAllowedIPPort(getAllowedIpPortOptionsModel).execute();
+            AllowedIPPort responseObj = response.getResult();
 ```
 
 ### Set Maximum Retries attempts and Max Interval time
