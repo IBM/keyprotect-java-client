@@ -64,7 +64,7 @@ To define a dependency on the entire set of services contained in the project, u
 
 ## Using the SDK
 
-### creating key protect service
+### Creating key protect service
 
 Import key-protect-api.jar into your project structure to access com.ibm.cloud.ibm_key_protect_api package.
 Import sdk-core.jar to have IamAuthenticator. Create IamAuthenticator using IAM API key and IAM AUTH URL.
@@ -77,7 +77,7 @@ Then configure key protect service with the authenticator, then run operations o
 
    import java.lang.*;
    import java.util.List;
-   public class sampleCreateService {
+   public class SampleCreateService {
        public static void main(String[] args) {
            String bluemixInstance = <INSTANCE_ID>;
            IbmKeyProtectApi testService;
@@ -116,14 +116,54 @@ Following examples use the service(testService) created above.
 
 ### Get Key Metadata
 ```
-               GetKeyMetadataOptions getKeyMetadataOptionsModel = new GetKeyMetadataOptions.Builder()
-                       .id(keyId)
-                       .bluemixInstance(bluemixInstance)
-                       .build();
+           GetKeyMetadataOptions getKeyMetadataOptionsModel = new GetKeyMetadataOptions.Builder()
+                   .id(keyId)
+                   .bluemixInstance(bluemixInstance)
+                   .build();
 
-               // Invoke operation with valid options model
-               Response<GetKeyMetadata> response = testService.getKeyMetadata(getKeyMetadataOptionsModel).execute();
-               GetKeyMetadata responseObj = response.getResult();
+           // Invoke operation with valid options model
+           Response<GetKeyMetadata> response = testService.getKeyMetadata(getKeyMetadataOptionsModel).execute();
+           GetKeyMetadata responseObj = response.getResult();
+```
+
+### Delete a Key
+```
+            DeleteKeyOptions deleteKeyOptionsModel = new DeleteKeyOptions.Builder()
+                    .id(keyId)
+                    .bluemixInstance(bluemixInstance)
+                    .force(true)
+                    .build();
+
+            // Invoke operation with valid options model 
+            Response<DeleteKey> response = testService.deleteKey(deleteKeyOptionsModel).execute();
+```
+
+### Restore a Key
+```
+            InputStream inputstream = new FileInputStream(<PATH_TO_Restore_Key_Body>)
+            ActionOnKeyOptions restoreKeyOptionsModel = new ActionOnKeyOptions.Builder()
+                    .id(keyId)
+                    .bluemixInstance(bluemixInstance)
+                    .action("restore")
+                    .keyActionOneOf(inputstream)
+                    .prefer("return=representation")
+                    .build();
+
+            // Invoke operation with valid options model
+            Response<KeyActionOneOfResponse> response = testService.actionOnKey(restoreKeyOptionsModel).execute();
+            KeyActionOneOfResponse responseObj = response.getResult();
+```
+
+### List Key Versions
+```
+            GetKeyVersionsOptions getKeyVersionsOptionsModel = new GetKeyVersionsOptions.Builder()
+                    .id(keyId)
+                    .bluemixInstance(bluemixInstance)
+                    .build();
+
+            // Invoke operation with valid options model 
+            Response<ListKeyVersions> response = testService.getKeyVersions(getKeyVersionsOptionsModel).execute();
+            List<KeyVersion> versions = response.getResult().getResources();
 ```
 
 ### Wrap/Unwrap a key
@@ -153,6 +193,49 @@ Following examples use the service(testService) created above.
             response = testService.actionOnKey(unWrapKeyOptionsModel).execute();
             responseObj = response.getResult();
 ```
+
+### Rotate a key
+```
+            InputStream inputstream = new FileInputStream(<PATH_TO_Rotate_Key_Body>)
+            ActionOnKeyOptions actionOnKeyOptionsModel = new ActionOnKeyOptions.Builder()
+                    .id(keyId)
+                    .bluemixInstance(bluemixInstance)
+                    .action("rotate")
+                    .keyActionOneOf(inputstream)
+                    .prefer("return=representation")
+                    .build();
+            Response<KeyActionOneOfResponse> response = testService.actionOnKey(actionOnKeyOptionsModel).execute();
+            KeyActionOneOfResponse responseObj = response.getResult();
+```
+
+### Disable a key
+```
+            InputStream inputstream = new FileInputStream(<PATH_TO_Disable_Key_Body>)
+            ActionOnKeyOptions disableKeyOptionsModel = new ActionOnKeyOptions.Builder()
+                    .id(keyId)
+                    .bluemixInstance(bluemixInstance)
+                    .action("disable")
+                    .keyActionOneOf(inputstream)
+                    .prefer("return=representation")
+                    .build();
+            Response<KeyActionOneOfResponse> response = testService.actionOnKey(disableKeyOptionsModel).execute();
+            KeyActionOneOfResponse responseObj = response.getResult();
+```
+
+### Enable a key
+```
+            InputStream inputstream = new FileInputStream(<PATH_TO_Enable_Key_Body>)
+            ActionOnKeyOptions enableKeyOptionsModel = new ActionOnKeyOptions.Builder()
+                    .id(keyId)
+                    .bluemixInstance(bluemixInstance)
+                    .action("enable")
+                    .keyActionOneOf(inputstream)
+                    .prefer("return=representation")
+                    .build();
+            Response<KeyActionOneOfResponse> response = testService.actionOnKey(enableKeyOptionsModel).execute();
+            KeyActionOneOfResponse responseObj = response.getResult();
+```
+
 ### Create/Retrieve an Import token
 ```
             //Creating Import Token
