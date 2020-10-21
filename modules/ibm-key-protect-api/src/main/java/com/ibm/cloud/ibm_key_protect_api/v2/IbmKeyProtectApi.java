@@ -13,7 +13,6 @@
 package com.ibm.cloud.ibm_key_protect_api.v2;
 
 import com.google.gson.JsonObject;
-import com.ibm.cloud.key_protect.common.SdkCommon;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.ActionOnKeyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKeyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKey;
@@ -21,21 +20,33 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKeyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.EventAcknowledgeOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetImportToken;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetImportTokenOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstancePoliciesOneOf;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstancePolicyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKey;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKeyCollectionMetadataOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKeyMetadata;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKeyMetadataOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKeyOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKeyPoliciesOneOf;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKeyVersionsOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKeysOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetPolicyOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetRegistrationsAllKeysOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetRegistrationsOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.ImportToken;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.Key;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyActionOneOfResponse;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyProtectException;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.ListKeyVersions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.ListKeys;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.PostImportTokenOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.PutInstancePolicyOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.PutPolicyOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.RegistrationWithTotalCount;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.RetryInterceptor;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyProtectException;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.AllowedIPPort;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetAllowedIPPortOptions;
+import com.ibm.cloud.key_protect.common.SdkCommon;
 import com.ibm.cloud.sdk.core.http.RequestBuilder;
 import com.ibm.cloud.sdk.core.http.ResponseConverter;
 import com.ibm.cloud.sdk.core.http.ServiceCall;
@@ -44,10 +55,11 @@ import com.ibm.cloud.sdk.core.security.ConfigBasedAuthenticatorFactory;
 import com.ibm.cloud.sdk.core.service.BaseService;
 import com.ibm.cloud.sdk.core.util.RequestUtils;
 import com.ibm.cloud.sdk.core.util.ResponseConverterUtils;
-import java.util.Map;
-import java.util.Map.Entry;
 import okhttp3.OkHttpClient;
 import okhttp3.Response;
+
+import java.util.Map;
+import java.util.Map.Entry;
 
 
 /**
@@ -572,5 +584,261 @@ public class IbmKeyProtectApi extends BaseService {
             }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
+
+  /**
+   * List registrations for a key.
+   *
+   * Retrieves a list of registrations that are associated with a specified root key.
+   *    When you use a root key to protect an IBM Cloud resource, such as a Cloud Object Storage bucket, Key Protect
+   * creates a registration between the resource and root key. You can use `GET /keys/{id}/registrations` to  understand
+   * which cloud resources are protected by the key that you specify.
+   *
+   * @param getRegistrationsOptions the {@link GetRegistrationsOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link RegistrationWithTotalCount}
+   */
+  public ServiceCall<RegistrationWithTotalCount> getRegistrations(GetRegistrationsOptions getRegistrationsOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(getRegistrationsOptions,
+            "getRegistrationsOptions cannot be null");
+    String[] pathSegments = { "api/v2/keys", "registrations" };
+    String[] pathParameters = { getRegistrationsOptions.id() };
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.constructHttpUrl(getServiceUrl(), pathSegments, pathParameters));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("ibm_key_protect_api", "v2", "getRegistrations");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    builder.header("Bluemix-Instance", getRegistrationsOptions.bluemixInstance());
+    if (getRegistrationsOptions.correlationId() != null) {
+      builder.header("Correlation-Id", getRegistrationsOptions.correlationId());
+    }
+    if (getRegistrationsOptions.limit() != null) {
+      builder.query("limit", String.valueOf(getRegistrationsOptions.limit()));
+    }
+    if (getRegistrationsOptions.offset() != null) {
+      builder.query("offset", String.valueOf(getRegistrationsOptions.offset()));
+    }
+    if (getRegistrationsOptions.urlEncodedResourceCrnQuery() != null) {
+      builder.query("urlEncodedResourceCRNQuery", getRegistrationsOptions.urlEncodedResourceCrnQuery());
+    }
+    if (getRegistrationsOptions.preventKeyDeletion() != null) {
+      builder.query("preventKeyDeletion", String.valueOf(getRegistrationsOptions.preventKeyDeletion()));
+    }
+    if (getRegistrationsOptions.totalCount() != null) {
+      builder.query("totalCount", String.valueOf(getRegistrationsOptions.totalCount()));
+    }
+    ResponseConverter<RegistrationWithTotalCount> responseConverter =
+            ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<RegistrationWithTotalCount>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * List registrations for any key.
+   *
+   * Retrieves a list of registrations that match the Cloud Resource Name (CRN) query that you specify.
+   *    When you use a root key to protect an IBM Cloud resource, such as a Cloud Object Storage bucket, Key Protect
+   * creates a registration between the resource and root key. You can use `GET /keys/registrations` to  understand
+   * which cloud resources are protected by keys in your Key Protect service instance.
+   *
+   * @param getRegistrationsAllKeysOptions the {@link GetRegistrationsAllKeysOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link RegistrationWithTotalCount}
+   */
+  public ServiceCall<RegistrationWithTotalCount> getRegistrationsAllKeys(GetRegistrationsAllKeysOptions getRegistrationsAllKeysOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(getRegistrationsAllKeysOptions,
+            "getRegistrationsAllKeysOptions cannot be null");
+    String[] pathSegments = { "api/v2/keys/registrations" };
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.constructHttpUrl(getServiceUrl(), pathSegments));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("ibm_key_protect_api", "v2", "getRegistrationsAllKeys");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    builder.header("Bluemix-Instance", getRegistrationsAllKeysOptions.bluemixInstance());
+    if (getRegistrationsAllKeysOptions.correlationId() != null) {
+      builder.header("Correlation-Id", getRegistrationsAllKeysOptions.correlationId());
+    }
+    if (getRegistrationsAllKeysOptions.urlEncodedResourceCrnQuery() != null) {
+      builder.query("urlEncodedResourceCRNQuery", getRegistrationsAllKeysOptions.urlEncodedResourceCrnQuery());
+    }
+    if (getRegistrationsAllKeysOptions.limit() != null) {
+      builder.query("limit", String.valueOf(getRegistrationsAllKeysOptions.limit()));
+    }
+    if (getRegistrationsAllKeysOptions.offset() != null) {
+      builder.query("offset", String.valueOf(getRegistrationsAllKeysOptions.offset()));
+    }
+    if (getRegistrationsAllKeysOptions.preventKeyDeletion() != null) {
+      builder.query("preventKeyDeletion", String.valueOf(getRegistrationsAllKeysOptions.preventKeyDeletion()));
+    }
+    if (getRegistrationsAllKeysOptions.totalCount() != null) {
+      builder.query("totalCount", String.valueOf(getRegistrationsAllKeysOptions.totalCount()));
+    }
+    ResponseConverter<RegistrationWithTotalCount> responseConverter =
+            ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<RegistrationWithTotalCount>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Set key policies.
+   *
+   * Creates or updates one or more policies for the specified key.
+   *    You can set policies for a key, such as an [automatic rotation
+   * policy](/docs/key-protect?topic=key-protect-set-rotation-policy)  or a [dual authorization
+   * policy](/docs/key-protect?topic=key-protect-set-dual-auth-key-policy) to protect  against the accidental deletion
+   * of keys. Use `PUT /keys/{id}/policies` to create new policies for a key or update an existing policy.
+   *
+   * @param putPolicyOptions the {@link PutPolicyOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link GetKeyPoliciesOneOf}
+   */
+  public ServiceCall<GetKeyPoliciesOneOf> putPolicy(PutPolicyOptions putPolicyOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(putPolicyOptions,
+            "putPolicyOptions cannot be null");
+    String[] pathSegments = { "api/v2/keys", "policies" };
+    String[] pathParameters = { putPolicyOptions.id() };
+    RequestBuilder builder = RequestBuilder.put(RequestBuilder.constructHttpUrl(getServiceUrl(), pathSegments, pathParameters));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("ibm_key_protect_api", "v2", "putPolicy");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    builder.header("Bluemix-Instance", putPolicyOptions.bluemixInstance());
+    if (putPolicyOptions.correlationId() != null) {
+      builder.header("Correlation-Id", putPolicyOptions.correlationId());
+    }
+    if (putPolicyOptions.policy() != null) {
+      builder.query("policy", putPolicyOptions.policy());
+    }
+    builder.bodyContent(com.ibm.cloud.sdk.core.util.GsonSingleton.getGsonWithoutPrettyPrinting().toJson(putPolicyOptions.setKeyPoliciesOneOf()), "application/json");
+    ResponseConverter<GetKeyPoliciesOneOf> responseConverter =
+            ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<GetKeyPoliciesOneOf>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * List key policies.
+   *
+   * Retrieves a list of policies that are associated with a specified key.
+   *    You can set policies for a key, such as an [automatic rotation
+   * policy](/docs/key-protect?topic=key-protect-set-rotation-policy)  or a [dual authorization
+   * policy](/docs/key-protect?topic=key-protect-set-dual-auth-key-policy) to protect  against the accidental deletion
+   * of keys. Use `GET /keys/{id}/policies` to browse the policies that exist for a  specified key.
+   *
+   * @param getPolicyOptions the {@link GetPolicyOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link GetKeyPoliciesOneOf}
+   */
+  public ServiceCall<GetKeyPoliciesOneOf> getPolicy(GetPolicyOptions getPolicyOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(getPolicyOptions,
+            "getPolicyOptions cannot be null");
+    String[] pathSegments = { "api/v2/keys", "policies" };
+    String[] pathParameters = { getPolicyOptions.id() };
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.constructHttpUrl(getServiceUrl(), pathSegments, pathParameters));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("ibm_key_protect_api", "v2", "getPolicy");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    builder.header("Bluemix-Instance", getPolicyOptions.bluemixInstance());
+    if (getPolicyOptions.correlationId() != null) {
+      builder.header("Correlation-Id", getPolicyOptions.correlationId());
+    }
+    if (getPolicyOptions.policy() != null) {
+      builder.query("policy", getPolicyOptions.policy());
+    }
+    ResponseConverter<GetKeyPoliciesOneOf> responseConverter =
+            ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<GetKeyPoliciesOneOf>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Set instance policies.
+   *
+   * Creates or updates one or more policies for the specified service instance.
+   *
+   * **Note:** When you set an instance policy, Key Protect associates the policy information with keys that you add to
+   * the instance after the policy is updated. This operation does not affect existing keys in the instance.
+   *
+   * @param putInstancePolicyOptions the {@link PutInstancePolicyOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a void result
+   */
+  public ServiceCall<Void> putInstancePolicy(PutInstancePolicyOptions putInstancePolicyOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(putInstancePolicyOptions,
+            "putInstancePolicyOptions cannot be null");
+    String[] pathSegments = { "api/v2/instance/policies" };
+    RequestBuilder builder = RequestBuilder.put(RequestBuilder.constructHttpUrl(getServiceUrl(), pathSegments));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("ibm_key_protect_api", "v2", "putInstancePolicy");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Bluemix-Instance", putInstancePolicyOptions.bluemixInstance());
+    if (putInstancePolicyOptions.correlationId() != null) {
+      builder.header("Correlation-Id", putInstancePolicyOptions.correlationId());
+    }
+    if (putInstancePolicyOptions.policy() != null) {
+      builder.query("policy", putInstancePolicyOptions.policy());
+    }
+    builder.bodyContent(com.ibm.cloud.sdk.core.util.GsonSingleton.getGsonWithoutPrettyPrinting().toJson(putInstancePolicyOptions.setInstancePoliciesOneOf()), "application/json");
+    ResponseConverter<Void> responseConverter = ResponseConverterUtils.getVoid();
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * List instance policies.
+   *
+   * Retrieves a list of policies that are associated with a specified service instance. You can manage advanced
+   * preferences for keys in your service instance by creating instance-level policies. Use `GET /instance/policies` to
+   * browse the policies that are associated with the specified instance. Currently,   dual authorization policies are
+   * supported.
+   *
+   * @param getInstancePolicyOptions the {@link GetInstancePolicyOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link GetInstancePoliciesOneOf}
+   */
+  public ServiceCall<GetInstancePoliciesOneOf> getInstancePolicy(GetInstancePolicyOptions getInstancePolicyOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(getInstancePolicyOptions,
+            "getInstancePolicyOptions cannot be null");
+    String[] pathSegments = { "api/v2/instance/policies" };
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.constructHttpUrl(getServiceUrl(), pathSegments));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("ibm_key_protect_api", "v2", "getInstancePolicy");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    builder.header("Bluemix-Instance", getInstancePolicyOptions.bluemixInstance());
+    if (getInstancePolicyOptions.correlationId() != null) {
+      builder.header("Correlation-Id", getInstancePolicyOptions.correlationId());
+    }
+    if (getInstancePolicyOptions.policy() != null) {
+      builder.query("policy", getInstancePolicyOptions.policy());
+    }
+    ResponseConverter<GetInstancePoliciesOneOf> responseConverter =
+            ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<GetInstancePoliciesOneOf>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Retrieve Allowed IP Port.
+   *
+   * Retrieves the private endpoint port associated with your service instance's active allowed ip policy. If the
+   * instance does not contain an active allowed ip policy, no information will be returned.
+   *
+   * @param getAllowedIpPortOptions the {@link GetAllowedIPPortOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link AllowedIPPort}
+   */
+  public ServiceCall<AllowedIPPort> getAllowedIPPort(GetAllowedIPPortOptions getAllowedIpPortOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(getAllowedIpPortOptions,
+            "getAllowedIpPortOptions cannot be null");
+    String[] pathSegments = { "api/v2/instance/allowed_ip_port" };
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.constructHttpUrl(getServiceUrl(), pathSegments));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("ibm_key_protect_api", "v2", "getAllowedIPPort");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    builder.header("Bluemix-Instance", getAllowedIpPortOptions.bluemixInstance());
+    if (getAllowedIpPortOptions.correlationId() != null) {
+      builder.header("Correlation-Id", getAllowedIpPortOptions.correlationId());
+    }
+    ResponseConverter<AllowedIPPort> responseConverter =
+            ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<AllowedIPPort>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
 }
 
