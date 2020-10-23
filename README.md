@@ -196,10 +196,12 @@ Following examples use the service(testService) created above.
 
 ### Rotate a key
 ```
+            InputStream inputstream = new FileInputStream(<PATH_TO_Rotate_Key_Body>)
             ActionOnKeyOptions actionOnKeyOptionsModel = new ActionOnKeyOptions.Builder()
                     .id(keyId)
                     .bluemixInstance(bluemixInstance)
                     .action("rotate")
+                    .keyActionOneOf(inputstream)
                     .prefer("return=representation")
                     .build();
             Response<KeyActionOneOfResponse> response = testService.actionOnKey(actionOnKeyOptionsModel).execute();
