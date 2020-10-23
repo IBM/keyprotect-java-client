@@ -467,7 +467,9 @@ public class IbmKeyProtectApi extends BaseService {
       builder.header("Prefer", actionOnKeyOptions.prefer());
     }
     builder.query("action", actionOnKeyOptions.action());
-    builder.bodyContent(actionOnKeyOptions.keyActionOneOf(), "application/vnd.ibm.kms.key_action+json");
+    if (actionOnKeyOptions.keyActionOneOf() != null) {
+      builder.bodyContent(actionOnKeyOptions.keyActionOneOf(), "application/vnd.ibm.kms.key_action+json");
+    }
     ResponseConverter<KeyActionOneOfResponse> responseConverter =
             ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<KeyActionOneOfResponse>() {
             }.getType());

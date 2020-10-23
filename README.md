@@ -196,12 +196,10 @@ Following examples use the service(testService) created above.
 
 ### Rotate a key
 ```
-            InputStream inputstream = new FileInputStream(<PATH_TO_Rotate_Key_Body>)
             ActionOnKeyOptions actionOnKeyOptionsModel = new ActionOnKeyOptions.Builder()
                     .id(keyId)
                     .bluemixInstance(bluemixInstance)
                     .action("rotate")
-                    .keyActionOneOf(inputstream)
                     .prefer("return=representation")
                     .build();
             Response<KeyActionOneOfResponse> response = testService.actionOnKey(actionOnKeyOptionsModel).execute();
@@ -210,12 +208,10 @@ Following examples use the service(testService) created above.
 
 ### Disable a key
 ```
-            InputStream inputstream = new FileInputStream(<PATH_TO_Disable_Key_Body>)
             ActionOnKeyOptions disableKeyOptionsModel = new ActionOnKeyOptions.Builder()
                     .id(keyId)
                     .bluemixInstance(bluemixInstance)
                     .action("disable")
-                    .keyActionOneOf(inputstream)
                     .prefer("return=representation")
                     .build();
             Response<KeyActionOneOfResponse> response = testService.actionOnKey(disableKeyOptionsModel).execute();
@@ -224,12 +220,10 @@ Following examples use the service(testService) created above.
 
 ### Enable a key
 ```
-            InputStream inputstream = new FileInputStream(<PATH_TO_Enable_Key_Body>)
             ActionOnKeyOptions enableKeyOptionsModel = new ActionOnKeyOptions.Builder()
                     .id(keyId)
                     .bluemixInstance(bluemixInstance)
                     .action("enable")
-                    .keyActionOneOf(inputstream)
                     .prefer("return=representation")
                     .build();
             Response<KeyActionOneOfResponse> response = testService.actionOnKey(enableKeyOptionsModel).execute();
@@ -282,6 +276,7 @@ Following examples use the service(testService) created above.
                     .build();
 
             // Construct an instance of the KeyPolicyRotationRotation model
+            // Build a policy that will cause keys to be automatically rotated every 2 months
             KeyPolicyRotationRotation keyPolicyRotationRotationModel = new KeyPolicyRotationRotation.Builder()
                     .intervalMonth(2)
                     .build();
@@ -348,8 +343,9 @@ Following examples use the service(testService) created above.
             GetKeyPoliciesOneOf responseObj = response.getResult();
 ```
 ###### Set multiple policies for a key
-```
+Set up a dual auth delete policy and also a policy to rotate the key every 2 months, using one HTTP request.
 
+```
             // Construct an instance of the CollectionMetadata model
             CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
                     .collectionType("application/vnd.ibm.kms.policy+json")
@@ -469,6 +465,7 @@ Following examples use the service(testService) created above.
                     .build();
 
             // Construct an instance of the InstancePolicyAllowedNetworkPolicyDataAttributes model
+            // Build a network policy that allows access to the instance via public and private networks (the default)
             InstancePolicyAllowedNetworkPolicyDataAttributes instancePolicyAllowedNetworkPolicyDataAttributesModel = new InstancePolicyAllowedNetworkPolicyDataAttributes.Builder()
                     .allowedNetwork("public-and-private")
                     .build();
@@ -646,6 +643,11 @@ retryMaxInterval which is maximum time interval between two subsequent retries
             testService.setServiceUrl(<KEY_PROTECT_URL>);
 ```
 
+### Working with private network
+When working with private network, just set the service url to the end point of private network, for example:
+```
+testService.setServiceUrl("https://private.us-south.kms.cloud.ibm.com/");
+```
 ## Questions
 
 If you are having difficulties using this SDK or have a question about the IBM Cloud services,
