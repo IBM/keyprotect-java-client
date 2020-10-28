@@ -16,7 +16,7 @@
 
     <groupId>com.ibm.cloud</groupId>
     <version>0.1.0</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <properties>
         <!-- 
@@ -32,7 +32,6 @@
         <testng-version>7.1.0</testng-version>
         <okhttp3-version>3.13.1</okhttp3-version>
         <surefire-version>3.0.0-M3</surefire-version>
-        <jacoco-plugin-version>0.8.5</jacoco-plugin-version>
         <bintray-plugin-version>1.5.20191113165555</bintray-plugin-version>
         <maven-deploy-plugin-version>3.0.0-M1</maven-deploy-plugin-version>
         <maven-source-plugin-version>3.1.0</maven-source-plugin-version>
@@ -41,7 +40,6 @@
         <maven-compiler-plugin-version>3.8.1</maven-compiler-plugin-version>
         <maven-site-plugin-version>3.7.1</maven-site-plugin-version>
         <maven-checkstyle-plugin-version>3.1.0</maven-checkstyle-plugin-version>
-        <maven-reports-plugin-version>3.0.0</maven-reports-plugin-version>
         <maven-failsafe-plugin-version>3.0.0-M4</maven-failsafe-plugin-version>
         <maven-buildnumber-plugin-version>1.4</maven-buildnumber-plugin-version>
         <powermock-version>2.0.5</powermock-version>
@@ -54,17 +52,6 @@
         <!-- >>> Replace this with your github repository's URL -->
         <bintray.package.url>YOUR PROJECT'S GITHUB.COM URL</bintray.package.url>
     </properties>
-
-    <modules>
-        <!-- This module should always be listed first -->
-        <module>modules/common</module>
-
-        <!-- This module should always be listed -->
-        <module>modules/ibm-key-protect-api</module>
-
-        <!-- This module should always be listed last -->
-        <module>modules/coverage-reports</module>
-    </modules>
 
     <licenses>
         <license>
@@ -114,64 +101,62 @@
     </distributionManagement> 
     -->
 
-    <dependencyManagement>
-        <dependencies>
-            <!-- This is the Java core dependency -->
-            <dependency>
-                <groupId>com.ibm.cloud</groupId>
-                <artifactId>sdk-core</artifactId>
-                <version>8.3.0</version>
-            </dependency>
+    <dependencies>
+        <!-- This is the Java core dependency -->
+        <dependency>
+            <groupId>com.ibm.cloud</groupId>
+            <artifactId>sdk-core</artifactId>
+            <version>8.3.0</version>
+        </dependency>
 
-            <!-- Each module (except "common") should depend on this artifact -->
-            <dependency>
-                <!-- >>> Replace this with the common module's artifactId -->
-                <artifactId>key-protect-common</artifactId>
-                <groupId>${project.groupId}</groupId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <!-- >>> Replace this with the common module's artifactId -->
-                <artifactId>key-protect-common</artifactId>
-                <groupId>${project.groupId}</groupId>
-                <version>${project.version}</version>
-                <type>test-jar</type>
-                <classifier>tests</classifier>
-                <scope>test</scope>
-            </dependency>
+        <!-- Each module (except "common") should depend on this artifact -->
+        <dependency>
+            <!-- >>> Replace this with the common module's artifactId -->
+            <artifactId>key-protect-common</artifactId>
+            <groupId>${project.groupId}</groupId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <!-- >>> Replace this with the common module's artifactId -->
+            <artifactId>key-protect-common</artifactId>
+            <groupId>${project.groupId}</groupId>
+            <version>${project.version}</version>
+            <type>test-jar</type>
+            <classifier>tests</classifier>
+            <scope>test</scope>
+        </dependency>
 
-            <!-- TestNG is used to run unit/integration tests -->
-            <dependency>
-                <groupId>org.testng</groupId>
-                <artifactId>testng</artifactId>
-                <version>${testng-version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.squareup.okhttp3</groupId>
-                <artifactId>okhttp</artifactId>
-                <version>${okhttp3-version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.squareup.okhttp3</groupId>
-                <artifactId>mockwebserver</artifactId>
-                <version>${okhttp3-version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.powermock</groupId>
-                <artifactId>powermock-api-mockito2</artifactId>
-                <version>${powermock-version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.powermock</groupId>
-                <artifactId>powermock-module-testng</artifactId>
-                <version>${powermock-version}</version>
-                <scope>test</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+        <!-- TestNG is used to run unit/integration tests -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng-version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>${okhttp3-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>mockwebserver</artifactId>
+            <version>${okhttp3-version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-api-mockito2</artifactId>
+            <version>${powermock-version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-module-testng</artifactId>
+            <version>${powermock-version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
     <build>
         <pluginManagement>
@@ -246,31 +231,6 @@
                         <failsOnError>true</failsOnError>
                         <configLocation>checkstyle.xml</configLocation>
                         <consoleOutput>true</consoleOutput>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.jacoco</groupId>
-                    <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>${jacoco-plugin-version}</version>
-                    <executions>
-                        <execution>
-                            <id>prepare-agent</id>
-                            <goals>
-                                <goal>prepare-agent</goal>
-                            </goals>
-                        </execution>
-                        <execution>
-                            <id>report</id>
-                            <phase>test</phase>
-                            <goals>
-                                <goal>report</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <systemPropertyVariables>
-                            <jacoco-agent.destfile>${project.build.directory}</jacoco-agent.destfile>
-                        </systemPropertyVariables>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -407,10 +367,6 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
             </plugin>
@@ -447,24 +403,6 @@
             </plugin>
         </plugins>
     </build>
-
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${maven-javadoc-plugin-version}</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>${maven-reports-plugin-version}</version>
-                <reportSets>
-                    <reportSet></reportSet>
-                </reportSets>
-            </plugin>
-        </plugins>
-    </reporting>
 
     <developers>
         <developer>
