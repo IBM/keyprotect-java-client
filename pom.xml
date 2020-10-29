@@ -2,33 +2,45 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- >>> Replace this with your service category (e.g. "platform-services") -->
-    <artifactId>key-protect</artifactId>
-
-    <!-- >>> Update this field to reflect your project -->
-    <name>IBM Cloud Key Protect Java SDK</name>
-
-    <!-- >>> Update this field to reflect your project -->
-    <description>Java Client Library to access the IBM Cloud Key Protect</description>
-
-    <!-- >>> Update this field to reflect your project's github URL -->
-    <url>https://github.ibm.com/CloudEngineering/keyprotect-java-sdk</url>
-
     <groupId>com.ibm.cloud</groupId>
+    <artifactId>ibm-key-protect-sdk</artifactId>
     <version>0.1.0</version>
     <packaging>jar</packaging>
 
+    <name>IBM Cloud Key Protect Java SDK</name>
+    <description>Java Client Library to access the IBM Cloud Key Protect</description>
+    <url>https://github.com/IBM/keyprotect-java-client</url>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <organization>
+        <name>IBM Cloud</name>
+    </organization>
+
+    <scm>
+        <connection>scm:git:https://github.ibm.com/CloudEngineering/keyprotect-java-sdk</connection>
+        <developerConnection>scm:git:https://github.ibm.com/CloudEngineering/java-sdk-template</developerConnection>
+        <url>https://github.ibm.com/CloudEngineering/keyprotect-java-sdk/tree/master</url>
+    </scm>
+
+    <issueManagement>
+        <system>Github</system>
+        <url>https://github.ibm.com/CloudEngineering/keyprotect-java-sdk/issues</url>
+    </issueManagement>
+
+    <ciManagement>
+        <system>Travis-CI</system>
+        <url>https://travis.ibm.com/CloudEngineering/keyprotect-java-sdk/</url>
+    </ciManagement>
+
     <properties>
-        <!-- 
-            This is the version associated with the Java core. The version used here should be compatible with the version 
-            of the SDK generator used to generate your SDK code.
-            See this link for details: https://github.ibm.com/CloudEngineering/openapi-sdkgen/wiki/Compatibility-Chart
-        -->
         <sdk-core-version>8.3.0</sdk-core-version>
-
-        <!-- >>> Replace this with the name of your SDK's github repository -->
-        <git-repository-name>keyprotect-java-sdk</git-repository-name>
-
+        <git-repository-name>keyprotect-java-client</git-repository-name>
         <testng-version>7.1.0</testng-version>
         <okhttp3-version>3.13.1</okhttp3-version>
         <surefire-version>3.0.0-M3</surefire-version>
@@ -44,62 +56,7 @@
         <maven-buildnumber-plugin-version>1.4</maven-buildnumber-plugin-version>
         <powermock-version>2.0.5</powermock-version>
         <mockito-version>3.2.4</mockito-version>
-
-        <!-- Deployment-related properties -->
-        <bintray.org>ibm-cloud-sdks</bintray.org>
-        <!-- >>> Replace this with the name of your project's bintray repository -->
-        <bintray.repo>YOUR BINTRAY REPOSITORY NAME</bintray.repo>
-        <!-- >>> Replace this with your github repository's URL -->
-        <bintray.package.url>YOUR PROJECT'S GITHUB.COM URL</bintray.package.url>
     </properties>
-
-    <licenses>
-        <license>
-            <name>Apache License, Version 2.0</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
-        </license>
-    </licenses>
-
-    <organization>
-        <name>IBM Cloud</name>
-    </organization>
-
-    <!-- >>> Update these values to reflect your project -->
-    <scm>
-        <connection>scm:git:https://github.ibm.com/CloudEngineering/keyprotect-java-sdk</connection>
-        <developerConnection>scm:git:https://github.ibm.com/CloudEngineering/java-sdk-template</developerConnection>
-        <url>https://github.ibm.com/CloudEngineering/keyprotect-java-sdk/tree/master</url>
-    </scm>
-
-    <!-- >>> Update these values to reflect your project -->
-    <issueManagement>
-        <system>Github</system>
-        <url>https://github.ibm.com/CloudEngineering/keyprotect-java-sdk/issues</url>
-    </issueManagement>
-
-    <!-- >>> Update these values to reflect your project -->
-    <ciManagement>
-        <system>Travis-CI</system>
-        <url>https://travis.ibm.com/CloudEngineering/keyprotect-java-sdk/</url>
-    </ciManagement>
-
-    <repositories>
-        <!-- these definitions are useful only for internal SDK projects -->
-        <repository>
-            <id>na-artifactory-ibmcloud-sdks</id>
-            <url>https://na.artifactory.swg-devops.com:443/artifactory/wcp-ibmcloud-sdks-team-maven-local/</url>
-        </repository>
-
-        <repository>
-            <id>jcenter</id>
-            <url>https://jcenter.bintray.com/</url>
-        </repository>
-    </repositories>
-
-    <!-- This section is commented out because we use an alternate deploy plugin. 
-    <distributionManagement>
-    </distributionManagement> 
-    -->
 
     <dependencies>
         <!-- This is the Java core dependency -->
@@ -301,7 +258,7 @@
                 <configuration>
                     <skip>false</skip>
 
-                    <!-- Bintray oranization name. -->
+                    <!-- Bintray organization name. -->
                     <subject>${bintray.org}</subject>
 
                     <!-- Bintray target repository. -->
