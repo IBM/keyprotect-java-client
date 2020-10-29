@@ -108,24 +108,11 @@
             <artifactId>sdk-core</artifactId>
             <version>8.3.0</version>
         </dependency>
-
-        <!-- Each module (except "common") should depend on this artifact -->
         <dependency>
-            <!-- >>> Replace this with the common module's artifactId -->
-            <artifactId>key-protect-common</artifactId>
-            <groupId>${project.groupId}</groupId>
-            <version>${project.version}</version>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.6</version>
         </dependency>
-        <dependency>
-            <!-- >>> Replace this with the common module's artifactId -->
-            <artifactId>key-protect-common</artifactId>
-            <groupId>${project.groupId}</groupId>
-            <version>${project.version}</version>
-            <type>test-jar</type>
-            <classifier>tests</classifier>
-            <scope>test</scope>
-        </dependency>
-
         <!-- TestNG is used to run unit/integration tests -->
         <dependency>
             <groupId>org.testng</groupId>
