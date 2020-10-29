@@ -66,7 +66,7 @@ To define a dependency on the entire set of services contained in the project, u
 
 Currently, the artifact is not available on Maven Central, so a local install is required.
 The following steps will clone the project locally, and run a maven install to build and
-create the artifact in your local machines maven repository.
+create the artifact in your local maven repository.
 
 ```sh
 git clone https://github.com/IBM/keyprotect-java-client
