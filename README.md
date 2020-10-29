@@ -59,7 +59,7 @@ To define a dependency on the entire set of services contained in the project, u
 ##### Gradle
 
 ```gradle
-'com.ibm.cloud:key-protect-api:0.1.0'
+'com.ibm.cloud:ibm-key-protect-sdk:0.1.0'
 ```
 
 ## Using the SDK
