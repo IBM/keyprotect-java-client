@@ -51,7 +51,7 @@ To define a dependency on the entire set of services contained in the project, u
 ```xml
 <dependency>
 	<groupId>com.ibm.cloud</groupId>
-	<artifactId>key-protect-api</artifactId>
+	<artifactId>ibm-key-protect-sdk</artifactId>
 	<version>0.1.0</version>
 </dependency>
 ```
