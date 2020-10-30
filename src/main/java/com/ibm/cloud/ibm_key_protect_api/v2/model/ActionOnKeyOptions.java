@@ -208,8 +208,6 @@ public class ActionOnKeyOptions extends GenericModel {
       "bluemixInstance cannot be null");
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.action,
       "action cannot be null");
-    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.keyActionOneOf,
-      "keyActionOneOf cannot be null");
     id = builder.id;
     bluemixInstance = builder.bluemixInstance;
     action = builder.action;

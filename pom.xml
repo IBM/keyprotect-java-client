@@ -23,19 +23,19 @@
     </organization>
 
     <scm>
-        <connection>scm:git:https://github.ibm.com/CloudEngineering/keyprotect-java-sdk</connection>
-        <developerConnection>scm:git:https://github.ibm.com/CloudEngineering/java-sdk-template</developerConnection>
-        <url>https://github.ibm.com/CloudEngineering/keyprotect-java-sdk/tree/master</url>
+        <connection>scm:git:https://github.com/IBM/keyprotect-java-client</connection>
+        <developerConnection>scm:git:https://github.com/IBM/keyprotect-java-client</developerConnection>
+        <url>https://github.com/IBM/keyprotect-java-client</url>
     </scm>
 
     <issueManagement>
         <system>Github</system>
-        <url>https://github.ibm.com/CloudEngineering/keyprotect-java-sdk/issues</url>
+        <url>https://github.com/IBM/keyprotect-java-client/issues</url>
     </issueManagement>
 
     <ciManagement>
         <system>Travis-CI</system>
-        <url>https://travis.ibm.com/CloudEngineering/keyprotect-java-sdk/</url>
+        <url>https://travis.ibm.com/IBM/keyprotect-java-client</url>
     </ciManagement>
 
     <properties>
