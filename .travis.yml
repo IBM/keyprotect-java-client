@@ -4,7 +4,7 @@ dist: bionic
 jdk:
 - openjdk8
 - openjdk9
-- oraclejdk9
+- openjdk12
 
 env:
   global:
