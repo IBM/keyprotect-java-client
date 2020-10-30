@@ -62,6 +62,18 @@ To define a dependency on the entire set of services contained in the project, u
 'com.ibm.cloud:ibm-key-protect-sdk:0.1.0'
 ```
 
+##### Local Install
+
+Currently, the artifact is not available on Maven Central, so a local install is required.
+The following steps will clone the project locally, and run a maven install to build and
+create the artifact in your local maven repository.
+
+```sh
+git clone https://github.com/IBM/keyprotect-java-client
+cd keyprotect-java-client
+mvn install
+```
+
 ## Using the SDK
 
 ### Creating key protect service
