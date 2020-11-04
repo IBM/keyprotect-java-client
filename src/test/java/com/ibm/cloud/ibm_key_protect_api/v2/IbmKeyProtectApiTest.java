@@ -12,74 +12,28 @@
  */
 package com.ibm.cloud.ibm_key_protect_api.v2;
 
-import com.ibm.cloud.ibm_key_protect_api.v2.IbmKeyProtectApi;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.ActionOnKeyOptions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.CloudResourceName;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.CollectionMetadata;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.CollectionMetadataWithTotalCount;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKeyOptions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKey;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKeyOptions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.EventAcknowledgeOptions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.GetImportToken;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.GetImportTokenOptions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKey;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKeyCollectionMetadataOptions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKeyMetadata;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKeyMetadataOptions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKeyOptions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKeyVersionsOptions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKeysOptions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.ImportToken;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.Key;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyActionOneOfResponse;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyActionOneOfResponseRewrapKeyResponseBody;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyActionOneOfResponseUnwrapKeyResponseBody;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyActionOneOfResponseWrapKeyResponseBody;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyFullRepresentation;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyFullRepresentationAlgorithmMetadata;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyRepresentation;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyRepresentationAlgorithmMetadata;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyVersion;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyWithPayload;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyWithPayloadAlgorithmMetadata;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.ListKeyVersions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.ListKeys;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.PostImportTokenOptions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.RetryPolicy;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.*;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.http.Response;
 import com.ibm.cloud.sdk.core.security.Authenticator;
-import com.ibm.cloud.sdk.core.security.NoAuthAuthenticator;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
-
 import com.ibm.cloud.sdk.core.util.EnvironmentUtils;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
-
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.testng.PowerMockTestCase;
-
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-
 import org.testng.annotations.Test;
-import static org.mockito.Mockito.*;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.*;
+
+import static org.mockito.Mockito.mock;
 import static org.testng.Assert.*;
 
 /**
@@ -1276,6 +1230,455 @@ public class IbmKeyProtectApiTest extends PowerMockTestCase {
 
     // Invoke operation with null options model (negative test)
     testService.getKeyVersions(null).execute();
+  }
+
+  @Test
+  public void testGetRegistrationsWOptions() throws Throwable {
+    // Schedule some responses.
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1, \"totalCount\": 1}, \"resources\": [{\"keyId\": \"84a53643-9ca8-4ff2-9c68-d7842526167b\", \"keyName\": \"Example Key Name\", \"resourceCrn\": \"crn:v1:bluemix:public:cloud-object-storage:global:a/<account-id>:<service-instance>:bucket:<bucket-name>\", \"createdBy\": \"examplecreator@ibm.com\", \"creationDate\": \"2019-01-01T12:00:00\", \"updatedBy\": \"exampleupdater@ibm.com\", \"lastUpdated\": \"2019-01-01T12:00:00\", \"description\": \"Example description\", \"registrationMetadata\": \"us-south\", \"preventKeyDeletion\": true, \"keyVersion\": {\"id\": \"4a0225e9-17a0-46c1-ace7-f25bcf4237d4\", \"creationDate\": \"2019-01-01T12:00:00\"}}]}";
+    String getRegistrationsPath = "/api/v2/keys/testString/registrations";
+
+    server.enqueue(new MockResponse()
+            .setHeader("Content-type", "application/json")
+            .setResponseCode(200)
+            .setBody(mockResponseBody));
+
+    constructClientService();
+
+    // Construct an instance of the GetRegistrationsOptions model
+    GetRegistrationsOptions getRegistrationsOptionsModel = new GetRegistrationsOptions.Builder()
+            .id("testString")
+            .bluemixInstance("testString")
+            .correlationId("testString")
+            .limit(Long.valueOf("26"))
+            .offset(Long.valueOf("26"))
+            .urlEncodedResourceCrnQuery("crn%3Av1%3Abluemix%3Apublic%3Adatabases-for-postgresql%3Aus-south%3Aa%2F274074dce64e9c423ffc238516c755e1%3A29caf0e7-120f-4da8-9551-3abf57ebcfc7%3A*%3A*")
+            .preventKeyDeletion(true)
+            .totalCount(true)
+            .build();
+
+    // Invoke operation with valid options model (positive test)
+    Response<RegistrationWithTotalCount> response = testService.getRegistrations(getRegistrationsOptionsModel).execute();
+    assertNotNull(response);
+    RegistrationWithTotalCount responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "GET");
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+
+    // Check query
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNotNull(query);
+    // Get query params
+    assertEquals(Long.valueOf(query.get("limit")), Long.valueOf("26"));
+    assertEquals(Long.valueOf(query.get("offset")), Long.valueOf("26"));
+    assertEquals(query.get("urlEncodedResourceCRNQuery"), "crn%3Av1%3Abluemix%3Apublic%3Adatabases-for-postgresql%3Aus-south%3Aa%2F274074dce64e9c423ffc238516c755e1%3A29caf0e7-120f-4da8-9551-3abf57ebcfc7%3A*%3A*");
+    assertEquals(Boolean.valueOf(query.get("preventKeyDeletion")), Boolean.valueOf(true));
+    assertEquals(Boolean.valueOf(query.get("totalCount")), Boolean.valueOf(true));
+    // Check request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, getRegistrationsPath);
+  }
+
+  // Test the getRegistrations operation with null options model parameter
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testGetRegistrationsNoOptions() throws Throwable {
+    // construct the service
+    constructClientService();
+
+    server.enqueue(new MockResponse());
+
+    // Invoke operation with null options model (negative test)
+    testService.getRegistrations(null).execute();
+  }
+
+  @Test
+  public void testGetRegistrationsAllKeysWOptions() throws Throwable {
+    // Schedule some responses.
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1, \"totalCount\": 1}, \"resources\": [{\"keyId\": \"84a53643-9ca8-4ff2-9c68-d7842526167b\", \"keyName\": \"Example Key Name\", \"resourceCrn\": \"crn:v1:bluemix:public:cloud-object-storage:global:a/<account-id>:<service-instance>:bucket:<bucket-name>\", \"createdBy\": \"examplecreator@ibm.com\", \"creationDate\": \"2019-01-01T12:00:00\", \"updatedBy\": \"exampleupdater@ibm.com\", \"lastUpdated\": \"2019-01-01T12:00:00\", \"description\": \"Example description\", \"registrationMetadata\": \"us-south\", \"preventKeyDeletion\": true, \"keyVersion\": {\"id\": \"4a0225e9-17a0-46c1-ace7-f25bcf4237d4\", \"creationDate\": \"2019-01-01T12:00:00\"}}]}";
+    String getRegistrationsAllKeysPath = "/api/v2/keys/registrations";
+
+    server.enqueue(new MockResponse()
+            .setHeader("Content-type", "application/json")
+            .setResponseCode(200)
+            .setBody(mockResponseBody));
+
+    constructClientService();
+
+    // Construct an instance of the GetRegistrationsAllKeysOptions model
+    GetRegistrationsAllKeysOptions getRegistrationsAllKeysOptionsModel = new GetRegistrationsAllKeysOptions.Builder()
+            .bluemixInstance("testString")
+            .correlationId("testString")
+            .urlEncodedResourceCrnQuery("crn%3Av1%3Abluemix%3Apublic%3Adatabases-for-postgresql%3Aus-south%3Aa%2F274074dce64e9c423ffc238516c755e1%3A29caf0e7-120f-4da8-9551-3abf57ebcfc7%3A*%3A*")
+            .limit(Long.valueOf("26"))
+            .offset(Long.valueOf("26"))
+            .preventKeyDeletion(true)
+            .totalCount(true)
+            .build();
+
+    // Invoke operation with valid options model (positive test)
+    Response<RegistrationWithTotalCount> response = testService.getRegistrationsAllKeys(getRegistrationsAllKeysOptionsModel).execute();
+    assertNotNull(response);
+    RegistrationWithTotalCount responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "GET");
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+
+    // Check query
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNotNull(query);
+    // Get query params
+    assertEquals(query.get("urlEncodedResourceCRNQuery"), "crn%3Av1%3Abluemix%3Apublic%3Adatabases-for-postgresql%3Aus-south%3Aa%2F274074dce64e9c423ffc238516c755e1%3A29caf0e7-120f-4da8-9551-3abf57ebcfc7%3A*%3A*");
+    assertEquals(Long.valueOf(query.get("limit")), Long.valueOf("26"));
+    assertEquals(Long.valueOf(query.get("offset")), Long.valueOf("26"));
+    assertEquals(Boolean.valueOf(query.get("preventKeyDeletion")), Boolean.valueOf(true));
+    assertEquals(Boolean.valueOf(query.get("totalCount")), Boolean.valueOf(true));
+    // Check request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, getRegistrationsAllKeysPath);
+  }
+
+  // Test the getRegistrationsAllKeys operation with null options model parameter
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testGetRegistrationsAllKeysNoOptions() throws Throwable {
+    // construct the service
+    constructClientService();
+
+    server.enqueue(new MockResponse());
+
+    // Invoke operation with null options model (negative test)
+    testService.getRegistrationsAllKeys(null).execute();
+  }
+
+  @Test
+  public void testPutPolicyWOptions() throws Throwable {
+    // Schedule some responses.
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"id\": \"id\", \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance:policy:<policy-id>\", \"creationDate\": \"2019-01-01T12:00:00\", \"createdBy\": \"createdBy\", \"lastUpdateDate\": \"2019-01-01T12:00:00\", \"updatedBy\": \"updatedBy\", \"type\": \"application/vnd.ibm.kms.policy+json\", \"dualAuthDelete\": {\"enabled\": true}}]}";
+    String putPolicyPath = "/api/v2/keys/testString/policies";
+
+    server.enqueue(new MockResponse()
+            .setHeader("Content-type", "application/json")
+            .setResponseCode(200)
+            .setBody(mockResponseBody));
+
+    constructClientService();
+
+    // Construct an instance of the KeyPolicyDualAuthDeleteDualAuthDelete model
+    KeyPolicyDualAuthDeleteDualAuthDelete keyPolicyDualAuthDeleteDualAuthDeleteModel = new KeyPolicyDualAuthDeleteDualAuthDelete.Builder()
+            .enabled(true)
+            .build();
+
+    // Construct an instance of the CollectionMetadata model
+    CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
+            .collectionType("application/vnd.ibm.kms.crn+json")
+            .collectionTotal(Long.valueOf("1"))
+            .build();
+
+    // Construct an instance of the KeyPolicyDualAuthDelete model
+    KeyPolicyDualAuthDelete keyPolicyDualAuthDeleteModel = new KeyPolicyDualAuthDelete.Builder()
+            .type("application/vnd.ibm.kms.policy+json")
+            .dualAuthDelete(keyPolicyDualAuthDeleteDualAuthDeleteModel)
+            .build();
+
+    // Construct an instance of the SetKeyPoliciesOneOfSetKeyPolicyDualAuthDelete model
+    SetKeyPoliciesOneOfSetKeyPolicyDualAuthDelete setKeyPoliciesOneOfModel = new SetKeyPoliciesOneOfSetKeyPolicyDualAuthDelete.Builder()
+            .metadata(collectionMetadataModel)
+            .resources(new ArrayList<KeyPolicyDualAuthDelete>(Arrays.asList(keyPolicyDualAuthDeleteModel)))
+            .build();
+
+    // Construct an instance of the PutPolicyOptions model
+    PutPolicyOptions putPolicyOptionsModel = new PutPolicyOptions.Builder()
+            .id("testString")
+            .bluemixInstance("testString")
+            .setKeyPoliciesOneOf(setKeyPoliciesOneOfModel)
+            .correlationId("testString")
+            .policy("dualAuthDelete")
+            .build();
+
+    // Invoke operation with valid options model (positive test)
+    Response<GetKeyPoliciesOneOf> response = testService.putPolicy(putPolicyOptionsModel).execute();
+    assertNotNull(response);
+    GetKeyPoliciesOneOf responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "PUT");
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+
+    // Check query
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNotNull(query);
+    // Get query params
+    assertEquals(query.get("policy"), "dualAuthDelete");
+    // Check request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, putPolicyPath);
+  }
+
+  // Test the putPolicy operation with null options model parameter
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testPutPolicyNoOptions() throws Throwable {
+    // construct the service
+    constructClientService();
+
+    server.enqueue(new MockResponse());
+
+    // Invoke operation with null options model (negative test)
+    testService.putPolicy(null).execute();
+  }
+
+  @Test
+  public void testGetPolicyWOptions() throws Throwable {
+    // Schedule some responses.
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"id\": \"id\", \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance:policy:<policy-id>\", \"creationDate\": \"2019-01-01T12:00:00\", \"createdBy\": \"createdBy\", \"lastUpdateDate\": \"2019-01-01T12:00:00\", \"updatedBy\": \"updatedBy\", \"type\": \"application/vnd.ibm.kms.policy+json\", \"dualAuthDelete\": {\"enabled\": true}}]}";
+    String getPolicyPath = "/api/v2/keys/testString/policies";
+
+    server.enqueue(new MockResponse()
+            .setHeader("Content-type", "application/json")
+            .setResponseCode(200)
+            .setBody(mockResponseBody));
+
+    constructClientService();
+
+    // Construct an instance of the GetPolicyOptions model
+    GetPolicyOptions getPolicyOptionsModel = new GetPolicyOptions.Builder()
+            .id("testString")
+            .bluemixInstance("testString")
+            .correlationId("testString")
+            .policy("dualAuthDelete")
+            .build();
+
+    // Invoke operation with valid options model (positive test)
+    Response<GetKeyPoliciesOneOf> response = testService.getPolicy(getPolicyOptionsModel).execute();
+    assertNotNull(response);
+    GetKeyPoliciesOneOf responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "GET");
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+
+    // Check query
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNotNull(query);
+    // Get query params
+    assertEquals(query.get("policy"), "dualAuthDelete");
+    // Check request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, getPolicyPath);
+  }
+
+  // Test the getPolicy operation with null options model parameter
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testGetPolicyNoOptions() throws Throwable {
+    // construct the service
+    constructClientService();
+
+    server.enqueue(new MockResponse());
+
+    // Invoke operation with null options model (negative test)
+    testService.getPolicy(null).execute();
+  }
+
+  @Test
+  public void testPutInstancePolicyWOptions() throws Throwable {
+    // Schedule some responses.
+    String mockResponseBody = "";
+    String putInstancePolicyPath = "/api/v2/instance/policies";
+
+    server.enqueue(new MockResponse()
+            .setResponseCode(204)
+            .setBody(mockResponseBody));
+
+    constructClientService();
+
+    // Construct an instance of the InstancePolicyAllowedNetworkPolicyDataAttributes model
+    InstancePolicyAllowedNetworkPolicyDataAttributes instancePolicyAllowedNetworkPolicyDataAttributesModel = new InstancePolicyAllowedNetworkPolicyDataAttributes.Builder()
+            .allowedNetwork("public-and-private")
+            .build();
+
+    // Construct an instance of the InstancePolicyAllowedNetworkPolicyData model
+    InstancePolicyAllowedNetworkPolicyData instancePolicyAllowedNetworkPolicyDataModel = new InstancePolicyAllowedNetworkPolicyData.Builder()
+            .enabled(true)
+            .attributes(instancePolicyAllowedNetworkPolicyDataAttributesModel)
+            .build();
+
+    // Construct an instance of the CollectionMetadata model
+    CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
+            .collectionType("application/vnd.ibm.kms.crn+json")
+            .collectionTotal(Long.valueOf("1"))
+            .build();
+
+    // Construct an instance of the SetInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItem model
+    SetInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItem setInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItemModel = new SetInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItem.Builder()
+            .policyType("allowedNetwork")
+            .policyData(instancePolicyAllowedNetworkPolicyDataModel)
+            .build();
+
+    // Construct an instance of the SetInstancePoliciesOneOfSetInstancePolicyAllowedNetwork model
+    SetInstancePoliciesOneOfSetInstancePolicyAllowedNetwork setInstancePoliciesOneOfModel = new SetInstancePoliciesOneOfSetInstancePolicyAllowedNetwork.Builder()
+            .metadata(collectionMetadataModel)
+            .resources(new ArrayList<SetInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItem>(Arrays.asList(setInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItemModel)))
+            .build();
+
+    // Construct an instance of the PutInstancePolicyOptions model
+    PutInstancePolicyOptions putInstancePolicyOptionsModel = new PutInstancePolicyOptions.Builder()
+            .bluemixInstance("testString")
+            .setInstancePoliciesOneOf(setInstancePoliciesOneOfModel)
+            .correlationId("testString")
+            .policy("allowedNetwork")
+            .build();
+
+    // Invoke operation with valid options model (positive test)
+    Response<Void> response = testService.putInstancePolicy(putInstancePolicyOptionsModel).execute();
+    assertNotNull(response);
+    Void responseObj = response.getResult();
+    // Response does not have a return type. Check that the result is null.
+    assertNull(responseObj);
+
+    // Verify the contents of the request
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "PUT");
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+
+    // Check query
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNotNull(query);
+    // Get query params
+    assertEquals(query.get("policy"), "allowedNetwork");
+    // Check request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, putInstancePolicyPath);
+  }
+
+  // Test the putInstancePolicy operation with null options model parameter
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testPutInstancePolicyNoOptions() throws Throwable {
+    // construct the service
+    constructClientService();
+
+    server.enqueue(new MockResponse());
+
+    // Invoke operation with null options model (negative test)
+    testService.putInstancePolicy(null).execute();
+  }
+
+  @Test
+  public void testGetInstancePolicyWOptions() throws Throwable {
+    // Schedule some responses.
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"creationDate\": \"2019-01-01T12:00:00\", \"createdBy\": \"createdBy\", \"updatedBy\": \"updatedBy\", \"lastUpdated\": \"2019-01-01T12:00:00\", \"policy_type\": \"policyType\", \"policy_data\": {\"enabled\": true, \"attributes\": {\"allowed_network\": \"public-and-private\"}}}]}";
+    String getInstancePolicyPath = "/api/v2/instance/policies";
+
+    server.enqueue(new MockResponse()
+            .setHeader("Content-type", "application/json")
+            .setResponseCode(200)
+            .setBody(mockResponseBody));
+
+    constructClientService();
+
+    // Construct an instance of the GetInstancePolicyOptions model
+    GetInstancePolicyOptions getInstancePolicyOptionsModel = new GetInstancePolicyOptions.Builder()
+            .bluemixInstance("testString")
+            .correlationId("testString")
+            .policy("allowedNetwork")
+            .build();
+
+    // Invoke operation with valid options model (positive test)
+    Response<GetInstancePoliciesOneOf> response = testService.getInstancePolicy(getInstancePolicyOptionsModel).execute();
+    assertNotNull(response);
+    GetInstancePoliciesOneOf responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "GET");
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+
+    // Check query
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNotNull(query);
+    // Get query params
+    assertEquals(query.get("policy"), "allowedNetwork");
+    // Check request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, getInstancePolicyPath);
+  }
+
+  // Test the getInstancePolicy operation with null options model parameter
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testGetInstancePolicyNoOptions() throws Throwable {
+    // construct the service
+    constructClientService();
+
+    server.enqueue(new MockResponse());
+
+    // Invoke operation with null options model (negative test)
+    testService.getInstancePolicy(null).execute();
+  }
+
+  @Test
+  public void testGetAllowedIpPortWOptions() throws Throwable {
+    // Schedule some responses.
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"private_endpoint_port\": 8888}]}";
+    String getAllowedIpPortPath = "/api/v2/instance/allowed_ip_port";
+
+    server.enqueue(new MockResponse()
+            .setHeader("Content-type", "application/json")
+            .setResponseCode(200)
+            .setBody(mockResponseBody));
+
+    constructClientService();
+
+    // Construct an instance of the GetAllowedIPPortOptions model
+    GetAllowedIPPortOptions getAllowedIpPortOptionsModel = new GetAllowedIPPortOptions.Builder()
+            .bluemixInstance("testString")
+            .correlationId("testString")
+            .build();
+
+    // Invoke operation with valid options model (positive test)
+    Response<AllowedIPPort> response = testService.getAllowedIPPort(getAllowedIpPortOptionsModel).execute();
+    assertNotNull(response);
+    AllowedIPPort responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "GET");
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+
+    // Check query
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
+
+    // Check request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, getAllowedIpPortPath);
+  }
+
+  // Test the getAllowedIPPort operation with null options model parameter
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testGetAllowedIpPortNoOptions() throws Throwable {
+    // construct the service
+    constructClientService();
+
+    server.enqueue(new MockResponse());
+
+    // Invoke operation with null options model (negative test)
+    testService.getAllowedIPPort(null).execute();
   }
 
   /** Initialize the server */
