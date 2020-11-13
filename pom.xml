@@ -22,9 +22,22 @@
         <name>IBM Cloud</name>
     </organization>
 
+    <developers>
+        <developer>
+            <name>Mathew Odden</name>
+            <email>mrodden@us.ibm.com</email>
+            <url>https://github.com/mrodden</url>
+        </developer>
+        <developer>
+            <name>Varinder Singh</name>
+            <email>varinder.singh.grewal@ibm.com</email>
+            <url>https://www.ibm.com/</url>
+        </developer>
+    </developers>
+
     <scm>
-        <connection>scm:git:https://github.com/IBM/keyprotect-java-client</connection>
-        <developerConnection>scm:git:https://github.com/IBM/keyprotect-java-client</developerConnection>
+        <connection>scm:git:https://github.com/IBM/keyprotect-java-client.git</connection>
+        <developerConnection>scm:git:https://github.com/IBM/keyprotect-java-client.git</developerConnection>
         <url>https://github.com/IBM/keyprotect-java-client</url>
     </scm>
 
@@ -282,7 +295,6 @@
                 <executions>
                     <!-- Activate "bintray:deploy" during "deploy" -->
                     <execution>
-                        <?m2e ignore?>
                         <id>bintray-deploy</id>
                         <phase>deploy</phase>
                         <goals>
@@ -347,13 +359,5 @@
             </plugin>
         </plugins>
     </build>
-
-    <developers>
-        <developer>
-            <name>IBM Cloud DevX SDK Development</name>
-            <email>varinder.singh.grewal@ibm.com</email>
-            <url>https://www.ibm.com/</url>
-        </developer>
-    </developers>
 
 </project>
