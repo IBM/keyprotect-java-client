@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.com/IBM/keyprotect-java-client.svg?branch=master)](https://travis-ci.com/IBM/keyprotect-java-client)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
-
+[![JavaDoc](https://img.shields.io/badge/javadoc-reference-blue.svg)](https://www.javadoc.io/doc/com.ibm.cloud/ibm-key-protect-sdk/latest/index.html)
 
 # IBM Cloud Key Protect Java SDK Version 0.1.0
 Java client library to interact with [IBM Key Protect](https://cloud.ibm.com/apidocs/key-protect).
@@ -639,6 +639,88 @@ Set up a dual auth delete policy and also a policy to rotate the key every 2 mon
             // Invoke operation with valid options model
             Response<AllowedIPPort> response = testService.getAllowedIPPort(getAllowedIpPortOptionsModel).execute();
             AllowedIPPort responseObj = response.getResult();
+```
+
+### Key alias
+
+###### Create key alias
+```
+            // Construct an instance of the CreateKeyAliasOptions model
+            CreateKeyAliasOptions createKeyAliasOptionsModel = new CreateKeyAliasOptions.Builder()
+                    .id(keyId)
+                    .alias(keyAlias)
+                    .bluemixInstance(bluemixInstance)
+                    .build();
+
+            // Invoke operation with valid options model, response status code should be 201
+            Response<KeyAlias> response = testService.createKeyAlias(createKeyAliasOptionsModel).execute();
+
+```
+
+###### Get key by using key alias
+```
+            // Construct an instance of the GetKeyOptions model
+            GetKeyOptions getKeyOptions = new GetKeyOptions.Builder().id(keyAlias)
+                    .bluemixInstance(bluemixInstance)
+                    .build();
+
+            // Invoke operation with valid options model
+            Response<GetKey> response = testService.getKey(getKeyOptions).execute();
+            GetKey responseObj = response.getResult();
+```
+
+###### Delete key alias
+```
+            // Construct an instance of the DeleteKeyAliasOptions model
+            DeleteKeyAliasOptions deleteKeyAliasOptionsModel = new DeleteKeyAliasOptions.Builder()
+                    .id(keyId)
+                    .alias(keyAlias)
+                    .bluemixInstance(bluemixInstance)
+                    .build();
+
+            // Invoke operation with valid options model, response status code should be 204
+            Response<Void> response = testService.deleteKeyAlias(deleteKeyAliasOptionsModel).execute();
+
+```
+
+### Key ring
+
+###### Create key ring
+```
+            // Construct an instance of the CreateKeyRingOptions model
+            CreateKeyRingOptions createKeyRingOptionsModel = new CreateKeyRingOptions.Builder()
+                    .keyRingId(keyRingId)
+                    .bluemixInstance(bluemixInstance)
+                    .build();
+
+            // Invoke operation with valid options model, response status code should be 201
+            Response<KeyRing> response = testService.createKeyRing(createKeyRingOptionsModel).execute();
+
+```
+
+###### List key rings
+```
+            // Construct an instance of the ListKeyRingsOptions model
+            ListKeyRingsOptions listKeyRingsOptionsModel = new ListKeyRingsOptions.Builder()
+                    .bluemixInstance(bluemixInstance)
+                    .build();
+
+            // Invoke operation with valid options model
+            Response<ListKeyRings> response = testService.listKeyRings(listKeyRingsOptionsModel).execute();
+            ListKeyRings responseObj = response.getResult();
+```
+
+###### Delete key ring
+```
+            // Construct an instance of the DeleteKeyRingOptions model
+            DeleteKeyRingOptions deleteKeyRingOptionsModel = new DeleteKeyRingOptions.Builder()
+                    .keyRingId(keyRingId)
+                    .bluemixInstance(bluemixInstance)
+                    .build();
+
+            // Invoke operation with valid options model, response status code should be 204
+            Response<KeyRing> response = testService.deleteKeyRing(deleteKeyRingOptionsModel).execute();
+
 ```
 
 ### Set Maximum Retries attempts and Max Interval time

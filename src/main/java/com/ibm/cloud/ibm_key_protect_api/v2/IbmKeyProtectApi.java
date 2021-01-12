@@ -43,9 +43,18 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.PostImportTokenOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.PutInstancePolicyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.PutPolicyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.RegistrationWithTotalCount;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.RestoreKeyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.RetryInterceptor;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.AllowedIPPort;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetAllowedIPPortOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKeyAliasOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKeyAliasOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyAlias;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKeyRingOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKeyRingOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.ListKeyRings;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.ListKeyRingsOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyRing;
 import com.ibm.cloud.key_protect.common.SdkCommon;
 import com.ibm.cloud.sdk.core.http.RequestBuilder;
 import com.ibm.cloud.sdk.core.http.ResponseConverter;
@@ -392,8 +401,8 @@ public class IbmKeyProtectApi extends BaseService {
 
   /**
    * Retrieve a key.
-   * <p>
-   * Retrieves a key and its details by specifying the ID of the key.
+   *
+   * Retrieves a key and its details by specifying the ID or alias of the key.
    *
    * @param getKeyOptions the {@link GetKeyOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link GetKey}
@@ -401,8 +410,8 @@ public class IbmKeyProtectApi extends BaseService {
   public ServiceCall<GetKey> getKey(GetKeyOptions getKeyOptions) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(getKeyOptions,
             "getKeyOptions cannot be null");
-    String[] pathSegments = {"api/v2/keys"};
-    String[] pathParameters = {getKeyOptions.id()};
+    String[] pathSegments = { "api/v2/keys" };
+    String[] pathParameters = { getKeyOptions.id() };
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.constructHttpUrl(getServiceUrl(), pathSegments, pathParameters));
     Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("ibm_key_protect_api", "v2", "getKey");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
@@ -414,8 +423,7 @@ public class IbmKeyProtectApi extends BaseService {
       builder.header("Correlation-Id", getKeyOptions.correlationId());
     }
     ResponseConverter<GetKey> responseConverter =
-            ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<GetKey>() {
-            }.getType());
+            ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<GetKey>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 
@@ -546,6 +554,40 @@ public class IbmKeyProtectApi extends BaseService {
     ResponseConverter<GetKeyMetadata> responseConverter =
             ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<GetKeyMetadata>() {
             }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Restore a Key.
+   *
+   * [Restore a previously imported root key](/docs/key-protect?topic=key-protect-restore-keys).
+   *
+   * @param restoreKeyOptions the {@link RestoreKeyOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link Key}
+   */
+  public ServiceCall<Key> restoreKey(RestoreKeyOptions restoreKeyOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(restoreKeyOptions,
+            "restoreKeyOptions cannot be null");
+    String[] pathSegments = { "api/v2/keys", "restore" };
+    String[] pathParameters = { restoreKeyOptions.id() };
+    RequestBuilder builder = RequestBuilder.post(RequestBuilder.constructHttpUrl(getServiceUrl(), pathSegments, pathParameters));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("ibm_key_protect_api", "v2", "restoreKey");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/vnd.ibm.kms.key+json");
+    builder.header("Bluemix-Instance", restoreKeyOptions.bluemixInstance());
+    if (restoreKeyOptions.correlationId() != null) {
+      builder.header("Correlation-Id", restoreKeyOptions.correlationId());
+    }
+    if (restoreKeyOptions.prefer() != null) {
+      builder.header("Prefer", restoreKeyOptions.prefer());
+    }
+    if (restoreKeyOptions.keyRestoreBody() != null) {
+      builder.bodyContent(restoreKeyOptions.keyRestoreBody(), "application/vnd.ibm.kms.key_action_restore+json");
+    }
+    ResponseConverter<Key> responseConverter =
+            ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<Key>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 
@@ -842,5 +884,141 @@ public class IbmKeyProtectApi extends BaseService {
     return createServiceCall(builder.build(), responseConverter);
   }
 
+
+  /**
+   * Create an alias.
+   *
+   * Creates an alias for the specified key.
+   *
+   * @param createKeyAliasOptions the {@link CreateKeyAliasOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link KeyAlias}
+   */
+  public ServiceCall<KeyAlias> createKeyAlias(CreateKeyAliasOptions createKeyAliasOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(createKeyAliasOptions,
+            "createKeyAliasOptions cannot be null");
+    String[] pathSegments = { "api/v2/keys", "aliases" };
+    String[] pathParameters = { createKeyAliasOptions.id(), createKeyAliasOptions.alias() };
+    RequestBuilder builder = RequestBuilder.post(RequestBuilder.constructHttpUrl(getServiceUrl(), pathSegments, pathParameters));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("ibm_key_protect_api", "v2", "createKeyAlias");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    builder.header("Bluemix-Instance", createKeyAliasOptions.bluemixInstance());
+    if (createKeyAliasOptions.correlationId() != null) {
+      builder.header("Correlation-Id", createKeyAliasOptions.correlationId());
+    }
+    ResponseConverter<KeyAlias> responseConverter =
+            ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<KeyAlias>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Delete an alias.
+   *
+   * Deletes an alias from the associated key. Delete alias does not delete the key.
+   *
+   * @param deleteKeyAliasOptions the {@link DeleteKeyAliasOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a void result
+   */
+  public ServiceCall<Void> deleteKeyAlias(DeleteKeyAliasOptions deleteKeyAliasOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(deleteKeyAliasOptions,
+            "deleteKeyAliasOptions cannot be null");
+    String[] pathSegments = { "api/v2/keys", "aliases" };
+    String[] pathParameters = { deleteKeyAliasOptions.id(), deleteKeyAliasOptions.alias() };
+    RequestBuilder builder = RequestBuilder.delete(RequestBuilder.constructHttpUrl(getServiceUrl(), pathSegments, pathParameters));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("ibm_key_protect_api", "v2", "deleteKeyAlias");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Bluemix-Instance", deleteKeyAliasOptions.bluemixInstance());
+    if (deleteKeyAliasOptions.correlationId() != null) {
+      builder.header("Correlation-Id", deleteKeyAliasOptions.correlationId());
+    }
+    ResponseConverter<Void> responseConverter = ResponseConverterUtils.getVoid();
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * List Key Rings.
+   *
+   * List all key rings in the instance.
+   *
+   * @param listKeyRingsOptions the {@link ListKeyRingsOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link ListKeyRings}
+   */
+  public ServiceCall<ListKeyRings> listKeyRings(ListKeyRingsOptions listKeyRingsOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(listKeyRingsOptions,
+            "listKeyRingsOptions cannot be null");
+    String[] pathSegments = { "api/v2/key_rings" };
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.constructHttpUrl(getServiceUrl(), pathSegments));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("ibm_key_protect_api", "v2", "listKeyRings");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    builder.header("Bluemix-Instance", listKeyRingsOptions.bluemixInstance());
+    if (listKeyRingsOptions.correlationId() != null) {
+      builder.header("Correlation-Id", listKeyRingsOptions.correlationId());
+    }
+    ResponseConverter<ListKeyRings> responseConverter =
+            ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ListKeyRings>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Create Key Ring.
+   *
+   * Create a key ring in the instance with the specified name. The key ring ID `default` is a reserved key ring ID and
+   * cannot be created nor destroyed. The default key ring is initial key ring that is generated with each newly created
+   * instance. All keys not associated with an otherwise specified key ring exist within the default key ring.
+   *
+   * @param createKeyRingOptions the {@link CreateKeyRingOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a void result
+   */
+  public ServiceCall<KeyRing> createKeyRing(CreateKeyRingOptions createKeyRingOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(createKeyRingOptions,
+            "createKeyRingOptions cannot be null");
+    String[] pathSegments = { "api/v2/key_rings" };
+    String[] pathParameters = { createKeyRingOptions.keyRingId() };
+    RequestBuilder builder = RequestBuilder.post(RequestBuilder.constructHttpUrl(getServiceUrl(), pathSegments, pathParameters));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("ibm_key_protect_api", "v2", "createKeyRing");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Bluemix-Instance", createKeyRingOptions.bluemixInstance());
+    if (createKeyRingOptions.correlationId() != null) {
+      builder.header("Correlation-Id", createKeyRingOptions.correlationId());
+    }
+    ResponseConverter<KeyRing> responseConverter = ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<KeyRing>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Delete Key Ring.
+   *
+   * Delete the key ring from the instance. key ring ID `default` cannot be destroyed. Currently, only key rings with 0
+   * (zero) keys, in any state [Active (1), Suspended (2), Deactivated (3), Destroyed (5)], may be deleted.
+   *
+   * @param deleteKeyRingOptions the {@link DeleteKeyRingOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a void result
+   */
+  public ServiceCall<KeyRing> deleteKeyRing(DeleteKeyRingOptions deleteKeyRingOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(deleteKeyRingOptions,
+            "deleteKeyRingOptions cannot be null");
+    String[] pathSegments = { "api/v2/key_rings" };
+    String[] pathParameters = { deleteKeyRingOptions.keyRingId() };
+    RequestBuilder builder = RequestBuilder.delete(RequestBuilder.constructHttpUrl(getServiceUrl(), pathSegments, pathParameters));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("ibm_key_protect_api", "v2", "deleteKeyRing");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Bluemix-Instance", deleteKeyRingOptions.bluemixInstance());
+    if (deleteKeyRingOptions.correlationId() != null) {
+      builder.header("Correlation-Id", deleteKeyRingOptions.correlationId());
+    }
+    ResponseConverter<KeyRing> responseConverter = ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<KeyRing>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
 }
 

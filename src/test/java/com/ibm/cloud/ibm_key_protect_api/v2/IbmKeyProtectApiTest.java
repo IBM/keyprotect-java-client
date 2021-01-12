@@ -566,7 +566,7 @@ public class IbmKeyProtectApiTest extends PowerMockTestCase {
   @Test
   public void testCreateKeyWOptions() throws Throwable {
     // Schedule some responses.
-    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"type\", \"id\": \"id\", \"name\": \"name\", \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2019-01-01T12:00:00\", \"extractable\": false, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": true, \"creationDate\": \"2019-01-01T12:00:00\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"128\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 128, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2019-01-01T12:00:00\", \"lastRotateDate\": \"2019-01-01T12:00:00\", \"keyVersion\": {\"id\": \"4a0225e9-17a0-46c1-ace7-f25bcf4237d4\", \"creationDate\": \"2019-01-01T12:00:00\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2019-01-01T12:00:00\"}, \"deleted\": false, \"deletionDate\": \"2019-01-01T12:00:00\", \"deletedBy\": \"deletedBy\", \"payload\": \"VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku\"}]}";
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"type\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2019-01-01T12:00:00\", \"extractable\": false, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": true, \"creationDate\": \"2019-01-01T12:00:00\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"128\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 128, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2019-01-01T12:00:00\", \"lastRotateDate\": \"2019-01-01T12:00:00\", \"keyVersion\": {\"id\": \"4a0225e9-17a0-46c1-ace7-f25bcf4237d4\", \"creationDate\": \"2019-01-01T12:00:00\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2019-01-01T12:00:00\"}, \"deleted\": false, \"deletionDate\": \"2019-01-01T12:00:00\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2019-01-01T12:00:00\", \"restoreAllowed\": true, \"payload\": \"VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku\"}]}";
     String createKeyPath = "/api/v2/keys";
 
     server.enqueue(new MockResponse()
@@ -660,7 +660,7 @@ public class IbmKeyProtectApiTest extends PowerMockTestCase {
   @Test
   public void testGetKeysWOptions() throws Throwable {
     // Schedule some responses.
-    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"type\", \"id\": \"id\", \"name\": \"name\", \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2019-01-01T12:00:00\", \"extractable\": false, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": true, \"creationDate\": \"2019-01-01T12:00:00\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"128\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 128, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2019-01-01T12:00:00\", \"lastRotateDate\": \"2019-01-01T12:00:00\", \"keyVersion\": {\"id\": \"4a0225e9-17a0-46c1-ace7-f25bcf4237d4\", \"creationDate\": \"2019-01-01T12:00:00\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2019-01-01T12:00:00\"}}]}";
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"type\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2019-01-01T12:00:00\", \"extractable\": false, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": true, \"creationDate\": \"2019-01-01T12:00:00\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"128\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 128, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2019-01-01T12:00:00\", \"lastRotateDate\": \"2019-01-01T12:00:00\", \"keyVersion\": {\"id\": \"4a0225e9-17a0-46c1-ace7-f25bcf4237d4\", \"creationDate\": \"2019-01-01T12:00:00\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2019-01-01T12:00:00\"}}]}";
     String getKeysPath = "/api/v2/keys";
 
     server.enqueue(new MockResponse()
@@ -756,7 +756,7 @@ public class IbmKeyProtectApiTest extends PowerMockTestCase {
   @Test
   public void testGetKeyWOptions() throws Throwable {
     // Schedule some responses.
-    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"type\", \"id\": \"id\", \"name\": \"name\", \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2019-01-01T12:00:00\", \"extractable\": false, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": true, \"creationDate\": \"2019-01-01T12:00:00\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"128\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 128, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2019-01-01T12:00:00\", \"lastRotateDate\": \"2019-01-01T12:00:00\", \"keyVersion\": {\"id\": \"4a0225e9-17a0-46c1-ace7-f25bcf4237d4\", \"creationDate\": \"2019-01-01T12:00:00\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2019-01-01T12:00:00\"}, \"deleted\": false, \"deletionDate\": \"2019-01-01T12:00:00\", \"deletedBy\": \"deletedBy\", \"payload\": \"VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku\"}]}";
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"type\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2019-01-01T12:00:00\", \"extractable\": false, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": true, \"creationDate\": \"2019-01-01T12:00:00\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"128\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 128, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2019-01-01T12:00:00\", \"lastRotateDate\": \"2019-01-01T12:00:00\", \"keyVersion\": {\"id\": \"4a0225e9-17a0-46c1-ace7-f25bcf4237d4\", \"creationDate\": \"2019-01-01T12:00:00\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2019-01-01T12:00:00\"}, \"deleted\": false, \"deletionDate\": \"2019-01-01T12:00:00\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2019-01-01T12:00:00\", \"restoreAllowed\": true, \"payload\": \"VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku\"}]}";
     String getKeyPath = "/api/v2/keys/testString";
 
     server.enqueue(new MockResponse()
@@ -951,7 +951,7 @@ public class IbmKeyProtectApiTest extends PowerMockTestCase {
   @Test
   public void testDeleteKeyWOptions() throws Throwable {
     // Schedule some responses.
-    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"type\", \"id\": \"id\", \"name\": \"name\", \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2019-01-01T12:00:00\", \"extractable\": false, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": true, \"creationDate\": \"2019-01-01T12:00:00\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"128\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 128, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2019-01-01T12:00:00\", \"lastRotateDate\": \"2019-01-01T12:00:00\", \"keyVersion\": {\"id\": \"4a0225e9-17a0-46c1-ace7-f25bcf4237d4\", \"creationDate\": \"2019-01-01T12:00:00\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2019-01-01T12:00:00\"}, \"deleted\": false, \"deletionDate\": \"2019-01-01T12:00:00\", \"deletedBy\": \"deletedBy\", \"payload\": \"VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku\"}]}";
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"type\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2019-01-01T12:00:00\", \"extractable\": false, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": true, \"creationDate\": \"2019-01-01T12:00:00\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"128\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 128, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2019-01-01T12:00:00\", \"lastRotateDate\": \"2019-01-01T12:00:00\", \"keyVersion\": {\"id\": \"4a0225e9-17a0-46c1-ace7-f25bcf4237d4\", \"creationDate\": \"2019-01-01T12:00:00\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2019-01-01T12:00:00\"}, \"deleted\": false, \"deletionDate\": \"2019-01-01T12:00:00\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2019-01-01T12:00:00\", \"restoreAllowed\": true, \"payload\": \"VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku\"}]}";
     String deleteKeyPath = "/api/v2/keys/testString";
 
     server.enqueue(new MockResponse()
@@ -1046,7 +1046,7 @@ public class IbmKeyProtectApiTest extends PowerMockTestCase {
   @Test
   public void testGetKeyMetadataWOptions() throws Throwable {
     // Schedule some responses.
-    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"type\", \"id\": \"id\", \"name\": \"name\", \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2019-01-01T12:00:00\", \"extractable\": false, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": true, \"creationDate\": \"2019-01-01T12:00:00\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"128\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 128, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2019-01-01T12:00:00\", \"lastRotateDate\": \"2019-01-01T12:00:00\", \"keyVersion\": {\"id\": \"4a0225e9-17a0-46c1-ace7-f25bcf4237d4\", \"creationDate\": \"2019-01-01T12:00:00\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2019-01-01T12:00:00\"}, \"deleted\": false, \"deletionDate\": \"2019-01-01T12:00:00\", \"deletedBy\": \"deletedBy\"}]}";
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"type\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2019-01-01T12:00:00\", \"extractable\": false, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": true, \"creationDate\": \"2019-01-01T12:00:00\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"128\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 128, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2019-01-01T12:00:00\", \"lastRotateDate\": \"2019-01-01T12:00:00\", \"keyVersion\": {\"id\": \"4a0225e9-17a0-46c1-ace7-f25bcf4237d4\", \"creationDate\": \"2019-01-01T12:00:00\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2019-01-01T12:00:00\"}, \"deleted\": false, \"deletionDate\": \"2019-01-01T12:00:00\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2019-01-01T12:00:00\", \"restoreAllowed\": true}]}";
     String getKeyMetadataPath = "/api/v2/keys/testString/metadata";
 
     server.enqueue(new MockResponse()
@@ -1134,6 +1134,61 @@ public class IbmKeyProtectApiTest extends PowerMockTestCase {
 
     // Invoke operation with null options model (negative test)
     testService.getKeyMetadata(null).execute();
+  }
+
+  @Test
+  public void testRestoreKeyWOptions() throws Throwable {
+    // Schedule some responses.
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"type\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2019-01-01T12:00:00\", \"extractable\": false, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": true, \"creationDate\": \"2019-01-01T12:00:00\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"128\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 128, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2019-01-01T12:00:00\", \"lastRotateDate\": \"2019-01-01T12:00:00\", \"keyVersion\": {\"id\": \"4a0225e9-17a0-46c1-ace7-f25bcf4237d4\", \"creationDate\": \"2019-01-01T12:00:00\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2019-01-01T12:00:00\"}, \"deleted\": false, \"deletionDate\": \"2019-01-01T12:00:00\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2019-01-01T12:00:00\", \"restoreAllowed\": true, \"payload\": \"VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku\"}]}";
+    String restoreKeyPath = "/api/v2/keys/testString/restore";
+
+    server.enqueue(new MockResponse()
+            .setHeader("Content-type", "application/vnd.ibm.kms.key+json")
+            .setResponseCode(201)
+            .setBody(mockResponseBody));
+
+    constructClientService();
+
+    // Construct an instance of the RestoreKeyOptions model
+    RestoreKeyOptions restoreKeyOptionsModel = new RestoreKeyOptions.Builder()
+            .id("testString")
+            .bluemixInstance("testString")
+            .keyRestoreBody(TestUtilities.createMockStream("This is a mock file."))
+            .correlationId("testString")
+            .prefer("return=representation")
+            .build();
+
+    // Invoke operation with valid options model (positive test)
+    Response<Key> response = testService.restoreKey(restoreKeyOptionsModel).execute();
+    assertNotNull(response);
+    Key responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "POST");
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+
+    // Check query
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
+
+    // Check request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, restoreKeyPath);
+  }
+
+  // Test the restoreKey operation with null options model parameter
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testRestoreKeyNoOptions() throws Throwable {
+    // construct the service
+    constructClientService();
+
+    server.enqueue(new MockResponse());
+
+    // Invoke operation with null options model (negative test)
+    testService.restoreKey(null).execute();
   }
 
   @Test
@@ -1680,6 +1735,274 @@ public class IbmKeyProtectApiTest extends PowerMockTestCase {
     // Invoke operation with null options model (negative test)
     testService.getAllowedIPPort(null).execute();
   }
+
+
+  @Test
+  public void testCreateKeyAliasWOptions() throws Throwable {
+    // Schedule some responses.
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"keyId\": \"84a53643-9ca8-4ff2-9c68-d7842526167b\", \"alias\": \"Example-test-key\", \"createdBy\": \"...\", \"creationDate\": \"2019-01-01T12:00:00\"}]}";
+    String createKeyAliasPath = "/api/v2/keys/testString/aliases/testString";
+
+    server.enqueue(new MockResponse()
+            .setHeader("Content-type", "application/json")
+            .setResponseCode(200)
+            .setBody(mockResponseBody));
+
+    constructClientService();
+
+    // Construct an instance of the CreateKeyAliasOptions model
+    CreateKeyAliasOptions createKeyAliasOptionsModel = new CreateKeyAliasOptions.Builder()
+            .id("testString")
+            .alias("testString")
+            .bluemixInstance("testString")
+            .correlationId("testString")
+            .build();
+
+    // Invoke operation with valid options model (positive test)
+    Response<KeyAlias> response = testService.createKeyAlias(createKeyAliasOptionsModel).execute();
+    assertNotNull(response);
+    KeyAlias responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "POST");
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+
+    // Check query
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
+
+    // Check request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, createKeyAliasPath);
+  }
+
+  // Test the createKeyAlias operation with null options model parameter
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testCreateKeyAliasNoOptions() throws Throwable {
+    // construct the service
+    constructClientService();
+
+    server.enqueue(new MockResponse());
+
+    // Invoke operation with null options model (negative test)
+    testService.createKeyAlias(null).execute();
+  }
+
+  @Test
+  public void testDeleteKeyAliasWOptions() throws Throwable {
+    // Schedule some responses.
+    String mockResponseBody = "";
+    String deleteKeyAliasPath = "/api/v2/keys/testString/aliases/testString";
+
+    server.enqueue(new MockResponse()
+            .setResponseCode(204)
+            .setBody(mockResponseBody));
+
+    constructClientService();
+
+    // Construct an instance of the DeleteKeyAliasOptions model
+    DeleteKeyAliasOptions deleteKeyAliasOptionsModel = new DeleteKeyAliasOptions.Builder()
+            .id("testString")
+            .alias("testString")
+            .bluemixInstance("testString")
+            .correlationId("testString")
+            .build();
+
+    // Invoke operation with valid options model (positive test)
+    Response<Void> response = testService.deleteKeyAlias(deleteKeyAliasOptionsModel).execute();
+    assertNotNull(response);
+    Void responseObj = response.getResult();
+    // Response does not have a return type. Check that the result is null.
+    assertNull(responseObj);
+
+    // Verify the contents of the request
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "DELETE");
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+
+    // Check query
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
+
+    // Check request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, deleteKeyAliasPath);
+  }
+
+  // Test the deleteKeyAlias operation with null options model parameter
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testDeleteKeyAliasNoOptions() throws Throwable {
+    // construct the service
+    constructClientService();
+
+    server.enqueue(new MockResponse());
+
+    // Invoke operation with null options model (negative test)
+    testService.deleteKeyAlias(null).execute();
+  }
+
+  @Test
+  public void testListKeyRingsWOptions() throws Throwable {
+    // Schedule some responses.
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"id\": \"id\", \"creationDate\": \"2019-01-01T12:00:00\", \"createdBy\": \"createdBy\"}]}";
+    String listKeyRingsPath = "/api/v2/key_rings";
+
+    server.enqueue(new MockResponse()
+            .setHeader("Content-type", "application/json")
+            .setResponseCode(200)
+            .setBody(mockResponseBody));
+
+    constructClientService();
+
+    // Construct an instance of the ListKeyRingsOptions model
+    ListKeyRingsOptions listKeyRingsOptionsModel = new ListKeyRingsOptions.Builder()
+            .bluemixInstance("testString")
+            .correlationId("testString")
+            .build();
+
+    // Invoke operation with valid options model (positive test)
+    Response<ListKeyRings> response = testService.listKeyRings(listKeyRingsOptionsModel).execute();
+    assertNotNull(response);
+    ListKeyRings responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "GET");
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+
+    // Check query
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
+
+    // Check request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, listKeyRingsPath);
+  }
+
+  // Test the listKeyRings operation with null options model parameter
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testListKeyRingsNoOptions() throws Throwable {
+    // construct the service
+    constructClientService();
+
+    server.enqueue(new MockResponse());
+
+    // Invoke operation with null options model (negative test)
+    testService.listKeyRings(null).execute();
+  }
+
+  @Test
+  public void testCreateKeyRingWOptions() throws Throwable {
+    // Schedule some responses.
+    String mockResponseBody = "";
+    String createKeyRingPath = "/api/v2/key_rings/testString";
+
+    server.enqueue(new MockResponse()
+            .setResponseCode(201)
+            .setBody(mockResponseBody));
+
+    constructClientService();
+
+    // Construct an instance of the CreateKeyRingOptions model
+    CreateKeyRingOptions createKeyRingOptionsModel = new CreateKeyRingOptions.Builder()
+            .keyRingId("testString")
+            .bluemixInstance("testString")
+            .correlationId("testString")
+            .build();
+
+    // Invoke operation with valid options model (positive test)
+    Response<KeyRing> response = testService.createKeyRing(createKeyRingOptionsModel).execute();
+    assertNotNull(response);
+    KeyRing responseObj = response.getResult();
+    // Response does not have a return type. Check that the result is null.
+    assertNull(responseObj);
+
+    // Verify the contents of the request
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "POST");
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+
+    // Check query
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
+
+    // Check request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, createKeyRingPath);
+  }
+
+  // Test the createKeyRing operation with null options model parameter
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testCreateKeyRingNoOptions() throws Throwable {
+    // construct the service
+    constructClientService();
+
+    server.enqueue(new MockResponse());
+
+    // Invoke operation with null options model (negative test)
+    testService.createKeyRing(null).execute();
+  }
+
+  @Test
+  public void testDeleteKeyRingWOptions() throws Throwable {
+    // Schedule some responses.
+    String mockResponseBody = "";
+    String deleteKeyRingPath = "/api/v2/key_rings/testString";
+
+    server.enqueue(new MockResponse()
+            .setResponseCode(204)
+            .setBody(mockResponseBody));
+
+    constructClientService();
+
+    // Construct an instance of the DeleteKeyRingOptions model
+    DeleteKeyRingOptions deleteKeyRingOptionsModel = new DeleteKeyRingOptions.Builder()
+            .keyRingId("testString")
+            .bluemixInstance("testString")
+            .correlationId("testString")
+            .build();
+
+    // Invoke operation with valid options model (positive test)
+    Response<KeyRing> response = testService.deleteKeyRing(deleteKeyRingOptionsModel).execute();
+    assertNotNull(response);
+    KeyRing responseObj = response.getResult();
+    // Response does not have a return type. Check that the result is null.
+    assertNull(responseObj);
+
+    // Verify the contents of the request
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "DELETE");
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+
+    // Check query
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
+
+    // Check request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, deleteKeyRingPath);
+  }
+
+  // Test the deleteKeyRing operation with null options model parameter
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testDeleteKeyRingNoOptions() throws Throwable {
+    // construct the service
+    constructClientService();
+
+    server.enqueue(new MockResponse());
+
+    // Invoke operation with null options model (negative test)
+    testService.deleteKeyRing(null).execute();
+  }
+
 
   /** Initialize the server */
   @BeforeMethod
