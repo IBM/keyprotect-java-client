@@ -723,6 +723,16 @@ Set up a dual auth delete policy and also a policy to rotate the key every 2 mon
 
 ```
 
+###### Working with key ring
+To work with key ring in an instance, pass in the key ring ID when creating a service. Note this cannot be done when 
+working with instance policy.
+
+```
+            testService = IbmKeyProtectApi.newInstance(authenticator, "testKeyRingId");
+            // Perform create key and get keys etc. operations as usual
+
+```
+
 ### Set Maximum Retries attempts and Max Interval time
 Key protect service has exponential back-off retry policy.
 To configure retry policy  set maxRetry which is maximum number of retries allowed for failed HTTP requests and
@@ -736,6 +746,8 @@ retryMaxInterval which is maximum time interval between two subsequent retries
             authenticator.setURL(<IAM_AUTH_URL>);
             authenticator.validate();
             testService = IbmKeyProtectApi.newInstance(authenticator, maxRetry, retryMaxInterval);
+            // To work with key ring use following
+            // testService = IbmKeyProtectApi.newInstance(authenticator, keyRingId, maxRetry, retryMaxInterval);
             testService.setServiceUrl(<KEY_PROTECT_URL>);
 ```
 

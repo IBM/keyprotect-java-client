@@ -89,12 +89,36 @@ public class IbmKeyProtectApiTest extends PowerMockTestCase {
   }
 
   /**
+   * Positive Test - construct the service with a key ring ID but no service name
+   */
+  @Test
+  public void testConstructorWithKeyRing() throws Throwable {
+    Authenticator authenticator = mock(Authenticator.class);
+    IbmKeyProtectApi sampleTestService = IbmKeyProtectApi.newInstance(authenticator, "testKeyRingId");
+    assertEquals(sampleTestService.DEFAULT_SERVICE_NAME, "ibm_key_protect_api");
+    assertEquals(sampleTestService.DEFAULT_RETRY_MAX_INTERVAL, 30L);
+    assertEquals(sampleTestService.DEFAULT_MAX_RETRY, 4);
+  }
+
+  /**
    * Positive Test - construct the service with retry params.
    */
   @Test
   public void testConstructorWithRetryParams() throws Throwable {
     Authenticator authenticator = mock(Authenticator.class);
     IbmKeyProtectApi sampleTestService = IbmKeyProtectApi.newInstance(authenticator, 4, 30L);
+    assertEquals(sampleTestService.DEFAULT_MAX_RETRY, 4);
+    assertEquals(sampleTestService.DEFAULT_RETRY_MAX_INTERVAL, 30L);
+  }
+
+  /**
+   * Positive Test - construct the service with a key ring ID and retry params.
+   */
+  @Test
+  public void testConstructorWithKeyRingAndRetryParams() throws Throwable {
+    Authenticator authenticator = mock(Authenticator.class);
+    IbmKeyProtectApi sampleTestService = IbmKeyProtectApi.newInstance(authenticator, "testKeyRingId",
+            4, 30L);
     assertEquals(sampleTestService.DEFAULT_MAX_RETRY, 4);
     assertEquals(sampleTestService.DEFAULT_RETRY_MAX_INTERVAL, 30L);
   }
