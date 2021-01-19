@@ -45,6 +45,7 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.PutPolicyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.RegistrationWithTotalCount;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.RestoreKeyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.RetryInterceptor;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.AddHeaderInterceptor;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.AllowedIPPort;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetAllowedIPPortOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKeyAliasOptions;
@@ -129,6 +130,39 @@ public class IbmKeyProtectApi extends BaseService {
 
   /**
    * Class method which constructs an instance of the `IbmKeyProtectApi` client.
+   * The default service name is used to configure the client instance.
+   * The specified authenticator is used to configure the client instance.
+   * The specified key ring ID is used to configure the client instance.
+   *  @param authenticator the {@link Authenticator} instance to be configured for this client
+   *  @param keyRingId identifier of the key ring belongs to the instance
+   *  @return an instance of the `IbmKeyProtectApi` client using external configuration
+   */
+  public static IbmKeyProtectApi newInstance(Authenticator authenticator, String keyRingId) {
+    IbmKeyProtectApi service =  new IbmKeyProtectApi(DEFAULT_SERVICE_NAME, authenticator, keyRingId);
+    service.configureService(DEFAULT_SERVICE_NAME);
+    return service;
+  }
+
+  /**
+   * Class method which constructs an instance of the `IbmKeyProtectApi` client.
+   * The default service name is used to configure the client instance.
+   * The specified authenticator is used to configure the client instance.
+   * The specified key ring ID is used to configure the client instance.
+   * The specified retry attempts and intervals can be passed
+   *  @param authenticator the {@link Authenticator} instance to be configured for this client
+   *  @param keyRingId identifier of the key ring belongs to the instance
+   *  @param maxRetry maximum number of retry attempts for failed HTTP requests
+   *  @param retryMaxInterval maximum time interval between two subsequent retries
+   *  @return an instance of the `IbmKeyProtectApi` client using external configuration
+   */
+  public static IbmKeyProtectApi newInstance(Authenticator authenticator, String keyRingId, int maxRetry, long retryMaxInterval) {
+    IbmKeyProtectApi service =  new IbmKeyProtectApi(DEFAULT_SERVICE_NAME, authenticator, keyRingId, maxRetry, retryMaxInterval);
+    service.configureService(DEFAULT_SERVICE_NAME);
+    return service;
+  }
+
+  /**
+   * Class method which constructs an instance of the `IbmKeyProtectApi` client.
    * The specified service name is used to configure the client instance.
    *
    * @param serviceName the service name to be used when configuring the client instance
@@ -162,6 +196,26 @@ public class IbmKeyProtectApi extends BaseService {
   }
 
   /**
+   * Constructs an instance of the `IbmKeyProtectApi` client, and use the key ring in the instance
+   * The specified service name, authenticator and key ring ID are used to configure the client instance.
+   *
+   * @param serviceName   the service name to be used when configuring the client instance
+   * @param authenticator the {@link Authenticator} instance to be configured for this client
+   * @param keyRingId     identifier of the key ring belongs to the instance
+   */
+  public IbmKeyProtectApi(String serviceName, Authenticator authenticator, String keyRingId) {
+    super(serviceName, authenticator);
+    // Creating new okHttp Client with add header interceptor
+    AddHeaderInterceptor interceptor = new AddHeaderInterceptor("x-kms-key-ring", keyRingId);
+    OkHttpClient okHttpClient = new OkHttpClient()
+            .newBuilder()
+            .addInterceptor(interceptor)
+            .build();
+    // updating service with new client
+    this.setClient(okHttpClient);
+  }
+
+  /**
    * Constructs an instance of the `IbmKeyProtectApi` client.
    * The specified service name, authenticator, retries and intervals are used to configure the client instance.
    *
@@ -176,8 +230,33 @@ public class IbmKeyProtectApi extends BaseService {
     RetryInterceptor interceptor = new RetryInterceptor(maxRetry, retryMaxInterval);
     OkHttpClient okHttpClient = new OkHttpClient()
             .newBuilder()
-            //httpLogging interceptor for logging network requests
             .addInterceptor(interceptor)
+            .build();
+    // updating service with new client
+    this.setClient(okHttpClient);
+  }
+
+  /**
+   * Constructs an instance of the `IbmKeyProtectApi` client.
+   * The specified service name, authenticator, key ring ID, retries and intervals are used to configure the client
+   * instance.
+   *
+   * @param serviceName   the service name to be used when configuring the client instance
+   * @param authenticator the {@link Authenticator} instance to be configured for this client
+   * @param keyRingId     identifier of the key ring belongs to the instance
+   * @param maxRetry maximum number of retry attempts for failed HTTP requests
+   * @param retryMaxInterval maximum time interval between two subsequent retries
+   */
+  public IbmKeyProtectApi(String serviceName, Authenticator authenticator, String keyRingId, int maxRetry,
+                          long retryMaxInterval) {
+    super(serviceName, authenticator);
+    // Creating new okHttp Client with retry interceptor and header interceptor
+    RetryInterceptor retryInterceptor = new RetryInterceptor(maxRetry, retryMaxInterval);
+    AddHeaderInterceptor headerInterceptor = new AddHeaderInterceptor("x-kms-key-ring", keyRingId);
+    OkHttpClient okHttpClient = new OkHttpClient()
+            .newBuilder()
+            .addInterceptor(retryInterceptor)
+            .addInterceptor(headerInterceptor)
             .build();
     // updating service with new client
     this.setClient(okHttpClient);
@@ -188,7 +267,7 @@ public class IbmKeyProtectApi extends BaseService {
     if (response.isSuccessful()) {
       return converter.convert(response);
     } else
-        throw new KeyProtectException(response.code(), response);
+      throw new KeyProtectException(response.code(), response);
   }
 
   /**
