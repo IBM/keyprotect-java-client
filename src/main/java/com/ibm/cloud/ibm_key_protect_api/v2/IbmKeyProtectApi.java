@@ -134,7 +134,7 @@ public class IbmKeyProtectApi extends BaseService {
    * The specified authenticator is used to configure the client instance.
    * The specified key ring ID is used to configure the client instance.
    *  @param authenticator the {@link Authenticator} instance to be configured for this client
-   *  @param keyRingId identifier of the key ring belongs to the instance
+   *  @param keyRingId Key Ring ID of the key ring which the client will be bound to
    *  @return an instance of the `IbmKeyProtectApi` client using external configuration
    */
   public static IbmKeyProtectApi newInstance(Authenticator authenticator, String keyRingId) {
@@ -150,7 +150,7 @@ public class IbmKeyProtectApi extends BaseService {
    * The specified key ring ID is used to configure the client instance.
    * The specified retry attempts and intervals can be passed
    *  @param authenticator the {@link Authenticator} instance to be configured for this client
-   *  @param keyRingId identifier of the key ring belongs to the instance
+   *  @param keyRingId Key Ring ID of the key ring which the client will be bound to
    *  @param maxRetry maximum number of retry attempts for failed HTTP requests
    *  @param retryMaxInterval maximum time interval between two subsequent retries
    *  @return an instance of the `IbmKeyProtectApi` client using external configuration
@@ -201,7 +201,7 @@ public class IbmKeyProtectApi extends BaseService {
    *
    * @param serviceName   the service name to be used when configuring the client instance
    * @param authenticator the {@link Authenticator} instance to be configured for this client
-   * @param keyRingId     identifier of the key ring belongs to the instance
+   * @param keyRingId     Key Ring ID of the key ring which the client will be bound to
    */
   public IbmKeyProtectApi(String serviceName, Authenticator authenticator, String keyRingId) {
     super(serviceName, authenticator);
@@ -243,7 +243,7 @@ public class IbmKeyProtectApi extends BaseService {
    *
    * @param serviceName   the service name to be used when configuring the client instance
    * @param authenticator the {@link Authenticator} instance to be configured for this client
-   * @param keyRingId     identifier of the key ring belongs to the instance
+   * @param keyRingId     Key Ring ID of the key ring which the client will be bound to
    * @param maxRetry maximum number of retry attempts for failed HTTP requests
    * @param retryMaxInterval maximum time interval between two subsequent retries
    */
