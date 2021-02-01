@@ -1,0 +1,15 @@
+{
+     "metadata": {
+       "collectionType": "application/vnd.ibm.kms.key+json",
+       "collectionTotal": 1
+     },
+     "resources": [
+       {
+         "type": "application/vnd.ibm.kms.key+json",
+         "name": "sdk-created-key",
+         "extractable": false,
+         "description": "created via sdk",
+         "payload": "SXQgaXMgYSByZWFsbHkgaW1wb3J0YW50IG1lc3NhZ2U="
+       }
+     ]
+}
