@@ -15,22 +15,21 @@ package com.ibm.cloud.ibm_key_protect_api.v2;
 
 import com.ibm.cloud.ibm_key_protect_api.v2.model.*;
 import com.ibm.cloud.sdk.core.http.Response;
-import com.ibm.cloud.sdk.core.security.*;
+import com.ibm.cloud.sdk.core.security.IamAuthenticator;
 import com.ibm.cloud.sdk.core.service.exception.ServiceResponseException;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.lang.*;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.Base64;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 //
-// This class provides examples of how to use the Key Protect key services.
+// This class provides examples of how to use the Key Protect key actions services.
 //
 // The following configuration properties are assumed to be exported as environment variables
 //
@@ -41,9 +40,9 @@ import org.slf4j.LoggerFactory;
 //
 // API docs: https://cloud.ibm.com/apidocs/key-protect
 
-public class KeysExamples {
+public class KeyActionsExamples {
 
-    private static final Logger logger = LoggerFactory.getLogger(KeysExamples.class);
+    private static final Logger logger = LoggerFactory.getLogger(KeyActionsExamples.class);
 
     //values to be read from the env setting
     private static String ibmCloudApiKey;
@@ -59,7 +58,7 @@ public class KeysExamples {
         serviceUrl = config.get("KP_SERVICE_URL");
     }
 
-    public KeysExamples() {
+    public KeyActionsExamples() {
     }
 
     public static void main(String[] args) {
@@ -72,7 +71,7 @@ public class KeysExamples {
             exampleService = IbmKeyProtectApi.newInstance(authenticator);
             exampleService.setServiceUrl(serviceUrl);
 
-            // Create key
+            // Create a key
             logger.info("Create a key");
             InputStream inputstream = new FileInputStream("createImportKeyBody.txt");
             CreateKeyOptions createKeyOptionsModel = new CreateKeyOptions.Builder()
@@ -87,29 +86,68 @@ public class KeysExamples {
             String key_id = keyWithPayload.getId();
             logger.info(String.format("Key with ID %s created", key_id));
 
-            // Get a key
-            logger.info("Get a key");
-            GetKeyOptions options = new GetKeyOptions.Builder().id(key_id)
-                    .bluemixInstance(bluemixInstance)
-                    .build();
-            Response<GetKey> get_response = exampleService.getKey(options).execute();
-            GetKey responseObj = get_response.getResult();
-            KeyWithPayload key = responseObj.getResources().get(0);
-            logger.info(String.format("Got key with ID %s: ", key_id) + key);
+            // Wrap a key
+            logger.info("Wrap a key");
+            String str = "It is a really important message";
+            String encodedStr = Base64.getEncoder().encodeToString(str.getBytes());
+            logger.info("Encoded plain text:" + encodedStr);
+            InputStream wrapInputStream = new ByteArrayInputStream(("{\"plaintext\" :\"" + encodedStr + "\"}").getBytes());
 
-            // Get list of keys associated to the instance
-            logger.info("List keys");
-            GetKeysOptions getKeysOptionsModel = new GetKeysOptions.Builder()
+            ActionOnKeyOptions wrapKeyOptionsModel = new ActionOnKeyOptions.Builder()
+                    .id(key_id)
                     .bluemixInstance(bluemixInstance)
+                    .action("wrap")
+                    .keyActionOneOf(wrapInputStream)
+                    .prefer("return=representation")
                     .build();
-            Response<ListKeys> list_response = exampleService.getKeys(getKeysOptionsModel).execute();
-            List<KeyRepresentation> keys = list_response.getResult().getResources();
-            for (int i = 0; i < keys.size(); i++) {
-                logger.info("key " + (i+1) + " ID is --> " + keys.get(i).getId());
-            }
+            Response<KeyActionOneOfResponse> response = exampleService.actionOnKey(wrapKeyOptionsModel).execute();
+            KeyActionOneOfResponse responseObj = response.getResult();
+            logger.info("Wrap Key Response " + responseObj);
 
-            // Delete a key
-            logger.info("Delete a key");
+            InputStream unWrapInputStream = new ByteArrayInputStream(("{\"ciphertext\" :\"" +
+                    responseObj.getCiphertext() + "\"}").getBytes());
+
+            // UnWrap a key
+            logger.info("UnWrap a key");
+            ActionOnKeyOptions unWrapKeyOptionsModel = new ActionOnKeyOptions.Builder()
+                    .id(key_id)
+                    .bluemixInstance(bluemixInstance)
+                    .action("unwrap")
+                    .keyActionOneOf(unWrapInputStream)
+                    .prefer("return=representation")
+                    .build();
+            response = exampleService.actionOnKey(unWrapKeyOptionsModel).execute();
+            responseObj = response.getResult();
+            logger.info("Unwrap Key Response " + responseObj);
+
+            // Disable a key
+            logger.info("Disable a key");
+            ActionOnKeyOptions disableKeyOptionsModel = new ActionOnKeyOptions.Builder()
+                    .id(key_id)
+                    .bluemixInstance(bluemixInstance)
+                    .action("disable")
+                    .prefer("return=representation")
+                    .build();
+            exampleService.actionOnKey(disableKeyOptionsModel).execute();
+            logger.info(String.format("Key with ID %s disabled", key_id));
+
+            // Need to delay 30 seconds before calling enable
+            TimeUnit.SECONDS.sleep(30);
+
+            // Enable a key
+            logger.info("Enable a key");
+            ActionOnKeyOptions enableKeyOptionsModel = new ActionOnKeyOptions.Builder()
+                    .id(key_id)
+                    .bluemixInstance(bluemixInstance)
+                    .action("enable")
+                    .prefer("return=representation")
+                    .build();
+            exampleService.actionOnKey(enableKeyOptionsModel).execute();
+            logger.info(String.format("Key with ID %s enabled", key_id));
+
+            // Clean up
+            // Delete key
+            logger.info("Clean up : delete key");
             DeleteKeyOptions deleteKeyOptionsModel = new DeleteKeyOptions.Builder()
                     .id(key_id)
                     .bluemixInstance(bluemixInstance)
@@ -119,52 +157,13 @@ public class KeysExamples {
             exampleService.deleteKey(deleteKeyOptionsModel).execute();
             logger.info(String.format("Key with ID %s deleted", key_id));
 
-            // Need to delay 30 seconds before calling restore
-            TimeUnit.SECONDS.sleep(30);
-
-            // Restore a key
-            logger.info("Restore a key");
-            inputstream = new FileInputStream("restoreKeyBody.txt");
-            ActionOnKeyOptions restoreKeyOptionsModel = new ActionOnKeyOptions.Builder()
-                    .id(key_id)
-                    .bluemixInstance(bluemixInstance)
-                    .action("restore")
-                    .keyActionOneOf(inputstream)
-                    .build();
-            exampleService.actionOnKey(restoreKeyOptionsModel).execute();
-            logger.info(String.format("Key with ID %s restored", key_id));
-
-            // Rotate a key
-            logger.info("Rotate a key");
-            InputStream rotateInputstream = new FileInputStream("rotateKeyBody.txt");
-            ActionOnKeyOptions actionOnKeyOptionsModel = new ActionOnKeyOptions.Builder()
-                    .id(key_id)
-                    .bluemixInstance(bluemixInstance)
-                    .action("rotate")
-                    .keyActionOneOf(rotateInputstream)
-                    .prefer("return=representation")
-                    .build();
-            exampleService.actionOnKey(actionOnKeyOptionsModel).execute();
-            logger.info(String.format("Key with ID %s rotated", key_id));
-
-            //List key version
-            logger.info("List key versions");
-            GetKeyVersionsOptions getKeyVersionsOptionsModel = new GetKeyVersionsOptions.Builder()
-                    .id(key_id)
-                    .bluemixInstance(bluemixInstance)
-                    .build();
-            Response<ListKeyVersions> response = exampleService.getKeyVersions(getKeyVersionsOptionsModel).execute();
-            List<KeyVersion> versions = response.getResult().getResources();
-            for (int i = 0; i < versions.size(); i++) {
-                logger.info("Version " + (i + 1) + " of key is --> " + versions.get(i));
-            }
-        }catch (FileNotFoundException e1) {
-            logger.error(String.format("Error details: %s", e1.getMessage()),  e1);
-        }catch (ServiceResponseException e2) {
+        } catch (FileNotFoundException e1) {
+            logger.error(String.format("Error details: %s", e1.getMessage()), e1);
+        } catch (ServiceResponseException e2) {
             logger.error(String.format("Service returned status code %s: %s\nError details: %s",
                     e2.getStatusCode(), e2.getMessage(), e2.getDebuggingInfo()), e2);
         } catch (InterruptedException e3) {
-            logger.error(String.format("Error details: %s", e3.getMessage()),  e3);
+            logger.error(String.format("Error details: %s", e3.getMessage()), e3);
         }
     }
 }
