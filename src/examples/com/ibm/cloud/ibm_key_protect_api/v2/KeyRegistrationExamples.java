@@ -17,11 +17,9 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.*;
 import com.ibm.cloud.sdk.core.http.Response;
 import com.ibm.cloud.sdk.core.security.IamAuthenticator;
 import com.ibm.cloud.sdk.core.service.exception.ServiceResponseException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+
 import java.io.InputStream;
 import java.util.Map;
 
@@ -43,14 +41,14 @@ public class KeyRegistrationExamples {
 
     //values to be read from the env setting
     private static String ibmCloudApiKey;
-    private static String bluemixInstance;
+    private static String exampleInstance;
     private static String iamAuthUrl;
     private static String serviceUrl;
 
     static {
         Map<String, String> config = System.getenv();
         ibmCloudApiKey = config.get("IBMCLOUD_API_KEY");
-        bluemixInstance = config.get("KP_INSTANCE_ID");
+        exampleInstance = config.get("KP_INSTANCE_ID");
         iamAuthUrl = config.get("IAM_AUTH_URL");
         serviceUrl = config.get("KP_SERVICE_URL");
     }
@@ -59,73 +57,39 @@ public class KeyRegistrationExamples {
     }
 
     public static void main(String[] args) {
-        IbmKeyProtectApi exampleService;
         IamAuthenticator authenticator = new IamAuthenticator(ibmCloudApiKey);
         authenticator.setURL(iamAuthUrl);
         authenticator.validate();
+        // payload is base64 encoded string of "It is a really important message"
+        String payload = "SXQgaXMgYSByZWFsbHkgaW1wb3J0YW50IG1lc3NhZ2U=";
 
         try {
-            exampleService = IbmKeyProtectApi.newInstance(authenticator);
+            IbmKeyProtectApi exampleService = IbmKeyProtectApi.newInstance(authenticator);
             exampleService.setServiceUrl(serviceUrl);
 
-            // Create a key
+            // Create key
             logger.info("Create a key");
-            InputStream inputstream = new FileInputStream("createImportKeyBody.txt");
-            CreateKeyOptions createKeyOptionsModel = new CreateKeyOptions.Builder()
-                    .bluemixInstance(bluemixInstance)
-                    .createKeyOneOf(inputstream)
-                    .prefer("return=representation")
-                    .build();
-
-            // Invoke operation with valid options model
-            Response<Key> create_response = exampleService.createKey(createKeyOptionsModel).execute();
-            KeyWithPayload keyWithPayload = create_response.getResult().getResources().get(0);
-            String key_id = keyWithPayload.getId();
-            logger.info(String.format("Key with ID %s created", key_id));
+            String keyId = KpUtils.createKey(exampleService, exampleInstance, "sdk-created-key",
+                    "created via sdk", payload, false);
+            logger.info(String.format("Key with ID %s created", keyId));
 
             // Get registrations associated with a key
             logger.info("Get registrations associated with a key");
-            // Construct an instance of the GetRegistrationsOptions model
-            GetRegistrationsOptions getRegistrationsOptionsModel = new GetRegistrationsOptions.Builder()
-                    .id(key_id)
-                    .bluemixInstance(bluemixInstance)
-                    .limit(Long.valueOf("50"))
-                    .totalCount(true)
-                    .build();
-
-            // Invoke operation with valid options model
-            Response<RegistrationWithTotalCount> response = exampleService.
-                    getRegistrations(getRegistrationsOptionsModel).execute();
+            Response<RegistrationWithTotalCount> response = KpUtils.getRegistrationsForKey(exampleService,
+                    exampleInstance, keyId);
             logger.info("Registrations count: " + response.getResult().getMetadata().getTotalCount());
 
             // Get registrations associated with an instance
             logger.info("Get registrations associated with an instance");
-            // Construct an instance of the GetRegistrationsAllKeysOptions model
-            GetRegistrationsAllKeysOptions getRegistrationsAllKeysOptionsModel
-                    = new GetRegistrationsAllKeysOptions.Builder()
-                    .bluemixInstance(bluemixInstance)
-                    .limit(Long.valueOf("50"))
-                    .totalCount(true)
-                    .build();
-
-            // Invoke operation with valid options model
-            response = exampleService.getRegistrationsAllKeys(getRegistrationsAllKeysOptionsModel).execute();
+            response = KpUtils.getRegistrationsForInstance(exampleService, exampleInstance, keyId);
             logger.info("Registrations count: " + response.getResult().getMetadata().getTotalCount());
 
             // Clean up
             // Delete key
             logger.info("Clean up : delete key");
-            DeleteKeyOptions deleteKeyOptionsModel = new DeleteKeyOptions.Builder()
-                    .id(key_id)
-                    .bluemixInstance(bluemixInstance)
-                    .force(true)
-                    .build();
+            KpUtils.deleteKey(exampleService, exampleInstance, keyId);
+            logger.info(String.format("Key with ID %s deleted", keyId));
 
-            exampleService.deleteKey(deleteKeyOptionsModel).execute();
-            logger.info(String.format("Key with ID %s deleted", key_id));
-
-        } catch (FileNotFoundException e1) {
-            logger.error(String.format("Error details: %s", e1.getMessage()), e1);
         } catch (ServiceResponseException e2) {
             logger.error(String.format("Service returned status code %s: %s\nError details: %s",
                     e2.getStatusCode(), e2.getMessage(), e2.getDebuggingInfo()), e2);
