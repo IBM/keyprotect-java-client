@@ -29,6 +29,7 @@ import java.util.Base64;
 import java.util.List;
 
 // API docs: https://cloud.ibm.com/apidocs/key-protect
+// Utilities class to provide KP services
 
 public class KpUtils {
 
@@ -37,6 +38,7 @@ public class KpUtils {
     public KpUtils() {
     }
 
+    // API docs: https://cloud.ibm.com/apidocs/key-protect#createkey
     // payload is null if not an imported key
     // notRootKey is false if this is a root key
     public static String createKey(IbmKeyProtectApi exampleService, String exampleInstance, String keyName,
@@ -56,8 +58,9 @@ public class KpUtils {
         return keyId;
     }
 
-    public static KeyWithPayload getKey(IbmKeyProtectApi exampleService, String exampleInstance, String keyId) {
-        GetKeyOptions options = new GetKeyOptions.Builder().id(keyId)
+    // API docs: https://cloud.ibm.com/apidocs/key-protect#getkey
+    public static KeyWithPayload getKey(IbmKeyProtectApi exampleService, String exampleInstance, String keyId_or_alias) {
+        GetKeyOptions options = new GetKeyOptions.Builder().id(keyId_or_alias)
                 .bluemixInstance(exampleInstance)
                 .build();
         Response<GetKey> response = exampleService.getKey(options).execute();
@@ -66,6 +69,7 @@ public class KpUtils {
         return keyWithPayload;
     }
 
+    // API docs: https://cloud.ibm.com/apidocs/key-protect#getkeys
     public static List<KeyRepresentation> getKeys(IbmKeyProtectApi exampleService, String exampleInstance) {
         GetKeysOptions getKeysOptionsModel = new GetKeysOptions.Builder()
                 .bluemixInstance(exampleInstance)
@@ -74,6 +78,7 @@ public class KpUtils {
         return response.getResult().getResources();
     }
 
+    // API docs: https://cloud.ibm.com/apidocs/key-protect#deletekey
     public static void deleteKey(IbmKeyProtectApi exampleService, String exampleInstance, String keyId) {
         DeleteKeyOptions deleteKeyOptionsModel = new DeleteKeyOptions.Builder()
                 .id(keyId)
@@ -84,6 +89,7 @@ public class KpUtils {
         exampleService.deleteKey(deleteKeyOptionsModel).execute();
     }
 
+    // API docs: https://cloud.ibm.com/apidocs/key-protect#restorekey
     public static void restoreKey(IbmKeyProtectApi exampleService, String exampleInstance, String keyId,
                                   String payload) {
         InputStream  inputstream = KpUtils.buildRestoreKeyInputStream(payload);
@@ -97,6 +103,7 @@ public class KpUtils {
         exampleService.actionOnKey(restoreKeyOptionsModel).execute();
     }
 
+    // API docs: https://cloud.ibm.com/apidocs/key-protect#rotatekey
     public static void rotateKey(IbmKeyProtectApi exampleService, String exampleInstance, String keyId, String payload) {
         InputStream inputstream = KpUtils.buildRotateKeyInputStream(payload);
         ActionOnKeyOptions actionOnKeyOptionsModel = new ActionOnKeyOptions.Builder()
@@ -110,6 +117,7 @@ public class KpUtils {
         exampleService.actionOnKey(actionOnKeyOptionsModel).execute();
     }
 
+    // API docs: https://cloud.ibm.com/apidocs/key-protect#wrapkey
     public static KeyActionOneOfResponse wrapKey(IbmKeyProtectApi exampleService, String exampleInstance,
                                                  String keyId, String payload) {
 
@@ -126,6 +134,7 @@ public class KpUtils {
         return exampleService.actionOnKey(wrapKeyOptionsModel).execute().getResult();
     }
 
+    // API docs: https://cloud.ibm.com/apidocs/key-protect#unwrapkey
     public static KeyActionOneOfResponse unWrapKey(IbmKeyProtectApi exampleService, String exampleInstance,
                                                    String keyId, String ciphertext) {
 
@@ -140,6 +149,7 @@ public class KpUtils {
         return exampleService.actionOnKey(unWrapKeyOptionsModel).execute().getResult();
     }
 
+    // API docs: https://cloud.ibm.com/apidocs/key-protect#disablekey
     public static void disableKey(IbmKeyProtectApi exampleService, String exampleInstance, String keyId) {
         ActionOnKeyOptions disableKeyOptionsModel = new ActionOnKeyOptions.Builder()
                 .id(keyId)
@@ -150,6 +160,7 @@ public class KpUtils {
         exampleService.actionOnKey(disableKeyOptionsModel).execute();
     }
 
+    // API docs: https://cloud.ibm.com/apidocs/key-protect#enablekey
     public static void enableKey(IbmKeyProtectApi exampleService, String exampleInstance, String keyId) {
         ActionOnKeyOptions enableKeyOptionsModel = new ActionOnKeyOptions.Builder()
                 .id(keyId)
@@ -160,6 +171,7 @@ public class KpUtils {
         exampleService.actionOnKey(enableKeyOptionsModel).execute();
     }
 
+    // API docs: https://cloud.ibm.com/apidocs/key-protect#getkeyversions
     public static List<KeyVersion> getKeyVersions(IbmKeyProtectApi exampleService, String exampleInstance, String keyId) {
         GetKeyVersionsOptions getKeyVersionsOptionsModel = new GetKeyVersionsOptions.Builder()
                 .id(keyId)
@@ -169,6 +181,7 @@ public class KpUtils {
         return response.getResult().getResources();
     }
 
+    // API docs: https://cloud.ibm.com/apidocs/key-protect#getregistrations
     public static Response<RegistrationWithTotalCount> getRegistrationsForKey(IbmKeyProtectApi exampleService,
                                                                               String exampleInstance, String keyId) {
         // Construct an instance of the GetRegistrationsOptions model
@@ -186,6 +199,7 @@ public class KpUtils {
         return response;
     }
 
+    // API docs: https://cloud.ibm.com/apidocs/key-protect#getregistrationsallkeys
     public static Response<RegistrationWithTotalCount> getRegistrationsForInstance(IbmKeyProtectApi exampleService,
                                                                               String exampleInstance, String keyId) {
         // Construct an instance of the GetRegistrationsAllKeysOptions model
@@ -203,8 +217,9 @@ public class KpUtils {
         return response;
     }
 
+    // API docs: https://cloud.ibm.com/apidocs/key-protect#putpolicy
     public static void createKeyPolicyDualAuthDelete (IbmKeyProtectApi exampleService,
-                                                      String exampleInstance, String keyId) {
+                                                      String exampleInstance, String keyId, boolean dualAuth) {
         // Construct an instance of the CollectionMetadata model
         CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
                 .collectionType("application/vnd.ibm.kms.policy+json")
@@ -214,7 +229,7 @@ public class KpUtils {
         // Construct an instance of the KeyPolicyDualAuthDeleteDualAuthDelete model
         KeyPolicyDualAuthDeleteDualAuthDelete keyPolicyDualAuthDeleteDualAuthDeleteModel
                 = new KeyPolicyDualAuthDeleteDualAuthDelete.Builder()
-                .enabled(false)
+                .enabled(dualAuth)
                 .build();
 
         // Construct an instance of the KeyPolicyDualAuthDelete model
@@ -242,8 +257,9 @@ public class KpUtils {
         exampleService.putPolicy(putPolicyOptionsModel).execute();
     }
 
+    // API docs: https://cloud.ibm.com/apidocs/key-protect#putpolicy
     public static void createKeyPolicyRotation (IbmKeyProtectApi exampleService,
-                                                      String exampleInstance, String keyId) {
+                                                      String exampleInstance, String keyId, int intervalMonth) {
         // Construct an instance of the CollectionMetadata model
         CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
                 .collectionType("application/vnd.ibm.kms.policy+json")
@@ -252,7 +268,7 @@ public class KpUtils {
 
         // Construct an instance of the KeyPolicyRotationRotation model
         KeyPolicyRotationRotation keyPolicyRotationRotationModel = new KeyPolicyRotationRotation.Builder()
-                .intervalMonth(3)
+                .intervalMonth(intervalMonth)
                 .build();
 
         // Construct an instance of the KeyPolicyRotation model
@@ -280,6 +296,7 @@ public class KpUtils {
         exampleService.putPolicy(putPolicyOptionsModel).execute();
     }
 
+    // API docs: https://cloud.ibm.com/apidocs/key-protect#getpolicy
     public static Response<GetKeyPoliciesOneOf> getKeyPolicies (IbmKeyProtectApi exampleService,
                                                                 String exampleInstance, String keyId) {
         GetPolicyOptions getPolicyOptionsModel = new GetPolicyOptions.Builder()
@@ -291,8 +308,9 @@ public class KpUtils {
         return response;
     }
 
+    // API docs: https://cloud.ibm.com/apidocs/key-protect#putinstancepolicy
     public static void createInstancePolicyDualAuthDelete (IbmKeyProtectApi exampleService,
-                                                String exampleInstance) {
+                                                String exampleInstance, boolean dualAuth) {
         // Construct an instance of the CollectionMetadata model
         CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
                 .collectionType("application/vnd.ibm.kms.policy+json")
@@ -301,7 +319,7 @@ public class KpUtils {
 
         // Construct an instance of the DualAuthDeleteProperties model
         DualAuthDeleteProperties dualAuthDeletePropertiesModel = new DualAuthDeleteProperties.Builder()
-                .enabled(false)
+                .enabled(dualAuth)
                 .build();
 
         // Construct an instance of the SetInstancePolicyDualAuthDeleteResourcesItem model
@@ -330,8 +348,9 @@ public class KpUtils {
         exampleService.putInstancePolicy(putInstancePolicyOptionsModel).execute();
     }
 
+    // API docs: https://cloud.ibm.com/apidocs/key-protect#putinstancepolicy
     public static void createInstancePolicyAllowedNetwork (IbmKeyProtectApi exampleService,
-                                                           String exampleInstance) {
+                                                           String exampleInstance, String allowedNetworkType) {
         // Construct an instance of the CollectionMetadata model
         CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
                 .collectionType("application/vnd.ibm.kms.policy+json")
@@ -341,7 +360,7 @@ public class KpUtils {
         // Construct an instance of the InstancePolicyAllowedNetworkPolicyDataAttributes model
         InstancePolicyAllowedNetworkPolicyDataAttributes instancePolicyAllowedNetworkPolicyDataAttributesModel
                 = new InstancePolicyAllowedNetworkPolicyDataAttributes.Builder()
-                .allowedNetwork("public-and-private")
+                .allowedNetwork(allowedNetworkType)
                 .build();
 
         // Construct an instance of the InstancePolicyAllowedNetworkPolicyData model
@@ -378,6 +397,7 @@ public class KpUtils {
         exampleService.putInstancePolicy(putInstancePolicyOptionsModel).execute();
     }
 
+    // API docs: https://cloud.ibm.com/apidocs/key-protect#getinstancepolicy
     public static Response<GetInstancePoliciesOneOf> getInstancePolicies (IbmKeyProtectApi exampleService,
                                                                           String exampleInstance) {
         // Construct an instance of the GetInstancePolicyOptions model
@@ -390,6 +410,77 @@ public class KpUtils {
                 (getInstancePolicyOptionsModel).execute();
 
         return response;
+    }
+
+    // API docs: https://cloud.ibm.com/apidocs/key-protect#createkeyalias
+    public static void createKeyAlias (IbmKeyProtectApi exampleService,
+                                                     String exampleInstance, String keyId, String keyAlias) {
+
+        // Construct an instance of the CreateKeyAliasOptions model
+        CreateKeyAliasOptions createKeyAliasOptionsModel = new CreateKeyAliasOptions.Builder()
+                .id(keyId)
+                .alias(keyAlias)
+                .bluemixInstance(exampleInstance)
+                .build();
+
+        // Invoke operation with valid options model
+        exampleService.createKeyAlias(createKeyAliasOptionsModel).execute();
+    }
+
+    // API docs: https://cloud.ibm.com/apidocs/key-protect#deletekeyalias
+    public static void deleteKeyAlias (IbmKeyProtectApi exampleService,
+                                       String exampleInstance, String keyId, String keyAlias) {
+
+        // Construct an instance of the DeleteKeyAliasOptions model
+        DeleteKeyAliasOptions deleteKeyAliasOptionsModel = new DeleteKeyAliasOptions.Builder()
+                .id(keyId)
+                .alias(keyAlias)
+                .bluemixInstance(exampleInstance)
+                .build();
+
+        // Invoke operation with valid options model
+        exampleService.deleteKeyAlias(deleteKeyAliasOptionsModel).execute();
+    }
+
+    // API docs: https://cloud.ibm.com/apidocs/key-protect
+    public static void createKeyRing (IbmKeyProtectApi exampleService,
+                                       String exampleInstance, String keyRingId) {
+
+        // Construct an instance of the CreateKeyRingOptions model
+        CreateKeyRingOptions createKeyRingOptionsModel = new CreateKeyRingOptions.Builder()
+                .keyRingId(keyRingId)
+                .bluemixInstance(exampleInstance)
+                .build();
+
+        // Invoke operation with valid options model
+        exampleService.createKeyRing(createKeyRingOptionsModel).execute();
+    }
+
+    // API docs: https://cloud.ibm.com/apidocs/key-protect
+    public static Response<ListKeyRings> getKeyRings (IbmKeyProtectApi exampleService,
+                                      String exampleInstance) {
+
+        // Construct an instance of the ListKeyRingsOptions model
+        ListKeyRingsOptions listKeyRingsOptionsModel = new ListKeyRingsOptions.Builder()
+                .bluemixInstance(exampleInstance)
+                .build();
+
+        // Invoke operation with valid options model
+        return exampleService.listKeyRings(listKeyRingsOptionsModel).execute();
+    }
+
+    // API docs: https://cloud.ibm.com/apidocs/key-protect
+    public static void deleteKeyRing (IbmKeyProtectApi exampleService,
+                                      String exampleInstance, String keyRingId) {
+
+        // Construct an instance of the DeleteKeyRingOptions model
+        DeleteKeyRingOptions deleteKeyRingOptionsModel = new DeleteKeyRingOptions.Builder()
+                .keyRingId(keyRingId)
+                .bluemixInstance(exampleInstance)
+                .build();
+
+        // Invoke operation with valid options model
+        exampleService.deleteKeyRing(deleteKeyRingOptionsModel).execute();
     }
 
     // payload should be base64 encoded string
