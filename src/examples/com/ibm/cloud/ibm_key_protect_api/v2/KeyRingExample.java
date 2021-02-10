@@ -13,17 +13,18 @@
 
 package com.ibm.cloud.ibm_key_protect_api.v2;
 
-import com.ibm.cloud.ibm_key_protect_api.v2.model.*;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyWithPayload;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.ListKeyRings;
 import com.ibm.cloud.sdk.core.http.Response;
 import com.ibm.cloud.sdk.core.security.IamAuthenticator;
 import com.ibm.cloud.sdk.core.service.exception.ServiceResponseException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.util.Map;
 
 //
-// This class provides examples of how to handle policies that are associated with an instance
+// This class provides examples of how to use the Key Protect key ring services.
 //
 // The following configuration properties are assumed to be exported as environment variables
 //
@@ -34,9 +35,9 @@ import java.util.Map;
 //
 // API docs: https://cloud.ibm.com/apidocs/key-protect
 
-public class InstancePolicies {
+public class KeyRingExample {
 
-    private static final Logger logger = LoggerFactory.getLogger(InstancePolicies.class);
+    private static final Logger logger = LoggerFactory.getLogger(KeyRingExample.class);
 
     //values to be read from the env setting
     private static String ibmCloudApiKey;
@@ -52,33 +53,33 @@ public class InstancePolicies {
         serviceUrl = config.get("KP_SERVICE_URL");
     }
 
-    public InstancePolicies() {
+    public KeyRingExample() {
     }
 
     public static void main(String[] args) {
         IamAuthenticator authenticator = new IamAuthenticator(ibmCloudApiKey);
         authenticator.setURL(iamAuthUrl);
         authenticator.validate();
+        String keyRingId = "sdkKeyRingId";
 
         try {
             IbmKeyProtectApi exampleService = IbmKeyProtectApi.newInstance(authenticator);
             exampleService.setServiceUrl(serviceUrl);
 
-            // Create instance dual auth delete policy
-            logger.info("Create instance dual auth delete policy");
-            KpUtils.createInstancePolicyDualAuthDelete (exampleService, exampleInstance, false);
-            logger.info("Dual auth delete instance policy created");
+            // Create key ring
+            logger.info("Create a key ring");
+            KpUtils.createKeyRing(exampleService, exampleInstance, keyRingId);
+            logger.info(String.format("Key ring %s created", keyRingId));
 
-            // Create instance allowed network policy that allows both public and private endpoint traffic
-            // to the instance (the default)
-            logger.info("Create instance allowed network policy");
-            KpUtils.createInstancePolicyAllowedNetwork (exampleService, exampleInstance, "public-and-private");
-            logger.info("Allowed network instance policy created");
+            // List key rings
+            logger.info("List key rings");
+            Response<ListKeyRings> response = KpUtils.getKeyRings(exampleService, exampleInstance);
+            logger.info("Key rings associated with this instance: " + response.getResult());
 
-            // Get instance policies
-            logger.info("Get instance policies");
-            Response<GetInstancePoliciesOneOf> response = KpUtils.getInstancePolicies (exampleService, exampleInstance);
-            logger.info("Instance Policies: " + response.getResult());
+            // Delete key ring
+            logger.info("Delete a key ring");
+            KpUtils.deleteKeyRing(exampleService, exampleInstance, keyRingId);
+            logger.info(String.format("Key ring %s deleted", keyRingId));
 
         } catch (ServiceResponseException sre) {
             logger.error(String.format("Service returned status code %s: %s\nError details: %s",

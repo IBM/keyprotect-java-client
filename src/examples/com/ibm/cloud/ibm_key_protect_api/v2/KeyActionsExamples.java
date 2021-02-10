@@ -61,6 +61,8 @@ public class KeyActionsExamples {
         authenticator.validate();
         // payload is base64 encoded string of "It is a really important message"
         String payload = "SXQgaXMgYSByZWFsbHkgaW1wb3J0YW50IG1lc3NhZ2U=";
+        String keyName = "sdk-created-key";
+        String keyDesc = "created via sdk";
 
         try {
             IbmKeyProtectApi exampleService = IbmKeyProtectApi.newInstance(authenticator);
@@ -68,8 +70,8 @@ public class KeyActionsExamples {
 
             // Create key
             logger.info("Create a key");
-            String keyId = KpUtils.createKey(exampleService, exampleInstance, "sdk-created-key",
-                    "created via sdk", payload, false);
+            String keyId = KpUtils.createKey(exampleService, exampleInstance, keyName, keyDesc,
+                    payload, false);
             logger.info(String.format("Key with ID %s created", keyId));
 
             // Wrap a key
@@ -101,11 +103,11 @@ public class KeyActionsExamples {
             KpUtils.deleteKey(exampleService, exampleInstance, keyId);
             logger.info(String.format("Key with ID %s deleted", keyId));
 
-        } catch (ServiceResponseException e2) {
+        }catch (ServiceResponseException sre) {
             logger.error(String.format("Service returned status code %s: %s\nError details: %s",
-                    e2.getStatusCode(), e2.getMessage(), e2.getDebuggingInfo()), e2);
-        } catch (InterruptedException e3) {
-            logger.error(String.format("Error details: %s", e3.getMessage()), e3);
+                    sre.getStatusCode(), sre.getMessage(), sre.getDebuggingInfo()), sre);
+        } catch (InterruptedException ie) {
+            logger.error(String.format("Error details: %s", ie.getMessage()),  ie);
         }
     }
 }

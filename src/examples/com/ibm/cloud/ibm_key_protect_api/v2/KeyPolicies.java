@@ -13,18 +13,13 @@
 
 package com.ibm.cloud.ibm_key_protect_api.v2;
 
-import com.ibm.cloud.ibm_key_protect_api.v2.model.*;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKeyPoliciesOneOf;
 import com.ibm.cloud.sdk.core.http.Response;
 import com.ibm.cloud.sdk.core.security.IamAuthenticator;
 import com.ibm.cloud.sdk.core.service.exception.ServiceResponseException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.Map;
 
 //
@@ -45,14 +40,14 @@ public class KeyPolicies {
 
     //values to be read from the env setting
     private static String ibmCloudApiKey;
-    private static String bluemixInstance;
+    private static String exampleInstance;
     private static String iamAuthUrl;
     private static String serviceUrl;
 
     static {
         Map<String, String> config = System.getenv();
         ibmCloudApiKey = config.get("IBMCLOUD_API_KEY");
-        bluemixInstance = config.get("KP_INSTANCE_ID");
+        exampleInstance = config.get("KP_INSTANCE_ID");
         iamAuthUrl = config.get("IAM_AUTH_URL");
         serviceUrl = config.get("KP_SERVICE_URL");
     }
@@ -61,130 +56,48 @@ public class KeyPolicies {
     }
 
     public static void main(String[] args) {
-        IbmKeyProtectApi exampleService;
         IamAuthenticator authenticator = new IamAuthenticator(ibmCloudApiKey);
         authenticator.setURL(iamAuthUrl);
         authenticator.validate();
+        // payload is null, rotation policy cannot be set on imported CRK
+        String payload = null;
+        String keyName = "sdk-created-key";
+        String keyDesc = "created via sdk";
 
         try {
-            exampleService = IbmKeyProtectApi.newInstance(authenticator);
+            IbmKeyProtectApi exampleService = IbmKeyProtectApi.newInstance(authenticator);
             exampleService.setServiceUrl(serviceUrl);
 
-            // Create a key
+            // Create key
             logger.info("Create a key");
-            InputStream inputstream = new FileInputStream("createKeyBody.txt");
-            CreateKeyOptions createKeyOptionsModel = new CreateKeyOptions.Builder()
-                    .bluemixInstance(bluemixInstance)
-                    .createKeyOneOf(inputstream)
-                    .prefer("return=representation")
-                    .build();
-
-            // Invoke operation with valid options model
-            Response<Key> create_response = exampleService.createKey(createKeyOptionsModel).execute();
-            KeyWithPayload keyWithPayload = create_response.getResult().getResources().get(0);
-            String key_id = keyWithPayload.getId();
-            logger.info(String.format("Key with ID %s created", key_id));
+            String keyId = KpUtils.createKey(exampleService, exampleInstance, keyName, keyDesc,
+                    payload, false);
+            logger.info(String.format("Key with ID %s created", keyId));
 
             // Create key dual auth delete policy
             logger.info("Create key dual auth delete policy");
-            // Construct an instance of the CollectionMetadata model
-            CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
-                    .collectionType("application/vnd.ibm.kms.policy+json")
-                    .collectionTotal(Long.valueOf("1"))
-                    .build();
-
-            // Construct an instance of the KeyPolicyDualAuthDeleteDualAuthDelete model
-            KeyPolicyDualAuthDeleteDualAuthDelete keyPolicyDualAuthDeleteDualAuthDeleteModel
-                    = new KeyPolicyDualAuthDeleteDualAuthDelete.Builder()
-                    .enabled(false)
-                    .build();
-
-            // Construct an instance of the KeyPolicyDualAuthDelete model
-            KeyPolicyDualAuthDelete keyPolicyDualAuthDeleteModel = new KeyPolicyDualAuthDelete.Builder()
-                    .type("application/vnd.ibm.kms.policy+json")
-                    .dualAuthDelete(keyPolicyDualAuthDeleteDualAuthDeleteModel)
-                    .build();
-
-            // Construct an instance of the SetKeyPoliciesOneOfSetKeyPolicyDualAuthDelete model
-            SetKeyPoliciesOneOfSetKeyPolicyDualAuthDelete setKeyPoliciesOneOfDualAuthDeleteModel
-                    = new SetKeyPoliciesOneOfSetKeyPolicyDualAuthDelete.Builder()
-                    .metadata(collectionMetadataModel)
-                    .resources(new ArrayList<KeyPolicyDualAuthDelete>(Arrays.asList(keyPolicyDualAuthDeleteModel)))
-                    .build();
-
-            // Construct an instance of the PutPolicyOptions model
-            PutPolicyOptions putPolicyOptionsModel = new PutPolicyOptions.Builder()
-                    .id(key_id)
-                    .bluemixInstance(bluemixInstance)
-                    .setKeyPoliciesOneOf(setKeyPoliciesOneOfDualAuthDeleteModel)
-                    .policy("dualAuthDelete")
-                    .build();
-
-            // Invoke operation with valid options model
-            exampleService.putPolicy(putPolicyOptionsModel).execute();
+            KpUtils.createKeyPolicyDualAuthDelete (exampleService, exampleInstance, keyId, false);
             logger.info("Dual auth delete key policy created");
 
             // Create key rotation policy
             logger.info("Create key rotation policy");
-
-            // Construct an instance of the KeyPolicyRotationRotation model
-            KeyPolicyRotationRotation keyPolicyRotationRotationModel = new KeyPolicyRotationRotation.Builder()
-                    .intervalMonth(3)
-                    .build();
-
-            // Construct an instance of the KeyPolicyRotation model
-            KeyPolicyRotation keyPolicyRotationModel = new KeyPolicyRotation.Builder()
-                    .type("application/vnd.ibm.kms.policy+json")
-                    .rotation(keyPolicyRotationRotationModel)
-                    .build();
-
-            // Construct an instance of the SetKeyPoliciesOneOfSetKeyPolicyRotation model
-            SetKeyPoliciesOneOfSetKeyPolicyRotation setKeyPoliciesOneOfRotationModel
-                    = new SetKeyPoliciesOneOfSetKeyPolicyRotation.Builder()
-                    .metadata(collectionMetadataModel)
-                    .resources(new ArrayList<KeyPolicyRotation>(Arrays.asList(keyPolicyRotationModel)))
-                    .build();
-
-            // Construct an instance of the PutPolicyOptions model
-            putPolicyOptionsModel = new PutPolicyOptions.Builder()
-                    .id(key_id)
-                    .bluemixInstance(bluemixInstance)
-                    .setKeyPoliciesOneOf(setKeyPoliciesOneOfRotationModel)
-                    .policy("rotation")
-                    .build();
-
-            // Invoke operation with valid options model
-            exampleService.putPolicy(putPolicyOptionsModel).execute();
+            KpUtils.createKeyPolicyRotation (exampleService, exampleInstance, keyId, 3);
             logger.info("Rotation key policy created");
 
             // List key policies
             logger.info("List key policies");
-            GetPolicyOptions getPolicyOptionsModel = new GetPolicyOptions.Builder()
-                    .id(key_id)
-                    .bluemixInstance(bluemixInstance)
-                    .build();
-
-            Response<GetKeyPoliciesOneOf> get_response = exampleService.getPolicy(getPolicyOptionsModel).execute();
-            GetKeyPoliciesOneOf responseObj = get_response.getResult();
-            logger.info("Key policies: " + responseObj);
+            Response<GetKeyPoliciesOneOf> response = KpUtils.getKeyPolicies (exampleService, exampleInstance, keyId);
+            logger.info("Key policies: " + response.getResult());
 
             // Clean up
             // Delete key
             logger.info("Clean up : delete key");
-            DeleteKeyOptions deleteKeyOptionsModel = new DeleteKeyOptions.Builder()
-                    .id(key_id)
-                    .bluemixInstance(bluemixInstance)
-                    .force(true)
-                    .build();
+            KpUtils.deleteKey(exampleService, exampleInstance, keyId);
+            logger.info(String.format("Key with ID %s deleted", keyId));
 
-            exampleService.deleteKey(deleteKeyOptionsModel).execute();
-            logger.info(String.format("Key with ID %s deleted", key_id));
-
-        } catch (FileNotFoundException e1) {
-            logger.error(String.format("Error details: %s", e1.getMessage()), e1);
-        } catch (ServiceResponseException e2) {
+        } catch (ServiceResponseException sre) {
             logger.error(String.format("Service returned status code %s: %s\nError details: %s",
-                    e2.getStatusCode(), e2.getMessage(), e2.getDebuggingInfo()), e2);
+                    sre.getStatusCode(), sre.getMessage(), sre.getDebuggingInfo()), sre);
         }
     }
 }

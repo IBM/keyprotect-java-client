@@ -13,20 +13,16 @@
 
 package com.ibm.cloud.ibm_key_protect_api.v2;
 
-import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyRepresentation;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyVersion;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyWithPayload;
 import com.ibm.cloud.sdk.core.security.IamAuthenticator;
 import com.ibm.cloud.sdk.core.service.exception.ServiceResponseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 //
-// This class provides examples of how to use the Key Protect key services.
+// This class provides examples of how to use the Key Protect key alias services.
 //
 // The following configuration properties are assumed to be exported as environment variables
 //
@@ -37,9 +33,9 @@ import java.util.concurrent.TimeUnit;
 //
 // API docs: https://cloud.ibm.com/apidocs/key-protect
 
-public class KeysExamples {
+public class KeyAliasExample {
 
-    private static final Logger logger = LoggerFactory.getLogger(KeysExamples.class);
+    private static final Logger logger = LoggerFactory.getLogger(KeyAliasExample.class);
 
     //values to be read from the env setting
     private static String ibmCloudApiKey;
@@ -55,7 +51,7 @@ public class KeysExamples {
         serviceUrl = config.get("KP_SERVICE_URL");
     }
 
-    public KeysExamples() {
+    public KeyAliasExample() {
     }
 
     public static void main(String[] args) {
@@ -64,6 +60,7 @@ public class KeysExamples {
         authenticator.validate();
         // payload is base64 encoded string of "It is a really important message"
         String payload = "SXQgaXMgYSByZWFsbHkgaW1wb3J0YW50IG1lc3NhZ2U=";
+        String keyAlias = "sdkKeyAlias";
         String keyName = "sdk-created-key";
         String keyDesc = "created via sdk";
 
@@ -77,49 +74,30 @@ public class KeysExamples {
                     payload, false);
             logger.info(String.format("Key with ID %s created", keyId));
 
-            // Get a key
-            logger.info("Get a key");
-            KeyWithPayload keyWithPayload = KpUtils.getKey(exampleService, exampleInstance, keyId);
-            logger.info(String.format("Got key with ID %s: ", keyId) + keyWithPayload);
+            // Create key alias
+            logger.info("Create a key alias");
+            KpUtils.createKeyAlias(exampleService, exampleInstance, keyId, keyAlias);
+            logger.info(String.format("Key alias %s for key with ID %s created", keyAlias, keyId));
 
-            // Get list of keys associated to the instance
-            logger.info("List keys");
-            List<KeyRepresentation> keys = KpUtils.getKeys(exampleService, exampleInstance);
-            for (int i = 0; i < keys.size(); i++) {
-                logger.info("key " + (i+1) + " ID is --> " + keys.get(i).getId());
-            }
+            // Get a key using key alias
+            logger.info("Get a key using key alias");
+            KeyWithPayload keyWithPayload = KpUtils.getKey(exampleService, exampleInstance, keyAlias);
+            logger.info(String.format("Got key with alias %s: ", keyAlias) + keyWithPayload);
 
-            // Delete a key
-            logger.info("Delete a key");
+            // Delete key alias
+            logger.info("Delete a key alias");
+            KpUtils.deleteKeyAlias(exampleService, exampleInstance, keyId, keyAlias);
+            logger.info(String.format("Key alias %s for key with ID %s deleted", keyAlias, keyId));
+
+            // Clean up
+            // Delete key
+            logger.info("Clean up : delete key");
             KpUtils.deleteKey(exampleService, exampleInstance, keyId);
             logger.info(String.format("Key with ID %s deleted", keyId));
 
-            // Need to delay 30 seconds before calling restore
-            TimeUnit.SECONDS.sleep(30);
-
-            // Restore a key
-            logger.info("Restore a key");
-            KpUtils.restoreKey(exampleService, exampleInstance, keyId, payload);
-            logger.info(String.format("Key with ID %s restored", keyId));
-
-            // Rotate a key
-            logger.info("Rotate a key");
-            KpUtils.rotateKey(exampleService, exampleInstance, keyId, payload);
-            logger.info(String.format("Key with ID %s rotated", keyId));
-
-            //List key version
-            logger.info("List key versions");
-            List<KeyVersion> versions = KpUtils.getKeyVersions(exampleService, exampleInstance, keyId);
-            for (int i = 0; i < versions.size(); i++) {
-                logger.info("Version " + (i + 1) + " of key is --> " + versions.get(i));
-            }
-
-        }catch (ServiceResponseException sre) {
+        } catch (ServiceResponseException sre) {
             logger.error(String.format("Service returned status code %s: %s\nError details: %s",
                     sre.getStatusCode(), sre.getMessage(), sre.getDebuggingInfo()), sre);
-        } catch (InterruptedException ie) {
-            logger.error(String.format("Error details: %s", ie.getMessage()),  ie);
         }
     }
-
 }
