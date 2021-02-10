@@ -19,6 +19,7 @@ import com.ibm.cloud.sdk.core.service.exception.ServiceResponseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Base64;
 import java.util.Map;
 
 //
@@ -58,11 +59,14 @@ public class KeyAliasExample {
         IamAuthenticator authenticator = new IamAuthenticator(ibmCloudApiKey);
         authenticator.setURL(iamAuthUrl);
         authenticator.validate();
-        // payload is base64 encoded string of "It is a really important message"
-        String payload = "SXQgaXMgYSByZWFsbHkgaW1wb3J0YW50IG1lc3NhZ2U=";
+
         String keyAlias = "sdkKeyAlias";
         String keyName = "sdk-created-key";
         String keyDesc = "created via sdk";
+
+        // payload is base64 encoded string of "It is a really important message"
+        String str = "It is a really important message";
+        String payload = Base64.getEncoder().encodeToString(str.getBytes());
 
         try {
             IbmKeyProtectApi exampleService = IbmKeyProtectApi.newInstance(authenticator);
@@ -82,7 +86,7 @@ public class KeyAliasExample {
             // Get a key using key alias
             logger.info("Get a key using key alias");
             KeyWithPayload keyWithPayload = KpUtils.getKey(exampleService, exampleInstance, keyAlias);
-            logger.info(String.format("Got key with alias %s: ", keyAlias) + keyWithPayload);
+            logger.info(String.format("Got key with alias %s, key description is: ", keyAlias) + keyWithPayload.getDescription());
 
             // Delete key alias
             logger.info("Delete a key alias");
