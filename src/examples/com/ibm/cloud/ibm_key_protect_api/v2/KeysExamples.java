@@ -21,6 +21,7 @@ import com.ibm.cloud.sdk.core.service.exception.ServiceResponseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -62,10 +63,13 @@ public class KeysExamples {
         IamAuthenticator authenticator = new IamAuthenticator(ibmCloudApiKey);
         authenticator.setURL(iamAuthUrl);
         authenticator.validate();
-        // payload is base64 encoded string of "It is a really important message"
-        String payload = "SXQgaXMgYSByZWFsbHkgaW1wb3J0YW50IG1lc3NhZ2U=";
+
         String keyName = "sdk-created-key";
         String keyDesc = "created via sdk";
+
+        // payload is base64 encoded string of "It is a really important message"
+        String str = "It is a really important message";
+        String payload = Base64.getEncoder().encodeToString(str.getBytes());
 
         try {
             IbmKeyProtectApi exampleService = IbmKeyProtectApi.newInstance(authenticator);
@@ -80,7 +84,7 @@ public class KeysExamples {
             // Get a key
             logger.info("Get a key");
             KeyWithPayload keyWithPayload = KpUtils.getKey(exampleService, exampleInstance, keyId);
-            logger.info(String.format("Got key with ID %s: ", keyId) + keyWithPayload);
+            logger.info(String.format("Got key with ID %s, key description is: ", keyId) + keyWithPayload.getDescription());
 
             // Get list of keys associated to the instance
             logger.info("List keys");
