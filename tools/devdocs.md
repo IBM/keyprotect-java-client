@@ -9,8 +9,8 @@ We use the Nexus Staging plugin with Maven as outlined here: https://central.son
 
 ### Setup
 
-create gpg key
-export gpg key
+- create gpg key
+- export gpg key
 
 don't forget to:
 ```
