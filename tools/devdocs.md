@@ -67,8 +67,8 @@ git push origin <version>
 ### Deploying artifacts to Central
 
 To push to a staging Nexus repo in OSSRH
-``
-`mvn clean deploy -P release
+```
+mvn clean deploy -P release
 ``` 
 
 This should build, sign, and push the artifacts to the Nexus Staging repo.
