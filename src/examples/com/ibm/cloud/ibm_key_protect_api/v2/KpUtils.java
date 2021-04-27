@@ -397,6 +397,103 @@ public class KpUtils {
         exampleService.putInstancePolicy(putInstancePolicyOptionsModel).execute();
     }
 
+    // API docs: https://cloud.ibm.com/apidocs/key-protect#putinstancepolicy
+    public static void createInstancePolicyMetrics (IbmKeyProtectApi exampleService,
+                                                           String exampleInstance, boolean metrics) {
+        // Construct an instance of the CollectionMetadata model
+        CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
+                .collectionType("application/vnd.ibm.kms.policy+json")
+                .collectionTotal(Long.valueOf("1"))
+                .build();
+
+        // Construct an instance of the MetricsProperties model
+        MetricsProperties metricsPropertiesModel = new MetricsProperties.Builder()
+                .enabled(metrics)
+                .build();
+
+        // Construct an instance of the SetInstancePoliciesOneOfSetInstancePolicyMetricsResourcesItem model
+        SetInstancePoliciesOneOfSetInstancePolicyMetricsResourcesItem
+                setInstancePoliciesOneOfSetInstancePolicyMetricsResourcesItemModel
+                = new SetInstancePoliciesOneOfSetInstancePolicyMetricsResourcesItem.Builder()
+                .policyType("metrics")
+                .policyData(metricsPropertiesModel)
+                .build();
+
+        // Construct an instance of the SetInstancePoliciesOneOfSetInstancePolicyMetrics model
+        SetInstancePoliciesOneOfSetInstancePolicyMetrics setInstancePoliciesOneOfMetricsModel
+                = new SetInstancePoliciesOneOfSetInstancePolicyMetrics.Builder()
+                .metadata(collectionMetadataModel)
+                .resources(new ArrayList<SetInstancePoliciesOneOfSetInstancePolicyMetricsResourcesItem>
+                        (Arrays.asList(setInstancePoliciesOneOfSetInstancePolicyMetricsResourcesItemModel)))
+                .build();
+
+        // Construct an instance of the PutInstancePolicyOptions model
+        PutInstancePolicyOptions putInstancePolicyOptionsModel = new PutInstancePolicyOptions.Builder()
+                .bluemixInstance(exampleInstance)
+                .setInstancePoliciesOneOf(setInstancePoliciesOneOfMetricsModel)
+                .policy("metrics")
+                .build();
+
+        // Invoke operation with valid options model
+        exampleService.putInstancePolicy(putInstancePolicyOptionsModel).execute();
+    }
+
+    // API docs: https://cloud.ibm.com/apidocs/key-protect#putinstancepolicy
+    public static void createInstancePolicyKeyCreateImportAccess (IbmKeyProtectApi exampleService,
+                                                                  String exampleInstance,
+                                                                  boolean createRootKey, boolean createStandardKey,
+                                                                  boolean importRootKey, boolean importStandardKey,
+                                                                  boolean enforceToken) {
+        // Construct an instance of the CollectionMetadata model
+        CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
+                .collectionType("application/vnd.ibm.kms.policy+json")
+                .collectionTotal(Long.valueOf("1"))
+                .build();
+
+        // Construct an instance of the InstancePolicyKeyCreateImportAccessPolicyDataAttributes model
+        InstancePolicyKeyCreateImportAccessPolicyDataAttributes instancePolicyKeyCreateImportAccessPolicyDataAttributesModel
+                = new InstancePolicyKeyCreateImportAccessPolicyDataAttributes.Builder()
+                .createRootKey(createRootKey)
+                .createStandardKey(createStandardKey)
+                .importRootKey(importRootKey)
+                .importStandardKey(importStandardKey)
+                .enforceToken(enforceToken)
+                .build();
+
+        // Construct an instance of the InstancePolicyKeyCreateImportAccessPolicyData model
+        InstancePolicyKeyCreateImportAccessPolicyData instancePolicyKeyCreateImportAccessPolicyDataModel
+                = new InstancePolicyKeyCreateImportAccessPolicyData.Builder()
+                .enabled(true)
+                .attributes(instancePolicyKeyCreateImportAccessPolicyDataAttributesModel)
+                .build();
+
+        // Construct an instance of the SetInstancePoliciesOneOfSetInstancePolicyKeyCreateImportAccessResourcesItem model
+        SetInstancePoliciesOneOfSetInstancePolicyKeyCreateImportAccessResourcesItem
+                setInstancePoliciesOneOfSetInstancePolicyKeyCreateImportAccessResourcesItemModel
+                = new SetInstancePoliciesOneOfSetInstancePolicyKeyCreateImportAccessResourcesItem.Builder()
+                .policyType("keyCreateImportAccess")
+                .policyData(instancePolicyKeyCreateImportAccessPolicyDataModel)
+                .build();
+
+        // Construct an instance of the SetInstancePoliciesOneOfSetInstancePolicyKeyCreateImportAccess model
+        SetInstancePoliciesOneOfSetInstancePolicyKeyCreateImportAccess setInstancePoliciesOneOfKeyCreateImportAccessModel
+                = new SetInstancePoliciesOneOfSetInstancePolicyKeyCreateImportAccess.Builder()
+                .metadata(collectionMetadataModel)
+                .resources(new ArrayList<SetInstancePoliciesOneOfSetInstancePolicyKeyCreateImportAccessResourcesItem>
+                        (Arrays.asList(setInstancePoliciesOneOfSetInstancePolicyKeyCreateImportAccessResourcesItemModel)))
+                .build();
+
+        // Construct an instance of the PutInstancePolicyOptions model
+        PutInstancePolicyOptions putInstancePolicyOptionsModel = new PutInstancePolicyOptions.Builder()
+                .bluemixInstance(exampleInstance)
+                .setInstancePoliciesOneOf(setInstancePoliciesOneOfKeyCreateImportAccessModel)
+                .policy("keyCreateImportAccess")
+                .build();
+
+        // Invoke operation with valid options model
+        exampleService.putInstancePolicy(putInstancePolicyOptionsModel).execute();
+    }
+
     // API docs: https://cloud.ibm.com/apidocs/key-protect#getinstancepolicy
     public static Response<GetInstancePoliciesOneOf> getInstancePolicies (IbmKeyProtectApi exampleService,
                                                                           String exampleInstance) {

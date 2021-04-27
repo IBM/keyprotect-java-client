@@ -75,6 +75,17 @@ public class InstancePolicies {
             KpUtils.createInstancePolicyAllowedNetwork (exampleService, exampleInstance, "public-and-private");
             logger.info("Allowed network instance policy created");
 
+            // Create instance metrics policy
+            logger.info("Create instance metrics policy");
+            KpUtils.createInstancePolicyMetrics (exampleService, exampleInstance, true);
+            logger.info("Metrics instance policy created");
+
+            // Create instance key create import access policy
+            logger.info("Create instance key create import access policy");
+            KpUtils.createInstancePolicyKeyCreateImportAccess (exampleService, exampleInstance, true, true,
+                    true, true, true);
+            logger.info("Key create import access instance policy created");
+
             // Get instance policies
             logger.info("Get instance policies");
             Response<GetInstancePoliciesOneOf> response = KpUtils.getInstancePolicies (exampleService, exampleInstance);
