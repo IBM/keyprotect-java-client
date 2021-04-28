@@ -28,27 +28,16 @@ public class GetInstancePoliciesOneOfResourcesItemPolicyDataAttributes extends G
   @SerializedName("allowed_ip")
   protected ArrayList<String> allowedIP;
 
-  /**
-   * Gets the allowedNetwork.
-   *
-   * If set to `public-and-private`, Key Protect allows the instance to be accessible through public and private
-   * endpoints. If set to `private-only`, Key Protect restricts the instance to only be accessible through a private
-   * endpoint.
-   *
-   * @return the allowedNetwork
-   */
-  public String getAllowedNetwork() {
-    return allowedNetwork;
-  }
-
-  /**
-   * Gets the allowedIP.
-   *
-   * @return the allowedNetwork
-   */
-  public ArrayList<String> getAllowedIP() {
-    return allowedIP;
-  }
+  @SerializedName("create_root_key")
+  protected Boolean createRootKey;
+  @SerializedName("create_standard_key")
+  protected Boolean createStandardKey;
+  @SerializedName("import_root_key")
+  protected Boolean importRootKey;
+  @SerializedName("import_standard_key")
+  protected Boolean importStandardKey;
+  @SerializedName("enforce_token")
+  protected Boolean enforceToken;
 
 }
 
