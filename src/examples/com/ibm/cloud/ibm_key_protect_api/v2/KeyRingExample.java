@@ -13,7 +13,6 @@
 
 package com.ibm.cloud.ibm_key_protect_api.v2;
 
-import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyWithPayload;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.ListKeyRings;
 import com.ibm.cloud.sdk.core.http.Response;
 import com.ibm.cloud.sdk.core.security.IamAuthenticator;
@@ -21,6 +20,7 @@ import com.ibm.cloud.sdk.core.service.exception.ServiceResponseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Base64;
 import java.util.Map;
 
 //
@@ -60,7 +60,7 @@ public class KeyRingExample {
         IamAuthenticator authenticator = new IamAuthenticator(ibmCloudApiKey);
         authenticator.setURL(iamAuthUrl);
         authenticator.validate();
-        String keyRingId = "sdkKeyRingId";
+        String sdkKeyRingId = "sdkKeyRingId";
 
         try {
             IbmKeyProtectApi exampleService = IbmKeyProtectApi.newInstance(authenticator);
@@ -68,18 +68,35 @@ public class KeyRingExample {
 
             // Create key ring
             logger.info("Create a key ring");
-            KpUtils.createKeyRing(exampleService, exampleInstance, keyRingId);
-            logger.info(String.format("Key ring %s created", keyRingId));
+            KpUtils.createKeyRing(exampleService, exampleInstance, sdkKeyRingId);
+            logger.info(String.format("Key ring %s created", sdkKeyRingId));
 
             // List key rings
             logger.info("List key rings");
             Response<ListKeyRings> response = KpUtils.getKeyRings(exampleService, exampleInstance);
-            logger.info("Key rings associated with this instance: " + response.getResult());
+            logger.info(String.format("Key rings associated with this instance: %s", response.getResult()));
+
+            // Transfer a key to a different key ring
+            logger.info("Transfer a key to a different key ring");
+            // First create a key
+            String keyName = "sdk-created-key";
+            String keyDesc = "created via sdk";
+            String str = "It is a really important message";
+            String payload = Base64.getEncoder().encodeToString(str.getBytes());
+            String keyId = KpUtils.createKey(exampleService, exampleInstance, keyName, keyDesc,
+                    payload, false);
+            logger.info(String.format("Key with ID %s created in default key ring", keyId));
+            // Transfer
+            KpUtils.setKeyRing(exampleService, exampleInstance, keyId, "default", sdkKeyRingId);
+            logger.info(String.format("Key transferred to key ring: %s", sdkKeyRingId));
+
+            logger.info(String.format("Transfer key out of key ring %s, so that the key ring can be deleted", sdkKeyRingId));
+            KpUtils.setKeyRing(exampleService, exampleInstance, keyId, sdkKeyRingId,"default");
 
             // Delete key ring
-            logger.info("Delete a key ring");
-            KpUtils.deleteKeyRing(exampleService, exampleInstance, keyRingId);
-            logger.info(String.format("Key ring %s deleted", keyRingId));
+            logger.info("Delete key ring");
+            KpUtils.deleteKeyRing(exampleService, exampleInstance, sdkKeyRingId);
+            logger.info(String.format("Key ring %s deleted", sdkKeyRingId));
 
         } catch (ServiceResponseException sre) {
             logger.error(String.format("Service returned status code %s: %s\nError details: %s",

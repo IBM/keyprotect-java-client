@@ -56,6 +56,8 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKeyRingOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.ListKeyRings;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.ListKeyRingsOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyRing;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.PatchKeyResponseBody;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.PatchKeyOptions;
 import com.ibm.cloud.key_protect.common.SdkCommon;
 import com.ibm.cloud.sdk.core.http.RequestBuilder;
 import com.ibm.cloud.sdk.core.http.ResponseConverter;
@@ -1099,5 +1101,41 @@ public class IbmKeyProtectApi extends BaseService {
     ResponseConverter<KeyRing> responseConverter = ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<KeyRing>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
-}
 
+  /**
+   * Update (patch) a key.
+   *
+   * Update attributes of a key. Currently only the following attributes are applicable for update: - keyRingID Note: If
+   * provided, the `X-Kms-Key-Ring` header should specify the key's current key ring. To change the key ring of the key,
+   * specify the new key ring in the request body.
+   *
+   * @param patchKeyOptions the {@link PatchKeyOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link PatchKeyResponseBody}
+   */
+  public ServiceCall<PatchKeyResponseBody> patchKey(PatchKeyOptions patchKeyOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(patchKeyOptions,
+            "patchKeyOptions cannot be null");
+    String[] pathSegments = { "api/v2/keys/" };
+    String[] pathParameters = { patchKeyOptions.id() };
+    RequestBuilder builder = RequestBuilder.patch(RequestBuilder.constructHttpUrl(getServiceUrl(), pathSegments, pathParameters));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("ibm_key_protect_api", "v2", "patchKey");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    builder.header("Bluemix-Instance", patchKeyOptions.bluemixInstance());
+    if (patchKeyOptions.correlationId() != null) {
+      builder.header("Correlation-Id", patchKeyOptions.correlationId());
+    }
+    if (patchKeyOptions.xKmsKeyRing() != null) {
+      builder.header("X-Kms-Key-Ring", patchKeyOptions.xKmsKeyRing());
+    }
+    if (patchKeyOptions.keyPatchBody() != null) {
+      builder.bodyContent(patchKeyOptions.keyPatchBody(), "application/vnd.ibm.kms.key+json");
+    }
+    ResponseConverter<PatchKeyResponseBody> responseConverter =
+            ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<PatchKeyResponseBody>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+}

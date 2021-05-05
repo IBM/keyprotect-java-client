@@ -83,7 +83,7 @@ public class InstancePolicies {
             // Create instance key create import access policy
             logger.info("Create instance key create import access policy");
             KpUtils.createInstancePolicyKeyCreateImportAccess (exampleService, exampleInstance, true, true,
-                    true, true, true);
+                    true, true, false);
             logger.info("Key create import access instance policy created");
 
             // Get instance policies
