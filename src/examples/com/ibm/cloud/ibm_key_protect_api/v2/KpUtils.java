@@ -25,7 +25,6 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Base64;
 import java.util.List;
 
 // API docs: https://cloud.ibm.com/apidocs/key-protect
@@ -580,6 +579,22 @@ public class KpUtils {
         exampleService.deleteKeyRing(deleteKeyRingOptionsModel).execute();
     }
 
+    // https://cloud.ibm.com/apidocs/key-protect#patchkey
+    public static void setKeyRing (IbmKeyProtectApi exampleService,
+                                      String exampleInstance, String keyId, String keyRingId, String newKeyRingId) {
+        // Construct an instance of the PatchKeyOptions model
+        PatchKeyOptions patchKeyOptionsModel = new PatchKeyOptions.Builder()
+                .id(keyId)
+                .bluemixInstance(exampleInstance)
+                .keyPatchBody(buildSetKeyRingStream(newKeyRingId))
+                .xKmsKeyRing(keyRingId)
+                .build();
+
+        // Invoke operation with valid options model
+        Response<PatchKeyResponseBody> response = exampleService.patchKey(patchKeyOptionsModel).execute();
+        PatchKeyResponseBody responseObj = response.getResult();
+    }
+
     // payload should be base64 encoded string
     // notRootKey is false if this is a root key
     public static InputStream buildCreateKeyInputStream(String keyName,String keyDesc, String payload,
@@ -658,6 +673,18 @@ public class KpUtils {
         // build json format input stream
         JsonObjectBuilder jsonObjectBuilder = Json.createObjectBuilder()
                 .add("ciphertext", ciphertext);
+
+        JsonObject jsonObject = jsonObjectBuilder.build();
+
+        InputStream inputstream = new ByteArrayInputStream(jsonObject.toString().getBytes());
+        return inputstream;
+    }
+
+    public static InputStream buildSetKeyRingStream(String newKeyRingId) {
+
+        // build json format input stream
+        JsonObjectBuilder jsonObjectBuilder = Json.createObjectBuilder()
+                .add("keyRingID", newKeyRingId);
 
         JsonObject jsonObject = jsonObjectBuilder.build();
 
