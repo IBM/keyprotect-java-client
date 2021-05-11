@@ -2082,6 +2082,62 @@ public class IbmKeyProtectApiTest extends PowerMockTestCase {
     testService.patchKey(null).execute();
   }
 
+
+  @Test
+  public void testPurgeKeyWOptions() throws Throwable {
+    // Schedule some responses.
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"type\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2018-12-01T23:20:50.520Z\", \"extractable\": false, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": true, \"creationDate\": \"2018-04-12T23:20:50.520Z\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"128\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 128, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2018-04-12T23:20:50.520Z\", \"lastRotateDate\": \"2018-04-12T23:20:50.520Z\", \"keyVersion\": {\"id\": \"4a0225e9-17a0-46c1-ace7-f25bcf4237d4\", \"creationDate\": \"2019-01-01T12:00:00.000Z\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2019-01-01T12:00:00.000Z\"}, \"deleted\": false, \"deletionDate\": \"2019-01-01T12:00:00.000Z\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2019-01-01T12:00:00.000Z\", \"restoreAllowed\": true, \"purgeAllowed\": true, \"purgeAllowedFrom\": \"2019-01-01T12:00:00.000Z\", \"purgeScheduledOn\": \"2019-01-01T12:00:00.000Z\"}]}";
+    String purgeKeyPath = "/api/v2/keys/testString/purge";
+
+    server.enqueue(new MockResponse()
+            .setHeader("Content-type", "application/json")
+            .setResponseCode(200)
+            .setBody(mockResponseBody));
+
+    constructClientService();
+
+    // Construct an instance of the PurgeKeyOptions model
+    PurgeKeyOptions purgeKeyOptionsModel = new PurgeKeyOptions.Builder()
+            .id("testString")
+            .bluemixInstance("testString")
+            .correlationId("testString")
+            .xKmsKeyRing("testString")
+            .prefer("return=representation")
+            .build();
+
+    // Invoke operation with valid options model (positive test)
+    Response<PurgeKey> response = testService.purgeKey(purgeKeyOptionsModel).execute();
+    assertNotNull(response);
+    PurgeKey responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "DELETE");
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+
+    // Check query
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
+
+    // Check request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, purgeKeyPath);
+  }
+
+  // Test the purgeKey operation with null options model parameter
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testPurgeKeyNoOptions() throws Throwable {
+    // construct the service
+    constructClientService();
+
+    server.enqueue(new MockResponse());
+
+    // Invoke operation with null options model (negative test)
+    testService.purgeKey(null).execute();
+  }
+
   /** Initialize the server */
   @BeforeMethod
   public void setUpMockServer() {
