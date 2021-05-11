@@ -592,7 +592,20 @@ public class KpUtils {
 
         // Invoke operation with valid options model
         Response<PatchKeyResponseBody> response = exampleService.patchKey(patchKeyOptionsModel).execute();
-        PatchKeyResponseBody responseObj = response.getResult();
+    }
+
+    // https://cloud.ibm.com/apidocs/key-protect#purgekey
+    public static void purgeKey (IbmKeyProtectApi exampleService,
+                                   String exampleInstance, String keyId) {
+        // Construct an instance of the PurgeKeyOptions model
+        PurgeKeyOptions purgeKeyOptionsModel = new PurgeKeyOptions.Builder()
+                .id(keyId)
+                .bluemixInstance(exampleInstance)
+                .prefer("return=representation")
+                .build();
+
+        // Invoke operation with valid options model
+        Response<PurgeKey> response = exampleService.purgeKey(purgeKeyOptionsModel).execute();
     }
 
     // payload should be base64 encoded string

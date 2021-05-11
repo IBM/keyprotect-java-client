@@ -58,6 +58,8 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.ListKeyRingsOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyRing;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.PatchKeyResponseBody;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.PatchKeyOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.PurgeKey;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.PurgeKeyOptions;
 import com.ibm.cloud.key_protect.common.SdkCommon;
 import com.ibm.cloud.sdk.core.http.RequestBuilder;
 import com.ibm.cloud.sdk.core.http.ResponseConverter;
@@ -1138,4 +1140,41 @@ public class IbmKeyProtectApi extends BaseService {
     return createServiceCall(builder.build(), responseConverter);
   }
 
+  /**
+   * Purge a deleted key.
+   *
+   * Purge all key metadata and registrations associated with the specified key. Purge key can only be applied to a key
+   * in the Destroyed (5) state.  After a key is deleted, there is a wait period of up to four hours before purge key
+   * operation is allowed.  **Important:** When you purge a key, you permanently shred its contents and associated data.
+   * The action cannot be reversed.
+   *
+   * @param purgeKeyOptions the {@link PurgeKeyOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link PurgeKey}
+   */
+  public ServiceCall<PurgeKey> purgeKey(PurgeKeyOptions purgeKeyOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(purgeKeyOptions,
+            "purgeKeyOptions cannot be null");
+
+    String[] pathSegments = { "api/v2/keys", "purge" };
+    String[] pathParameters = { purgeKeyOptions.id() };
+    RequestBuilder builder = RequestBuilder.delete(RequestBuilder.constructHttpUrl(getServiceUrl(), pathSegments, pathParameters));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("ibm_key_protect_api", "v2", "purgeKey");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    builder.header("Bluemix-Instance", purgeKeyOptions.bluemixInstance());
+    if (purgeKeyOptions.correlationId() != null) {
+      builder.header("Correlation-Id", purgeKeyOptions.correlationId());
+    }
+    if (purgeKeyOptions.xKmsKeyRing() != null) {
+      builder.header("X-Kms-Key-Ring", purgeKeyOptions.xKmsKeyRing());
+    }
+    if (purgeKeyOptions.prefer() != null) {
+      builder.header("Prefer", purgeKeyOptions.prefer());
+    }
+    ResponseConverter<PurgeKey> responseConverter =
+            ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<PurgeKey>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
 }
