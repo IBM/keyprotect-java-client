@@ -57,9 +57,9 @@
     <git-repository-name>keyprotect-java-client</git-repository-name>
 
     <!-- version props -->
-    <sdk-core-version>8.3.0</sdk-core-version>
+    <sdk-core-version>9.10.4</sdk-core-version>
     <testng-version>7.1.0</testng-version>
-    <okhttp3-version>3.13.1</okhttp3-version>
+    <okhttp3-version>4.9.1</okhttp3-version>
     <surefire-version>3.0.0-M3</surefire-version>
     <maven-deploy-plugin-version>3.0.0-M1</maven-deploy-plugin-version>
     <maven-source-plugin-version>3.1.0</maven-source-plugin-version>
@@ -79,7 +79,7 @@
     <dependency>
       <groupId>com.ibm.cloud</groupId>
       <artifactId>sdk-core</artifactId>
-      <version>8.3.0</version>
+      <version>9.10.4</version>
     </dependency>
     <dependency>
       <groupId>com.google.code.gson</groupId>
