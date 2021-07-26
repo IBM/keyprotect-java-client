@@ -17,6 +17,7 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyProtectException;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyRepresentation;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyVersion;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyWithPayload;
+import com.ibm.cloud.ibm_key_protect_api.v2.utils.KpUtilities;
 import com.ibm.cloud.sdk.core.security.IamAuthenticator;
 import com.ibm.cloud.sdk.core.service.exception.ServiceResponseException;
 import org.slf4j.Logger;
@@ -32,9 +33,9 @@ import java.util.concurrent.TimeUnit;
 //
 // The following configuration properties are assumed to be exported as environment variables
 //
-// IBMCLOUD_API_KEY=<IBM Cloud APIKEY for the User>
+// APIKEY=<IBM Cloud APIKEY for the User>
 // KP_INSTANCE_ID=<ID of the service instance to be used >
-// IAM_AUTH_URL=<IAM Token Service URL>
+// AUTH_URL=<IAM Token Service URL>
 // KP_SERVICE_URL=<Service URL>
 //
 // API docs: https://cloud.ibm.com/apidocs/key-protect
@@ -44,26 +45,18 @@ public class KeysExamples {
     private static final Logger logger = LoggerFactory.getLogger(KeysExamples.class);
 
     //values to be read from the env setting
-    private static String ibmCloudApiKey;
+    private static Map<String, String> config;
     private static String exampleInstance;
-    private static String iamAuthUrl;
     private static String serviceUrl;
 
     static {
-        Map<String, String> config = System.getenv();
-        ibmCloudApiKey = config.get("IBMCLOUD_API_KEY");
+        config = System.getenv();
         exampleInstance = config.get("KP_INSTANCE_ID");
-        iamAuthUrl = config.get("IAM_AUTH_URL");
         serviceUrl = config.get("KP_SERVICE_URL");
     }
 
-    public KeysExamples() {
-    }
-
     public static void main(String[] args) {
-        IamAuthenticator authenticator = new IamAuthenticator(ibmCloudApiKey);
-        authenticator.setURL(iamAuthUrl);
-        authenticator.validate();
+        IamAuthenticator authenticator = IamAuthenticator.fromConfiguration(config);
 
         String keyName = "sdk-created-key";
         String keyDesc = "created via sdk";
@@ -78,25 +71,25 @@ public class KeysExamples {
 
             // Create key
             logger.info("Create a key");
-            String keyId = KpUtils.createKey(exampleService, exampleInstance, keyName, keyDesc,
+            String keyId = KpUtilities.createKey(exampleService, exampleInstance, keyName, keyDesc,
                     payload, false);
             logger.info(String.format("Key with ID %s created", keyId));
 
             // Get a key
             logger.info("Get a key");
-            KeyWithPayload keyWithPayload = KpUtils.getKey(exampleService, exampleInstance, keyId);
+            KeyWithPayload keyWithPayload = KpUtilities.getKey(exampleService, exampleInstance, keyId);
             logger.info(String.format("Got key with ID %s, key description is: ", keyId) + keyWithPayload.getDescription());
 
             // Get list of keys associated to the instance
             logger.info("List keys");
-            List<KeyRepresentation> keys = KpUtils.getKeys(exampleService, exampleInstance);
+            List<KeyRepresentation> keys = KpUtilities.getKeys(exampleService, exampleInstance);
             for (int i = 0; i < keys.size(); i++) {
                 logger.info("key " + (i+1) + " ID is --> " + keys.get(i).getId());
             }
 
             // Delete a key
             logger.info("Delete a key");
-            KpUtils.deleteKey(exampleService, exampleInstance, keyId);
+            KpUtilities.deleteKey(exampleService, exampleInstance, keyId);
             logger.info(String.format("Key with ID %s deleted", keyId));
 
             // Need to delay 30 seconds before calling restore
@@ -104,30 +97,30 @@ public class KeysExamples {
 
             // Restore a key
             logger.info("Restore a key");
-            KpUtils.restoreKey(exampleService, exampleInstance, keyId, payload);
+            KpUtilities.restoreKey(exampleService, exampleInstance, keyId, payload);
             logger.info(String.format("Key with ID %s restored", keyId));
 
             // Rotate a key
             logger.info("Rotate a key");
-            KpUtils.rotateKey(exampleService, exampleInstance, keyId, payload);
+            KpUtilities.rotateKey(exampleService, exampleInstance, keyId, payload);
             logger.info(String.format("Key with ID %s rotated", keyId));
 
             //List key version
             logger.info("List key versions");
-            List<KeyVersion> versions = KpUtils.getKeyVersions(exampleService, exampleInstance, keyId);
+            List<KeyVersion> versions = KpUtilities.getKeyVersions(exampleService, exampleInstance, keyId);
             for (int i = 0; i < versions.size(); i++) {
                 logger.info("Version " + (i + 1) + " of key is --> " + versions.get(i));
             }
 
             // Delete the key again then try to purge it
             logger.info("Delete the key");
-            KpUtils.deleteKey(exampleService, exampleInstance, keyId);
+            KpUtilities.deleteKey(exampleService, exampleInstance, keyId);
             logger.info(String.format("Key with ID %s deleted", keyId));
 
             // Purge key, this should fail since the key just got deleted
             logger.info("Purge a key");
             try {
-                KpUtils.purgeKey(exampleService, exampleInstance, keyId);
+                KpUtilities.purgeKey(exampleService, exampleInstance, keyId);
             }
             catch (KeyProtectException kpe) {
                 if (kpe.getMessage().contains("REQ_TOO_EARLY_ERR")) {

@@ -11,8 +11,9 @@
  * specific language governing permissions and limitations under the License.
  */
 
-package com.ibm.cloud.ibm_key_protect_api.v2;
+package com.ibm.cloud.ibm_key_protect_api.v2.utils;
 
+import com.ibm.cloud.ibm_key_protect_api.v2.IbmKeyProtectApi;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.*;
 import com.ibm.cloud.sdk.core.http.Response;
 import org.slf4j.Logger;
@@ -30,195 +31,195 @@ import java.util.List;
 // API docs: https://cloud.ibm.com/apidocs/key-protect
 // Utilities class to provide KP services
 
-public class KpUtils {
+public class KpUtilities {
 
-    private static final Logger logger = LoggerFactory.getLogger(KpUtils.class);
+    private static final Logger logger = LoggerFactory.getLogger(KpUtilities.class);
 
-    public KpUtils() {
+    public KpUtilities() {
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect#createkey
     // payload is null if not an imported key
     // notRootKey is false if this is a root key
-    public static String createKey(IbmKeyProtectApi exampleService, String exampleInstance, String keyName,
+    public static String createKey(IbmKeyProtectApi testService, String testInstance, String keyName,
                                    String keyDesc, String payload, boolean notRootKey) {
 
-        InputStream inputstream = KpUtils.buildCreateKeyInputStream(keyName, keyDesc, payload, notRootKey);
+        InputStream inputstream = KpUtilities.buildCreateKeyInputStream(keyName, keyDesc, payload, notRootKey);
 
         CreateKeyOptions createKeyOptionsModel = new CreateKeyOptions.Builder()
-                .bluemixInstance(exampleInstance)
+                .bluemixInstance(testInstance)
                 .createKeyOneOf(inputstream)
                 .prefer("return=representation")
                 .build();
 
-        Response<Key> response = exampleService.createKey(createKeyOptionsModel).execute();
+        Response<Key> response = testService.createKey(createKeyOptionsModel).execute();
         KeyWithPayload keyWithPayload = response.getResult().getResources().get(0);
         String keyId = keyWithPayload.getId();
         return keyId;
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect#getkey
-    public static KeyWithPayload getKey(IbmKeyProtectApi exampleService, String exampleInstance, String keyId_or_alias) {
+    public static KeyWithPayload getKey(IbmKeyProtectApi testService, String testInstance, String keyId_or_alias) {
         GetKeyOptions options = new GetKeyOptions.Builder().id(keyId_or_alias)
-                .bluemixInstance(exampleInstance)
+                .bluemixInstance(testInstance)
                 .build();
-        Response<GetKey> response = exampleService.getKey(options).execute();
+        Response<GetKey> response = testService.getKey(options).execute();
         GetKey responseObj = response.getResult();
         KeyWithPayload keyWithPayload = responseObj.getResources().get(0);
         return keyWithPayload;
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect#getkeys
-    public static List<KeyRepresentation> getKeys(IbmKeyProtectApi exampleService, String exampleInstance) {
+    public static List<KeyRepresentation> getKeys(IbmKeyProtectApi testService, String testInstance) {
         GetKeysOptions getKeysOptionsModel = new GetKeysOptions.Builder()
-                .bluemixInstance(exampleInstance)
+                .bluemixInstance(testInstance)
                 .build();
-        Response<ListKeys> response = exampleService.getKeys(getKeysOptionsModel).execute();
+        Response<ListKeys> response = testService.getKeys(getKeysOptionsModel).execute();
         return response.getResult().getResources();
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect#deletekey
-    public static void deleteKey(IbmKeyProtectApi exampleService, String exampleInstance, String keyId) {
+    public static Response<DeleteKey> deleteKey(IbmKeyProtectApi testService, String testInstance, String keyId) {
         DeleteKeyOptions deleteKeyOptionsModel = new DeleteKeyOptions.Builder()
                 .id(keyId)
-                .bluemixInstance(exampleInstance)
+                .bluemixInstance(testInstance)
                 .force(true)
                 .build();
 
-        exampleService.deleteKey(deleteKeyOptionsModel).execute();
+        return testService.deleteKey(deleteKeyOptionsModel).execute();
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect#restorekey
-    public static void restoreKey(IbmKeyProtectApi exampleService, String exampleInstance, String keyId,
-                                  String payload) {
-        InputStream  inputstream = KpUtils.buildRestoreKeyInputStream(payload);
+    public static Response<KeyActionOneOfResponse> restoreKey(IbmKeyProtectApi testService, String testInstance, String keyId,
+                                                              String payload) {
+        InputStream  inputstream = KpUtilities.buildRestoreKeyInputStream(payload);
         ActionOnKeyOptions restoreKeyOptionsModel = new ActionOnKeyOptions.Builder()
                 .id(keyId)
-                .bluemixInstance(exampleInstance)
+                .bluemixInstance(testInstance)
                 .action("restore")
                 .keyActionOneOf(inputstream)
                 .build();
 
-        exampleService.actionOnKey(restoreKeyOptionsModel).execute();
+        return testService.actionOnKey(restoreKeyOptionsModel).execute();
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect#rotatekey
-    public static void rotateKey(IbmKeyProtectApi exampleService, String exampleInstance, String keyId, String payload) {
-        InputStream inputstream = KpUtils.buildRotateKeyInputStream(payload);
+    public static Response<KeyActionOneOfResponse> rotateKey(IbmKeyProtectApi testService, String testInstance, String keyId, String payload) {
+        InputStream inputstream = KpUtilities.buildRotateKeyInputStream(payload);
         ActionOnKeyOptions actionOnKeyOptionsModel = new ActionOnKeyOptions.Builder()
                 .id(keyId)
-                .bluemixInstance(exampleInstance)
+                .bluemixInstance(testInstance)
                 .action("rotate")
                 .keyActionOneOf(inputstream)
                 .prefer("return=representation")
                 .build();
 
-        exampleService.actionOnKey(actionOnKeyOptionsModel).execute();
+        return testService.actionOnKey(actionOnKeyOptionsModel).execute();
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect#wrapkey
-    public static KeyActionOneOfResponse wrapKey(IbmKeyProtectApi exampleService, String exampleInstance,
+    public static KeyActionOneOfResponse wrapKey(IbmKeyProtectApi testService, String testInstance,
                                                  String keyId, String payload) {
 
-        InputStream wrapInputStream = KpUtils.buildWrapKeyInputStream(payload);
+        InputStream wrapInputStream = KpUtilities.buildWrapKeyInputStream(payload);
 
         ActionOnKeyOptions wrapKeyOptionsModel = new ActionOnKeyOptions.Builder()
                 .id(keyId)
-                .bluemixInstance(exampleInstance)
+                .bluemixInstance(testInstance)
                 .action("wrap")
                 .keyActionOneOf(wrapInputStream)
                 .prefer("return=representation")
                 .build();
 
-        return exampleService.actionOnKey(wrapKeyOptionsModel).execute().getResult();
+        return testService.actionOnKey(wrapKeyOptionsModel).execute().getResult();
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect#unwrapkey
-    public static KeyActionOneOfResponse unWrapKey(IbmKeyProtectApi exampleService, String exampleInstance,
+    public static KeyActionOneOfResponse unWrapKey(IbmKeyProtectApi testService, String testInstance,
                                                    String keyId, String ciphertext) {
 
-        InputStream unWrapInputStream = KpUtils.buildUnWrapKeyInputStream(ciphertext);
+        InputStream unWrapInputStream = KpUtilities.buildUnWrapKeyInputStream(ciphertext);
         ActionOnKeyOptions unWrapKeyOptionsModel = new ActionOnKeyOptions.Builder()
                 .id(keyId)
-                .bluemixInstance(exampleInstance)
+                .bluemixInstance(testInstance)
                 .action("unwrap")
                 .keyActionOneOf(unWrapInputStream)
                 .prefer("return=representation")
                 .build();
-        return exampleService.actionOnKey(unWrapKeyOptionsModel).execute().getResult();
+        return testService.actionOnKey(unWrapKeyOptionsModel).execute().getResult();
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect#disablekey
-    public static void disableKey(IbmKeyProtectApi exampleService, String exampleInstance, String keyId) {
+    public static Response<KeyActionOneOfResponse> disableKey(IbmKeyProtectApi testService, String testInstance, String keyId) {
         ActionOnKeyOptions disableKeyOptionsModel = new ActionOnKeyOptions.Builder()
                 .id(keyId)
-                .bluemixInstance(exampleInstance)
+                .bluemixInstance(testInstance)
                 .action("disable")
                 .prefer("return=representation")
                 .build();
-        exampleService.actionOnKey(disableKeyOptionsModel).execute();
+        return testService.actionOnKey(disableKeyOptionsModel).execute();
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect#enablekey
-    public static void enableKey(IbmKeyProtectApi exampleService, String exampleInstance, String keyId) {
+    public static Response<KeyActionOneOfResponse> enableKey(IbmKeyProtectApi testService, String testInstance, String keyId) {
         ActionOnKeyOptions enableKeyOptionsModel = new ActionOnKeyOptions.Builder()
                 .id(keyId)
-                .bluemixInstance(exampleInstance)
+                .bluemixInstance(testInstance)
                 .action("enable")
                 .prefer("return=representation")
                 .build();
-        exampleService.actionOnKey(enableKeyOptionsModel).execute();
+        return testService.actionOnKey(enableKeyOptionsModel).execute();
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect#getkeyversions
-    public static List<KeyVersion> getKeyVersions(IbmKeyProtectApi exampleService, String exampleInstance, String keyId) {
+    public static List<KeyVersion> getKeyVersions(IbmKeyProtectApi testService, String testInstance, String keyId) {
         GetKeyVersionsOptions getKeyVersionsOptionsModel = new GetKeyVersionsOptions.Builder()
                 .id(keyId)
-                .bluemixInstance(exampleInstance)
+                .bluemixInstance(testInstance)
                 .build();
-        Response<ListKeyVersions> response = exampleService.getKeyVersions(getKeyVersionsOptionsModel).execute();
+        Response<ListKeyVersions> response = testService.getKeyVersions(getKeyVersionsOptionsModel).execute();
         return response.getResult().getResources();
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect#getregistrations
-    public static Response<RegistrationWithTotalCount> getRegistrationsForKey(IbmKeyProtectApi exampleService,
-                                                                              String exampleInstance, String keyId) {
+    public static Response<RegistrationWithTotalCount> getRegistrationsForKey(IbmKeyProtectApi testService,
+                                                                              String testInstance, String keyId) {
         // Construct an instance of the GetRegistrationsOptions model
         GetRegistrationsOptions getRegistrationsOptionsModel = new GetRegistrationsOptions.Builder()
                 .id(keyId)
-                .bluemixInstance(exampleInstance)
+                .bluemixInstance(testInstance)
                 .limit(Long.valueOf("50"))
                 .totalCount(true)
                 .build();
 
         // Invoke operation with valid options model
-        Response<RegistrationWithTotalCount> response = exampleService.
+        Response<RegistrationWithTotalCount> response = testService.
                 getRegistrations(getRegistrationsOptionsModel).execute();
 
         return response;
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect#getregistrationsallkeys
-    public static Response<RegistrationWithTotalCount> getRegistrationsForInstance(IbmKeyProtectApi exampleService,
-                                                                              String exampleInstance, String keyId) {
+    public static Response<RegistrationWithTotalCount> getRegistrationsForInstance(IbmKeyProtectApi testService,
+                                                                              String testInstance, String keyId) {
         // Construct an instance of the GetRegistrationsAllKeysOptions model
         GetRegistrationsAllKeysOptions getRegistrationsAllKeysOptionsModel
                 = new GetRegistrationsAllKeysOptions.Builder()
-                .bluemixInstance(exampleInstance)
+                .bluemixInstance(testInstance)
                 .limit(Long.valueOf("50"))
                 .totalCount(true)
                 .build();
 
         // Invoke operation with valid options model
         Response<RegistrationWithTotalCount> response
-                = exampleService.getRegistrationsAllKeys(getRegistrationsAllKeysOptionsModel).execute();
+                = testService.getRegistrationsAllKeys(getRegistrationsAllKeysOptionsModel).execute();
 
         return response;
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect#putpolicy
-    public static void createKeyPolicyDualAuthDelete (IbmKeyProtectApi exampleService,
-                                                      String exampleInstance, String keyId, boolean dualAuth) {
+    public static Response<GetKeyPoliciesOneOf> createKeyPolicyDualAuthDelete (IbmKeyProtectApi testService,
+                                                                               String testInstance, String keyId, boolean dualAuth) {
         // Construct an instance of the CollectionMetadata model
         CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
                 .collectionType("application/vnd.ibm.kms.policy+json")
@@ -247,18 +248,18 @@ public class KpUtils {
         // Construct an instance of the PutPolicyOptions model
         PutPolicyOptions putPolicyOptionsModel = new PutPolicyOptions.Builder()
                 .id(keyId)
-                .bluemixInstance(exampleInstance)
+                .bluemixInstance(testInstance)
                 .setKeyPoliciesOneOf(setKeyPoliciesOneOfDualAuthDeleteModel)
                 .policy("dualAuthDelete")
                 .build();
 
         // Invoke operation with valid options model
-        exampleService.putPolicy(putPolicyOptionsModel).execute();
+        return testService.putPolicy(putPolicyOptionsModel).execute();
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect#putpolicy
-    public static void createKeyPolicyRotation (IbmKeyProtectApi exampleService,
-                                                      String exampleInstance, String keyId, int intervalMonth) {
+    public static Response<GetKeyPoliciesOneOf> createKeyPolicyRotation (IbmKeyProtectApi testService,
+                                                                         String testInstance, String keyId, int intervalMonth) {
         // Construct an instance of the CollectionMetadata model
         CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
                 .collectionType("application/vnd.ibm.kms.policy+json")
@@ -286,30 +287,29 @@ public class KpUtils {
         // Construct an instance of the PutPolicyOptions model
         PutPolicyOptions putPolicyOptionsModel = new PutPolicyOptions.Builder()
                 .id(keyId)
-                .bluemixInstance(exampleInstance)
+                .bluemixInstance(testInstance)
                 .setKeyPoliciesOneOf(setKeyPoliciesOneOfRotationModel)
                 .policy("rotation")
                 .build();
 
         // Invoke operation with valid options model
-        exampleService.putPolicy(putPolicyOptionsModel).execute();
+        return testService.putPolicy(putPolicyOptionsModel).execute();
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect#getpolicy
-    public static Response<GetKeyPoliciesOneOf> getKeyPolicies (IbmKeyProtectApi exampleService,
-                                                                String exampleInstance, String keyId) {
+    public static Response<GetKeyPoliciesOneOf> getKeyPolicies (IbmKeyProtectApi testService,
+                                                                String testInstance, String keyId) {
         GetPolicyOptions getPolicyOptionsModel = new GetPolicyOptions.Builder()
                 .id(keyId)
-                .bluemixInstance(exampleInstance)
+                .bluemixInstance(testInstance)
                 .build();
 
-        Response<GetKeyPoliciesOneOf> response = exampleService.getPolicy(getPolicyOptionsModel).execute();
-        return response;
+        return testService.getPolicy(getPolicyOptionsModel).execute();
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect#putinstancepolicy
-    public static void createInstancePolicyDualAuthDelete (IbmKeyProtectApi exampleService,
-                                                String exampleInstance, boolean dualAuth) {
+    public static Response<Void> createInstancePolicyDualAuthDelete (IbmKeyProtectApi testService,
+                                                                     String testInstance, boolean dualAuth) {
         // Construct an instance of the CollectionMetadata model
         CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
                 .collectionType("application/vnd.ibm.kms.policy+json")
@@ -338,18 +338,18 @@ public class KpUtils {
 
         // Construct an instance of the PutInstancePolicyOptions model
         PutInstancePolicyOptions putInstancePolicyOptionsModel = new PutInstancePolicyOptions.Builder()
-                .bluemixInstance(exampleInstance)
+                .bluemixInstance(testInstance)
                 .setInstancePoliciesOneOf(setInstancePoliciesOneOfDualAuthDeleteModel)
                 .policy("dualAuthDelete")
                 .build();
 
         // Invoke operation with valid options model (positive test)
-        exampleService.putInstancePolicy(putInstancePolicyOptionsModel).execute();
+        return testService.putInstancePolicy(putInstancePolicyOptionsModel).execute();
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect#putinstancepolicy
-    public static void createInstancePolicyAllowedNetwork (IbmKeyProtectApi exampleService,
-                                                           String exampleInstance, String allowedNetworkType) {
+    public static Response<Void> createInstancePolicyAllowedNetwork (IbmKeyProtectApi testService,
+                                                                     String testInstance, String allowedNetworkType) {
         // Construct an instance of the CollectionMetadata model
         CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
                 .collectionType("application/vnd.ibm.kms.policy+json")
@@ -387,18 +387,18 @@ public class KpUtils {
 
         // Construct an instance of the PutInstancePolicyOptions model
         PutInstancePolicyOptions putInstancePolicyOptionsModel = new PutInstancePolicyOptions.Builder()
-                .bluemixInstance(exampleInstance)
+                .bluemixInstance(testInstance)
                 .setInstancePoliciesOneOf(setInstancePoliciesOneOfAllowedNetworkModel)
                 .policy("allowedNetwork")
                 .build();
 
         // Invoke operation with valid options model
-        exampleService.putInstancePolicy(putInstancePolicyOptionsModel).execute();
+        return testService.putInstancePolicy(putInstancePolicyOptionsModel).execute();
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect#putinstancepolicy
-    public static void createInstancePolicyMetrics (IbmKeyProtectApi exampleService,
-                                                           String exampleInstance, boolean metrics) {
+    public static Response<Void> createInstancePolicyMetrics (IbmKeyProtectApi testService,
+                                                              String testInstance, boolean metrics) {
         // Construct an instance of the CollectionMetadata model
         CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
                 .collectionType("application/vnd.ibm.kms.policy+json")
@@ -428,21 +428,21 @@ public class KpUtils {
 
         // Construct an instance of the PutInstancePolicyOptions model
         PutInstancePolicyOptions putInstancePolicyOptionsModel = new PutInstancePolicyOptions.Builder()
-                .bluemixInstance(exampleInstance)
+                .bluemixInstance(testInstance)
                 .setInstancePoliciesOneOf(setInstancePoliciesOneOfMetricsModel)
                 .policy("metrics")
                 .build();
 
         // Invoke operation with valid options model
-        exampleService.putInstancePolicy(putInstancePolicyOptionsModel).execute();
+        return testService.putInstancePolicy(putInstancePolicyOptionsModel).execute();
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect#putinstancepolicy
-    public static void createInstancePolicyKeyCreateImportAccess (IbmKeyProtectApi exampleService,
-                                                                  String exampleInstance,
-                                                                  boolean createRootKey, boolean createStandardKey,
-                                                                  boolean importRootKey, boolean importStandardKey,
-                                                                  boolean enforceToken) {
+    public static Response<Void> createInstancePolicyKeyCreateImportAccess (IbmKeyProtectApi testService,
+                                                                            String testInstance,
+                                                                            boolean createRootKey, boolean createStandardKey,
+                                                                            boolean importRootKey, boolean importStandardKey,
+                                                                            boolean enforceToken) {
         // Construct an instance of the CollectionMetadata model
         CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
                 .collectionType("application/vnd.ibm.kms.policy+json")
@@ -484,128 +484,128 @@ public class KpUtils {
 
         // Construct an instance of the PutInstancePolicyOptions model
         PutInstancePolicyOptions putInstancePolicyOptionsModel = new PutInstancePolicyOptions.Builder()
-                .bluemixInstance(exampleInstance)
+                .bluemixInstance(testInstance)
                 .setInstancePoliciesOneOf(setInstancePoliciesOneOfKeyCreateImportAccessModel)
                 .policy("keyCreateImportAccess")
                 .build();
 
         // Invoke operation with valid options model
-        exampleService.putInstancePolicy(putInstancePolicyOptionsModel).execute();
+        return testService.putInstancePolicy(putInstancePolicyOptionsModel).execute();
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect#getinstancepolicy
-    public static Response<GetInstancePoliciesOneOf> getInstancePolicies (IbmKeyProtectApi exampleService,
-                                                                          String exampleInstance) {
+    public static Response<GetInstancePoliciesOneOf> getInstancePolicies (IbmKeyProtectApi testService,
+                                                                          String testInstance) {
         // Construct an instance of the GetInstancePolicyOptions model
         GetInstancePolicyOptions getInstancePolicyOptionsModel = new GetInstancePolicyOptions.Builder()
-                .bluemixInstance(exampleInstance)
+                .bluemixInstance(testInstance)
                 .build();
 
         // Invoke operation with valid options model
-        Response<GetInstancePoliciesOneOf> response = exampleService.getInstancePolicy
+        Response<GetInstancePoliciesOneOf> response = testService.getInstancePolicy
                 (getInstancePolicyOptionsModel).execute();
 
         return response;
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect#createkeyalias
-    public static void createKeyAlias (IbmKeyProtectApi exampleService,
-                                                     String exampleInstance, String keyId, String keyAlias) {
+    public static Response<KeyAlias> createKeyAlias (IbmKeyProtectApi testService,
+                                                     String testInstance, String keyId, String keyAlias) {
 
         // Construct an instance of the CreateKeyAliasOptions model
         CreateKeyAliasOptions createKeyAliasOptionsModel = new CreateKeyAliasOptions.Builder()
                 .id(keyId)
                 .alias(keyAlias)
-                .bluemixInstance(exampleInstance)
+                .bluemixInstance(testInstance)
                 .build();
 
         // Invoke operation with valid options model
-        exampleService.createKeyAlias(createKeyAliasOptionsModel).execute();
+        return testService.createKeyAlias(createKeyAliasOptionsModel).execute();
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect#deletekeyalias
-    public static void deleteKeyAlias (IbmKeyProtectApi exampleService,
-                                       String exampleInstance, String keyId, String keyAlias) {
+    public static Response<Void> deleteKeyAlias (IbmKeyProtectApi testService,
+                                       String testInstance, String keyId, String keyAlias) {
 
         // Construct an instance of the DeleteKeyAliasOptions model
         DeleteKeyAliasOptions deleteKeyAliasOptionsModel = new DeleteKeyAliasOptions.Builder()
                 .id(keyId)
                 .alias(keyAlias)
-                .bluemixInstance(exampleInstance)
+                .bluemixInstance(testInstance)
                 .build();
 
         // Invoke operation with valid options model
-        exampleService.deleteKeyAlias(deleteKeyAliasOptionsModel).execute();
+        return testService.deleteKeyAlias(deleteKeyAliasOptionsModel).execute();
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect
-    public static void createKeyRing (IbmKeyProtectApi exampleService,
-                                       String exampleInstance, String keyRingId) {
+    public static Response<KeyRing> createKeyRing (IbmKeyProtectApi testService,
+                                                   String testInstance, String keyRingId) {
 
         // Construct an instance of the CreateKeyRingOptions model
         CreateKeyRingOptions createKeyRingOptionsModel = new CreateKeyRingOptions.Builder()
                 .keyRingId(keyRingId)
-                .bluemixInstance(exampleInstance)
+                .bluemixInstance(testInstance)
                 .build();
 
         // Invoke operation with valid options model
-        exampleService.createKeyRing(createKeyRingOptionsModel).execute();
+        return testService.createKeyRing(createKeyRingOptionsModel).execute();
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect
-    public static Response<ListKeyRings> getKeyRings (IbmKeyProtectApi exampleService,
-                                      String exampleInstance) {
+    public static Response<ListKeyRings> getKeyRings (IbmKeyProtectApi testService,
+                                      String testInstance) {
 
         // Construct an instance of the ListKeyRingsOptions model
         ListKeyRingsOptions listKeyRingsOptionsModel = new ListKeyRingsOptions.Builder()
-                .bluemixInstance(exampleInstance)
+                .bluemixInstance(testInstance)
                 .build();
 
         // Invoke operation with valid options model
-        return exampleService.listKeyRings(listKeyRingsOptionsModel).execute();
+        return testService.listKeyRings(listKeyRingsOptionsModel).execute();
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect
-    public static void deleteKeyRing (IbmKeyProtectApi exampleService,
-                                      String exampleInstance, String keyRingId) {
+    public static Response<KeyRing> deleteKeyRing (IbmKeyProtectApi testService,
+                                      String testInstance, String keyRingId) {
 
         // Construct an instance of the DeleteKeyRingOptions model
         DeleteKeyRingOptions deleteKeyRingOptionsModel = new DeleteKeyRingOptions.Builder()
                 .keyRingId(keyRingId)
-                .bluemixInstance(exampleInstance)
+                .bluemixInstance(testInstance)
                 .build();
 
         // Invoke operation with valid options model
-        exampleService.deleteKeyRing(deleteKeyRingOptionsModel).execute();
+        return testService.deleteKeyRing(deleteKeyRingOptionsModel).execute();
     }
 
     // https://cloud.ibm.com/apidocs/key-protect#patchkey
-    public static void setKeyRing (IbmKeyProtectApi exampleService,
-                                      String exampleInstance, String keyId, String keyRingId, String newKeyRingId) {
+    public static Response<PatchKeyResponseBody> setKeyRing (IbmKeyProtectApi testService,
+                                      String testInstance, String keyId, String keyRingId, String newKeyRingId) {
         // Construct an instance of the PatchKeyOptions model
         PatchKeyOptions patchKeyOptionsModel = new PatchKeyOptions.Builder()
                 .id(keyId)
-                .bluemixInstance(exampleInstance)
+                .bluemixInstance(testInstance)
                 .keyPatchBody(buildSetKeyRingStream(newKeyRingId))
                 .xKmsKeyRing(keyRingId)
                 .build();
 
         // Invoke operation with valid options model
-        Response<PatchKeyResponseBody> response = exampleService.patchKey(patchKeyOptionsModel).execute();
+        return testService.patchKey(patchKeyOptionsModel).execute();
     }
 
     // https://cloud.ibm.com/apidocs/key-protect#purgekey
-    public static void purgeKey (IbmKeyProtectApi exampleService,
-                                   String exampleInstance, String keyId) {
+    public static void purgeKey (IbmKeyProtectApi testService,
+                                   String testInstance, String keyId) {
         // Construct an instance of the PurgeKeyOptions model
         PurgeKeyOptions purgeKeyOptionsModel = new PurgeKeyOptions.Builder()
                 .id(keyId)
-                .bluemixInstance(exampleInstance)
+                .bluemixInstance(testInstance)
                 .prefer("return=representation")
                 .build();
 
         // Invoke operation with valid options model
-        Response<PurgeKey> response = exampleService.purgeKey(purgeKeyOptionsModel).execute();
+        Response<PurgeKey> response = testService.purgeKey(purgeKeyOptionsModel).execute();
     }
 
     // payload should be base64 encoded string
