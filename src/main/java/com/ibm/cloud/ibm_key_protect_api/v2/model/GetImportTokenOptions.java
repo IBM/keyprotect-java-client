@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -21,6 +21,7 @@ public class GetImportTokenOptions extends GenericModel {
 
   protected String bluemixInstance;
   protected String correlationId;
+  protected String xKmsKeyRing;
 
   /**
    * Builder.
@@ -28,10 +29,12 @@ public class GetImportTokenOptions extends GenericModel {
   public static class Builder {
     private String bluemixInstance;
     private String correlationId;
+    private String xKmsKeyRing;
 
     private Builder(GetImportTokenOptions getImportTokenOptions) {
       this.bluemixInstance = getImportTokenOptions.bluemixInstance;
       this.correlationId = getImportTokenOptions.correlationId;
+      this.xKmsKeyRing = getImportTokenOptions.xKmsKeyRing;
     }
 
     /**
@@ -79,6 +82,17 @@ public class GetImportTokenOptions extends GenericModel {
       this.correlationId = correlationId;
       return this;
     }
+
+    /**
+     * Set the xKmsKeyRing.
+     *
+     * @param xKmsKeyRing the xKmsKeyRing
+     * @return the GetImportTokenOptions builder
+     */
+    public Builder xKmsKeyRing(String xKmsKeyRing) {
+      this.xKmsKeyRing = xKmsKeyRing;
+      return this;
+    }
   }
 
   protected GetImportTokenOptions(Builder builder) {
@@ -86,6 +100,7 @@ public class GetImportTokenOptions extends GenericModel {
       "bluemixInstance cannot be null");
     bluemixInstance = builder.bluemixInstance;
     correlationId = builder.correlationId;
+    xKmsKeyRing = builder.xKmsKeyRing;
   }
 
   /**
@@ -117,6 +132,19 @@ public class GetImportTokenOptions extends GenericModel {
    */
   public String correlationId() {
     return correlationId;
+  }
+
+  /**
+   * Gets the xKmsKeyRing.
+   *
+   * The ID of the key ring that the specified key belongs to. When the header is not specified,  Key Protect will
+   * perform a key ring lookup. For a more optimized request,  specify the key ring on every call. The key ring ID of
+   * keys that are created without an  `X-Kms-Key-Ring` header is: `default`.
+   *
+   * @return the xKmsKeyRing
+   */
+  public String xKmsKeyRing() {
+    return xKmsKeyRing;
   }
 }
 

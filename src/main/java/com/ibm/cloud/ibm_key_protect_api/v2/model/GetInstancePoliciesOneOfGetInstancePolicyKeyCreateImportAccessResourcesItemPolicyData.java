@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -26,7 +26,7 @@ public class GetInstancePoliciesOneOfGetInstancePolicyKeyCreateImportAccessResou
    * Gets the enabled.
    *
    * If set to `true`, Key Protect enables the specified policy for your service instance. If set to `false`, Key
-   * Protect disables the specified policy for your service instance, and the policy will no longer  affect Key Protect
+   * Protect disables the specified policy for your service instance, and the policy will no longer affect Key Protect
    * actions.
    *
    * **Note:** If a policy with attributes is disabled, all attributes are reset and are not retained.

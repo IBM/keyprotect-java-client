@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -22,7 +22,7 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class ListKeys extends GenericModel {
 
   protected CollectionMetadata metadata;
-  protected List<KeyRepresentation> resources;
+  protected List<KeyFullRepresentation> resources;
 
   /**
    * Gets the metadata.
@@ -42,7 +42,7 @@ public class ListKeys extends GenericModel {
    *
    * @return the resources
    */
-  public List<KeyRepresentation> getResources() {
+  public List<KeyFullRepresentation> getResources() {
     return resources;
   }
 }

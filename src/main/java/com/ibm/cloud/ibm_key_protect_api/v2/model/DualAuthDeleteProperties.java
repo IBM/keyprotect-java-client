@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -86,8 +86,9 @@ public class DualAuthDeleteProperties extends GenericModel {
    * Gets the enabled.
    *
    * If set to `true`, Key Protect enables a dual authorization deletion policy for your service instance.
-   *    By default, Key Protect requires only one authorization to delete a key. After you  enable a dual authorization
-   * policy, any new key that you create or add to the  instance will require an authorization from two users to delete
+   *
+   * By default, Key Protect requires only one authorization to delete a key. After you enable a dual authorization
+   * policy, any new key that you create or add to the instance will require an authorization from two users to delete
    * keys.
    *
    * **Note:** This change does not affect existing keys in your instance.

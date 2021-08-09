@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -218,19 +218,22 @@ public class SetMultipleInstancePoliciesResourcesItemPolicyDataAttributes extend
   /**
    * Gets the allowedIp.
    *
-   * A string array of ipv4 or ipv6 CIDR notated subnets that are authorized to interact with the instance. If both
-   * `allowedNetwork` and `allowedIP`  policies are set, only traffic aligning with both the `allowed_network` allowed
-   * network policy attribute and the `allowed_ip`  allowed ip policy attribute will be allowed. Ipv4 and ipv6 addresses
-   * are accepted for public endpoints. Only the ipv4 private network gateway addresses from the array will be
-   * authorized to access your instance via private endpoint.
-   * **Important:** Once set, accessing your instance may require additional steps. Please visit  [Accessing an instance
-   * via public endpoint]
-   * (https://test.cloud.ibm.com/docs/key-protect?topic=key-protect-manage-allowed-ip#access-allowed-ip-public-endpoint)
-   *  and [Accessing an instance via private endpoint]
-   * (https://test.cloud.ibm.com/docs/key-protect?topic=key-protect-manage-allowed-ip#access-allowed-ip-private-endpoint)
-   *  for more details.
+   * A string array of IPv4 or IPv6 CIDR notated subnets that are authorized to interact with the instance. If both
+   * `allowedNetwork` and `allowedIP` policies are set, only traffic aligning with both the `allowed_network` allowed
+   * network policy attribute and the
+   * `allowed_ip` allowed IP policy attribute will be allowed.
    *
-   * **Note:** An allowed ip policy does not affect requests from other IBM Cloud services.
+   * IPv4 and iIP6 addresses are accepted for public endpoints. Only the IPv4 private network gateway addresses from the
+   * array will be authorized to access your instance via private endpoint.
+   *
+   * **Important:** Once set, accessing your instance may require additional steps. Please visit
+   * [Accessing an instance via public
+   * endpoint](/docs/key-protect?topic=key-protect-manage-allowed-ip#access-allowed-ip-public-endpoint) and
+   * [Accessing an instance via private
+   * endpoint](/docs/key-protect?topic=key-protect-manage-allowed-ip#access-allowed-ip-private-endpoint) for more
+   * details.
+   *
+   * **Note:** An allowed IP policy does not affect requests from other IBM Cloud services.
    *
    * @return the allowedIp
    */
@@ -241,8 +244,8 @@ public class SetMultipleInstancePoliciesResourcesItemPolicyDataAttributes extend
   /**
    * Gets the createRootKey.
    *
-   * If set to `false`, the service prevents you or any authorized users from using Key Protect to  create root keys in
-   * the specified service instance. If set to `true`, Key Protect allows you or  any authorized users to create root
+   * If set to `false`, the service prevents you or any authorized users from using Key Protect to create root keys in
+   * the specified service instance. If set to `true`, Key Protect allows you or any authorized users to create root
    * keys in the instance.
    *
    * **Note:** If omitted, `POST /instance/policies` will set this attribute to the default value (`true`).
@@ -256,9 +259,10 @@ public class SetMultipleInstancePoliciesResourcesItemPolicyDataAttributes extend
   /**
    * Gets the createStandardKey.
    *
-   * If set to `false`, the service prevents you or any authorized users from using Key Protect to  create standard keys
-   * in the specified service instance. If set to `true`, Key Protect allows you  or any authorized users to create
+   * If set to `false`, the service prevents you or any authorized users from using Key Protect to create standard keys
+   * in the specified service instance. If set to `true`, Key Protect allows you or any authorized users to create
    * standard keys in the instance.
+   *
    * **Note:** If omitted, `POST /instance/policies` will set this attribute to the default value (`true`).
    *
    * @return the createStandardKey
@@ -270,9 +274,10 @@ public class SetMultipleInstancePoliciesResourcesItemPolicyDataAttributes extend
   /**
    * Gets the importRootKey.
    *
-   * If set to `false`, the service prevents you or any authorized users from importing root keys  into the specified
-   * service instance. If set to `true`, Key Protect allows you or any authorized  users to import root keys into the
+   * If set to `false`, the service prevents you or any authorized users from importing root keys into the specified
+   * service instance. If set to `true`, Key Protect allows you or any authorized users to import root keys into the
    * instance.
+   *
    * **Note:** If omitted, `POST /instance/policies` will set this attribute to the default value (`true`).
    *
    * @return the importRootKey
@@ -284,9 +289,10 @@ public class SetMultipleInstancePoliciesResourcesItemPolicyDataAttributes extend
   /**
    * Gets the importStandardKey.
    *
-   * If set to `false`, the service prevents you or any authorized users from importing standard keys  into the
-   * specified service instance. If set to `true`, Key Protect allows you or any authorized  users to import standard
-   * keys into the instance.
+   * If set to `false`, the service prevents you or any authorized users from importing standard keys into the specified
+   * service instance. If set to `true`, Key Protect allows you or any authorized users to import standard keys into the
+   * instance.
+   *
    * **Note:** If omitted, `POST /instance/policies` will set this attribute to the default value (`true`).
    *
    * @return the importStandardKey
@@ -298,9 +304,10 @@ public class SetMultipleInstancePoliciesResourcesItemPolicyDataAttributes extend
   /**
    * Gets the enforceToken.
    *
-   * If set to `true`, the service prevents you or any authorized users from importing key material  into the specified
-   * service instance without using an import token. If set to `false`, Key Protect  allows you or any authorized users
+   * If set to `true`, the service prevents you or any authorized users from importing key material into the specified
+   * service instance without using an import token. If set to `false`, Key Protect allows you or any authorized users
    * to import key material into the instance without the use of an import token.
+   *
    * **Note:** If omitted, `POST /instance/policies` will set this attribute to the default value (`false`).
    *
    * @return the enforceToken

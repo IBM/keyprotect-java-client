@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -37,7 +37,6 @@ public class GetKeyPoliciesOneOfResourcesItem extends GenericModel {
   protected String updatedBy;
   protected String type;
   protected GetKeyPoliciesOneOfResourcesItemDualAuthDelete dualAuthDelete;
-  protected GetKeyPoliciesOneOfResourcesItemRotation rotation;
 
   /**
    * Gets the id.
@@ -53,7 +52,7 @@ public class GetKeyPoliciesOneOfResourcesItem extends GenericModel {
   /**
    * Gets the crn.
    *
-   * The Cloud Resource Name (CRN) that uniquely identifies your cloud resources.
+   * The Cloud Resource Name (CRN) that uniquely identifies your cloud. resources.
    *
    * @return the crn
    */
@@ -125,17 +124,6 @@ public class GetKeyPoliciesOneOfResourcesItem extends GenericModel {
    */
   public GetKeyPoliciesOneOfResourcesItemDualAuthDelete getDualAuthDelete() {
     return dualAuthDelete;
-  }
-
-  /**
-   * Gets the rotation.
-   *
-   * Data associated with the rotation policy.
-   *
-   * @return the rotation
-   */
-  public GetKeyPoliciesOneOfResourcesItemRotation getRotation() {
-    return rotation;
   }
 }
 

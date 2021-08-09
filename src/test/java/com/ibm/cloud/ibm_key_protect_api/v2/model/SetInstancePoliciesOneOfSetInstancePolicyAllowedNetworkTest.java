@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -19,15 +19,12 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.InstancePolicyAllowedNetworkPo
 import com.ibm.cloud.ibm_key_protect_api.v2.model.SetInstancePoliciesOneOfSetInstancePolicyAllowedNetwork;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.SetInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItem;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
-
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
@@ -40,6 +37,13 @@ public class SetInstancePoliciesOneOfSetInstancePolicyAllowedNetworkTest {
 
   @Test
   public void testSetInstancePoliciesOneOfSetInstancePolicyAllowedNetwork() throws Throwable {
+    CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
+      .collectionType("application/vnd.ibm.kms.crn+json")
+      .collectionTotal(Long.valueOf("1"))
+      .build();
+    assertEquals(collectionMetadataModel.collectionType(), "application/vnd.ibm.kms.crn+json");
+    assertEquals(collectionMetadataModel.collectionTotal(), Long.valueOf("1"));
+
     InstancePolicyAllowedNetworkPolicyDataAttributes instancePolicyAllowedNetworkPolicyDataAttributesModel = new InstancePolicyAllowedNetworkPolicyDataAttributes.Builder()
       .allowedNetwork("public-and-private")
       .build();
@@ -52,13 +56,6 @@ public class SetInstancePoliciesOneOfSetInstancePolicyAllowedNetworkTest {
     assertEquals(instancePolicyAllowedNetworkPolicyDataModel.enabled(), Boolean.valueOf(true));
     assertEquals(instancePolicyAllowedNetworkPolicyDataModel.attributes(), instancePolicyAllowedNetworkPolicyDataAttributesModel);
 
-    CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
-      .collectionType("application/vnd.ibm.kms.crn+json")
-      .collectionTotal(Long.valueOf("1"))
-      .build();
-    assertEquals(collectionMetadataModel.collectionType(), "application/vnd.ibm.kms.crn+json");
-    assertEquals(collectionMetadataModel.collectionTotal(), Long.valueOf("1"));
-
     SetInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItem setInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItemModel = new SetInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItem.Builder()
       .policyType("allowedNetwork")
       .policyData(instancePolicyAllowedNetworkPolicyDataModel)
@@ -68,10 +65,10 @@ public class SetInstancePoliciesOneOfSetInstancePolicyAllowedNetworkTest {
 
     SetInstancePoliciesOneOfSetInstancePolicyAllowedNetwork setInstancePoliciesOneOfSetInstancePolicyAllowedNetworkModel = new SetInstancePoliciesOneOfSetInstancePolicyAllowedNetwork.Builder()
       .metadata(collectionMetadataModel)
-      .resources(new ArrayList<SetInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItem>(Arrays.asList(setInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItemModel)))
+      .resources(new java.util.ArrayList<SetInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItem>(java.util.Arrays.asList(setInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItemModel)))
       .build();
     assertEquals(setInstancePoliciesOneOfSetInstancePolicyAllowedNetworkModel.metadata(), collectionMetadataModel);
-    assertEquals(setInstancePoliciesOneOfSetInstancePolicyAllowedNetworkModel.resources(), new ArrayList<SetInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItem>(Arrays.asList(setInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItemModel)));
+    assertEquals(setInstancePoliciesOneOfSetInstancePolicyAllowedNetworkModel.resources(), new java.util.ArrayList<SetInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItem>(java.util.Arrays.asList(setInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItemModel)));
 
     String json = TestUtilities.serialize(setInstancePoliciesOneOfSetInstancePolicyAllowedNetworkModel);
 

@@ -12,12 +12,12 @@
  */
 package com.ibm.cloud.ibm_key_protect_api.v2.model;
 
-import com.ibm.cloud.sdk.core.service.model.GenericModel;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+
+import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
  * The patchKey options.

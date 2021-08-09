@@ -48,7 +48,7 @@ public class KpUtilities {
 
         CreateKeyOptions createKeyOptionsModel = new CreateKeyOptions.Builder()
                 .bluemixInstance(testInstance)
-                .createKeyOneOf(inputstream)
+                .body(inputstream)
                 .prefer("return=representation")
                 .build();
 
@@ -70,7 +70,7 @@ public class KpUtilities {
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect#getkeys
-    public static List<KeyRepresentation> getKeys(IbmKeyProtectApi testService, String testInstance) {
+    public static List<KeyFullRepresentation> getKeys(IbmKeyProtectApi testService, String testInstance) {
         GetKeysOptions getKeysOptionsModel = new GetKeysOptions.Builder()
                 .bluemixInstance(testInstance)
                 .build();
@@ -90,85 +90,76 @@ public class KpUtilities {
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect#restorekey
-    public static Response<KeyActionOneOfResponse> restoreKey(IbmKeyProtectApi testService, String testInstance, String keyId,
-                                                              String payload) {
+    public static Response<InputStream> restoreKey(IbmKeyProtectApi testService, String testInstance, String keyId,
+                                                   String payload) {
         InputStream  inputstream = KpUtilities.buildRestoreKeyInputStream(payload);
-        ActionOnKeyOptions restoreKeyOptionsModel = new ActionOnKeyOptions.Builder()
+        RestoreKeyOptions restoreKeyOptionsModel = new RestoreKeyOptions.Builder()
                 .id(keyId)
                 .bluemixInstance(testInstance)
-                .action("restore")
-                .keyActionOneOf(inputstream)
+                .keyRestoreBody(inputstream)
+                .prefer("return=representation")
                 .build();
 
-        return testService.actionOnKey(restoreKeyOptionsModel).execute();
+        return testService.restoreKey(restoreKeyOptionsModel).execute();
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect#rotatekey
-    public static Response<KeyActionOneOfResponse> rotateKey(IbmKeyProtectApi testService, String testInstance, String keyId, String payload) {
+    public static Response<Void> rotateKey(IbmKeyProtectApi testService, String testInstance, String keyId, String payload) {
         InputStream inputstream = KpUtilities.buildRotateKeyInputStream(payload);
-        ActionOnKeyOptions actionOnKeyOptionsModel = new ActionOnKeyOptions.Builder()
+        RotateKeyOptions rotateKeyOptionsModel = new RotateKeyOptions.Builder()
                 .id(keyId)
                 .bluemixInstance(testInstance)
-                .action("rotate")
-                .keyActionOneOf(inputstream)
+                .keyActionRotateBody(inputstream)
                 .prefer("return=representation")
                 .build();
 
-        return testService.actionOnKey(actionOnKeyOptionsModel).execute();
+        return testService.rotateKey(rotateKeyOptionsModel).execute();
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect#wrapkey
-    public static KeyActionOneOfResponse wrapKey(IbmKeyProtectApi testService, String testInstance,
-                                                 String keyId, String payload) {
+    public static Response<WrapKeyResponseBody> wrapKey(IbmKeyProtectApi testService, String testInstance,
+                                                        String keyId, String payload) {
 
         InputStream wrapInputStream = KpUtilities.buildWrapKeyInputStream(payload);
 
-        ActionOnKeyOptions wrapKeyOptionsModel = new ActionOnKeyOptions.Builder()
+        WrapKeyOptions wrapKeyOptionsModel = new WrapKeyOptions.Builder()
                 .id(keyId)
                 .bluemixInstance(testInstance)
-                .action("wrap")
-                .keyActionOneOf(wrapInputStream)
-                .prefer("return=representation")
+                .keyActionWrapBody(wrapInputStream)
                 .build();
 
-        return testService.actionOnKey(wrapKeyOptionsModel).execute().getResult();
+        return testService.wrapKey(wrapKeyOptionsModel).execute();
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect#unwrapkey
-    public static KeyActionOneOfResponse unWrapKey(IbmKeyProtectApi testService, String testInstance,
-                                                   String keyId, String ciphertext) {
+    public static Response<UnwrapKeyResponseBody> unWrapKey(IbmKeyProtectApi testService, String testInstance,
+                                                            String keyId, String ciphertext) {
 
         InputStream unWrapInputStream = KpUtilities.buildUnWrapKeyInputStream(ciphertext);
-        ActionOnKeyOptions unWrapKeyOptionsModel = new ActionOnKeyOptions.Builder()
+        UnwrapKeyOptions unwrapKeyOptionsModel = new UnwrapKeyOptions.Builder()
                 .id(keyId)
                 .bluemixInstance(testInstance)
-                .action("unwrap")
-                .keyActionOneOf(unWrapInputStream)
-                .prefer("return=representation")
+                .keyActionUnwrapBody(unWrapInputStream)
                 .build();
-        return testService.actionOnKey(unWrapKeyOptionsModel).execute().getResult();
+        return testService.unwrapKey(unwrapKeyOptionsModel).execute();
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect#disablekey
-    public static Response<KeyActionOneOfResponse> disableKey(IbmKeyProtectApi testService, String testInstance, String keyId) {
-        ActionOnKeyOptions disableKeyOptionsModel = new ActionOnKeyOptions.Builder()
+    public static Response<Void> disableKey(IbmKeyProtectApi testService, String testInstance, String keyId) {
+        DisableKeyOptions disableKeyOptionsModel = new DisableKeyOptions.Builder()
                 .id(keyId)
                 .bluemixInstance(testInstance)
-                .action("disable")
-                .prefer("return=representation")
                 .build();
-        return testService.actionOnKey(disableKeyOptionsModel).execute();
+        return testService.disableKey(disableKeyOptionsModel).execute();
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect#enablekey
-    public static Response<KeyActionOneOfResponse> enableKey(IbmKeyProtectApi testService, String testInstance, String keyId) {
-        ActionOnKeyOptions enableKeyOptionsModel = new ActionOnKeyOptions.Builder()
+    public static Response<Void> enableKey(IbmKeyProtectApi testService, String testInstance, String keyId) {
+        EnableKeyOptions enableKeyOptionsModel = new EnableKeyOptions.Builder()
                 .id(keyId)
                 .bluemixInstance(testInstance)
-                .action("enable")
-                .prefer("return=representation")
                 .build();
-        return testService.actionOnKey(enableKeyOptionsModel).execute();
+        return testService.enableKey(enableKeyOptionsModel).execute();
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect#getkeyversions
@@ -539,8 +530,8 @@ public class KpUtilities {
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect
-    public static Response<KeyRing> createKeyRing (IbmKeyProtectApi testService,
-                                                   String testInstance, String keyRingId) {
+    public static Response<Void> createKeyRing (IbmKeyProtectApi testService,
+                                                String testInstance, String keyRingId) {
 
         // Construct an instance of the CreateKeyRingOptions model
         CreateKeyRingOptions createKeyRingOptionsModel = new CreateKeyRingOptions.Builder()
@@ -566,8 +557,8 @@ public class KpUtilities {
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect
-    public static Response<KeyRing> deleteKeyRing (IbmKeyProtectApi testService,
-                                      String testInstance, String keyRingId) {
+    public static Response<Void> deleteKeyRing (IbmKeyProtectApi testService,
+                                                String testInstance, String keyRingId) {
 
         // Construct an instance of the DeleteKeyRingOptions model
         DeleteKeyRingOptions deleteKeyRingOptionsModel = new DeleteKeyRingOptions.Builder()

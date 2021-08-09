@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -15,13 +15,10 @@ package com.ibm.cloud.ibm_key_protect_api.v2.model;
 
 import com.ibm.cloud.ibm_key_protect_api.v2.model.ImportToken;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
-
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
-
 import java.util.HashMap;
 import java.util.List;
-
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
@@ -35,17 +32,17 @@ public class ImportTokenTest {
   @Test
   public void testImportToken() throws Throwable {
     ImportToken importTokenModel = new ImportToken.Builder()
-      .expiration(Double.valueOf("72.5"))
-      .maxAllowedRetrievals(Double.valueOf("72.5"))
+      .expiration(Double.valueOf("300"))
+      .maxAllowedRetrievals(Double.valueOf("1"))
       .build();
-    assertEquals(importTokenModel.expiration(), Double.valueOf("72.5"));
-    assertEquals(importTokenModel.maxAllowedRetrievals(), Double.valueOf("72.5"));
+    assertEquals(importTokenModel.expiration(), Double.valueOf("300"));
+    assertEquals(importTokenModel.maxAllowedRetrievals(), Double.valueOf("1"));
 
     String json = TestUtilities.serialize(importTokenModel);
 
     ImportToken importTokenModelNew = TestUtilities.deserialize(json, ImportToken.class);
     assertTrue(importTokenModelNew instanceof ImportToken);
-    assertEquals(importTokenModelNew.expiration(), Double.valueOf("72.5"));
-    assertEquals(importTokenModelNew.maxAllowedRetrievals(), Double.valueOf("72.5"));
+    assertEquals(importTokenModelNew.expiration(), Double.valueOf("300"));
+    assertEquals(importTokenModelNew.maxAllowedRetrievals(), Double.valueOf("1"));
   }
 }

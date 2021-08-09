@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -15,13 +15,10 @@ package com.ibm.cloud.ibm_key_protect_api.v2.model;
 
 import com.ibm.cloud.ibm_key_protect_api.v2.model.RestoreKeyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
-
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
-
 import java.util.HashMap;
 import java.util.List;
-
 import org.apache.commons.io.IOUtils;
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;
@@ -36,16 +33,18 @@ public class RestoreKeyOptionsTest {
   @Test
   public void testRestoreKeyOptions() throws Throwable {
     RestoreKeyOptions restoreKeyOptionsModel = new RestoreKeyOptions.Builder()
-            .id("testString")
-            .bluemixInstance("testString")
-            .keyRestoreBody(TestUtilities.createMockStream("This is a mock file."))
-            .correlationId("testString")
-            .prefer("return=representation")
-            .build();
+      .id("testString")
+      .bluemixInstance("testString")
+      .keyRestoreBody(TestUtilities.createMockStream("This is a mock file."))
+      .correlationId("testString")
+      .xKmsKeyRing("testString")
+      .prefer("return=representation")
+      .build();
     assertEquals(restoreKeyOptionsModel.id(), "testString");
     assertEquals(restoreKeyOptionsModel.bluemixInstance(), "testString");
     assertEquals(IOUtils.toString(restoreKeyOptionsModel.keyRestoreBody()), IOUtils.toString(TestUtilities.createMockStream("This is a mock file.")));
     assertEquals(restoreKeyOptionsModel.correlationId(), "testString");
+    assertEquals(restoreKeyOptionsModel.xKmsKeyRing(), "testString");
     assertEquals(restoreKeyOptionsModel.prefer(), "return=representation");
   }
 

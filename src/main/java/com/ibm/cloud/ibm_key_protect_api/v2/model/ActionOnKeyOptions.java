@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -28,31 +28,31 @@ public class ActionOnKeyOptions extends GenericModel {
    * The action to perform on the specified key.
    */
   public interface Action {
-    /** wrap. */
-    String WRAP = "wrap";
-    /** unwrap. */
-    String UNWRAP = "unwrap";
-    /** rotate. */
-    String ROTATE = "rotate";
-    /** rewrap. */
-    String REWRAP = "rewrap";
-    /** setKeyForDeletion. */
-    String SETKEYFORDELETION = "setKeyForDeletion";
-    /** unsetKeyForDeletion. */
-    String UNSETKEYFORDELETION = "unsetKeyForDeletion";
     /** disable. */
     String DISABLE = "disable";
     /** enable. */
     String ENABLE = "enable";
     /** restore. */
     String RESTORE = "restore";
+    /** rewrap. */
+    String REWRAP = "rewrap";
+    /** rotate. */
+    String ROTATE = "rotate";
+    /** setKeyForDeletion. */
+    String SETKEYFORDELETION = "setKeyForDeletion";
+    /** unsetKeyForDeletion. */
+    String UNSETKEYFORDELETION = "unsetKeyForDeletion";
+    /** unwrap. */
+    String UNWRAP = "unwrap";
+    /** wrap. */
+    String WRAP = "wrap";
   }
 
   /**
-   * Alters server behavior for POST or DELETE operations. A header with `return=minimal` causes the service to  return
-   * only the key identifier, or metadata. A header containing `return=representation` returns both the key  material
-   * and metadata in the response entity-body. If the key has been designated as a root key, the  system cannot return
-   * the key material.
+   * Alters server behavior for POST or DELETE operations. A header with
+   * `return=minimal` causes the service to return only the key identifier, or metadata. A header containing
+   * `return=representation` returns both the key material and metadata in the response entity-body. If the key has been
+   * designated as a root key, the system cannot return the key material.
    *
    * **Note:** During POST operations, Key Protect may not immediately return the key material due to key generation
    * time. To retrieve the key material, you can perform a subsequent `GET /keys/{id}` request.
@@ -67,8 +67,9 @@ public class ActionOnKeyOptions extends GenericModel {
   protected String id;
   protected String bluemixInstance;
   protected String action;
-  protected InputStream keyActionOneOf;
+  protected InputStream body;
   protected String correlationId;
+  protected String xKmsKeyRing;
   protected String prefer;
 
   /**
@@ -78,16 +79,18 @@ public class ActionOnKeyOptions extends GenericModel {
     private String id;
     private String bluemixInstance;
     private String action;
-    private InputStream keyActionOneOf;
+    private InputStream body;
     private String correlationId;
+    private String xKmsKeyRing;
     private String prefer;
 
     private Builder(ActionOnKeyOptions actionOnKeyOptions) {
       this.id = actionOnKeyOptions.id;
       this.bluemixInstance = actionOnKeyOptions.bluemixInstance;
       this.action = actionOnKeyOptions.action;
-      this.keyActionOneOf = actionOnKeyOptions.keyActionOneOf;
+      this.body = actionOnKeyOptions.body;
       this.correlationId = actionOnKeyOptions.correlationId;
+      this.xKmsKeyRing = actionOnKeyOptions.xKmsKeyRing;
       this.prefer = actionOnKeyOptions.prefer;
     }
 
@@ -103,13 +106,13 @@ public class ActionOnKeyOptions extends GenericModel {
      * @param id the id
      * @param bluemixInstance the bluemixInstance
      * @param action the action
-     * @param keyActionOneOf the keyActionOneOf
+     * @param body the body
      */
-    public Builder(String id, String bluemixInstance, String action, InputStream keyActionOneOf) {
+    public Builder(String id, String bluemixInstance, String action, InputStream body) {
       this.id = id;
       this.bluemixInstance = bluemixInstance;
       this.action = action;
-      this.keyActionOneOf = keyActionOneOf;
+      this.body = body;
     }
 
     /**
@@ -155,13 +158,13 @@ public class ActionOnKeyOptions extends GenericModel {
     }
 
     /**
-     * Set the keyActionOneOf.
+     * Set the body.
      *
-     * @param keyActionOneOf the keyActionOneOf
+     * @param body the body
      * @return the ActionOnKeyOptions builder
      */
-    public Builder keyActionOneOf(InputStream keyActionOneOf) {
-      this.keyActionOneOf = keyActionOneOf;
+    public Builder body(InputStream body) {
+      this.body = body;
       return this;
     }
 
@@ -177,6 +180,17 @@ public class ActionOnKeyOptions extends GenericModel {
     }
 
     /**
+     * Set the xKmsKeyRing.
+     *
+     * @param xKmsKeyRing the xKmsKeyRing
+     * @return the ActionOnKeyOptions builder
+     */
+    public Builder xKmsKeyRing(String xKmsKeyRing) {
+      this.xKmsKeyRing = xKmsKeyRing;
+      return this;
+    }
+
+    /**
      * Set the prefer.
      *
      * @param prefer the prefer
@@ -188,15 +202,15 @@ public class ActionOnKeyOptions extends GenericModel {
     }
 
     /**
-     * Set the keyActionOneOf.
+     * Set the body.
      *
-     * @param keyActionOneOf the keyActionOneOf
+     * @param body the body
      * @return the ActionOnKeyOptions builder
      *
      * @throws FileNotFoundException if the file could not be found
      */
-    public Builder keyActionOneOf(File keyActionOneOf) throws FileNotFoundException {
-      this.keyActionOneOf = new FileInputStream(keyActionOneOf);
+    public Builder body(File body) throws FileNotFoundException {
+      this.body = new FileInputStream(body);
       return this;
     }
   }
@@ -208,11 +222,14 @@ public class ActionOnKeyOptions extends GenericModel {
       "bluemixInstance cannot be null");
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.action,
       "action cannot be null");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.body,
+      "body cannot be null");
     id = builder.id;
     bluemixInstance = builder.bluemixInstance;
     action = builder.action;
-    keyActionOneOf = builder.keyActionOneOf;
+    body = builder.body;
     correlationId = builder.correlationId;
+    xKmsKeyRing = builder.xKmsKeyRing;
     prefer = builder.prefer;
   }
 
@@ -259,14 +276,14 @@ public class ActionOnKeyOptions extends GenericModel {
   }
 
   /**
-   * Gets the keyActionOneOf.
+   * Gets the body.
    *
    * The base request for key actions.
    *
-   * @return the keyActionOneOf
+   * @return the body
    */
-  public InputStream keyActionOneOf() {
-    return keyActionOneOf;
+  public InputStream body() {
+    return body;
   }
 
   /**
@@ -281,12 +298,25 @@ public class ActionOnKeyOptions extends GenericModel {
   }
 
   /**
+   * Gets the xKmsKeyRing.
+   *
+   * The ID of the key ring that the specified key is a part of. When the  header is not specified, Key Protect will
+   * perform a key ring lookup. For  a more optimized request, specify the key ring on every call. The key ring ID of
+   * keys that are created without an `X-Kms-Key-Ring` header is: `default`.
+   *
+   * @return the xKmsKeyRing
+   */
+  public String xKmsKeyRing() {
+    return xKmsKeyRing;
+  }
+
+  /**
    * Gets the prefer.
    *
-   * Alters server behavior for POST or DELETE operations. A header with `return=minimal` causes the service to  return
-   * only the key identifier, or metadata. A header containing `return=representation` returns both the key  material
-   * and metadata in the response entity-body. If the key has been designated as a root key, the  system cannot return
-   * the key material.
+   * Alters server behavior for POST or DELETE operations. A header with
+   * `return=minimal` causes the service to return only the key identifier, or metadata. A header containing
+   * `return=representation` returns both the key material and metadata in the response entity-body. If the key has been
+   * designated as a root key, the system cannot return the key material.
    *
    * **Note:** During POST operations, Key Protect may not immediately return the key material due to key generation
    * time. To retrieve the key material, you can perform a subsequent `GET /keys/{id}` request.

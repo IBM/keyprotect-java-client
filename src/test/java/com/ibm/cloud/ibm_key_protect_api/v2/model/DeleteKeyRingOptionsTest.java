@@ -15,13 +15,10 @@ package com.ibm.cloud.ibm_key_protect_api.v2.model;
 
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKeyRingOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
-
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
-
 import java.util.HashMap;
 import java.util.List;
-
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
@@ -35,10 +32,10 @@ public class DeleteKeyRingOptionsTest {
   @Test
   public void testDeleteKeyRingOptions() throws Throwable {
     DeleteKeyRingOptions deleteKeyRingOptionsModel = new DeleteKeyRingOptions.Builder()
-            .keyRingId("testString")
-            .bluemixInstance("testString")
-            .correlationId("testString")
-            .build();
+      .keyRingId("testString")
+      .bluemixInstance("testString")
+      .correlationId("testString")
+      .build();
     assertEquals(deleteKeyRingOptionsModel.keyRingId(), "testString");
     assertEquals(deleteKeyRingOptionsModel.bluemixInstance(), "testString");
     assertEquals(deleteKeyRingOptionsModel.correlationId(), "testString");

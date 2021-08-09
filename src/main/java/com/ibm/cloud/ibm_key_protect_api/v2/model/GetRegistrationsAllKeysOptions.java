@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -21,6 +21,7 @@ public class GetRegistrationsAllKeysOptions extends GenericModel {
 
   protected String bluemixInstance;
   protected String correlationId;
+  protected String xKmsKeyRing;
   protected String urlEncodedResourceCrnQuery;
   protected Long limit;
   protected Long offset;
@@ -33,6 +34,7 @@ public class GetRegistrationsAllKeysOptions extends GenericModel {
   public static class Builder {
     private String bluemixInstance;
     private String correlationId;
+    private String xKmsKeyRing;
     private String urlEncodedResourceCrnQuery;
     private Long limit;
     private Long offset;
@@ -42,6 +44,7 @@ public class GetRegistrationsAllKeysOptions extends GenericModel {
     private Builder(GetRegistrationsAllKeysOptions getRegistrationsAllKeysOptions) {
       this.bluemixInstance = getRegistrationsAllKeysOptions.bluemixInstance;
       this.correlationId = getRegistrationsAllKeysOptions.correlationId;
+      this.xKmsKeyRing = getRegistrationsAllKeysOptions.xKmsKeyRing;
       this.urlEncodedResourceCrnQuery = getRegistrationsAllKeysOptions.urlEncodedResourceCrnQuery;
       this.limit = getRegistrationsAllKeysOptions.limit;
       this.offset = getRegistrationsAllKeysOptions.offset;
@@ -92,6 +95,17 @@ public class GetRegistrationsAllKeysOptions extends GenericModel {
      */
     public Builder correlationId(String correlationId) {
       this.correlationId = correlationId;
+      return this;
+    }
+
+    /**
+     * Set the xKmsKeyRing.
+     *
+     * @param xKmsKeyRing the xKmsKeyRing
+     * @return the GetRegistrationsAllKeysOptions builder
+     */
+    public Builder xKmsKeyRing(String xKmsKeyRing) {
+      this.xKmsKeyRing = xKmsKeyRing;
       return this;
     }
 
@@ -156,6 +170,7 @@ public class GetRegistrationsAllKeysOptions extends GenericModel {
       "bluemixInstance cannot be null");
     bluemixInstance = builder.bluemixInstance;
     correlationId = builder.correlationId;
+    xKmsKeyRing = builder.xKmsKeyRing;
     urlEncodedResourceCrnQuery = builder.urlEncodedResourceCrnQuery;
     limit = builder.limit;
     offset = builder.offset;
@@ -195,13 +210,28 @@ public class GetRegistrationsAllKeysOptions extends GenericModel {
   }
 
   /**
+   * Gets the xKmsKeyRing.
+   *
+   * The ID of the target key ring. If unspecified, all resources in the instance that the caller has access to will be
+   * returned. When the header  is specified, only resources within the specified key ring, that the caller has access
+   * to,  will be returned. The key ring ID of keys that are created without an `X-Kms-Key-Ring` header is: `default`.
+   *
+   * @return the xKmsKeyRing
+   */
+  public String xKmsKeyRing() {
+    return xKmsKeyRing;
+  }
+
+  /**
    * Gets the urlEncodedResourceCrnQuery.
    *
-   * Filters for resources that are associated with a specified  [Cloud Resource Name
-   * (CRN)](docs/overview?topic=overview-crn) by using URL encoded  wildcard characters (`*`). The parameter should
-   * contain all CRN segments and must be URL encoded.  If provided, the parameter should not contain (`*`) in the first
-   * eight segments. If this parameter is not provided, registrations for all keys in the requested Key Protect instance
-   * are returned.
+   * Filters for resources that are associated with a specified
+   * [Cloud Resource Name](/docs/account?topic=account-crn)
+   * (CRN) by using URL encoded wildcard characters (`*`). The parameter should contain all CRN segments and must be URL
+   * encoded.
+   *
+   * If provided, the parameter should not contain (`*`) in the first eight segments. If this parameter is not provided,
+   * registrations for all keys in the requested Key Protect instance are returned.
    *
    * @return the urlEncodedResourceCrnQuery
    */
@@ -213,11 +243,12 @@ public class GetRegistrationsAllKeysOptions extends GenericModel {
    * Gets the limit.
    *
    * The number of registrations to retrieve. By default returns the first 200 registrations. To retrieve a different
-   * set of registrations, use `limit` with `offset` to page through your available resources. The maximum value for
-   * `limit` is 5000.
+   * set of registrations, use
+   * `limit` with `offset` to page through your available resources. The maximum value for `limit` is 5,000.
    *
-   * **Usage:** If you have 20 registrations that are associated with a key, and you want to retrieve only the first  5
-   * registrations, use `../registrations?limit=5`.
+   * **Usage:** If you have 20 registrations that are associated with a key, and you want to retrieve only the first 5
+   * registrations, use
+   * `../registrations?limit=5`.
    *
    * @return the limit
    */
@@ -231,8 +262,9 @@ public class GetRegistrationsAllKeysOptions extends GenericModel {
    * The number of registrations to skip. By specifying `offset`, you retrieve a subset of registrations that starts
    * with the `offset` value. Use `offset` with `limit` to page through your available resources.
    *
-   * **Usage:** If you have 100 registrations that are associated with a key, and you want to retrieve registrations  26
-   * through 50, use `../registrations?offset=25&amp;limit=25`.
+   * **Usage:** If you have 100 registrations that are associated with a key, and you want to retrieve registrations 26
+   * through 50, use
+   * `../registrations?offset=25&amp;limit=25`.
    *
    * @return the offset
    */
@@ -261,7 +293,8 @@ public class GetRegistrationsAllKeysOptions extends GenericModel {
    * If set to `true`, returns `totalCount` in the response metadata for use with pagination. The `totalCount` value
    * returned specifies the total number of registrations that match the request, disregarding limit and offset.
    *
-   * **Usage:** To return the `totalCount` value for use with pagination, use `../registrations?totalCount=true`.
+   * **Usage:** To return the `totalCount` value for use with pagination, use
+   * `../registrations?totalCount=true`.
    *
    * @return the totalCount
    */

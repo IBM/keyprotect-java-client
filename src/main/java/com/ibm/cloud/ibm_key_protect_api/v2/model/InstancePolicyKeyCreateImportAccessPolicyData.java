@@ -104,6 +104,8 @@ public class InstancePolicyKeyCreateImportAccessPolicyData extends GenericModel 
    * Protect disables the specified policy for your service instance, and the policy will no longer  affect Key Protect
    * actions.
    *
+   * **Note:** If a policy with attributes is disabled, all attributes are reset and are not retained.
+   *
    * @return the enabled
    */
   public Boolean enabled() {

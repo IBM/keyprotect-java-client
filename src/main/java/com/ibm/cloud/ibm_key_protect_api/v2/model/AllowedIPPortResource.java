@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -16,7 +16,7 @@ import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * Metadata of the port associated with an instance with an allowed ip policy.
+ * Metadata of the port associated with an instance with an allowed IP policy.
  */
 public class AllowedIPPortResource extends GenericModel {
 
@@ -26,11 +26,13 @@ public class AllowedIPPortResource extends GenericModel {
   /**
    * Gets the privateEndpointPort.
    *
-   * The port required to access an instance with an allowed ip policy via the Key Protect  private service endpoint.
+   * The port required to access an instance with an allowed IP policy via the Key Protect private service endpoint.
    * Cannot be used with the Key Protect public service endpoint.
-   *    Please visit [Accessing an instance via private endpoint]
-   * (https://test.cloud.ibm.com/docs/key-protect?topic=key-protect-manage-allowed-ip#access-allowed-ip-private-endpoint)
-   * for instructions on how to use the `private_endpoint_port` value.
+   *
+   * Please visit
+   * [Accessing an instance via private
+   * endpoint](/docs/key-protect?topic=key-protect-manage-allowed-ip#access-allowed-ip-private-endpoint) for
+   * instructions on how to use the `private_endpoint_port` value.
    *
    * @return the privateEndpointPort
    */

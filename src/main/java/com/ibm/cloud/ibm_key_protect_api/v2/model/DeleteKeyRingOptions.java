@@ -99,9 +99,9 @@ public class DeleteKeyRingOptions extends GenericModel {
 
   protected DeleteKeyRingOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.keyRingId,
-            "keyRingId cannot be empty");
+      "keyRingId cannot be empty");
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.bluemixInstance,
-            "bluemixInstance cannot be null");
+      "bluemixInstance cannot be null");
     keyRingId = builder.keyRingId;
     bluemixInstance = builder.bluemixInstance;
     correlationId = builder.correlationId;

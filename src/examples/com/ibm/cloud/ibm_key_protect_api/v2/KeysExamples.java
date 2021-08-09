@@ -13,16 +13,14 @@
 
 package com.ibm.cloud.ibm_key_protect_api.v2;
 
-import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyProtectException;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyRepresentation;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyVersion;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyWithPayload;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.*;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.KpUtilities;
 import com.ibm.cloud.sdk.core.security.IamAuthenticator;
 import com.ibm.cloud.sdk.core.service.exception.ServiceResponseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.Map;
@@ -82,7 +80,7 @@ public class KeysExamples {
 
             // Get list of keys associated to the instance
             logger.info("List keys");
-            List<KeyRepresentation> keys = KpUtilities.getKeys(exampleService, exampleInstance);
+            List<KeyFullRepresentation> keys = KpUtilities.getKeys(exampleService, exampleInstance);
             for (int i = 0; i < keys.size(); i++) {
                 logger.info("key " + (i+1) + " ID is --> " + keys.get(i).getId());
             }
@@ -122,8 +120,8 @@ public class KeysExamples {
             try {
                 KpUtilities.purgeKey(exampleService, exampleInstance, keyId);
             }
-            catch (KeyProtectException kpe) {
-                if (kpe.getMessage().contains("REQ_TOO_EARLY_ERR")) {
+            catch (ServiceResponseException sre) {
+                if (((ArrayList)sre.getDebuggingInfo().get("resources")).get(0).toString().contains("REQ_TOO_EARLY_ERR")) {
                     logger.info("Result is expected, wait for 4 hours to successfully purge the key");
                 }
             }

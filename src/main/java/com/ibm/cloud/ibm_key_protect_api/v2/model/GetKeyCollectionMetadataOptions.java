@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -25,6 +25,8 @@ public class GetKeyCollectionMetadataOptions extends GenericModel {
   protected String bluemixInstance;
   protected String correlationId;
   protected List<Long> state;
+  protected Boolean extractable;
+  protected String xKmsKeyRing;
 
   /**
    * Builder.
@@ -33,11 +35,15 @@ public class GetKeyCollectionMetadataOptions extends GenericModel {
     private String bluemixInstance;
     private String correlationId;
     private List<Long> state;
+    private Boolean extractable;
+    private String xKmsKeyRing;
 
     private Builder(GetKeyCollectionMetadataOptions getKeyCollectionMetadataOptions) {
       this.bluemixInstance = getKeyCollectionMetadataOptions.bluemixInstance;
       this.correlationId = getKeyCollectionMetadataOptions.correlationId;
       this.state = getKeyCollectionMetadataOptions.state;
+      this.extractable = getKeyCollectionMetadataOptions.extractable;
+      this.xKmsKeyRing = getKeyCollectionMetadataOptions.xKmsKeyRing;
     }
 
     /**
@@ -113,6 +119,28 @@ public class GetKeyCollectionMetadataOptions extends GenericModel {
       this.state = state;
       return this;
     }
+
+    /**
+     * Set the extractable.
+     *
+     * @param extractable the extractable
+     * @return the GetKeyCollectionMetadataOptions builder
+     */
+    public Builder extractable(Boolean extractable) {
+      this.extractable = extractable;
+      return this;
+    }
+
+    /**
+     * Set the xKmsKeyRing.
+     *
+     * @param xKmsKeyRing the xKmsKeyRing
+     * @return the GetKeyCollectionMetadataOptions builder
+     */
+    public Builder xKmsKeyRing(String xKmsKeyRing) {
+      this.xKmsKeyRing = xKmsKeyRing;
+      return this;
+    }
   }
 
   protected GetKeyCollectionMetadataOptions(Builder builder) {
@@ -121,6 +149,8 @@ public class GetKeyCollectionMetadataOptions extends GenericModel {
     bluemixInstance = builder.bluemixInstance;
     correlationId = builder.correlationId;
     state = builder.state;
+    extractable = builder.extractable;
+    xKmsKeyRing = builder.xKmsKeyRing;
   }
 
   /**
@@ -161,12 +191,43 @@ public class GetKeyCollectionMetadataOptions extends GenericModel {
    * whitespace or trailing commas. Valid states are based on NIST SP 800-57. States are integers and correspond to the
    * Pre-activation = 0, Active = 1, Suspended = 2, Deactivated = 3, and Destroyed = 5 values.
    *
-   * **Usage:** If you want to retrieve active and deleted keys, use `../keys?state=1,5`.
+   * **Usage:** If you want to retrieve active and deleted keys, use
+   * `../keys?state=1,5`.
    *
    * @return the state
    */
   public List<Long> state() {
     return state;
+  }
+
+  /**
+   * Gets the extractable.
+   *
+   * The type of keys to be retrieved. Filters keys based on the
+   * `extractable` property. You can use this query parameter to search for keys whose material can leave the service.
+   * If set to `true`, standard keys will be retrieved. If set to `false`, root keys will be retrieved. If omitted, both
+   * root and standard keys will be retrieved.
+   *
+   * **Usage:** If you want to retrieve standard keys, use
+   * `../keys?extractable=true`.
+   *
+   * @return the extractable
+   */
+  public Boolean extractable() {
+    return extractable;
+  }
+
+  /**
+   * Gets the xKmsKeyRing.
+   *
+   * The ID of the target key ring. If unspecified, all resources in the instance that the caller has access to will be
+   * returned. When the header  is specified, only resources within the specified key ring, that the caller has access
+   * to,  will be returned. The key ring ID of keys that are created without an `X-Kms-Key-Ring` header is: `default`.
+   *
+   * @return the xKmsKeyRing
+   */
+  public String xKmsKeyRing() {
+    return xKmsKeyRing;
   }
 }
 

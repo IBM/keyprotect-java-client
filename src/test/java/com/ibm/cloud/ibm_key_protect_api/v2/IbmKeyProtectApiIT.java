@@ -19,6 +19,7 @@ import com.ibm.cloud.sdk.core.http.Response;
 import com.ibm.cloud.sdk.core.security.IamAuthenticator;
 import com.ibm.cloud.sdk.core.service.exception.ServiceResponseException;
 
+import java.io.InputStream;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -85,7 +86,7 @@ public class IbmKeyProtectApiIT {
             assertEquals(keyWithPayload.getState(), new Long(1));
 
             // test getting a list of keys associated to the instance
-            List<KeyRepresentation> keys = KpUtilities.getKeys(testService, testInstance);
+            List<KeyFullRepresentation> keys = KpUtilities.getKeys(testService, testInstance);
             assertTrue(keys.size() >= 1);
 
             // test deleting a key
@@ -97,12 +98,12 @@ public class IbmKeyProtectApiIT {
             TimeUnit.SECONDS.sleep(30);
 
             // test restoring a key
-            Response<KeyActionOneOfResponse> restoreResponse = KpUtilities.restoreKey(testService, testInstance, keyId, payload);
+            Response<InputStream> restoreResponse = KpUtilities.restoreKey(testService, testInstance, keyId, payload);
             assertEquals(restoreResponse.getStatusCode(), 201);
             assertEquals(KpUtilities.getKey(testService, testInstance, keyId).getState(), new Long(1));
 
             // test rotating a key
-            Response<KeyActionOneOfResponse> rotateResponse = KpUtilities.rotateKey(testService, testInstance, keyId, payload);
+            Response<Void> rotateResponse = KpUtilities.rotateKey(testService, testInstance, keyId, payload);
             assertEquals(rotateResponse.getStatusCode(), 204);
 
             //test key versions
@@ -115,8 +116,8 @@ public class IbmKeyProtectApiIT {
             // test purging key, this should fail since the key just got deleted
             try {
                 KpUtilities.purgeKey(testService, testInstance, keyId);
-            } catch (KeyProtectException kpe) {
-                assertTrue(kpe.getMessage().contains("REQ_TOO_EARLY_ERR"));
+            } catch (ServiceResponseException e) {
+                assertTrue(((ArrayList)e.getDebuggingInfo().get("resources")).get(0).toString().contains("REQ_TOO_EARLY_ERR"));
             }
 
         } catch (ServiceResponseException e) {
@@ -136,15 +137,15 @@ public class IbmKeyProtectApiIT {
                     payload, false);
 
             // test wrapping a key
-            KeyActionOneOfResponse wrapResponseObj = KpUtilities.wrapKey(testService, testInstance, keyId, payload);
-            assertNotNull(wrapResponseObj.getCiphertext());
+            Response<WrapKeyResponseBody> wrapResponseObj = KpUtilities.wrapKey(testService, testInstance, keyId, payload);
+            assertNotNull(wrapResponseObj.getResult().getCiphertext());
 
             // test unwrapping a key
-            KeyActionOneOfResponse unWrapResponseObj = KpUtilities.unWrapKey(testService, testInstance, keyId, wrapResponseObj.getCiphertext());
-            assertEquals(payload, unWrapResponseObj.getPlaintext());
+            Response<UnwrapKeyResponseBody> unWrapResponseObj = KpUtilities.unWrapKey(testService, testInstance, keyId, wrapResponseObj.getResult().getCiphertext());
+            assertEquals(payload, unWrapResponseObj.getResult().getPlaintext());
 
             // test disabling a key
-            Response<KeyActionOneOfResponse> disableResponse = KpUtilities.disableKey(testService, testInstance, keyId);
+            Response<Void> disableResponse = KpUtilities.disableKey(testService, testInstance, keyId);
             assertEquals(disableResponse.getStatusCode(), 204);
             assertEquals(KpUtilities.getKey(testService, testInstance, keyId).getState(), new Long(2));
 
@@ -152,7 +153,7 @@ public class IbmKeyProtectApiIT {
             TimeUnit.SECONDS.sleep(30);
 
             // test enabling a key
-            Response<KeyActionOneOfResponse> enableResponse = KpUtilities.enableKey(testService, testInstance, keyId);
+            Response<Void> enableResponse = KpUtilities.enableKey(testService, testInstance, keyId);
             assertEquals(enableResponse.getStatusCode(), 204);
             assertEquals(KpUtilities.getKey(testService, testInstance, keyId).getState(), new Long(1));
 
@@ -301,7 +302,7 @@ public class IbmKeyProtectApiIT {
         String sdkKeyRingId = "sdkTestKeyRingId";
         try {
             // test creating key ring
-            Response<KeyRing> createResponse = KpUtilities.createKeyRing(testService, testInstance, sdkKeyRingId);
+            Response<Void> createResponse = KpUtilities.createKeyRing(testService, testInstance, sdkKeyRingId);
             assertEquals(createResponse.getStatusCode(), 201);
 
             // test listing key rings
@@ -320,7 +321,7 @@ public class IbmKeyProtectApiIT {
             KpUtilities.setKeyRing(testService, testInstance, keyId, sdkKeyRingId, "default");
 
             // test deleting key ring
-            Response<KeyRing> deleteResponse = KpUtilities.deleteKeyRing(testService, testInstance, sdkKeyRingId);
+            Response<Void> deleteResponse = KpUtilities.deleteKeyRing(testService, testInstance, sdkKeyRingId);
             assertEquals(deleteResponse.getStatusCode(), 204);
 
         } catch (ServiceResponseException e) {
@@ -332,9 +333,9 @@ public class IbmKeyProtectApiIT {
     @AfterClass
     public void tearDown() {
         // Remove all test keys
-        List<KeyRepresentation> keys = KpUtilities.getKeys(testService, testInstance);
+        List<KeyFullRepresentation> keys = KpUtilities.getKeys(testService, testInstance);
         if (keys != null)
-            for (KeyRepresentation key: keys)
+            for (KeyFullRepresentation key: keys)
                 KpUtilities.deleteKey(testService, testInstance, key.getId());
 
         logger.info("Clean up complete.");

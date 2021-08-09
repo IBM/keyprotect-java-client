@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -58,8 +58,8 @@ public class RegistrationResource extends GenericModel {
   /**
    * Gets the resourceCrn.
    *
-   * The [Cloud Resource Name](https://cloud.ibm.com/docs/overview?topic=overview-crn) (CRN) that represents the  cloud
-   * resource, such as a Cloud Object Storage bucket, that is associated with the key.
+   * The [Cloud Resource Name](/docs/account?topic=account-crn) (CRN) that represents the cloud resource, such as a
+   * Cloud Object Storage bucket, that is associated with the key.
    *
    * @return the resourceCrn
    */
@@ -125,7 +125,7 @@ public class RegistrationResource extends GenericModel {
   /**
    * Gets the registrationMetadata.
    *
-   * Additional information about the registration. This field is not exposed to  customers and is visible only with IBM
+   * Additional information about the registration. This field is not exposed to customers and is visible only with IBM
    * Cloud service to service calls.
    *
    * @return the registrationMetadata

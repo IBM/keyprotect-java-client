@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -13,15 +13,14 @@
 
 package com.ibm.cloud.ibm_key_protect_api.v2.model;
 
+import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKeyAliasOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
-import org.testng.annotations.Test;
-
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
-
-import static org.testng.Assert.assertEquals;
+import org.testng.annotations.Test;
+import static org.testng.Assert.*;
 
 /**
  * Unit test class for the DeleteKeyAliasOptions model.
@@ -37,11 +36,13 @@ public class DeleteKeyAliasOptionsTest {
       .alias("testString")
       .bluemixInstance("testString")
       .correlationId("testString")
+      .xKmsKeyRing("testString")
       .build();
     assertEquals(deleteKeyAliasOptionsModel.id(), "testString");
     assertEquals(deleteKeyAliasOptionsModel.alias(), "testString");
     assertEquals(deleteKeyAliasOptionsModel.bluemixInstance(), "testString");
     assertEquals(deleteKeyAliasOptionsModel.correlationId(), "testString");
+    assertEquals(deleteKeyAliasOptionsModel.xKmsKeyRing(), "testString");
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

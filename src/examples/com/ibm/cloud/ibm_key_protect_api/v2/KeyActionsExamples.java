@@ -13,8 +13,9 @@
 
 package com.ibm.cloud.ibm_key_protect_api.v2;
 
-import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyActionOneOfResponse;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.WrapKeyResponseBody;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.KpUtilities;
+import com.ibm.cloud.sdk.core.http.Response;
 import com.ibm.cloud.sdk.core.security.IamAuthenticator;
 import com.ibm.cloud.sdk.core.service.exception.ServiceResponseException;
 import org.slf4j.Logger;
@@ -73,12 +74,12 @@ public class KeyActionsExamples {
 
             // Wrap a key
             logger.info("Wrap a key");
-            KeyActionOneOfResponse responseObj = KpUtilities.wrapKey(exampleService, exampleInstance, keyId, payload);
+            Response<WrapKeyResponseBody> responseObj = KpUtilities.wrapKey(exampleService, exampleInstance, keyId, payload);
             logger.info(String.format("Key with ID %s wrapped", keyId));
 
             // UnWrap a key
             logger.info("UnWrap a key");
-            KpUtilities.unWrapKey(exampleService, exampleInstance, keyId, responseObj.getCiphertext());
+            KpUtilities.unWrapKey(exampleService, exampleInstance, keyId, responseObj.getResult().getCiphertext());
             logger.info(String.format("Key with ID %s unwrapped", keyId));
 
             // Disable a key

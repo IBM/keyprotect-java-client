@@ -53,7 +53,7 @@ public class KeyAliasExample {
     public static void main(String[] args) {
         IamAuthenticator authenticator = IamAuthenticator.fromConfiguration(config);
 
-        String keyAlias = "sdk-key-alias";
+        String keyAlias = "sdk-key-alias-test";
         String keyName = "sdk-created-key";
         String keyDesc = "created via sdk";
 

@@ -21,42 +21,42 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class KeyRing extends GenericModel {
 
-    protected String id;
-    protected Date creationDate;
-    protected String createdBy;
+  protected String id;
+  protected Date creationDate;
+  protected String createdBy;
 
-    /**
-     * Gets the id.
-     *
-     * An ID that identifies the key ring. Each ID is unique only within the given instance and is not reserved across the
-     * Key Protect service.
-     *
-     * @return the id
-     */
-    public String getId() {
-        return id;
-    }
+  /**
+   * Gets the id.
+   *
+   * An ID that identifies the key ring. Each ID is unique only within the given instance and is not reserved across the
+   * Key Protect service.
+   *
+   * @return the id
+   */
+  public String getId() {
+    return id;
+  }
 
-    /**
-     * Gets the creationDate.
-     *
-     * The date the key ring was created. The date format follows RFC 3339.
-     *
-     * @return the creationDate
-     */
-    public Date getCreationDate() {
-        return creationDate;
-    }
+  /**
+   * Gets the creationDate.
+   *
+   * The date the key ring was created. The date format follows RFC 3339.
+   *
+   * @return the creationDate
+   */
+  public Date getCreationDate() {
+    return creationDate;
+  }
 
-    /**
-     * Gets the createdBy.
-     *
-     * The unique identifier for the user that created the key ring.
-     *
-     * @return the createdBy
-     */
-    public String getCreatedBy() {
-        return createdBy;
-    }
+  /**
+   * Gets the createdBy.
+   *
+   * The unique identifier for the user that created the key ring.
+   *
+   * @return the createdBy
+   */
+  public String getCreatedBy() {
+    return createdBy;
+  }
 }
 

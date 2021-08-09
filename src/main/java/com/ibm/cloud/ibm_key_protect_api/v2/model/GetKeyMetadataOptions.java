@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -22,6 +22,7 @@ public class GetKeyMetadataOptions extends GenericModel {
   protected String id;
   protected String bluemixInstance;
   protected String correlationId;
+  protected String xKmsKeyRing;
 
   /**
    * Builder.
@@ -30,11 +31,13 @@ public class GetKeyMetadataOptions extends GenericModel {
     private String id;
     private String bluemixInstance;
     private String correlationId;
+    private String xKmsKeyRing;
 
     private Builder(GetKeyMetadataOptions getKeyMetadataOptions) {
       this.id = getKeyMetadataOptions.id;
       this.bluemixInstance = getKeyMetadataOptions.bluemixInstance;
       this.correlationId = getKeyMetadataOptions.correlationId;
+      this.xKmsKeyRing = getKeyMetadataOptions.xKmsKeyRing;
     }
 
     /**
@@ -95,6 +98,17 @@ public class GetKeyMetadataOptions extends GenericModel {
       this.correlationId = correlationId;
       return this;
     }
+
+    /**
+     * Set the xKmsKeyRing.
+     *
+     * @param xKmsKeyRing the xKmsKeyRing
+     * @return the GetKeyMetadataOptions builder
+     */
+    public Builder xKmsKeyRing(String xKmsKeyRing) {
+      this.xKmsKeyRing = xKmsKeyRing;
+      return this;
+    }
   }
 
   protected GetKeyMetadataOptions(Builder builder) {
@@ -105,6 +119,7 @@ public class GetKeyMetadataOptions extends GenericModel {
     id = builder.id;
     bluemixInstance = builder.bluemixInstance;
     correlationId = builder.correlationId;
+    xKmsKeyRing = builder.xKmsKeyRing;
   }
 
   /**
@@ -119,7 +134,7 @@ public class GetKeyMetadataOptions extends GenericModel {
   /**
    * Gets the id.
    *
-   * The v4 UUID that uniquely identifies the key.
+   * The v4 UUID or alias that uniquely identifies the key.
    *
    * @return the id
    */
@@ -147,6 +162,19 @@ public class GetKeyMetadataOptions extends GenericModel {
    */
   public String correlationId() {
     return correlationId;
+  }
+
+  /**
+   * Gets the xKmsKeyRing.
+   *
+   * The ID of the key ring that the specified key is a part of. When the  header is not specified, Key Protect will
+   * perform a key ring lookup. For  a more optimized request, specify the key ring on every call. The key ring ID of
+   * keys that are created without an `X-Kms-Key-Ring` header is: `default`.
+   *
+   * @return the xKmsKeyRing
+   */
+  public String xKmsKeyRing() {
+    return xKmsKeyRing;
   }
 }
 

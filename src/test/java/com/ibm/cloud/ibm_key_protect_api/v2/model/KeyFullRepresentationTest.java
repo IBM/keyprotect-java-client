@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -18,13 +18,10 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyFullRepresentation;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyFullRepresentationAlgorithmMetadata;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyVersion;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
-
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
-
 import java.util.HashMap;
 import java.util.List;
-
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
@@ -40,6 +37,7 @@ public class KeyFullRepresentationTest {
     KeyFullRepresentation keyFullRepresentationModel = new KeyFullRepresentation();
     assertNull(keyFullRepresentationModel.getType());
     assertNull(keyFullRepresentationModel.getName());
+    assertNull(keyFullRepresentationModel.getAliases());
     assertNull(keyFullRepresentationModel.getDescription());
     assertNull(keyFullRepresentationModel.getTags());
     assertNull(keyFullRepresentationModel.getExpirationDate());
@@ -49,5 +47,10 @@ public class KeyFullRepresentationTest {
     assertNull(keyFullRepresentationModel.getAlgorithmMode());
     assertNull(keyFullRepresentationModel.getKeyVersion());
     assertNull(keyFullRepresentationModel.getDualAuthDelete());
+    assertNull(keyFullRepresentationModel.getRestoreExpirationDate());
+    assertNull(keyFullRepresentationModel.isRestoreAllowed());
+    assertNull(keyFullRepresentationModel.isPurgeAllowed());
+    assertNull(keyFullRepresentationModel.getPurgeAllowedFrom());
+    assertNull(keyFullRepresentationModel.getPurgeScheduledOn());
   }
 }

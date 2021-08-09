@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -18,15 +18,12 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyPolicyDualAuthDelete;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyPolicyDualAuthDeleteDualAuthDelete;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.SetKeyPoliciesOneOfSetKeyPolicyDualAuthDelete;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
-
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
@@ -39,17 +36,17 @@ public class SetKeyPoliciesOneOfSetKeyPolicyDualAuthDeleteTest {
 
   @Test
   public void testSetKeyPoliciesOneOfSetKeyPolicyDualAuthDelete() throws Throwable {
-    KeyPolicyDualAuthDeleteDualAuthDelete keyPolicyDualAuthDeleteDualAuthDeleteModel = new KeyPolicyDualAuthDeleteDualAuthDelete.Builder()
-      .enabled(true)
-      .build();
-    assertEquals(keyPolicyDualAuthDeleteDualAuthDeleteModel.enabled(), Boolean.valueOf(true));
-
     CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
       .collectionType("application/vnd.ibm.kms.crn+json")
       .collectionTotal(Long.valueOf("1"))
       .build();
     assertEquals(collectionMetadataModel.collectionType(), "application/vnd.ibm.kms.crn+json");
     assertEquals(collectionMetadataModel.collectionTotal(), Long.valueOf("1"));
+
+    KeyPolicyDualAuthDeleteDualAuthDelete keyPolicyDualAuthDeleteDualAuthDeleteModel = new KeyPolicyDualAuthDeleteDualAuthDelete.Builder()
+      .enabled(true)
+      .build();
+    assertEquals(keyPolicyDualAuthDeleteDualAuthDeleteModel.enabled(), Boolean.valueOf(true));
 
     KeyPolicyDualAuthDelete keyPolicyDualAuthDeleteModel = new KeyPolicyDualAuthDelete.Builder()
       .type("application/vnd.ibm.kms.policy+json")
@@ -60,10 +57,10 @@ public class SetKeyPoliciesOneOfSetKeyPolicyDualAuthDeleteTest {
 
     SetKeyPoliciesOneOfSetKeyPolicyDualAuthDelete setKeyPoliciesOneOfSetKeyPolicyDualAuthDeleteModel = new SetKeyPoliciesOneOfSetKeyPolicyDualAuthDelete.Builder()
       .metadata(collectionMetadataModel)
-      .resources(new ArrayList<KeyPolicyDualAuthDelete>(Arrays.asList(keyPolicyDualAuthDeleteModel)))
+      .resources(new java.util.ArrayList<KeyPolicyDualAuthDelete>(java.util.Arrays.asList(keyPolicyDualAuthDeleteModel)))
       .build();
     assertEquals(setKeyPoliciesOneOfSetKeyPolicyDualAuthDeleteModel.metadata(), collectionMetadataModel);
-    assertEquals(setKeyPoliciesOneOfSetKeyPolicyDualAuthDeleteModel.resources(), new ArrayList<KeyPolicyDualAuthDelete>(Arrays.asList(keyPolicyDualAuthDeleteModel)));
+    assertEquals(setKeyPoliciesOneOfSetKeyPolicyDualAuthDeleteModel.resources(), new java.util.ArrayList<KeyPolicyDualAuthDelete>(java.util.Arrays.asList(keyPolicyDualAuthDeleteModel)));
 
     String json = TestUtilities.serialize(setKeyPoliciesOneOfSetKeyPolicyDualAuthDeleteModel);
 

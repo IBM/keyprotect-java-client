@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -15,13 +15,10 @@ package com.ibm.cloud.ibm_key_protect_api.v2.model;
 
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKeyVersionsOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
-
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
-
 import java.util.HashMap;
 import java.util.List;
-
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
@@ -38,14 +35,16 @@ public class GetKeyVersionsOptionsTest {
       .id("testString")
       .bluemixInstance("testString")
       .correlationId("testString")
-      .limit(Long.valueOf("26"))
-      .offset(Long.valueOf("26"))
+      .xKmsKeyRing("testString")
+      .limit(Long.valueOf("1"))
+      .offset(Long.valueOf("0"))
       .build();
     assertEquals(getKeyVersionsOptionsModel.id(), "testString");
     assertEquals(getKeyVersionsOptionsModel.bluemixInstance(), "testString");
     assertEquals(getKeyVersionsOptionsModel.correlationId(), "testString");
-    assertEquals(getKeyVersionsOptionsModel.limit(), Long.valueOf("26"));
-    assertEquals(getKeyVersionsOptionsModel.offset(), Long.valueOf("26"));
+    assertEquals(getKeyVersionsOptionsModel.xKmsKeyRing(), "testString");
+    assertEquals(getKeyVersionsOptionsModel.limit(), Long.valueOf("1"));
+    assertEquals(getKeyVersionsOptionsModel.offset(), Long.valueOf("0"));
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

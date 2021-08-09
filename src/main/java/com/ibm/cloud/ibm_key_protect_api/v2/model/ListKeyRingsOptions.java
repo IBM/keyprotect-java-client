@@ -83,7 +83,7 @@ public class ListKeyRingsOptions extends GenericModel {
 
   protected ListKeyRingsOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.bluemixInstance,
-            "bluemixInstance cannot be null");
+      "bluemixInstance cannot be null");
     bluemixInstance = builder.bluemixInstance;
     correlationId = builder.correlationId;
   }

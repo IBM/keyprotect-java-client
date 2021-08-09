@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -20,14 +20,14 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class InstancePolicyAllowedIPPolicyData extends GenericModel {
 
   protected Boolean enabled;
-  protected InstancePolicyAllowedIPPolicyDataAttributes attributes;
+  protected AllowedIPProperties attributes;
 
   /**
    * Builder.
    */
   public static class Builder {
     private Boolean enabled;
-    private InstancePolicyAllowedIPPolicyDataAttributes attributes;
+    private AllowedIPProperties attributes;
 
     private Builder(InstancePolicyAllowedIPPolicyData instancePolicyAllowedIpPolicyData) {
       this.enabled = instancePolicyAllowedIpPolicyData.enabled;
@@ -75,7 +75,7 @@ public class InstancePolicyAllowedIPPolicyData extends GenericModel {
      * @param attributes the attributes
      * @return the InstancePolicyAllowedIPPolicyData builder
      */
-    public Builder attributes(InstancePolicyAllowedIPPolicyDataAttributes attributes) {
+    public Builder attributes(AllowedIPProperties attributes) {
       this.attributes = attributes;
       return this;
     }
@@ -101,7 +101,7 @@ public class InstancePolicyAllowedIPPolicyData extends GenericModel {
    * Gets the enabled.
    *
    * If set to `true`, Key Protect enables the specified policy for your service instance. If set to `false`, Key
-   * Protect disables the specified policy for your service instance, and the policy will no longer  affect Key Protect
+   * Protect disables the specified policy for your service instance, and the policy will no longer affect Key Protect
    * actions.
    *
    * **Note:** If a policy with attributes is disabled, all attributes are reset and are not retained.
@@ -120,7 +120,7 @@ public class InstancePolicyAllowedIPPolicyData extends GenericModel {
    *
    * @return the attributes
    */
-  public InstancePolicyAllowedIPPolicyDataAttributes attributes() {
+  public AllowedIPProperties attributes() {
     return attributes;
   }
 }

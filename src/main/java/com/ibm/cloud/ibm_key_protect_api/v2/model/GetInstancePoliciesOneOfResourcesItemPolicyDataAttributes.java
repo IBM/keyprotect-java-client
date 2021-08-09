@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -15,29 +15,37 @@ package com.ibm.cloud.ibm_key_protect_api.v2.model;
 import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
-import java.util.ArrayList;
-
 /**
- * Data associated with the policy type `allowed_network` or 'allow_ip'.
+ * Data associated with the policy type `allowed_network`.
  */
 public class GetInstancePoliciesOneOfResourcesItemPolicyDataAttributes extends GenericModel {
+
+  /**
+   * If set to `public-and-private`, Key Protect allows the instance to be accessible through public and private
+   * endpoints. If set to `private-only`, Key Protect restricts the instance to only be accessible through a private
+   * endpoint.
+   */
+  public interface AllowedNetwork {
+    /** public-and-private. */
+    String PUBLIC_AND_PRIVATE = "public-and-private";
+    /** private-only. */
+    String PRIVATE_ONLY = "private-only";
+  }
 
   @SerializedName("allowed_network")
   protected String allowedNetwork;
 
-  @SerializedName("allowed_ip")
-  protected ArrayList<String> allowedIP;
-
-  @SerializedName("create_root_key")
-  protected Boolean createRootKey;
-  @SerializedName("create_standard_key")
-  protected Boolean createStandardKey;
-  @SerializedName("import_root_key")
-  protected Boolean importRootKey;
-  @SerializedName("import_standard_key")
-  protected Boolean importStandardKey;
-  @SerializedName("enforce_token")
-  protected Boolean enforceToken;
-
+  /**
+   * Gets the allowedNetwork.
+   *
+   * If set to `public-and-private`, Key Protect allows the instance to be accessible through public and private
+   * endpoints. If set to `private-only`, Key Protect restricts the instance to only be accessible through a private
+   * endpoint.
+   *
+   * @return the allowedNetwork
+   */
+  public String getAllowedNetwork() {
+    return allowedNetwork;
+  }
 }
 

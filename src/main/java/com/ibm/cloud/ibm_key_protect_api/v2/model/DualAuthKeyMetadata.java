@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -29,8 +29,9 @@ public class DualAuthKeyMetadata extends GenericModel {
    * Gets the enabled.
    *
    * The status of a dual authorization policy on the key.
-   *    If `true`, dual authorization is required to delete the key. If `false`, no prior authorization is required  to
-   * delete the key.
+   *
+   * If `true`, dual authorization is required to delete the key. If
+   * `false`, no prior authorization is required to delete the key.
    *
    * @return the enabled
    */
@@ -42,9 +43,10 @@ public class DualAuthKeyMetadata extends GenericModel {
    * Gets the keySetForDeletion.
    *
    * Indicates if a delete authorization has been issued for a key.
-   *    If `true`, an authorization to delete this key has been issued by the first user, and a second user with  a
-   * Manager access policy can safely delete the key. If the `enabled` property is `false`, this field is  omitted in
-   * the response body.
+   *
+   * If `true`, an authorization to delete this key has been issued by the first user, and a second user with a Manager
+   * access policy can safely delete the key. If the `enabled` property is `false`, this field is omitted in the
+   * response body.
    *
    * @return the keySetForDeletion
    */
@@ -55,9 +57,9 @@ public class DualAuthKeyMetadata extends GenericModel {
   /**
    * Gets the authExpiration.
    *
-   * The date that an authorization for deletion expires for the key. If this date has passed, the  authorization is no
-   * longer valid. If the `enabled` or `keySetForDeletion` properties are `false`, this  field is omitted in the
-   * response body.
+   * The date that an authorization for deletion expires for the key. If this date has passed, the authorization is no
+   * longer valid. If the `enabled` or `keySetForDeletion` properties are `false`, this field is omitted in the response
+   * body.
    *
    * @return the authExpiration
    */

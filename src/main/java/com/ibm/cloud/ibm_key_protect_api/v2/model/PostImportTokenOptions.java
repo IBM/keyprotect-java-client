@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -23,6 +23,7 @@ public class PostImportTokenOptions extends GenericModel {
   protected Double expiration;
   protected Double maxAllowedRetrievals;
   protected String correlationId;
+  protected String xKmsKeyRing;
 
   /**
    * Builder.
@@ -32,12 +33,14 @@ public class PostImportTokenOptions extends GenericModel {
     private Double expiration;
     private Double maxAllowedRetrievals;
     private String correlationId;
+    private String xKmsKeyRing;
 
     private Builder(PostImportTokenOptions postImportTokenOptions) {
       this.bluemixInstance = postImportTokenOptions.bluemixInstance;
       this.expiration = postImportTokenOptions.expiration;
       this.maxAllowedRetrievals = postImportTokenOptions.maxAllowedRetrievals;
       this.correlationId = postImportTokenOptions.correlationId;
+      this.xKmsKeyRing = postImportTokenOptions.xKmsKeyRing;
     }
 
     /**
@@ -109,6 +112,17 @@ public class PostImportTokenOptions extends GenericModel {
     }
 
     /**
+     * Set the xKmsKeyRing.
+     *
+     * @param xKmsKeyRing the xKmsKeyRing
+     * @return the PostImportTokenOptions builder
+     */
+    public Builder xKmsKeyRing(String xKmsKeyRing) {
+      this.xKmsKeyRing = xKmsKeyRing;
+      return this;
+    }
+
+    /**
      * Set the importToken.
      *
      * @param importToken the importToken
@@ -128,6 +142,7 @@ public class PostImportTokenOptions extends GenericModel {
     expiration = builder.expiration;
     maxAllowedRetrievals = builder.maxAllowedRetrievals;
     correlationId = builder.correlationId;
+    xKmsKeyRing = builder.xKmsKeyRing;
   }
 
   /**
@@ -153,10 +168,12 @@ public class PostImportTokenOptions extends GenericModel {
   /**
    * Gets the expiration.
    *
-   * The time in seconds from the creation of an import token that determines how long its associated public key
-   * remains valid.
-   *     The minimum value is `300` seconds (5 minutes), and the maximum value is `86400` (24 hours). The default value
-   * is `600` (10 minutes).
+   * The time in seconds from the creation of an import token that determines how long its associated public key remains
+   * valid.
+   *
+   * The minimum value is `300` seconds (5 minutes), and the maximum value is `86400` (24 hours). The default value is
+   * `600`
+   * (10 minutes).
    *
    * @return the expiration
    */
@@ -185,6 +202,19 @@ public class PostImportTokenOptions extends GenericModel {
    */
   public String correlationId() {
     return correlationId;
+  }
+
+  /**
+   * Gets the xKmsKeyRing.
+   *
+   * The ID of the key ring that the specified key belongs to. When the header is not specified,  Key Protect will
+   * perform a key ring lookup. For a more optimized request,  specify the key ring on every call. The key ring ID of
+   * keys that are created without an  `X-Kms-Key-Ring` header is: `default`.
+   *
+   * @return the xKmsKeyRing
+   */
+  public String xKmsKeyRing() {
+    return xKmsKeyRing;
   }
 }
 

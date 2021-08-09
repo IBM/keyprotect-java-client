@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -37,14 +37,15 @@ public class KeyActionOneOfResponse extends GenericModel {
    *
    * The data encryption key (DEK) used in wrap actions when the query parameter is set to `wrap`. The system returns a
    * base64 encoded plaintext in the response entity-body when you perform an `unwrap` action on a key.
-   *    To wrap an existing DEK, provide a base64 encoded plaintext during a `wrap` action. To generate a new DEK, omit
-   * the `plaintext` property. Key Protect generates a random plaintext (32 bytes) that is rooted in an HSM and then
-   * wraps that value.
+   *
+   * To wrap an existing DEK, provide a base64 encoded plaintext during a
+   * `wrap` action. To generate a new DEK, omit the `plaintext` property. Key Protect generates a random plaintext (32
+   * bytes) that is rooted in an HSM and then wraps that value.
    *
    * **Note:** When you unwrap a wrapped data encryption key (WDEK) by using a rotated root key, the service returns a
-   * new ciphertext in the response entity-body. Each ciphertext remains available for `unwrap` actions.  If you unwrap
-   * a DEK with a previous ciphertext, the service also returns the latest ciphertext in the response.  Use the latest
-   * ciphertext for future unwrap operations.
+   * new ciphertext in the response entity-body. Each ciphertext remains available for
+   * `unwrap` actions. If you unwrap a DEK with a previous ciphertext, the service also returns the latest ciphertext in
+   * the response. Use the latest ciphertext for future unwrap operations.
    *
    * @return the plaintext
    */
