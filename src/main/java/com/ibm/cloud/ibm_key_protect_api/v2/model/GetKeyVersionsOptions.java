@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -22,6 +22,7 @@ public class GetKeyVersionsOptions extends GenericModel {
   protected String id;
   protected String bluemixInstance;
   protected String correlationId;
+  protected String xKmsKeyRing;
   protected Long limit;
   protected Long offset;
 
@@ -32,6 +33,7 @@ public class GetKeyVersionsOptions extends GenericModel {
     private String id;
     private String bluemixInstance;
     private String correlationId;
+    private String xKmsKeyRing;
     private Long limit;
     private Long offset;
 
@@ -39,6 +41,7 @@ public class GetKeyVersionsOptions extends GenericModel {
       this.id = getKeyVersionsOptions.id;
       this.bluemixInstance = getKeyVersionsOptions.bluemixInstance;
       this.correlationId = getKeyVersionsOptions.correlationId;
+      this.xKmsKeyRing = getKeyVersionsOptions.xKmsKeyRing;
       this.limit = getKeyVersionsOptions.limit;
       this.offset = getKeyVersionsOptions.offset;
     }
@@ -103,6 +106,17 @@ public class GetKeyVersionsOptions extends GenericModel {
     }
 
     /**
+     * Set the xKmsKeyRing.
+     *
+     * @param xKmsKeyRing the xKmsKeyRing
+     * @return the GetKeyVersionsOptions builder
+     */
+    public Builder xKmsKeyRing(String xKmsKeyRing) {
+      this.xKmsKeyRing = xKmsKeyRing;
+      return this;
+    }
+
+    /**
      * Set the limit.
      *
      * @param limit the limit
@@ -133,6 +147,7 @@ public class GetKeyVersionsOptions extends GenericModel {
     id = builder.id;
     bluemixInstance = builder.bluemixInstance;
     correlationId = builder.correlationId;
+    xKmsKeyRing = builder.xKmsKeyRing;
     limit = builder.limit;
     offset = builder.offset;
   }
@@ -180,11 +195,24 @@ public class GetKeyVersionsOptions extends GenericModel {
   }
 
   /**
+   * Gets the xKmsKeyRing.
+   *
+   * The ID of the key ring that the specified key is a part of. When the  header is not specified, Key Protect will
+   * perform a key ring lookup. For  a more optimized request, specify the key ring on every call. The key ring ID of
+   * keys that are created without an `X-Kms-Key-Ring` header is: `default`.
+   *
+   * @return the xKmsKeyRing
+   */
+  public String xKmsKeyRing() {
+    return xKmsKeyRing;
+  }
+
+  /**
    * Gets the limit.
    *
    * The number of key versions to retrieve. By default, `GET /versions` returns the first 200 key versions. To retrieve
    * a different set of key versions, use `limit` with `offset` to page through your available resources. The maximum
-   * value for `limit` is 5000.
+   * value for `limit` is 5,000.
    *
    * **Usage:** If you have a key with 20 versions in your instance, and you want to retrieve only the first 5 versions,
    * use `../versions?limit=5`.
@@ -199,10 +227,12 @@ public class GetKeyVersionsOptions extends GenericModel {
    * Gets the offset.
    *
    * The number of key versions to skip. By specifying `offset`, you retrieve a subset of key versions that starts with
-   * the `offset` value. Use `offset` with `limit` to page through your available resources.
+   * the `offset` value. Use
+   * `offset` with `limit` to page through your available resources.
    *
    * **Usage:** If you have a key with 100 versions in your instance, and you want to retrieve versions 26 through 50,
-   * use `../versions?offset=25&amp;limit=25`.
+   * use
+   * `../versions?offset=25&amp;limit=25`.
    *
    * @return the offset
    */

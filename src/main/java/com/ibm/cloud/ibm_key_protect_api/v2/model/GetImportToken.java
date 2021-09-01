@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -32,10 +32,12 @@ public class GetImportToken extends GenericModel {
   /**
    * Gets the expiration.
    *
-   * The time in seconds from the creation of an import token that determines how long its associated public key
-   * remains valid.
-   *     The minimum value is `300` seconds (5 minutes), and the maximum value is `86400` (24 hours). The default value
-   * is `600` (10 minutes).
+   * The time in seconds from the creation of an import token that determines how long its associated public key remains
+   * valid.
+   *
+   * The minimum value is `300` seconds (5 minutes), and the maximum value is `86400` (24 hours). The default value is
+   * `600`
+   * (10 minutes).
    *
    * @return the expiration
    */
@@ -92,8 +94,9 @@ public class GetImportToken extends GenericModel {
    * Gets the payload.
    *
    * The public encryption key that you can use to encrypt key material before you import it into the service.
-   *    This value is a PEM-encoded public key in PKIX format. Because PEM encoding is a byte format, the value is
-   * base64 encoded.
+   *
+   * This value is a PEM-encoded public key in PKIX format. Because PEM encoding is a byte format, the value is base64
+   * encoded.
    *
    * @return the payload
    */

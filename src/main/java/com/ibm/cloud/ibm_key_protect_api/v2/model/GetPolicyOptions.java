@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -32,6 +32,7 @@ public class GetPolicyOptions extends GenericModel {
   protected String id;
   protected String bluemixInstance;
   protected String correlationId;
+  protected String xKmsKeyRing;
   protected String policy;
 
   /**
@@ -41,12 +42,14 @@ public class GetPolicyOptions extends GenericModel {
     private String id;
     private String bluemixInstance;
     private String correlationId;
+    private String xKmsKeyRing;
     private String policy;
 
     private Builder(GetPolicyOptions getPolicyOptions) {
       this.id = getPolicyOptions.id;
       this.bluemixInstance = getPolicyOptions.bluemixInstance;
       this.correlationId = getPolicyOptions.correlationId;
+      this.xKmsKeyRing = getPolicyOptions.xKmsKeyRing;
       this.policy = getPolicyOptions.policy;
     }
 
@@ -110,6 +113,17 @@ public class GetPolicyOptions extends GenericModel {
     }
 
     /**
+     * Set the xKmsKeyRing.
+     *
+     * @param xKmsKeyRing the xKmsKeyRing
+     * @return the GetPolicyOptions builder
+     */
+    public Builder xKmsKeyRing(String xKmsKeyRing) {
+      this.xKmsKeyRing = xKmsKeyRing;
+      return this;
+    }
+
+    /**
      * Set the policy.
      *
      * @param policy the policy
@@ -129,6 +143,7 @@ public class GetPolicyOptions extends GenericModel {
     id = builder.id;
     bluemixInstance = builder.bluemixInstance;
     correlationId = builder.correlationId;
+    xKmsKeyRing = builder.xKmsKeyRing;
     policy = builder.policy;
   }
 
@@ -172,6 +187,19 @@ public class GetPolicyOptions extends GenericModel {
    */
   public String correlationId() {
     return correlationId;
+  }
+
+  /**
+   * Gets the xKmsKeyRing.
+   *
+   * The ID of the key ring that the specified key is a part of. When the  header is not specified, Key Protect will
+   * perform a key ring lookup. For  a more optimized request, specify the key ring on every call. The key ring ID of
+   * keys that are created without an `X-Kms-Key-Ring` header is: `default`.
+   *
+   * @return the xKmsKeyRing
+   */
+  public String xKmsKeyRing() {
+    return xKmsKeyRing;
   }
 
   /**

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -25,21 +25,24 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class EventAcknowledgeOptions extends GenericModel {
 
   protected String bluemixInstance;
-  protected InputStream eventAcknowledge;
+  protected InputStream body;
   protected String correlationId;
+  protected String xKmsKeyRing;
 
   /**
    * Builder.
    */
   public static class Builder {
     private String bluemixInstance;
-    private InputStream eventAcknowledge;
+    private InputStream body;
     private String correlationId;
+    private String xKmsKeyRing;
 
     private Builder(EventAcknowledgeOptions eventAcknowledgeOptions) {
       this.bluemixInstance = eventAcknowledgeOptions.bluemixInstance;
-      this.eventAcknowledge = eventAcknowledgeOptions.eventAcknowledge;
+      this.body = eventAcknowledgeOptions.body;
       this.correlationId = eventAcknowledgeOptions.correlationId;
+      this.xKmsKeyRing = eventAcknowledgeOptions.xKmsKeyRing;
     }
 
     /**
@@ -52,11 +55,11 @@ public class EventAcknowledgeOptions extends GenericModel {
      * Instantiates a new builder with required properties.
      *
      * @param bluemixInstance the bluemixInstance
-     * @param eventAcknowledge the eventAcknowledge
+     * @param body the body
      */
-    public Builder(String bluemixInstance, InputStream eventAcknowledge) {
+    public Builder(String bluemixInstance, InputStream body) {
       this.bluemixInstance = bluemixInstance;
-      this.eventAcknowledge = eventAcknowledge;
+      this.body = body;
     }
 
     /**
@@ -80,13 +83,13 @@ public class EventAcknowledgeOptions extends GenericModel {
     }
 
     /**
-     * Set the eventAcknowledge.
+     * Set the body.
      *
-     * @param eventAcknowledge the eventAcknowledge
+     * @param body the body
      * @return the EventAcknowledgeOptions builder
      */
-    public Builder eventAcknowledge(InputStream eventAcknowledge) {
-      this.eventAcknowledge = eventAcknowledge;
+    public Builder body(InputStream body) {
+      this.body = body;
       return this;
     }
 
@@ -102,15 +105,26 @@ public class EventAcknowledgeOptions extends GenericModel {
     }
 
     /**
-     * Set the eventAcknowledge.
+     * Set the xKmsKeyRing.
      *
-     * @param eventAcknowledge the eventAcknowledge
+     * @param xKmsKeyRing the xKmsKeyRing
+     * @return the EventAcknowledgeOptions builder
+     */
+    public Builder xKmsKeyRing(String xKmsKeyRing) {
+      this.xKmsKeyRing = xKmsKeyRing;
+      return this;
+    }
+
+    /**
+     * Set the body.
+     *
+     * @param body the body
      * @return the EventAcknowledgeOptions builder
      *
      * @throws FileNotFoundException if the file could not be found
      */
-    public Builder eventAcknowledge(File eventAcknowledge) throws FileNotFoundException {
-      this.eventAcknowledge = new FileInputStream(eventAcknowledge);
+    public Builder body(File body) throws FileNotFoundException {
+      this.body = new FileInputStream(body);
       return this;
     }
   }
@@ -118,11 +132,12 @@ public class EventAcknowledgeOptions extends GenericModel {
   protected EventAcknowledgeOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.bluemixInstance,
       "bluemixInstance cannot be null");
-    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.eventAcknowledge,
-      "eventAcknowledge cannot be null");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.body,
+      "body cannot be null");
     bluemixInstance = builder.bluemixInstance;
-    eventAcknowledge = builder.eventAcknowledge;
+    body = builder.body;
     correlationId = builder.correlationId;
+    xKmsKeyRing = builder.xKmsKeyRing;
   }
 
   /**
@@ -146,14 +161,14 @@ public class EventAcknowledgeOptions extends GenericModel {
   }
 
   /**
-   * Gets the eventAcknowledge.
+   * Gets the body.
    *
    * The base request for acknowledging a key action events.
    *
-   * @return the eventAcknowledge
+   * @return the body
    */
-  public InputStream eventAcknowledge() {
-    return eventAcknowledge;
+  public InputStream body() {
+    return body;
   }
 
   /**
@@ -165,6 +180,19 @@ public class EventAcknowledgeOptions extends GenericModel {
    */
   public String correlationId() {
     return correlationId;
+  }
+
+  /**
+   * Gets the xKmsKeyRing.
+   *
+   * The ID of the key ring that the specified key belongs to. When the header is not specified,  Key Protect will
+   * perform a key ring lookup. For a more optimized request,  specify the key ring on every call. The key ring ID of
+   * keys that are created without an  `X-Kms-Key-Ring` header is: `default`.
+   *
+   * @return the xKmsKeyRing
+   */
+  public String xKmsKeyRing() {
+    return xKmsKeyRing;
   }
 }
 

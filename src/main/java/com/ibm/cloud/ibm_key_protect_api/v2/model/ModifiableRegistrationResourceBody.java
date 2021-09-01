@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -120,8 +120,9 @@ public class ModifiableRegistrationResourceBody extends GenericModel {
    * Gets the preventKeyDeletion.
    *
    * A boolean that determines whether Key Protect must prevent deletion of a root key.
-   *    If set to `true`, Key Protect prevents deletion of the specified root key and its  associated protected
-   * resources. The system prevents the deletion of any key that  has at least one registration where
+   *
+   * If set to `true`, Key Protect prevents deletion of the specified root key and its associated protected resources.
+   * The system prevents the deletion of any key that has at least one registration where
    * `preventKeyDeletion` is `true`.
    *
    * @return the preventKeyDeletion
@@ -133,7 +134,7 @@ public class ModifiableRegistrationResourceBody extends GenericModel {
   /**
    * Gets the description.
    *
-   * A text field that cloud services can use to store external metadata about the registration.  This field is exposed
+   * A text field that cloud services can use to store external metadata about the registration. This field is exposed
    * to customers when they review registered resources using GET /registrations.
    *
    * @return the description
@@ -145,7 +146,7 @@ public class ModifiableRegistrationResourceBody extends GenericModel {
   /**
    * Gets the registrationMetadata.
    *
-   * A text field that cloud services can use to store internal metadata about the registration.  This field is not
+   * A text field that cloud services can use to store internal metadata about the registration. This field is not
    * exposed to customers and is visible only with IBM Cloud service to service calls.
    *
    * @return the registrationMetadata

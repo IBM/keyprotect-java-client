@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -27,6 +27,8 @@ public class GetKeysOptions extends GenericModel {
   protected Long limit;
   protected Long offset;
   protected List<Long> state;
+  protected Boolean extractable;
+  protected String xKmsKeyRing;
 
   /**
    * Builder.
@@ -37,6 +39,8 @@ public class GetKeysOptions extends GenericModel {
     private Long limit;
     private Long offset;
     private List<Long> state;
+    private Boolean extractable;
+    private String xKmsKeyRing;
 
     private Builder(GetKeysOptions getKeysOptions) {
       this.bluemixInstance = getKeysOptions.bluemixInstance;
@@ -44,6 +48,8 @@ public class GetKeysOptions extends GenericModel {
       this.limit = getKeysOptions.limit;
       this.offset = getKeysOptions.offset;
       this.state = getKeysOptions.state;
+      this.extractable = getKeysOptions.extractable;
+      this.xKmsKeyRing = getKeysOptions.xKmsKeyRing;
     }
 
     /**
@@ -141,6 +147,28 @@ public class GetKeysOptions extends GenericModel {
       this.state = state;
       return this;
     }
+
+    /**
+     * Set the extractable.
+     *
+     * @param extractable the extractable
+     * @return the GetKeysOptions builder
+     */
+    public Builder extractable(Boolean extractable) {
+      this.extractable = extractable;
+      return this;
+    }
+
+    /**
+     * Set the xKmsKeyRing.
+     *
+     * @param xKmsKeyRing the xKmsKeyRing
+     * @return the GetKeysOptions builder
+     */
+    public Builder xKmsKeyRing(String xKmsKeyRing) {
+      this.xKmsKeyRing = xKmsKeyRing;
+      return this;
+    }
   }
 
   protected GetKeysOptions(Builder builder) {
@@ -151,6 +179,8 @@ public class GetKeysOptions extends GenericModel {
     limit = builder.limit;
     offset = builder.offset;
     state = builder.state;
+    extractable = builder.extractable;
+    xKmsKeyRing = builder.xKmsKeyRing;
   }
 
   /**
@@ -188,7 +218,9 @@ public class GetKeysOptions extends GenericModel {
    * Gets the limit.
    *
    * The number of keys to retrieve. By default, `GET /keys` returns the first 200 keys. To retrieve a different set of
-   * keys, use `limit` with `offset` to page through your available resources. The maximum value for `limit` is 5000.
+   * keys, use `limit` with
+   * `offset` to page through your available resources. The maximum value for
+   * `limit` is 5,000.
    *
    * **Usage:** If you have 20 keys in your instance, and you want to retrieve only the first 5 keys, use
    * `../keys?limit=5`.
@@ -203,7 +235,8 @@ public class GetKeysOptions extends GenericModel {
    * Gets the offset.
    *
    * The number of keys to skip. By specifying `offset`, you retrieve a subset of keys that starts with the `offset`
-   * value. Use `offset` with `limit` to page through your available resources.
+   * value. Use `offset` with
+   * `limit` to page through your available resources.
    *
    * **Usage:** If you have 100 keys in your instance, and you want to retrieve keys 26 through 50, use
    * `../keys?offset=25&amp;limit=25`.
@@ -221,12 +254,43 @@ public class GetKeysOptions extends GenericModel {
    * whitespace or trailing commas. Valid states are based on NIST SP 800-57. States are integers and correspond to the
    * Pre-activation = 0, Active = 1, Suspended = 2, Deactivated = 3, and Destroyed = 5 values.
    *
-   * **Usage:** If you want to retrieve active and deleted keys, use `../keys?state=1,5`.
+   * **Usage:** If you want to retrieve active and deleted keys, use
+   * `../keys?state=1,5`.
    *
    * @return the state
    */
   public List<Long> state() {
     return state;
+  }
+
+  /**
+   * Gets the extractable.
+   *
+   * The type of keys to be retrieved. Filters keys based on the
+   * `extractable` property. You can use this query parameter to search for keys whose material can leave the service.
+   * If set to `true`, standard keys will be retrieved. If set to `false`, root keys will be retrieved. If omitted, both
+   * root and standard keys will be retrieved.
+   *
+   * **Usage:** If you want to retrieve standard keys, use
+   * `../keys?extractable=true`.
+   *
+   * @return the extractable
+   */
+  public Boolean extractable() {
+    return extractable;
+  }
+
+  /**
+   * Gets the xKmsKeyRing.
+   *
+   * The ID of the target key ring. If unspecified, all resources in the instance that the caller has access to will be
+   * returned. When the header  is specified, only resources within the specified key ring, that the caller has access
+   * to,  will be returned. The key ring ID of keys that are created without an `X-Kms-Key-Ring` header is: `default`.
+   *
+   * @return the xKmsKeyRing
+   */
+  public String xKmsKeyRing() {
+    return xKmsKeyRing;
   }
 }
 

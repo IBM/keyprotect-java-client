@@ -13,15 +13,14 @@
 
 package com.ibm.cloud.ibm_key_protect_api.v2.model;
 
+import com.ibm.cloud.ibm_key_protect_api.v2.model.PurgeKeyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
-import org.testng.annotations.Test;
-
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
-
-import static org.testng.Assert.assertEquals;
+import org.testng.annotations.Test;
+import static org.testng.Assert.*;
 
 /**
  * Unit test class for the PurgeKeyOptions model.

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -26,7 +26,7 @@ public class SetKeyPoliciesOneOfSetMultipleKeyPolicies extends SetKeyPoliciesOne
    */
   public static class Builder {
     private CollectionMetadata metadata;
-    private List<SetMultipleKeyPoliciesResourcesItem> resources;
+    private List<SetMultipleKeyPoliciesResource> resources;
 
     public Builder(SetKeyPoliciesOneOf setKeyPoliciesOneOfSetMultipleKeyPolicies) {
       this.metadata = setKeyPoliciesOneOfSetMultipleKeyPolicies.metadata;
@@ -45,7 +45,7 @@ public class SetKeyPoliciesOneOfSetMultipleKeyPolicies extends SetKeyPoliciesOne
      * @param metadata the metadata
      * @param resources the resources
      */
-    public Builder(CollectionMetadata metadata, List<SetMultipleKeyPoliciesResourcesItem> resources) {
+    public Builder(CollectionMetadata metadata, List<SetMultipleKeyPoliciesResource> resources) {
       this.metadata = metadata;
       this.resources = resources;
     }
@@ -65,11 +65,11 @@ public class SetKeyPoliciesOneOfSetMultipleKeyPolicies extends SetKeyPoliciesOne
      * @param resources the new resources
      * @return the SetKeyPoliciesOneOfSetMultipleKeyPolicies builder
      */
-    public Builder addResources(SetMultipleKeyPoliciesResourcesItem resources) {
+    public Builder addResources(SetMultipleKeyPoliciesResource resources) {
       com.ibm.cloud.sdk.core.util.Validator.notNull(resources,
         "resources cannot be null");
       if (this.resources == null) {
-        this.resources = new ArrayList<SetMultipleKeyPoliciesResourcesItem>();
+        this.resources = new ArrayList<SetMultipleKeyPoliciesResource>();
       }
       this.resources.add(resources);
       return this;
@@ -93,7 +93,7 @@ public class SetKeyPoliciesOneOfSetMultipleKeyPolicies extends SetKeyPoliciesOne
      * @param resources the resources
      * @return the SetKeyPoliciesOneOfSetMultipleKeyPolicies builder
      */
-    public Builder resources(List<SetMultipleKeyPoliciesResourcesItem> resources) {
+    public Builder resources(List<SetMultipleKeyPoliciesResource> resources) {
       this.resources = resources;
       return this;
     }

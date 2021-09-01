@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -22,6 +22,7 @@ public class GetRegistrationsOptions extends GenericModel {
   protected String id;
   protected String bluemixInstance;
   protected String correlationId;
+  protected String xKmsKeyRing;
   protected Long limit;
   protected Long offset;
   protected String urlEncodedResourceCrnQuery;
@@ -35,6 +36,7 @@ public class GetRegistrationsOptions extends GenericModel {
     private String id;
     private String bluemixInstance;
     private String correlationId;
+    private String xKmsKeyRing;
     private Long limit;
     private Long offset;
     private String urlEncodedResourceCrnQuery;
@@ -45,6 +47,7 @@ public class GetRegistrationsOptions extends GenericModel {
       this.id = getRegistrationsOptions.id;
       this.bluemixInstance = getRegistrationsOptions.bluemixInstance;
       this.correlationId = getRegistrationsOptions.correlationId;
+      this.xKmsKeyRing = getRegistrationsOptions.xKmsKeyRing;
       this.limit = getRegistrationsOptions.limit;
       this.offset = getRegistrationsOptions.offset;
       this.urlEncodedResourceCrnQuery = getRegistrationsOptions.urlEncodedResourceCrnQuery;
@@ -112,6 +115,17 @@ public class GetRegistrationsOptions extends GenericModel {
     }
 
     /**
+     * Set the xKmsKeyRing.
+     *
+     * @param xKmsKeyRing the xKmsKeyRing
+     * @return the GetRegistrationsOptions builder
+     */
+    public Builder xKmsKeyRing(String xKmsKeyRing) {
+      this.xKmsKeyRing = xKmsKeyRing;
+      return this;
+    }
+
+    /**
      * Set the limit.
      *
      * @param limit the limit
@@ -175,6 +189,7 @@ public class GetRegistrationsOptions extends GenericModel {
     id = builder.id;
     bluemixInstance = builder.bluemixInstance;
     correlationId = builder.correlationId;
+    xKmsKeyRing = builder.xKmsKeyRing;
     limit = builder.limit;
     offset = builder.offset;
     urlEncodedResourceCrnQuery = builder.urlEncodedResourceCrnQuery;
@@ -225,14 +240,28 @@ public class GetRegistrationsOptions extends GenericModel {
   }
 
   /**
+   * Gets the xKmsKeyRing.
+   *
+   * The ID of the key ring that the specified key is a part of. When the  header is not specified, Key Protect will
+   * perform a key ring lookup. For  a more optimized request, specify the key ring on every call. The key ring ID of
+   * keys that are created without an `X-Kms-Key-Ring` header is: `default`.
+   *
+   * @return the xKmsKeyRing
+   */
+  public String xKmsKeyRing() {
+    return xKmsKeyRing;
+  }
+
+  /**
    * Gets the limit.
    *
    * The number of registrations to retrieve. By default returns the first 200 registrations. To retrieve a different
-   * set of registrations, use `limit` with `offset` to page through your available resources. The maximum value for
-   * `limit` is 5000.
+   * set of registrations, use
+   * `limit` with `offset` to page through your available resources. The maximum value for `limit` is 5,000.
    *
-   * **Usage:** If you have 20 registrations that are associated with a key, and you want to retrieve only the first  5
-   * registrations, use `../registrations?limit=5`.
+   * **Usage:** If you have 20 registrations that are associated with a key, and you want to retrieve only the first 5
+   * registrations, use
+   * `../registrations?limit=5`.
    *
    * @return the limit
    */
@@ -246,8 +275,9 @@ public class GetRegistrationsOptions extends GenericModel {
    * The number of registrations to skip. By specifying `offset`, you retrieve a subset of registrations that starts
    * with the `offset` value. Use `offset` with `limit` to page through your available resources.
    *
-   * **Usage:** If you have 100 registrations that are associated with a key, and you want to retrieve registrations  26
-   * through 50, use `../registrations?offset=25&amp;limit=25`.
+   * **Usage:** If you have 100 registrations that are associated with a key, and you want to retrieve registrations 26
+   * through 50, use
+   * `../registrations?offset=25&amp;limit=25`.
    *
    * @return the offset
    */
@@ -258,18 +288,19 @@ public class GetRegistrationsOptions extends GenericModel {
   /**
    * Gets the urlEncodedResourceCrnQuery.
    *
-   * Filters for resources that are associated with a specified  [Cloud Resource Name
-   * (CRN)](/docs/overview?topic=overview-crn) by using URL encoded  wildcard characters (`*`). The parameter should
-   * contain all CRN segments and must be URL encoded. Supports a  prefix search when you specify `*` on the last CRN
-   * segment.
+   * Filters for resources that are associated with a specified
+   * [Cloud Resource Name](/docs/account?topic=account-crn)
+   * (CRN) by using URL encoded wildcard characters (`*`). The parameter should contain all CRN segments and must be URL
+   * encoded. Supports a prefix search when you specify `*` on the last CRN segment.
    *
    * **Usage:** To list registrations that are associated with all resources in `&lt;service-instance&gt;`, use a URL
-   * encoded  version of the following string:
-   * `crn:v1:bluemix:public:&lt;service-name&gt;:&lt;location&gt;:a/&lt;account&gt;:&lt;service-instance&gt;:*:*`.  To
+   * encoded version of the following string:
+   * `crn:v1:bluemix:public:&lt;service-name&gt;:&lt;location&gt;:a/&lt;account&gt;:&lt;service-instance&gt;:*:*`. To
    * search for subresources, use the following CRN format:
    * `crn:v1:bluemix:public:&lt;service-name&gt;:&lt;location&gt;:a/&lt;account&gt;:&lt;service-instance&gt;:&lt;resource-type&gt;:&lt;resource&gt;/&lt;subresource&gt;`.
-   *    For more examples, see [CRN query
-   * examples](/docs/key-protect?topic=key-protect-view-protected-resources#crn-query-examples).
+   *
+   * For more examples, see
+   * [CRN query examples](/docs/key-protect?topic=key-protect-view-protected-resources#crn-query-examples).
    *
    * @return the urlEncodedResourceCrnQuery
    */
@@ -298,7 +329,8 @@ public class GetRegistrationsOptions extends GenericModel {
    * If set to `true`, returns `totalCount` in the response metadata for use with pagination. The `totalCount` value
    * returned specifies the total number of registrations that match the request, disregarding limit and offset.
    *
-   * **Usage:** To return the `totalCount` value for use with pagination, use `../registrations?totalCount=true`.
+   * **Usage:** To return the `totalCount` value for use with pagination, use
+   * `../registrations?totalCount=true`.
    *
    * @return the totalCount
    */

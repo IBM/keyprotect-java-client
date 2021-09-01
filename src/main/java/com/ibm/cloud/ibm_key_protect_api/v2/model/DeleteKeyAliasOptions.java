@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -23,6 +23,7 @@ public class DeleteKeyAliasOptions extends GenericModel {
   protected String alias;
   protected String bluemixInstance;
   protected String correlationId;
+  protected String xKmsKeyRing;
 
   /**
    * Builder.
@@ -32,12 +33,14 @@ public class DeleteKeyAliasOptions extends GenericModel {
     private String alias;
     private String bluemixInstance;
     private String correlationId;
+    private String xKmsKeyRing;
 
     private Builder(DeleteKeyAliasOptions deleteKeyAliasOptions) {
       this.id = deleteKeyAliasOptions.id;
       this.alias = deleteKeyAliasOptions.alias;
       this.bluemixInstance = deleteKeyAliasOptions.bluemixInstance;
       this.correlationId = deleteKeyAliasOptions.correlationId;
+      this.xKmsKeyRing = deleteKeyAliasOptions.xKmsKeyRing;
     }
 
     /**
@@ -111,6 +114,17 @@ public class DeleteKeyAliasOptions extends GenericModel {
       this.correlationId = correlationId;
       return this;
     }
+
+    /**
+     * Set the xKmsKeyRing.
+     *
+     * @param xKmsKeyRing the xKmsKeyRing
+     * @return the DeleteKeyAliasOptions builder
+     */
+    public Builder xKmsKeyRing(String xKmsKeyRing) {
+      this.xKmsKeyRing = xKmsKeyRing;
+      return this;
+    }
   }
 
   protected DeleteKeyAliasOptions(Builder builder) {
@@ -124,6 +138,7 @@ public class DeleteKeyAliasOptions extends GenericModel {
     alias = builder.alias;
     bluemixInstance = builder.bluemixInstance;
     correlationId = builder.correlationId;
+    xKmsKeyRing = builder.xKmsKeyRing;
   }
 
   /**
@@ -150,11 +165,13 @@ public class DeleteKeyAliasOptions extends GenericModel {
    * Gets the alias.
    *
    * An alias that identifies a key. Each alias is unique only within the given instance and is not reserved across the
-   * Key Protect service. Each key can have up to five aliases. There is a limit of 1000 aliases per instance.  Alias
-   * must be alphanumeric and cannot contain spaces or special characters other than '-' or '_'. The alias cannot be a
-   * version 4 UUID and must not be a Key Protect reserved name: `allowed_ip`, `key`, `keys`, `metadata`, `policy`,
-   * `policies`, `registration`, `registrations`, `ring`, `rings`, `rotate`, `wrap`, `unwrap`, `rewrap`, `version`,
-   * `versions`. Alias size can be between 2 - 90 characters.
+   * Key Protect service. Each key can have up to five aliases. There is a limit of 1000 aliases per instance. Alias
+   * must be alphanumeric and cannot contain spaces or special characters other than '-' or '_'.
+   *
+   * The alias cannot be a version 4 UUID and must not be a Key Protect reserved name: `allowed_ip`, `key`, `keys`,
+   * `metadata`, `policy`,
+   * `policies`, `registration`, `registrations`, `ring`, `rings`, `rotate`,
+   * `wrap`, `unwrap`, `rewrap`, `version`, `versions`. Alias size can be between 2 - 90 characters.
    *
    * @return the alias
    */
@@ -182,6 +199,19 @@ public class DeleteKeyAliasOptions extends GenericModel {
    */
   public String correlationId() {
     return correlationId;
+  }
+
+  /**
+   * Gets the xKmsKeyRing.
+   *
+   * The ID of the key ring that the specified key is a part of. When the  header is not specified, Key Protect will
+   * perform a key ring lookup. For  a more optimized request, specify the key ring on every call. The key ring ID of
+   * keys that are created without an `X-Kms-Key-Ring` header is: `default`.
+   *
+   * @return the xKmsKeyRing
+   */
+  public String xKmsKeyRing() {
+    return xKmsKeyRing;
   }
 }
 

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -74,8 +74,7 @@ public class CloudResourceName extends GenericModel {
   /**
    * Gets the resourceCrn.
    *
-   * The [Cloud Resource Name](https://cloud.ibm.com/docs/overview?topic=overview-crn) (CRN) that uniquely identifies
-   * your cloud resources.
+   * The [Cloud Resource Name](/docs/account?topic=account-crn) (CRN) that uniquely identifies your cloud resources.
    *
    * @return the resourceCrn
    */

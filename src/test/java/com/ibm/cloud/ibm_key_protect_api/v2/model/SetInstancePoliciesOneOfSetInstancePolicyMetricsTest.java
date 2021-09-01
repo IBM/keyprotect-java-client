@@ -57,10 +57,10 @@ public class SetInstancePoliciesOneOfSetInstancePolicyMetricsTest {
 
     SetInstancePoliciesOneOfSetInstancePolicyMetrics setInstancePoliciesOneOfSetInstancePolicyMetricsModel = new SetInstancePoliciesOneOfSetInstancePolicyMetrics.Builder()
       .metadata(collectionMetadataModel)
-      .resources(new ArrayList<SetInstancePoliciesOneOfSetInstancePolicyMetricsResourcesItem>(Arrays.asList(setInstancePoliciesOneOfSetInstancePolicyMetricsResourcesItemModel)))
+      .resources(new java.util.ArrayList<SetInstancePoliciesOneOfSetInstancePolicyMetricsResourcesItem>(java.util.Arrays.asList(setInstancePoliciesOneOfSetInstancePolicyMetricsResourcesItemModel)))
       .build();
     assertEquals(setInstancePoliciesOneOfSetInstancePolicyMetricsModel.metadata(), collectionMetadataModel);
-    assertEquals(setInstancePoliciesOneOfSetInstancePolicyMetricsModel.resources(), new ArrayList<SetInstancePoliciesOneOfSetInstancePolicyMetricsResourcesItem>(Arrays.asList(setInstancePoliciesOneOfSetInstancePolicyMetricsResourcesItemModel)));
+    assertEquals(setInstancePoliciesOneOfSetInstancePolicyMetricsModel.resources(), new java.util.ArrayList<SetInstancePoliciesOneOfSetInstancePolicyMetricsResourcesItem>(java.util.Arrays.asList(setInstancePoliciesOneOfSetInstancePolicyMetricsResourcesItemModel)));
 
     String json = TestUtilities.serialize(setInstancePoliciesOneOfSetInstancePolicyMetricsModel);
 

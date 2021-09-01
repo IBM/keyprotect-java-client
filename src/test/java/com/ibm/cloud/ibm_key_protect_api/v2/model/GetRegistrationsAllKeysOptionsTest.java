@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -15,13 +15,10 @@ package com.ibm.cloud.ibm_key_protect_api.v2.model;
 
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetRegistrationsAllKeysOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
-
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
-
 import java.util.HashMap;
 import java.util.List;
-
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
@@ -37,17 +34,19 @@ public class GetRegistrationsAllKeysOptionsTest {
     GetRegistrationsAllKeysOptions getRegistrationsAllKeysOptionsModel = new GetRegistrationsAllKeysOptions.Builder()
       .bluemixInstance("testString")
       .correlationId("testString")
+      .xKmsKeyRing("testString")
       .urlEncodedResourceCrnQuery("crn%3Av1%3Abluemix%3Apublic%3Adatabases-for-postgresql%3Aus-south%3Aa%2F274074dce64e9c423ffc238516c755e1%3A29caf0e7-120f-4da8-9551-3abf57ebcfc7%3A*%3A*")
-      .limit(Long.valueOf("26"))
-      .offset(Long.valueOf("26"))
+      .limit(Long.valueOf("1"))
+      .offset(Long.valueOf("0"))
       .preventKeyDeletion(true)
       .totalCount(true)
       .build();
     assertEquals(getRegistrationsAllKeysOptionsModel.bluemixInstance(), "testString");
     assertEquals(getRegistrationsAllKeysOptionsModel.correlationId(), "testString");
+    assertEquals(getRegistrationsAllKeysOptionsModel.xKmsKeyRing(), "testString");
     assertEquals(getRegistrationsAllKeysOptionsModel.urlEncodedResourceCrnQuery(), "crn%3Av1%3Abluemix%3Apublic%3Adatabases-for-postgresql%3Aus-south%3Aa%2F274074dce64e9c423ffc238516c755e1%3A29caf0e7-120f-4da8-9551-3abf57ebcfc7%3A*%3A*");
-    assertEquals(getRegistrationsAllKeysOptionsModel.limit(), Long.valueOf("26"));
-    assertEquals(getRegistrationsAllKeysOptionsModel.offset(), Long.valueOf("26"));
+    assertEquals(getRegistrationsAllKeysOptionsModel.limit(), Long.valueOf("1"));
+    assertEquals(getRegistrationsAllKeysOptionsModel.offset(), Long.valueOf("0"));
     assertEquals(getRegistrationsAllKeysOptionsModel.preventKeyDeletion(), Boolean.valueOf(true));
     assertEquals(getRegistrationsAllKeysOptionsModel.totalCount(), Boolean.valueOf(true));
   }

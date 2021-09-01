@@ -15,13 +15,10 @@ package com.ibm.cloud.ibm_key_protect_api.v2.model;
 
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKeyRingOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
-
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
-
 import java.util.HashMap;
 import java.util.List;
-
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
@@ -35,10 +32,10 @@ public class CreateKeyRingOptionsTest {
   @Test
   public void testCreateKeyRingOptions() throws Throwable {
     CreateKeyRingOptions createKeyRingOptionsModel = new CreateKeyRingOptions.Builder()
-            .keyRingId("testString")
-            .bluemixInstance("testString")
-            .correlationId("testString")
-            .build();
+      .keyRingId("testString")
+      .bluemixInstance("testString")
+      .correlationId("testString")
+      .build();
     assertEquals(createKeyRingOptionsModel.keyRingId(), "testString");
     assertEquals(createKeyRingOptionsModel.bluemixInstance(), "testString");
     assertEquals(createKeyRingOptionsModel.correlationId(), "testString");

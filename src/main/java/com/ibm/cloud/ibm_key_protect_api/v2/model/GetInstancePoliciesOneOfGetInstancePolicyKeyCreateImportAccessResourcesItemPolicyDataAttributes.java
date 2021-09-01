@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -34,8 +34,8 @@ public class GetInstancePoliciesOneOfGetInstancePolicyKeyCreateImportAccessResou
   /**
    * Gets the createRootKey.
    *
-   * If set to `false`, the service prevents you or any authorized users from using Key Protect to  create root keys in
-   * the specified service instance. If set to `true`, Key Protect allows you or  any authorized users to create root
+   * If set to `false`, the service prevents you or any authorized users from using Key Protect to create root keys in
+   * the specified service instance. If set to `true`, Key Protect allows you or any authorized users to create root
    * keys in the instance.
    *
    * **Note:** If omitted, `POST /instance/policies` will set this attribute to the default value (`true`).
@@ -49,9 +49,10 @@ public class GetInstancePoliciesOneOfGetInstancePolicyKeyCreateImportAccessResou
   /**
    * Gets the createStandardKey.
    *
-   * If set to `false`, the service prevents you or any authorized users from using Key Protect to  create standard keys
-   * in the specified service instance. If set to `true`, Key Protect allows you  or any authorized users to create
+   * If set to `false`, the service prevents you or any authorized users from using Key Protect to create standard keys
+   * in the specified service instance. If set to `true`, Key Protect allows you or any authorized users to create
    * standard keys in the instance.
+   *
    * **Note:** If omitted, `POST /instance/policies` will set this attribute to the default value (`true`).
    *
    * @return the createStandardKey
@@ -63,9 +64,10 @@ public class GetInstancePoliciesOneOfGetInstancePolicyKeyCreateImportAccessResou
   /**
    * Gets the importRootKey.
    *
-   * If set to `false`, the service prevents you or any authorized users from importing root keys  into the specified
-   * service instance. If set to `true`, Key Protect allows you or any authorized  users to import root keys into the
+   * If set to `false`, the service prevents you or any authorized users from importing root keys into the specified
+   * service instance. If set to `true`, Key Protect allows you or any authorized users to import root keys into the
    * instance.
+   *
    * **Note:** If omitted, `POST /instance/policies` will set this attribute to the default value (`true`).
    *
    * @return the importRootKey
@@ -77,9 +79,10 @@ public class GetInstancePoliciesOneOfGetInstancePolicyKeyCreateImportAccessResou
   /**
    * Gets the importStandardKey.
    *
-   * If set to `false`, the service prevents you or any authorized users from importing standard keys  into the
-   * specified service instance. If set to `true`, Key Protect allows you or any authorized  users to import standard
-   * keys into the instance.
+   * If set to `false`, the service prevents you or any authorized users from importing standard keys into the specified
+   * service instance. If set to `true`, Key Protect allows you or any authorized users to import standard keys into the
+   * instance.
+   *
    * **Note:** If omitted, `POST /instance/policies` will set this attribute to the default value (`true`).
    *
    * @return the importStandardKey
@@ -91,9 +94,10 @@ public class GetInstancePoliciesOneOfGetInstancePolicyKeyCreateImportAccessResou
   /**
    * Gets the enforceToken.
    *
-   * If set to `true`, the service prevents you or any authorized users from importing key material  into the specified
-   * service instance without using an import token. If set to `false`, Key Protect  allows you or any authorized users
+   * If set to `true`, the service prevents you or any authorized users from importing key material into the specified
+   * service instance without using an import token. If set to `false`, Key Protect allows you or any authorized users
    * to import key material into the instance without the use of an import token.
+   *
    * **Note:** If omitted, `POST /instance/policies` will set this attribute to the default value (`false`).
    *
    * @return the enforceToken

@@ -12,7 +12,7 @@
  */
 
 // >>> Replace "my_services" with the correct value for your project
-package com.ibm.cloud.key_protect.common;
+package com.ibm.cloud.common;
 
 import java.io.InputStream;
 import java.util.HashMap;

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -25,10 +25,10 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class CreateKeyOptions extends GenericModel {
 
   /**
-   * Alters server behavior for POST or DELETE operations. A header with `return=minimal` causes the service to  return
-   * only the key identifier, or metadata. A header containing `return=representation` returns both the key  material
-   * and metadata in the response entity-body. If the key has been designated as a root key, the  system cannot return
-   * the key material.
+   * Alters server behavior for POST or DELETE operations. A header with
+   * `return=minimal` causes the service to return only the key identifier, or metadata. A header containing
+   * `return=representation` returns both the key material and metadata in the response entity-body. If the key has been
+   * designated as a root key, the system cannot return the key material.
    *
    * **Note:** During POST operations, Key Protect may not immediately return the key material due to key generation
    * time. To retrieve the key material, you can perform a subsequent `GET /keys/{id}` request.
@@ -41,24 +41,27 @@ public class CreateKeyOptions extends GenericModel {
   }
 
   protected String bluemixInstance;
-  protected InputStream createKeyOneOf;
+  protected InputStream body;
   protected String correlationId;
   protected String prefer;
+  protected String xKmsKeyRing;
 
   /**
    * Builder.
    */
   public static class Builder {
     private String bluemixInstance;
-    private InputStream createKeyOneOf;
+    private InputStream body;
     private String correlationId;
     private String prefer;
+    private String xKmsKeyRing;
 
     private Builder(CreateKeyOptions createKeyOptions) {
       this.bluemixInstance = createKeyOptions.bluemixInstance;
-      this.createKeyOneOf = createKeyOptions.createKeyOneOf;
+      this.body = createKeyOptions.body;
       this.correlationId = createKeyOptions.correlationId;
       this.prefer = createKeyOptions.prefer;
+      this.xKmsKeyRing = createKeyOptions.xKmsKeyRing;
     }
 
     /**
@@ -71,11 +74,11 @@ public class CreateKeyOptions extends GenericModel {
      * Instantiates a new builder with required properties.
      *
      * @param bluemixInstance the bluemixInstance
-     * @param createKeyOneOf the createKeyOneOf
+     * @param body the body
      */
-    public Builder(String bluemixInstance, InputStream createKeyOneOf) {
+    public Builder(String bluemixInstance, InputStream body) {
       this.bluemixInstance = bluemixInstance;
-      this.createKeyOneOf = createKeyOneOf;
+      this.body = body;
     }
 
     /**
@@ -99,13 +102,13 @@ public class CreateKeyOptions extends GenericModel {
     }
 
     /**
-     * Set the createKeyOneOf.
+     * Set the body.
      *
-     * @param createKeyOneOf the createKeyOneOf
+     * @param body the body
      * @return the CreateKeyOptions builder
      */
-    public Builder createKeyOneOf(InputStream createKeyOneOf) {
-      this.createKeyOneOf = createKeyOneOf;
+    public Builder body(InputStream body) {
+      this.body = body;
       return this;
     }
 
@@ -132,15 +135,26 @@ public class CreateKeyOptions extends GenericModel {
     }
 
     /**
-     * Set the createKeyOneOf.
+     * Set the xKmsKeyRing.
      *
-     * @param createKeyOneOf the createKeyOneOf
+     * @param xKmsKeyRing the xKmsKeyRing
+     * @return the CreateKeyOptions builder
+     */
+    public Builder xKmsKeyRing(String xKmsKeyRing) {
+      this.xKmsKeyRing = xKmsKeyRing;
+      return this;
+    }
+
+    /**
+     * Set the body.
+     *
+     * @param body the body
      * @return the CreateKeyOptions builder
      *
      * @throws FileNotFoundException if the file could not be found
      */
-    public Builder createKeyOneOf(File createKeyOneOf) throws FileNotFoundException {
-      this.createKeyOneOf = new FileInputStream(createKeyOneOf);
+    public Builder body(File body) throws FileNotFoundException {
+      this.body = new FileInputStream(body);
       return this;
     }
   }
@@ -148,12 +162,13 @@ public class CreateKeyOptions extends GenericModel {
   protected CreateKeyOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.bluemixInstance,
       "bluemixInstance cannot be null");
-    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.createKeyOneOf,
-      "createKeyOneOf cannot be null");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.body,
+      "body cannot be null");
     bluemixInstance = builder.bluemixInstance;
-    createKeyOneOf = builder.createKeyOneOf;
+    body = builder.body;
     correlationId = builder.correlationId;
     prefer = builder.prefer;
+    xKmsKeyRing = builder.xKmsKeyRing;
   }
 
   /**
@@ -177,14 +192,14 @@ public class CreateKeyOptions extends GenericModel {
   }
 
   /**
-   * Gets the createKeyOneOf.
+   * Gets the body.
    *
    * The base request for creating a new key.
    *
-   * @return the createKeyOneOf
+   * @return the body
    */
-  public InputStream createKeyOneOf() {
-    return createKeyOneOf;
+  public InputStream body() {
+    return body;
   }
 
   /**
@@ -201,10 +216,10 @@ public class CreateKeyOptions extends GenericModel {
   /**
    * Gets the prefer.
    *
-   * Alters server behavior for POST or DELETE operations. A header with `return=minimal` causes the service to  return
-   * only the key identifier, or metadata. A header containing `return=representation` returns both the key  material
-   * and metadata in the response entity-body. If the key has been designated as a root key, the  system cannot return
-   * the key material.
+   * Alters server behavior for POST or DELETE operations. A header with
+   * `return=minimal` causes the service to return only the key identifier, or metadata. A header containing
+   * `return=representation` returns both the key material and metadata in the response entity-body. If the key has been
+   * designated as a root key, the system cannot return the key material.
    *
    * **Note:** During POST operations, Key Protect may not immediately return the key material due to key generation
    * time. To retrieve the key material, you can perform a subsequent `GET /keys/{id}` request.
@@ -213,6 +228,19 @@ public class CreateKeyOptions extends GenericModel {
    */
   public String prefer() {
     return prefer;
+  }
+
+  /**
+   * Gets the xKmsKeyRing.
+   *
+   * The ID of the key ring that the specified key belongs to. When the header is not specified,  Key Protect will
+   * perform a key ring lookup. For a more optimized request,  specify the key ring on every call. The key ring ID of
+   * keys that are created without an  `X-Kms-Key-Ring` header is: `default`.
+   *
+   * @return the xKmsKeyRing
+   */
+  public String xKmsKeyRing() {
+    return xKmsKeyRing;
   }
 }
 

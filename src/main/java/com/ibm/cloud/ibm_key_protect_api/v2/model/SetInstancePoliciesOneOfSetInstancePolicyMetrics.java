@@ -67,7 +67,7 @@ public class SetInstancePoliciesOneOfSetInstancePolicyMetrics extends SetInstanc
      */
     public Builder addResources(SetInstancePoliciesOneOfSetInstancePolicyMetricsResourcesItem resources) {
       com.ibm.cloud.sdk.core.util.Validator.notNull(resources,
-        "resources cannot be null");
+              "resources cannot be null");
       if (this.resources == null) {
         this.resources = new ArrayList<SetInstancePoliciesOneOfSetInstancePolicyMetricsResourcesItem>();
       }
@@ -101,9 +101,9 @@ public class SetInstancePoliciesOneOfSetInstancePolicyMetrics extends SetInstanc
 
   protected SetInstancePoliciesOneOfSetInstancePolicyMetrics(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.metadata,
-      "metadata cannot be null");
+            "metadata cannot be null");
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.resources,
-      "resources cannot be null");
+            "resources cannot be null");
     metadata = builder.metadata;
     resources = builder.resources;
   }

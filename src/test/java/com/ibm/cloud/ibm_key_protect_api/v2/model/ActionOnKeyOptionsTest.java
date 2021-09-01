@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -15,13 +15,10 @@ package com.ibm.cloud.ibm_key_protect_api.v2.model;
 
 import com.ibm.cloud.ibm_key_protect_api.v2.model.ActionOnKeyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
-
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
-
 import java.util.HashMap;
 import java.util.List;
-
 import org.apache.commons.io.IOUtils;
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;
@@ -38,16 +35,18 @@ public class ActionOnKeyOptionsTest {
     ActionOnKeyOptions actionOnKeyOptionsModel = new ActionOnKeyOptions.Builder()
       .id("testString")
       .bluemixInstance("testString")
-      .action("wrap")
-      .keyActionOneOf(TestUtilities.createMockStream("This is a mock file."))
+      .action("disable")
+      .body(TestUtilities.createMockStream("This is a mock file."))
       .correlationId("testString")
+      .xKmsKeyRing("testString")
       .prefer("return=representation")
       .build();
     assertEquals(actionOnKeyOptionsModel.id(), "testString");
     assertEquals(actionOnKeyOptionsModel.bluemixInstance(), "testString");
-    assertEquals(actionOnKeyOptionsModel.action(), "wrap");
-    assertEquals(IOUtils.toString(actionOnKeyOptionsModel.keyActionOneOf()), IOUtils.toString(TestUtilities.createMockStream("This is a mock file.")));
+    assertEquals(actionOnKeyOptionsModel.action(), "disable");
+    assertEquals(IOUtils.toString(actionOnKeyOptionsModel.body()), IOUtils.toString(TestUtilities.createMockStream("This is a mock file.")));
     assertEquals(actionOnKeyOptionsModel.correlationId(), "testString");
+    assertEquals(actionOnKeyOptionsModel.xKmsKeyRing(), "testString");
     assertEquals(actionOnKeyOptionsModel.prefer(), "return=representation");
   }
 

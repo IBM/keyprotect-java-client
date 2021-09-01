@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -25,10 +25,10 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class RestoreKeyOptions extends GenericModel {
 
   /**
-   * Alters server behavior for POST or DELETE operations. A header with `return=minimal` causes the service to  return
-   * only the key identifier, or metadata. A header containing `return=representation` returns both the key  material
-   * and metadata in the response entity-body. If the key has been designated as a root key, the  system cannot return
-   * the key material.
+   * Alters server behavior for POST or DELETE operations. A header with
+   * `return=minimal` causes the service to return only the key identifier, or metadata. A header containing
+   * `return=representation` returns both the key material and metadata in the response entity-body. If the key has been
+   * designated as a root key, the system cannot return the key material.
    *
    * **Note:** During POST operations, Key Protect may not immediately return the key material due to key generation
    * time. To retrieve the key material, you can perform a subsequent `GET /keys/{id}` request.
@@ -44,6 +44,7 @@ public class RestoreKeyOptions extends GenericModel {
   protected String bluemixInstance;
   protected InputStream keyRestoreBody;
   protected String correlationId;
+  protected String xKmsKeyRing;
   protected String prefer;
 
   /**
@@ -54,6 +55,7 @@ public class RestoreKeyOptions extends GenericModel {
     private String bluemixInstance;
     private InputStream keyRestoreBody;
     private String correlationId;
+    private String xKmsKeyRing;
     private String prefer;
 
     private Builder(RestoreKeyOptions restoreKeyOptions) {
@@ -61,6 +63,7 @@ public class RestoreKeyOptions extends GenericModel {
       this.bluemixInstance = restoreKeyOptions.bluemixInstance;
       this.keyRestoreBody = restoreKeyOptions.keyRestoreBody;
       this.correlationId = restoreKeyOptions.correlationId;
+      this.xKmsKeyRing = restoreKeyOptions.xKmsKeyRing;
       this.prefer = restoreKeyOptions.prefer;
     }
 
@@ -135,6 +138,17 @@ public class RestoreKeyOptions extends GenericModel {
     }
 
     /**
+     * Set the xKmsKeyRing.
+     *
+     * @param xKmsKeyRing the xKmsKeyRing
+     * @return the RestoreKeyOptions builder
+     */
+    public Builder xKmsKeyRing(String xKmsKeyRing) {
+      this.xKmsKeyRing = xKmsKeyRing;
+      return this;
+    }
+
+    /**
      * Set the prefer.
      *
      * @param prefer the prefer
@@ -161,13 +175,14 @@ public class RestoreKeyOptions extends GenericModel {
 
   protected RestoreKeyOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.id,
-            "id cannot be empty");
+      "id cannot be empty");
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.bluemixInstance,
-            "bluemixInstance cannot be null");
+      "bluemixInstance cannot be null");
     id = builder.id;
     bluemixInstance = builder.bluemixInstance;
     keyRestoreBody = builder.keyRestoreBody;
     correlationId = builder.correlationId;
+    xKmsKeyRing = builder.xKmsKeyRing;
     prefer = builder.prefer;
   }
 
@@ -205,7 +220,7 @@ public class RestoreKeyOptions extends GenericModel {
   /**
    * Gets the keyRestoreBody.
    *
-   * The base request for restore key action.
+   * The base request parameters for restore key action.
    *
    * @return the keyRestoreBody
    */
@@ -225,12 +240,25 @@ public class RestoreKeyOptions extends GenericModel {
   }
 
   /**
+   * Gets the xKmsKeyRing.
+   *
+   * The ID of the key ring that the specified key is a part of. When the  header is not specified, Key Protect will
+   * perform a key ring lookup. For  a more optimized request, specify the key ring on every call. The key ring ID of
+   * keys that are created without an `X-Kms-Key-Ring` header is: `default`.
+   *
+   * @return the xKmsKeyRing
+   */
+  public String xKmsKeyRing() {
+    return xKmsKeyRing;
+  }
+
+  /**
    * Gets the prefer.
    *
-   * Alters server behavior for POST or DELETE operations. A header with `return=minimal` causes the service to  return
-   * only the key identifier, or metadata. A header containing `return=representation` returns both the key  material
-   * and metadata in the response entity-body. If the key has been designated as a root key, the  system cannot return
-   * the key material.
+   * Alters server behavior for POST or DELETE operations. A header with
+   * `return=minimal` causes the service to return only the key identifier, or metadata. A header containing
+   * `return=representation` returns both the key material and metadata in the response entity-body. If the key has been
+   * designated as a root key, the system cannot return the key material.
    *
    * **Note:** During POST operations, Key Protect may not immediately return the key material due to key generation
    * time. To retrieve the key material, you can perform a subsequent `GET /keys/{id}` request.

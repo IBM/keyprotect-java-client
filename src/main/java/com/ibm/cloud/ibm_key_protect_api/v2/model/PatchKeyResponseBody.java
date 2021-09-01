@@ -12,9 +12,9 @@
  */
 package com.ibm.cloud.ibm_key_protect_api.v2.model;
 
-import com.ibm.cloud.sdk.core.service.model.GenericModel;
-
 import java.util.List;
+
+import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
  * The base schema for patch key response body.

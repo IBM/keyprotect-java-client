@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -33,6 +33,7 @@ public class PutPolicyOptions extends GenericModel {
   protected String bluemixInstance;
   protected SetKeyPoliciesOneOf setKeyPoliciesOneOf;
   protected String correlationId;
+  protected String xKmsKeyRing;
   protected String policy;
 
   /**
@@ -43,6 +44,7 @@ public class PutPolicyOptions extends GenericModel {
     private String bluemixInstance;
     private SetKeyPoliciesOneOf setKeyPoliciesOneOf;
     private String correlationId;
+    private String xKmsKeyRing;
     private String policy;
 
     private Builder(PutPolicyOptions putPolicyOptions) {
@@ -50,6 +52,7 @@ public class PutPolicyOptions extends GenericModel {
       this.bluemixInstance = putPolicyOptions.bluemixInstance;
       this.setKeyPoliciesOneOf = putPolicyOptions.setKeyPoliciesOneOf;
       this.correlationId = putPolicyOptions.correlationId;
+      this.xKmsKeyRing = putPolicyOptions.xKmsKeyRing;
       this.policy = putPolicyOptions.policy;
     }
 
@@ -126,6 +129,17 @@ public class PutPolicyOptions extends GenericModel {
     }
 
     /**
+     * Set the xKmsKeyRing.
+     *
+     * @param xKmsKeyRing the xKmsKeyRing
+     * @return the PutPolicyOptions builder
+     */
+    public Builder xKmsKeyRing(String xKmsKeyRing) {
+      this.xKmsKeyRing = xKmsKeyRing;
+      return this;
+    }
+
+    /**
      * Set the policy.
      *
      * @param policy the policy
@@ -148,6 +162,7 @@ public class PutPolicyOptions extends GenericModel {
     bluemixInstance = builder.bluemixInstance;
     setKeyPoliciesOneOf = builder.setKeyPoliciesOneOf;
     correlationId = builder.correlationId;
+    xKmsKeyRing = builder.xKmsKeyRing;
     policy = builder.policy;
   }
 
@@ -202,6 +217,19 @@ public class PutPolicyOptions extends GenericModel {
    */
   public String correlationId() {
     return correlationId;
+  }
+
+  /**
+   * Gets the xKmsKeyRing.
+   *
+   * The ID of the key ring that the specified key is a part of. When the  header is not specified, Key Protect will
+   * perform a key ring lookup. For  a more optimized request, specify the key ring on every call. The key ring ID of
+   * keys that are created without an `X-Kms-Key-Ring` header is: `default`.
+   *
+   * @return the xKmsKeyRing
+   */
+  public String xKmsKeyRing() {
+    return xKmsKeyRing;
   }
 
   /**

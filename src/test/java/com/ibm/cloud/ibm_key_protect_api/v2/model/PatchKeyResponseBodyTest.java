@@ -13,15 +13,22 @@
 
 package com.ibm.cloud.ibm_key_protect_api.v2.model;
 
+import com.ibm.cloud.ibm_key_protect_api.v2.model.CollectionMetadata;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.DualAuthKeyMetadata;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyFullRepresentation;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyFullRepresentationAlgorithmMetadata;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyVersion;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.PatchKeyResponseBody;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
-import org.testng.annotations.Test;
-
+import com.ibm.cloud.sdk.core.util.DateUtils;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-
-import static org.testng.Assert.assertNull;
+import org.testng.annotations.Test;
+import static org.testng.Assert.*;
 
 /**
  * Unit test class for the PatchKeyResponseBody model.
