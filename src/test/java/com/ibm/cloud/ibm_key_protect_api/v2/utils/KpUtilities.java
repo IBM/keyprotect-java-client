@@ -15,7 +15,12 @@ package com.ibm.cloud.ibm_key_protect_api.v2.utils;
 
 import com.ibm.cloud.ibm_key_protect_api.v2.IbmKeyProtectApi;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.*;
+import com.ibm.cloud.platform_services.resource_controller.v2.ResourceController;
+import com.ibm.cloud.platform_services.resource_controller.v2.model.CreateResourceInstanceOptions;
+import com.ibm.cloud.platform_services.resource_controller.v2.model.DeleteResourceInstanceOptions;
+import com.ibm.cloud.platform_services.resource_controller.v2.model.ResourceInstance;
 import com.ibm.cloud.sdk.core.http.Response;
+import com.ibm.cloud.sdk.core.security.Authenticator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,6 +41,39 @@ public class KpUtilities {
     private static final Logger logger = LoggerFactory.getLogger(KpUtilities.class);
 
     public KpUtilities() {
+    }
+
+    public static ResourceController getResourceController(Authenticator authenticator) {
+        String serviceName = "resource_controller";
+        ResourceController service = new ResourceController(serviceName, authenticator);
+        service.configureService(serviceName);
+        return service;
+    }
+    public static String createInstance(ResourceController service, String resourceGroup) {
+        String resourceInstanceName = "java-sdk-test-instance";
+        String targetRegion = "us-south";
+        String resourcePlanId = "eedd3585-90c6-4c8f-be3d-062069e99fc3";  // keyprotect tiered-pricing ID
+
+        CreateResourceInstanceOptions createResourceInstanceOptions = new CreateResourceInstanceOptions.Builder()
+                .name(resourceInstanceName)
+                .target(targetRegion)
+                .resourceGroup(resourceGroup)
+                .resourcePlanId(resourcePlanId)
+                .build();
+
+        Response<ResourceInstance> response = service.createResourceInstance(createResourceInstanceOptions).execute();
+        ResourceInstance resourceInstance = response.getResult();
+
+        return resourceInstance.getGuid();
+    }
+
+    public static void deleteInstance(ResourceController service, String instanceGuid) {
+        DeleteResourceInstanceOptions deleteResourceInstanceOptions = new DeleteResourceInstanceOptions.Builder()
+                .id(instanceGuid)
+                .recursive(false)
+                .build();
+
+        Response<Void> response = service.deleteResourceInstance(deleteResourceInstanceOptions).execute();
     }
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect#createkey

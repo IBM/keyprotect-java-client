@@ -15,6 +15,7 @@ package com.ibm.cloud.ibm_key_protect_api.v2;
 
 import com.ibm.cloud.ibm_key_protect_api.v2.model.ListKeyRings;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.KpUtilities;
+import com.ibm.cloud.platform_services.resource_controller.v2.ResourceController;
 import com.ibm.cloud.sdk.core.http.Response;
 import com.ibm.cloud.sdk.core.security.IamAuthenticator;
 import com.ibm.cloud.sdk.core.service.exception.ServiceResponseException;
@@ -30,8 +31,8 @@ import java.util.Map;
 // The following configuration properties are assumed to be exported as environment variables
 //
 // APIKEY=<IBM Cloud APIKEY for the User>
-// KP_INSTANCE_ID=<ID of the service instance to be used >
 // AUTH_URL=<IAM Token Service URL>
+// RESOURCE_GROUP=<ID of the User's Resource Group>
 // KP_SERVICE_URL=<Service URL>
 //
 // API docs: https://cloud.ibm.com/apidocs/key-protect
@@ -43,11 +44,12 @@ public class KeyRingExample {
     //values to be read from the env setting
     private static Map<String, String> config;
     private static String exampleInstance;
+    private static String resourceGroup;
     private static String serviceUrl;
 
     static {
         config = System.getenv();
-        exampleInstance = config.get("KP_INSTANCE_ID");
+        resourceGroup = config.get("RESOURCE_GROUP");
         serviceUrl = config.get("KP_SERVICE_URL");
     }
 
@@ -56,6 +58,10 @@ public class KeyRingExample {
         String sdkKeyRingId = "sdkKeyRingId";
 
         try {
+            // Create an instance
+            ResourceController controllerService = KpUtilities.getResourceController((authenticator));
+            exampleInstance = KpUtilities.createInstance(controllerService, resourceGroup);
+
             IbmKeyProtectApi exampleService = IbmKeyProtectApi.newInstance(authenticator);
             exampleService.setServiceUrl(serviceUrl);
 
@@ -91,6 +97,9 @@ public class KeyRingExample {
             KpUtilities.deleteKeyRing(exampleService, exampleInstance, sdkKeyRingId);
             logger.info(String.format("Key ring %s deleted", sdkKeyRingId));
 
+            // Delete key before deleting the instance
+            KpUtilities.deleteKey(exampleService, exampleInstance, keyId);
+            KpUtilities.deleteInstance(controllerService, exampleInstance);
         } catch (ServiceResponseException sre) {
             logger.error(String.format("Service returned status code %s: %s\nError details: %s",
                     sre.getStatusCode(), sre.getMessage(), sre.getDebuggingInfo()), sre);

@@ -15,22 +15,24 @@ package com.ibm.cloud.ibm_key_protect_api.v2;
 
 import com.ibm.cloud.ibm_key_protect_api.v2.model.*;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.KpUtilities;
+import com.ibm.cloud.platform_services.resource_controller.v2.ResourceController;
 import com.ibm.cloud.sdk.core.http.Response;
 import com.ibm.cloud.sdk.core.security.IamAuthenticator;
 import com.ibm.cloud.sdk.core.service.exception.ServiceResponseException;
-
-import java.io.InputStream;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
 import static org.testng.Assert.*;
-import static org.testng.Assert.assertEquals;
 
 /**
  * Integration test class for the IbmKeyProtectApi service.
@@ -38,8 +40,8 @@ import static org.testng.Assert.assertEquals;
  * The following configuration properties are assumed to be exported as environment variables
  *
  * APIKEY=<IBM Cloud APIKEY for the User>
- * KP_INSTANCE_ID=<ID of the service instance to be used >
  * AUTH_URL=<IAM Token Service URL>
+ * RESOURCE_GROUP=<ID of the User's Resource Group>
  * KP_SERVICE_URL=<Service URL>
  */
 public class IbmKeyProtectApiIT {
@@ -48,6 +50,8 @@ public class IbmKeyProtectApiIT {
 
     private static Map<String, String> config;
     private static String testInstance;
+    private static String resourceGroup;
+    private ResourceController controllerService;
     private static IbmKeyProtectApi testService;
 
     private static String keyName = "sdk-created-key";
@@ -60,9 +64,14 @@ public class IbmKeyProtectApiIT {
     @BeforeClass
     public void constructService() {
         config = System.getenv();
-        testInstance = config.get("KP_INSTANCE_ID");
+        resourceGroup = config.get("RESOURCE_GROUP");
 
         IamAuthenticator authenticator = IamAuthenticator.fromConfiguration(config);
+
+        // Create an instance for test
+        controllerService = KpUtilities.getResourceController((authenticator));
+        testInstance = KpUtilities.createInstance(controllerService, resourceGroup);
+
         testService = IbmKeyProtectApi.newInstance(authenticator);
         testService.setServiceUrl(config.get("KP_SERVICE_URL"));
         logger.info("Setup complete.");
@@ -338,6 +347,7 @@ public class IbmKeyProtectApiIT {
             for (KeyFullRepresentation key: keys)
                 KpUtilities.deleteKey(testService, testInstance, key.getId());
 
+        KpUtilities.deleteInstance(controllerService, testInstance);
         logger.info("Clean up complete.");
     }
 }
