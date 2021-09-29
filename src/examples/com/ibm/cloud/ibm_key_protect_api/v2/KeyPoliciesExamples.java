@@ -62,7 +62,7 @@ public class KeyPoliciesExamples {
 
         try {
             // Create an instance
-            ResourceController controllerService = KpUtilities.getResourceController((authenticator));
+            ResourceController controllerService = KpUtilities.getResourceController(authenticator);
             exampleInstance = KpUtilities.createInstance(controllerService, resourceGroup);
 
             IbmKeyProtectApi exampleService = IbmKeyProtectApi.newInstance(authenticator);

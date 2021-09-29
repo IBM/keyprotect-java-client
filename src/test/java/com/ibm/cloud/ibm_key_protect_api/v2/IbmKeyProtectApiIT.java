@@ -69,7 +69,7 @@ public class IbmKeyProtectApiIT {
         IamAuthenticator authenticator = IamAuthenticator.fromConfiguration(config);
 
         // Create an instance for test
-        controllerService = KpUtilities.getResourceController((authenticator));
+        controllerService = KpUtilities.getResourceController(authenticator);
         testInstance = KpUtilities.createInstance(controllerService, resourceGroup);
 
         testService = IbmKeyProtectApi.newInstance(authenticator);
