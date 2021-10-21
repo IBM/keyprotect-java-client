@@ -9,6 +9,9 @@ jdk:
 env:
   global:
     - MVN_ARGS="--settings build/.travis.settings.xml"
+
+script:
+  - mvn test verify -B
     
 branches:
   except:
