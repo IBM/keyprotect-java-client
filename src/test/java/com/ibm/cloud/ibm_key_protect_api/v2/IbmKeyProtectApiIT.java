@@ -129,6 +129,13 @@ public class IbmKeyProtectApiIT {
                 assertTrue(((ArrayList)e.getDebuggingInfo().get("resources")).get(0).toString().contains("REQ_TOO_EARLY_ERR"));
             }
 
+            // test syncing associated resource, this should fail since the key just got deleted
+            try {
+                KpUtilities.syncAssociatedResources(testService, testInstance, keyId);
+            } catch (ServiceResponseException e) {
+                assertTrue(((ArrayList)e.getDebuggingInfo().get("resources")).get(0).toString().contains("REQ_TOO_EARLY_ERR"));
+            }
+
         } catch (ServiceResponseException e) {
             fail(String.format("Service returned status code %d: %s\nError details: %s",
                     e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));

@@ -230,7 +230,7 @@ public class KpUtilities {
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect#getregistrationsallkeys
     public static Response<RegistrationWithTotalCount> getRegistrationsForInstance(IbmKeyProtectApi testService,
-                                                                              String testInstance, String keyId) {
+                                                                                   String testInstance, String keyId) {
         // Construct an instance of the GetRegistrationsAllKeysOptions model
         GetRegistrationsAllKeysOptions getRegistrationsAllKeysOptionsModel
                 = new GetRegistrationsAllKeysOptions.Builder()
@@ -554,7 +554,7 @@ public class KpUtilities {
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect#deletekeyalias
     public static Response<Void> deleteKeyAlias (IbmKeyProtectApi testService,
-                                       String testInstance, String keyId, String keyAlias) {
+                                                 String testInstance, String keyId, String keyAlias) {
 
         // Construct an instance of the DeleteKeyAliasOptions model
         DeleteKeyAliasOptions deleteKeyAliasOptionsModel = new DeleteKeyAliasOptions.Builder()
@@ -583,7 +583,7 @@ public class KpUtilities {
 
     // API docs: https://cloud.ibm.com/apidocs/key-protect
     public static Response<ListKeyRings> getKeyRings (IbmKeyProtectApi testService,
-                                      String testInstance) {
+                                                      String testInstance) {
 
         // Construct an instance of the ListKeyRingsOptions model
         ListKeyRingsOptions listKeyRingsOptionsModel = new ListKeyRingsOptions.Builder()
@@ -610,7 +610,7 @@ public class KpUtilities {
 
     // https://cloud.ibm.com/apidocs/key-protect#patchkey
     public static Response<PatchKeyResponseBody> setKeyRing (IbmKeyProtectApi testService,
-                                      String testInstance, String keyId, String keyRingId, String newKeyRingId) {
+                                                             String testInstance, String keyId, String keyRingId, String newKeyRingId) {
         // Construct an instance of the PatchKeyOptions model
         PatchKeyOptions patchKeyOptionsModel = new PatchKeyOptions.Builder()
                 .id(keyId)
@@ -625,7 +625,7 @@ public class KpUtilities {
 
     // https://cloud.ibm.com/apidocs/key-protect#purgekey
     public static void purgeKey (IbmKeyProtectApi testService,
-                                   String testInstance, String keyId) {
+                                 String testInstance, String keyId) {
         // Construct an instance of the PurgeKeyOptions model
         PurgeKeyOptions purgeKeyOptionsModel = new PurgeKeyOptions.Builder()
                 .id(keyId)
@@ -635,6 +635,19 @@ public class KpUtilities {
 
         // Invoke operation with valid options model
         Response<PurgeKey> response = testService.purgeKey(purgeKeyOptionsModel).execute();
+    }
+
+    // https://cloud.ibm.com/apidocs/key-protect#syncassociatedresources
+    public static void syncAssociatedResources (IbmKeyProtectApi testService,
+                                                String testInstance, String keyId) {
+        // Construct an instance of the SyncAssociatedResourcesOptions model
+        SyncAssociatedResourcesOptions syncAssociatedResourcesOptions = new SyncAssociatedResourcesOptions.Builder()
+                .id(keyId)
+                .bluemixInstance(testInstance)
+                .build();
+
+        // Invoke operation with valid options model
+        Response<Void> response = testService.syncAssociatedResources(syncAssociatedResourcesOptions).execute();
     }
 
     // payload should be base64 encoded string
