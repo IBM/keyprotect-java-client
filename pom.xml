@@ -233,7 +233,7 @@
             </execution>
           </executions>
           <configuration>
-            <skipITs>false</skipITs>
+            <skipITs>true</skipITs>
           </configuration>
         </plugin>
         <plugin>
