@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.ibm.cloud</groupId>
@@ -70,8 +69,9 @@
     <maven-checkstyle-plugin-version>3.1.0</maven-checkstyle-plugin-version>
     <maven-failsafe-plugin-version>3.0.0-M4</maven-failsafe-plugin-version>
     <maven-buildnumber-plugin-version>1.4</maven-buildnumber-plugin-version>
-    <powermock-version>2.0.5</powermock-version>
-    <mockito-version>3.2.4</mockito-version>
+    <powermock-version>2.0.9</powermock-version>
+    <mockito-version>3.12.4</mockito-version>
+    <surefireJvmArgs></surefireJvmArgs>
   </properties>
 
   <dependencies>
@@ -357,11 +357,13 @@
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>buildnumber-maven-plugin</artifactId>
       </plugin>
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.22.2</version>
+        <version>3.0.0-M5</version>
+        <configuration>
+          <argLine>${surefireJvmArgs}</argLine>
+        </configuration>
       </plugin>
 
     </plugins>
@@ -388,6 +390,22 @@
           </plugin>
         </plugins>
       </build>
+    </profile>
+    <profile>
+      <id>java8</id>
+      <activation>
+        <jdk>1.8</jdk>
+      </activation>
+    </profile>
+    <profile>
+      <id>java16+</id>
+      <activation>
+        <jdk>[16,)</jdk>
+      </activation>
+      <properties>
+        <!-- For java 16 and higher, we need these jvm args when running tests due to errors caused by other libraries. -->
+        <surefireJvmArgs>--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.logging/java.util.logging=ALL-UNNAMED</surefireJvmArgs>
+      </properties>
     </profile>
   </profiles>
 
