@@ -71,6 +71,7 @@
     <maven-buildnumber-plugin-version>1.4</maven-buildnumber-plugin-version>
     <powermock-version>2.0.9</powermock-version>
     <mockito-version>3.12.4</mockito-version>
+    <!-- This property should be empty by default. -->
     <surefireJvmArgs></surefireJvmArgs>
   </properties>
 
@@ -365,7 +366,6 @@
           <argLine>${surefireJvmArgs}</argLine>
         </configuration>
       </plugin>
-
     </plugins>
   </build>
 
@@ -398,12 +398,12 @@
       </activation>
     </profile>
     <profile>
-      <id>java16+</id>
+      <id>java9plus</id>
       <activation>
-        <jdk>[16,)</jdk>
+        <jdk>[9,)</jdk>
       </activation>
       <properties>
-        <!-- For java 16 and higher, we need these jvm args when running tests due to errors caused by other libraries. -->
+        <!-- For java 9 and higher, we need these jvm args when running tests due to errors caused by other libraries. -->
         <surefireJvmArgs>--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.logging/java.util.logging=ALL-UNNAMED</surefireJvmArgs>
       </properties>
     </profile>
