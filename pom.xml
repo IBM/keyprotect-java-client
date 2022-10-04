@@ -3,8 +3,9 @@
 
   <groupId>com.ibm.cloud</groupId>
   <artifactId>ibm-key-protect-sdk</artifactId>
-  <version>0.3.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
+  <packaging>jar</packaging>  
+  <!-- This should be changed to 99-SNAPSHOT and should never need to change after that. -->
+  <version>99-SNAPSHOT</version>
 
   <name>IBM Cloud Key Protect Java SDK</name>
   <description>Java Client Library to access the IBM Cloud Key Protect</description>
@@ -50,6 +51,14 @@
     <url>https://travis.ibm.com/IBM/keyprotect-java-client</url>
   </ciManagement>
 
+  <repositories>
+    <!-- these definitions are useful only for internal SDK projects -->
+    <repository>
+      <id>na-artifactory-ibmcloud-sdks</id>
+      <url>https://na.artifactory.swg-devops.com:443/artifactory/wcp-ibmcloud-sdks-team-maven-local/</url>
+    </repository>
+  </repositories>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
@@ -57,22 +66,35 @@
 
     <!-- version props -->
     <sdk-core-version>9.17.3</sdk-core-version>
-    <testng-version>7.1.0</testng-version>
-    <okhttp3-version>4.9.1</okhttp3-version>
-    <surefire-version>3.0.0-M3</surefire-version>
-    <maven-deploy-plugin-version>3.0.0-M1</maven-deploy-plugin-version>
-    <maven-source-plugin-version>3.1.0</maven-source-plugin-version>
-    <maven-jar-plugin-version>3.2.0</maven-jar-plugin-version>
-    <maven-javadoc-plugin-version>3.1.1</maven-javadoc-plugin-version>
-    <maven-compiler-plugin-version>3.8.1</maven-compiler-plugin-version>
-    <maven-site-plugin-version>3.7.1</maven-site-plugin-version>
-    <maven-checkstyle-plugin-version>3.1.0</maven-checkstyle-plugin-version>
-    <maven-failsafe-plugin-version>3.0.0-M4</maven-failsafe-plugin-version>
-    <maven-buildnumber-plugin-version>1.4</maven-buildnumber-plugin-version>
+    <testng-version>7.4.0</testng-version>
+    <okhttp3-version>4.10.0</okhttp3-version>
+    <surefire-version>3.0.0-M7</surefire-version>
+    <maven-deploy-plugin-version>3.0.0</maven-deploy-plugin-version>
+    <maven-source-plugin-version>3.2.1</maven-source-plugin-version>
+    <maven-shade-plugin-version>3.3.0</maven-shade-plugin-version>
+    <maven-jar-plugin-version>3.2.2</maven-jar-plugin-version>
+    <maven-javadoc-plugin-version>3.4.1</maven-javadoc-plugin-version>
+    <maven-compiler-plugin-version>3.10.1</maven-compiler-plugin-version>
+    <maven-site-plugin-version>3.12.1</maven-site-plugin-version>
+    <maven-checkstyle-plugin-version>3.2.0</maven-checkstyle-plugin-version>
+    <checkstyle-version>8.41</checkstyle-version>
+    <maven-failsafe-plugin-version>3.0.0-M7</maven-failsafe-plugin-version>
+    <maven-reports-plugin-version>3.4.1</maven-reports-plugin-version>
+    <maven-buildnumber-plugin-version>3.0.0</maven-buildnumber-plugin-version>
     <powermock-version>2.0.9</powermock-version>
-    <mockito-version>3.12.4</mockito-version>
-    <!-- This property should be empty by default. -->
-    <surefireJvmArgs></surefireJvmArgs>
+    <mockito-version>3.2.4</mockito-version>
+    <nexus-staging-plugin-version>1.6.13</nexus-staging-plugin-version>
+    <maven-gpg-plugin-version>3.0.1</maven-gpg-plugin-version>
+    <slf4j-version>2.0.0</slf4j-version>
+    <jacoco-plugin-version>0.8.8</jacoco-plugin-version>
+    <ic-rc-version>0.19.2</ic-rc-version>
+    <gson-version>2.9.1</gson-version>
+    <slf4j-version>1.7.12</slf4j-version>
+    <javax-json-version>1.0</javax-json-version>
+    <glassfish-version>1.0.4</glassfish-version>    
+
+    <!-- versions of transitive dependencies we need to override to avoid vulnerability alerts -->
+    <junit-version>4.13.2</junit-version>
   </properties>
 
   <dependencies>
@@ -80,17 +102,17 @@
     <dependency>
       <groupId>com.ibm.cloud</groupId>
       <artifactId>sdk-core</artifactId>
-      <version>9.17.3</version>
+      <version>${sdk-core-version}</version>
     </dependency>
     <dependency>
       <groupId>com.ibm.cloud</groupId>
       <artifactId>resource-controller</artifactId>
-      <version>0.19.2</version>
+      <version>${ic-rc-version}</version>
     </dependency>
     <dependency>
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
-      <version>2.9.1</version>
+      <version>${gson-version}</version>
     </dependency>
     <!-- TestNG is used to run unit/integration tests -->
     <dependency>
@@ -125,22 +147,22 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-      <version>1.7.12</version>
+      <version>${slf4j-version}</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
-      <version>1.7.12</version>
+      <version>${slf4j-version}</version>
     </dependency>
     <dependency>
       <groupId>javax.json</groupId>
       <artifactId>javax.json-api</artifactId>
-      <version>1.0</version>
+      <version>${javax-json-version}</version>
     </dependency>
     <dependency>
       <groupId>org.glassfish</groupId>
       <artifactId>javax.json</artifactId>
-      <version>1.0.4</version>
+      <version>${glassfish-version}</version>
     </dependency>
   </dependencies>
 
@@ -158,6 +180,16 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-deploy-plugin</artifactId>
           <version>${maven-deploy-plugin-version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.sonatype.plugins</groupId>
+          <artifactId>nexus-staging-maven-plugin</artifactId>
+          <version>${nexus-staging-plugin-version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-gpg-plugin</artifactId>
+          <version>${maven-gpg-plugin-version}</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -222,6 +254,31 @@
           </configuration>
         </plugin>
         <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>${jacoco-plugin-version}</version>
+          <executions>
+            <execution>
+              <id>prepare-agent</id>
+              <goals>
+                <goal>prepare-agent</goal>
+              </goals>
+            </execution>
+            <execution>
+              <id>report</id>
+              <phase>test</phase>
+              <goals>
+                <goal>report</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <systemPropertyVariables>
+              <jacoco-agent.destfile>${project.build.directory}</jacoco-agent.destfile>
+            </systemPropertyVariables>
+          </configuration>
+        </plugin>
+        <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-failsafe-plugin</artifactId>
           <version>${maven-failsafe-plugin-version}</version>
@@ -283,8 +340,22 @@
             </archive>
           </configuration>
         </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-shade-plugin</artifactId>
+          <version>${maven-shade-plugin-version}</version>
+          <executions>
+            <execution>
+              <phase>package</phase>
+              <goals>
+                <goal>shade</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
       </plugins>
     </pluginManagement>
+
     <plugins>
       <!-- Disable default maven-deploy-plugin -->
       <plugin>
@@ -295,7 +366,7 @@
         </configuration>
       </plugin>
 
-      <plugin>
+      <!-- plugin>
         <groupId>org.sonatype.plugins</groupId>
         <artifactId>nexus-staging-maven-plugin</artifactId>
         <version>1.6.7</version>
@@ -305,7 +376,7 @@
           <nexusUrl>https://oss.sonatype.org/</nexusUrl>
           <autoReleaseAfterClose>false</autoReleaseAfterClose>
         </configuration>
-      </plugin>
+      </plugin -->
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -324,6 +395,11 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
       </plugin>
 
       <plugin>
@@ -358,14 +434,13 @@
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>buildnumber-maven-plugin</artifactId>
       </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.0.0-M5</version>
-        <configuration>
-          <argLine>${surefireJvmArgs}</argLine>
-        </configuration>
+        <version>${surefire-version}</version>
       </plugin>
+
     </plugins>
   </build>
 
@@ -392,21 +467,85 @@
       </build>
     </profile>
     <profile>
-      <id>java8</id>
-      <activation>
-        <jdk>1.8</jdk>
-      </activation>
-    </profile>
-    <profile>
+      <!-- When using java 9+ we need to use the "add-opens" jvm option to allow powermock to do its thing -->
       <id>java9plus</id>
       <activation>
         <jdk>[9,)</jdk>
       </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>${surefire-version}</version>
+            <configuration>
+              <skipTests>${skip.unit.tests}</skipTests>
+              <argLine>--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED</argLine>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <!-- "central" is used to deploy artifacts on maven central -->
+    <profile>
+      <id>central</id>
+
+      <!-- For this profile, we'll get dependencies from maven central -->
+      <repositories></repositories>
+
+      <distributionManagement>
+        <snapshotRepository>
+          <!-- We don't deploy snapshot releases -->
+        </snapshotRepository>
+        <repository>
+          <!-- This is where the nexus staging plugin will publish artifacts -->
+          <id>ossrh</id>
+          <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+      </distributionManagement>
+
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <extensions>true</extensions>
+            <configuration>
+              <serverId>ossrh</serverId>
+              <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+              <autoReleaseAfterClose>true</autoReleaseAfterClose>
+              <keepStagingRepositoryOnCloseRuleFailure>true</keepStagingRepositoryOnCloseRuleFailure>
+            </configuration>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <gpgArguments>
+                <arg>--batch</arg>
+                <arg>--pinentry-mode</arg>
+                <arg>loopback</arg>
+              </gpgArguments>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
       <properties>
-        <!-- For java 9 and higher, we need these jvm args when running tests due to errors caused by other libraries. -->
-        <surefireJvmArgs>--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.logging/java.util.logging=ALL-UNNAMED</surefireJvmArgs>
+        <!-- Configure the gpg plugin to use the env vars defined in the Travis build settings -->
+        <gpg.keyname>${env.GPG_KEYNAME}</gpg.keyname>
+        <gpg.passphrase>${env.GPG_PASSPHRASE}</gpg.passphrase>
       </properties>
     </profile>
-  </profiles>
 
+  </profiles>
 </project>
