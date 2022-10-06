@@ -1,3 +1,10 @@
+## [0.2.4](https://github.com/IBM/keyprotect-java-client/compare/0.2.3...0.2.4) (2022-10-06)
+
+
+### Bug Fixes
+
+* **build:** fix publishing gh-pages ([#36](https://github.com/IBM/keyprotect-java-client/issues/36)) ([2dfa1f3](https://github.com/IBM/keyprotect-java-client/commit/2dfa1f3cabc65139160eef5c39589b2902a9ffe7))
+
 ## [0.2.3](https://github.com/IBM/keyprotect-java-client/compare/0.2.2...0.2.3) (2022-10-06)
 
 
