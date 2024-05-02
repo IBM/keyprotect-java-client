@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -34,6 +34,8 @@ public class SetMultipleInstancePoliciesResourcesItem extends GenericModel {
     String KEYCREATEIMPORTACCESS = "keyCreateImportAccess";
     /** metrics. */
     String METRICS = "metrics";
+    /** rotation. */
+    String ROTATION = "rotation";
   }
 
   @SerializedName("policy_type")
@@ -48,6 +50,11 @@ public class SetMultipleInstancePoliciesResourcesItem extends GenericModel {
     private String policyType;
     private SetMultipleInstancePoliciesResourcesItemPolicyData policyData;
 
+    /**
+     * Instantiates a new Builder from an existing SetMultipleInstancePoliciesResourcesItem instance.
+     *
+     * @param setMultipleInstancePoliciesResourcesItem the instance to initialize the Builder with
+     */
     private Builder(SetMultipleInstancePoliciesResourcesItem setMultipleInstancePoliciesResourcesItem) {
       this.policyType = setMultipleInstancePoliciesResourcesItem.policyType;
       this.policyData = setMultipleInstancePoliciesResourcesItem.policyData;
@@ -101,6 +108,8 @@ public class SetMultipleInstancePoliciesResourcesItem extends GenericModel {
       return this;
     }
   }
+
+  protected SetMultipleInstancePoliciesResourcesItem() { }
 
   protected SetMultipleInstancePoliciesResourcesItem(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.policyType,

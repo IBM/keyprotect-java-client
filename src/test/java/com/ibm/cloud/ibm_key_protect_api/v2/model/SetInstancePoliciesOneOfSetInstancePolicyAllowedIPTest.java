@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -21,8 +21,6 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.SetInstancePoliciesOneOfSetIns
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import org.testng.annotations.Test;
@@ -45,9 +43,9 @@ public class SetInstancePoliciesOneOfSetInstancePolicyAllowedIPTest {
     assertEquals(collectionMetadataModel.collectionTotal(), Long.valueOf("1"));
 
     AllowedIPProperties allowedIpPropertiesModel = new AllowedIPProperties.Builder()
-      .allowedIp(new java.util.ArrayList<String>(java.util.Arrays.asList("10.1.0.0/32", "10.0.0.0/24", "192.0.2.0/32", "198.51.100.0/24", "2001:db8::/60")))
+      .allowedIp(java.util.Arrays.asList("10.1.0.0/32", "10.0.0.0/24", "192.0.2.0/32", "198.51.100.0/24", "2001:db8::/60"))
       .build();
-    assertEquals(allowedIpPropertiesModel.allowedIp(), new java.util.ArrayList<String>(java.util.Arrays.asList("10.1.0.0/32", "10.0.0.0/24", "192.0.2.0/32", "198.51.100.0/24", "2001:db8::/60")));
+    assertEquals(allowedIpPropertiesModel.allowedIp(), java.util.Arrays.asList("10.1.0.0/32", "10.0.0.0/24", "192.0.2.0/32", "198.51.100.0/24", "2001:db8::/60"));
 
     InstancePolicyAllowedIPPolicyData instancePolicyAllowedIpPolicyDataModel = new InstancePolicyAllowedIPPolicyData.Builder()
       .enabled(true)
@@ -65,10 +63,10 @@ public class SetInstancePoliciesOneOfSetInstancePolicyAllowedIPTest {
 
     SetInstancePoliciesOneOfSetInstancePolicyAllowedIP setInstancePoliciesOneOfSetInstancePolicyAllowedIpModel = new SetInstancePoliciesOneOfSetInstancePolicyAllowedIP.Builder()
       .metadata(collectionMetadataModel)
-      .resources(new java.util.ArrayList<SetInstancePoliciesOneOfSetInstancePolicyAllowedIPResourcesItem>(java.util.Arrays.asList(setInstancePoliciesOneOfSetInstancePolicyAllowedIpResourcesItemModel)))
+      .resources(java.util.Arrays.asList(setInstancePoliciesOneOfSetInstancePolicyAllowedIpResourcesItemModel))
       .build();
     assertEquals(setInstancePoliciesOneOfSetInstancePolicyAllowedIpModel.metadata(), collectionMetadataModel);
-    assertEquals(setInstancePoliciesOneOfSetInstancePolicyAllowedIpModel.resources(), new java.util.ArrayList<SetInstancePoliciesOneOfSetInstancePolicyAllowedIPResourcesItem>(java.util.Arrays.asList(setInstancePoliciesOneOfSetInstancePolicyAllowedIpResourcesItemModel)));
+    assertEquals(setInstancePoliciesOneOfSetInstancePolicyAllowedIpModel.resources(), java.util.Arrays.asList(setInstancePoliciesOneOfSetInstancePolicyAllowedIpResourcesItemModel));
 
     String json = TestUtilities.serialize(setInstancePoliciesOneOfSetInstancePolicyAllowedIpModel);
 

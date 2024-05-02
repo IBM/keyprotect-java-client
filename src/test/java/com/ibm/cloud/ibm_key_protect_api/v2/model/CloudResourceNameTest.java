@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -32,14 +32,14 @@ public class CloudResourceNameTest {
   @Test
   public void testCloudResourceName() throws Throwable {
     CloudResourceName cloudResourceNameModel = new CloudResourceName.Builder()
-      .resourceCrn("crn:v1:bluemix:public:cloud-object-storage:global:a/<account-id>:<service-instance>:bucket:<bucket-name>")
+      .resourceCrn("crn:v1:bluemix:public:<service-name>:<location>:a/<account-id>:<service-instance>:<resource-type>:<resource>")
       .build();
-    assertEquals(cloudResourceNameModel.resourceCrn(), "crn:v1:bluemix:public:cloud-object-storage:global:a/<account-id>:<service-instance>:bucket:<bucket-name>");
+    assertEquals(cloudResourceNameModel.resourceCrn(), "crn:v1:bluemix:public:<service-name>:<location>:a/<account-id>:<service-instance>:<resource-type>:<resource>");
 
     String json = TestUtilities.serialize(cloudResourceNameModel);
 
     CloudResourceName cloudResourceNameModelNew = TestUtilities.deserialize(json, CloudResourceName.class);
     assertTrue(cloudResourceNameModelNew instanceof CloudResourceName);
-    assertEquals(cloudResourceNameModelNew.resourceCrn(), "crn:v1:bluemix:public:cloud-object-storage:global:a/<account-id>:<service-instance>:bucket:<bucket-name>");
+    assertEquals(cloudResourceNameModelNew.resourceCrn(), "crn:v1:bluemix:public:<service-name>:<location>:a/<account-id>:<service-instance>:<resource-type>:<resource>");
   }
 }

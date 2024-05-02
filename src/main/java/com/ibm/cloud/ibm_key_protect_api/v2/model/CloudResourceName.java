@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -27,6 +27,11 @@ public class CloudResourceName extends GenericModel {
   public static class Builder {
     private String resourceCrn;
 
+    /**
+     * Instantiates a new Builder from an existing CloudResourceName instance.
+     *
+     * @param cloudResourceName the instance to initialize the Builder with
+     */
     private Builder(CloudResourceName cloudResourceName) {
       this.resourceCrn = cloudResourceName.resourceCrn;
     }
@@ -57,6 +62,8 @@ public class CloudResourceName extends GenericModel {
       return this;
     }
   }
+
+  protected CloudResourceName() { }
 
   protected CloudResourceName(Builder builder) {
     resourceCrn = builder.resourceCrn;

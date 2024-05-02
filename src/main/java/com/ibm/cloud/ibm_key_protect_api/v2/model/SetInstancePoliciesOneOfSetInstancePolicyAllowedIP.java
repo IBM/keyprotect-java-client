@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -28,6 +28,11 @@ public class SetInstancePoliciesOneOfSetInstancePolicyAllowedIP extends SetInsta
     private CollectionMetadata metadata;
     private List<SetInstancePoliciesOneOfSetInstancePolicyAllowedIPResourcesItem> resources;
 
+    /**
+     * Instantiates a new Builder from an existing SetInstancePoliciesOneOfSetInstancePolicyAllowedIP instance.
+     *
+     * @param setInstancePoliciesOneOfSetInstancePolicyAllowedIp the instance to initialize the Builder with
+     */
     public Builder(SetInstancePoliciesOneOf setInstancePoliciesOneOfSetInstancePolicyAllowedIp) {
       this.metadata = setInstancePoliciesOneOfSetInstancePolicyAllowedIp.metadata;
       this.resources = setInstancePoliciesOneOfSetInstancePolicyAllowedIp.resources;
@@ -98,6 +103,8 @@ public class SetInstancePoliciesOneOfSetInstancePolicyAllowedIP extends SetInsta
       return this;
     }
   }
+
+  protected SetInstancePoliciesOneOfSetInstancePolicyAllowedIP() { }
 
   protected SetInstancePoliciesOneOfSetInstancePolicyAllowedIP(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.metadata,

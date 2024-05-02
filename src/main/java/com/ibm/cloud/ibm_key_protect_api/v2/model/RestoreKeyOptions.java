@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -25,11 +25,10 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class RestoreKeyOptions extends GenericModel {
 
   /**
-   * Alters server behavior for POST or DELETE operations. A header with
-   * `return=minimal` causes the service to return only the key identifier, or metadata. A header containing
-   * `return=representation` returns both the key material and metadata in the response entity-body. If the key has been
-   * designated as a root key, the system cannot return the key material.
-   *
+   * Alters server behavior for POST or DELETE operations. A header with `return=minimal` causes the service to return
+   * only the key identifier as metadata. A header containing `return=representation` returns both the key material and
+   * metadata in the response entity-body. If the key has been designated as a root key, the system cannot return the
+   * key material.
    * **Note:** During POST operations, Key Protect may not immediately return the key material due to key generation
    * time. To retrieve the key material, you can perform a subsequent `GET /keys/{id}` request.
    */
@@ -58,6 +57,11 @@ public class RestoreKeyOptions extends GenericModel {
     private String xKmsKeyRing;
     private String prefer;
 
+    /**
+     * Instantiates a new Builder from an existing RestoreKeyOptions instance.
+     *
+     * @param restoreKeyOptions the instance to initialize the Builder with
+     */
     private Builder(RestoreKeyOptions restoreKeyOptions) {
       this.id = restoreKeyOptions.id;
       this.bluemixInstance = restoreKeyOptions.bluemixInstance;
@@ -173,6 +177,8 @@ public class RestoreKeyOptions extends GenericModel {
     }
   }
 
+  protected RestoreKeyOptions() { }
+
   protected RestoreKeyOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.id,
       "id cannot be empty");
@@ -198,7 +204,7 @@ public class RestoreKeyOptions extends GenericModel {
   /**
    * Gets the id.
    *
-   * The v4 UUID that uniquely identifies the key.
+   * The v4 UUID or alias that uniquely identifies the key.
    *
    * @return the id
    */
@@ -255,11 +261,10 @@ public class RestoreKeyOptions extends GenericModel {
   /**
    * Gets the prefer.
    *
-   * Alters server behavior for POST or DELETE operations. A header with
-   * `return=minimal` causes the service to return only the key identifier, or metadata. A header containing
-   * `return=representation` returns both the key material and metadata in the response entity-body. If the key has been
-   * designated as a root key, the system cannot return the key material.
-   *
+   * Alters server behavior for POST or DELETE operations. A header with `return=minimal` causes the service to return
+   * only the key identifier as metadata. A header containing `return=representation` returns both the key material and
+   * metadata in the response entity-body. If the key has been designated as a root key, the system cannot return the
+   * key material.
    * **Note:** During POST operations, Key Protect may not immediately return the key material due to key generation
    * time. To retrieve the key material, you can perform a subsequent `GET /keys/{id}` request.
    *

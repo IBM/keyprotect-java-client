@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -20,11 +20,10 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class DeleteKeyOptions extends GenericModel {
 
   /**
-   * Alters server behavior for POST or DELETE operations. A header with
-   * `return=minimal` causes the service to return only the key identifier, or metadata. A header containing
-   * `return=representation` returns both the key material and metadata in the response entity-body. If the key has been
-   * designated as a root key, the system cannot return the key material.
-   *
+   * Alters server behavior for POST or DELETE operations. A header with `return=minimal` causes the service to return
+   * only the key identifier as metadata. A header containing `return=representation` returns both the key material and
+   * metadata in the response entity-body. If the key has been designated as a root key, the system cannot return the
+   * key material.
    * **Note:** During POST operations, Key Protect may not immediately return the key material due to key generation
    * time. To retrieve the key material, you can perform a subsequent `GET /keys/{id}` request.
    */
@@ -53,6 +52,11 @@ public class DeleteKeyOptions extends GenericModel {
     private String prefer;
     private Boolean force;
 
+    /**
+     * Instantiates a new Builder from an existing DeleteKeyOptions instance.
+     *
+     * @param deleteKeyOptions the instance to initialize the Builder with
+     */
     private Builder(DeleteKeyOptions deleteKeyOptions) {
       this.id = deleteKeyOptions.id;
       this.bluemixInstance = deleteKeyOptions.bluemixInstance;
@@ -155,6 +159,8 @@ public class DeleteKeyOptions extends GenericModel {
     }
   }
 
+  protected DeleteKeyOptions() { }
+
   protected DeleteKeyOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.id,
       "id cannot be empty");
@@ -226,11 +232,10 @@ public class DeleteKeyOptions extends GenericModel {
   /**
    * Gets the prefer.
    *
-   * Alters server behavior for POST or DELETE operations. A header with
-   * `return=minimal` causes the service to return only the key identifier, or metadata. A header containing
-   * `return=representation` returns both the key material and metadata in the response entity-body. If the key has been
-   * designated as a root key, the system cannot return the key material.
-   *
+   * Alters server behavior for POST or DELETE operations. A header with `return=minimal` causes the service to return
+   * only the key identifier as metadata. A header containing `return=representation` returns both the key material and
+   * metadata in the response entity-body. If the key has been designated as a root key, the system cannot return the
+   * key material.
    * **Note:** During POST operations, Key Protect may not immediately return the key material due to key generation
    * time. To retrieve the key material, you can perform a subsequent `GET /keys/{id}` request.
    *
@@ -245,12 +250,10 @@ public class DeleteKeyOptions extends GenericModel {
    *
    * If set to `true`, Key Protect forces deletion on a key that is protecting a cloud resource, such as a Cloud Object
    * Storage bucket. The action removes any registrations that are associated with the key.
-   *
    * **Note:** If a key is protecting a cloud resource that has a retention policy, Key Protect cannot delete the key.
-   * Use
-   * `GET keys/{id}/registrations` to review registrations between the key and its associated cloud resources. To enable
-   * deletion, contact an account owner to remove the retention policy on each resource that is associated with this
-   * key.
+   * Use `GET keys/{id}/registrations` to review registrations between the key and its associated cloud resources. To
+   * enable deletion, contact an account owner to remove the retention policy on each resource that is associated with
+   * this key.
    *
    * @return the force
    */

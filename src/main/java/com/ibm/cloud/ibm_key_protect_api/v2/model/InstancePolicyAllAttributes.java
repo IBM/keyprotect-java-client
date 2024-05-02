@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -49,6 +49,10 @@ public class InstancePolicyAllAttributes extends GenericModel {
   protected Boolean importStandardKey;
   @SerializedName("enforce_token")
   protected Boolean enforceToken;
+  @SerializedName("interval_month")
+  protected Long intervalMonth;
+
+  protected InstancePolicyAllAttributes() { }
 
   /**
    * Gets the allowedNetwork.
@@ -68,19 +72,15 @@ public class InstancePolicyAllAttributes extends GenericModel {
    *
    * A string array of IPv4 or IPv6 CIDR notated subnets that are authorized to interact with the instance. If both
    * `allowedNetwork` and `allowedIP` policies are set, only traffic aligning with both the `allowed_network` allowed
-   * network policy attribute and the
-   * `allowed_ip` allowed IP policy attribute will be allowed.
-   *
-   * IPv4 and iIP6 addresses are accepted for public endpoints. Only the IPv4 private network gateway addresses from the
-   * array will be authorized to access your instance via private endpoint.
-   *
-   * **Important:** Once set, accessing your instance may require additional steps. Please visit
-   * [Accessing an instance via public
-   * endpoint](/docs/key-protect?topic=key-protect-manage-allowed-ip#access-allowed-ip-public-endpoint) and
-   * [Accessing an instance via private
+   * network policy attribute and the `allowed_ip` allowed IP policy attribute will be allowed. IPv4 and iIP6 addresses
+   * are accepted for public endpoints. Only the IPv4 private network gateway addresses from the array will be
+   * authorized to access your instance via private endpoint.
+   * **Important:** Once set, accessing your instance may require additional steps. For more information, see [Accessing
+   * an instance via public
+   * endpoint](/docs/key-protect?topic=key-protect-manage-allowed-ip#access-allowed-ip-public-endpoint) and [Accessing
+   * an instance via private
    * endpoint](/docs/key-protect?topic=key-protect-manage-allowed-ip#access-allowed-ip-private-endpoint) for more
    * details.
-   *
    * **Note:** An allowed IP policy does not affect requests from other IBM Cloud services.
    *
    * @return the allowedIp
@@ -95,7 +95,6 @@ public class InstancePolicyAllAttributes extends GenericModel {
    * If set to `false`, the service prevents you or any authorized users from using Key Protect to create root keys in
    * the specified service instance. If set to `true`, Key Protect allows you or any authorized users to create root
    * keys in the instance.
-   *
    * **Note:** If omitted, `POST /instance/policies` will set this attribute to the default value (`true`).
    *
    * @return the createRootKey
@@ -110,7 +109,6 @@ public class InstancePolicyAllAttributes extends GenericModel {
    * If set to `false`, the service prevents you or any authorized users from using Key Protect to create standard keys
    * in the specified service instance. If set to `true`, Key Protect allows you or any authorized users to create
    * standard keys in the instance.
-   *
    * **Note:** If omitted, `POST /instance/policies` will set this attribute to the default value (`true`).
    *
    * @return the createStandardKey
@@ -125,7 +123,6 @@ public class InstancePolicyAllAttributes extends GenericModel {
    * If set to `false`, the service prevents you or any authorized users from importing root keys into the specified
    * service instance. If set to `true`, Key Protect allows you or any authorized users to import root keys into the
    * instance.
-   *
    * **Note:** If omitted, `POST /instance/policies` will set this attribute to the default value (`true`).
    *
    * @return the importRootKey
@@ -140,7 +137,6 @@ public class InstancePolicyAllAttributes extends GenericModel {
    * If set to `false`, the service prevents you or any authorized users from importing standard keys into the specified
    * service instance. If set to `true`, Key Protect allows you or any authorized users to import standard keys into the
    * instance.
-   *
    * **Note:** If omitted, `POST /instance/policies` will set this attribute to the default value (`true`).
    *
    * @return the importStandardKey
@@ -155,13 +151,24 @@ public class InstancePolicyAllAttributes extends GenericModel {
    * If set to `true`, the service prevents you or any authorized users from importing key material into the specified
    * service instance without using an import token. If set to `false`, Key Protect allows you or any authorized users
    * to import key material into the instance without the use of an import token.
-   *
    * **Note:** If omitted, `POST /instance/policies` will set this attribute to the default value (`false`).
    *
    * @return the enforceToken
    */
   public Boolean isEnforceToken() {
     return enforceToken;
+  }
+
+  /**
+   * Gets the intervalMonth.
+   *
+   * Specifies the key rotation time interval in approximate months, where a month is equivalent to 30 days. A minimum
+   * of 1 and a maximum of 12 can be set.
+   *
+   * @return the intervalMonth
+   */
+  public Long getIntervalMonth() {
+    return intervalMonth;
   }
 }
 

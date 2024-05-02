@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -33,6 +33,11 @@ public class EnableKeyOptions extends GenericModel {
     private String correlationId;
     private String xKmsKeyRing;
 
+    /**
+     * Instantiates a new Builder from an existing EnableKeyOptions instance.
+     *
+     * @param enableKeyOptions the instance to initialize the Builder with
+     */
     private Builder(EnableKeyOptions enableKeyOptions) {
       this.id = enableKeyOptions.id;
       this.bluemixInstance = enableKeyOptions.bluemixInstance;
@@ -111,6 +116,8 @@ public class EnableKeyOptions extends GenericModel {
     }
   }
 
+  protected EnableKeyOptions() { }
+
   protected EnableKeyOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.id,
       "id cannot be empty");
@@ -134,7 +141,7 @@ public class EnableKeyOptions extends GenericModel {
   /**
    * Gets the id.
    *
-   * The v4 UUID that uniquely identifies the key.
+   * The v4 UUID or alias that uniquely identifies the key.
    *
    * @return the id
    */

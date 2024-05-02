@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -36,12 +36,12 @@ public class EventAcknowledgeOptionsTest {
       .bluemixInstance("testString")
       .body(TestUtilities.createMockStream("This is a mock file."))
       .correlationId("testString")
-      .xKmsKeyRing("testString")
+      .xKmsKeyRing("default")
       .build();
     assertEquals(eventAcknowledgeOptionsModel.bluemixInstance(), "testString");
     assertEquals(IOUtils.toString(eventAcknowledgeOptionsModel.body()), IOUtils.toString(TestUtilities.createMockStream("This is a mock file.")));
     assertEquals(eventAcknowledgeOptionsModel.correlationId(), "testString");
-    assertEquals(eventAcknowledgeOptionsModel.xKmsKeyRing(), "testString");
+    assertEquals(eventAcknowledgeOptionsModel.xKmsKeyRing(), "default");
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

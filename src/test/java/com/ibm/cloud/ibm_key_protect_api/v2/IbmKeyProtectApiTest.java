@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -12,37 +12,240 @@
  */
 package com.ibm.cloud.ibm_key_protect_api.v2;
 
-import com.ibm.cloud.ibm_key_protect_api.v2.model.*;
+import com.ibm.cloud.ibm_key_protect_api.v2.IbmKeyProtectApi;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.ActionOnKeyOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.ActionOnRegistrationOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.ActionOnRegistrationResponse;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.ActionOnRegistrationResponseDeactivateRegistration;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.AddKmipClientCertificateOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.AllowedIPPort;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.AllowedIPPortResource;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.AllowedIPProperties;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.CIPResource;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.CIPResourceConfigStateItem;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.CIPResourceConfigStateItemAdditionalTargetAttributes;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.CIPResourceNext;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.CloudResourceName;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.CollectionMetadata;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.CollectionMetadataListKeys;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.CollectionMetadataOneOf;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.CollectionMetadataOneOfCollectionMetadata;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.CollectionMetadataOneOfCollectionMetadataWithQuota;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.CollectionMetadataWithTotalCount;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKMIPAdapterRequestBodyResourcesItem;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKMIPClientCertificateObject;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKeyAliasOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKeyOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKeyRingOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKeyWithPoliciesOverridesOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKmipAdapterOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateMigrationIntentObject;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateMigrationIntentOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateRegistrationOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateRegistrationResourceBody;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.CryptoV2GetInstanceEndpointsOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.CurrentConfig;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.CurrentConfigNestedProperty;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.CurrentConfigSimpleProperty;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKey;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKeyAliasOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKeyOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKeyRingOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKmipAdapterOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKmipClientCertificateOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteMigrationIntentOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteRegistrationOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.DisableKeyOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.DualAuthDeleteProperties;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.DualAuthKeyMetadata;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.EnableKeyOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.EventAcknowledgeOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetAllowedIPPortOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetGovernanceConfigOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetGovernanceConfigPager;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetImportToken;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetImportTokenOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstanceEndpointInfo;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstanceEndpointInfoKms;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstancePoliciesOneOf;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstancePoliciesOneOfGetInstancePolicyAllowedIP;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstancePoliciesOneOfGetInstancePolicyAllowedNetwork;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstancePoliciesOneOfGetInstancePolicyAllowedNetworkResourcesItem;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstancePoliciesOneOfGetInstancePolicyAllowedNetworkResourcesItemPolicyData;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstancePoliciesOneOfGetInstancePolicyAllowedNetworkResourcesItemPolicyDataAttributes;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstancePoliciesOneOfGetInstancePolicyDualAuthDelete;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstancePoliciesOneOfGetInstancePolicyKeyCreateImportAccess;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstancePoliciesOneOfGetInstancePolicyKeyCreateImportAccessResourcesItem;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstancePoliciesOneOfGetInstancePolicyKeyCreateImportAccessResourcesItemPolicyData;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstancePoliciesOneOfGetInstancePolicyKeyCreateImportAccessResourcesItemPolicyDataAttributes;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstancePoliciesOneOfGetInstancePolicyMetrics;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstancePoliciesOneOfGetInstancePolicyRotation;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstancePoliciesOneOfGetMultipleInstancePolicies;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstancePoliciesOneOfResourcesItem;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstancePoliciesOneOfResourcesItemPolicyData;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstancePoliciesOneOfResourcesItemPolicyDataAttributes;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstancePolicyAllowedIPResourcesItem;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstancePolicyAllowedIPResourcesItemPolicyData;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstancePolicyAllowedIPResourcesItemPolicyDataAttributes;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstancePolicyDualAuthDeleteResourcesItem;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstancePolicyMetricsResourcesItem;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstancePolicyOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstancePolicyRotationResourcesItem;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstancePolicyRotationResourcesItemPolicyData;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstancePolicyRotationResourcesItemPolicyDataAttributes;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKey;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKeyCollectionMetadataOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKeyMetadata;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKeyMetadataOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKeyOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKeyPoliciesOneOf;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKeyPoliciesOneOfGetKeyPolicyDualAuthDelete;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKeyPoliciesOneOfGetKeyPolicyDualAuthDeleteResourcesItem;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKeyPoliciesOneOfGetKeyPolicyRotation;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKeyPoliciesOneOfGetMultipleKeyPolicies;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKeyPoliciesOneOfResourcesItem;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKeyPolicyRotationResourcesItem;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKeyVersionsOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKeysOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKmipAdapterOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKmipAdaptersOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKmipClientCertificateOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKmipClientCertificatesOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetMigrationIntent;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetMigrationIntentOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetMultipleKeyPoliciesResource;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetMultipleKeyPoliciesResourceDualAuthDelete;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetPolicyOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetRegistrationsAllKeysOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetRegistrationsOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.ImportToken;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.InstancePolicyAllAttributes;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.InstancePolicyAllowedIPPolicyData;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.InstancePolicyAllowedNetworkPolicyData;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.InstancePolicyAllowedNetworkPolicyDataAttributes;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.InstancePolicyKeyCreateImportAccessPolicyData;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.InstancePolicyProperties;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.InstancePolicyResource;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.InstancePolicyRotationPolicyData;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KMIPAdapter;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KMIPClientCertificate;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KMIPClientPartialCertificate;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KMIPProfileDataBody;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KMIPProfileDataBodyKMIPProfileDataNative;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KMIPProfileDataNative;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.Key;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyActionOneOfResponse;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyActionOneOfResponseRewrapKeyResponseBody;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyActionOneOfResponseUnwrapKeyResponseBody;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyActionOneOfResponseWrapKeyResponseBody;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyAlias;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyAliasResource;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyCreateImportAccessProperties;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyFullRepresentation;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyFullRepresentationAlgorithmMetadata;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyPolicyDualAuthDelete;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyPolicyDualAuthDeleteDualAuthDelete;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyPolicyRotation;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyPolicyRotationNonRequiredRotation;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyPolicyRotationRotation;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyRing;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyVersion;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyVersionID;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyWithPayload;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyWithPayloadAlgorithmMetadata;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.ListCollectionMetadata;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.ListCollectionMetadataCollectionMetadata;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.ListCollectionMetadataCollectionMetadataWithTotalCount;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.ListKMIPAdapters;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.ListKMIPAdaptersWithTotalCount;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.ListKMIPClientCertificates;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.ListKMIPPartialClientCertificatesWithTotalCount;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.ListKeyRingsOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.ListKeyRingsWithTotalCount;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.ListKeyVersions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.ListKeys;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.ListKeysMetadataPropertiesSearchQuery;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.MetricsProperties;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.MigrationIntent;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.ModifiableRegistrationResourceBody;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.PatchKeyOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.PatchKeyResponseBody;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.PostImportTokenOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.PurgeKey;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.PurgeKeyOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.PutInstancePolicyOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.PutPolicyOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.QuotaMetadataSatQuota;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.Registration;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.RegistrationActionOneOf;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.RegistrationActionOneOfDeactivateRegistration;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.RegistrationResource;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.RegistrationWithTotalCount;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.ReplaceRegistrationOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.ReplaceRegistrationResourceBody;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.RestoreKeyOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.RewrapKeyOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.RewrapKeyResponseBody;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.RotateKeyOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.RotationKeyMetadata;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.RotationProperties;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.SetInstancePoliciesOneOf;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.SetInstancePoliciesOneOfResourcesItem;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.SetInstancePoliciesOneOfSetInstancePolicyAllowedIP;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.SetInstancePoliciesOneOfSetInstancePolicyAllowedIPResourcesItem;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.SetInstancePoliciesOneOfSetInstancePolicyAllowedNetwork;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.SetInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItem;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.SetInstancePoliciesOneOfSetInstancePolicyDualAuthDelete;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.SetInstancePoliciesOneOfSetInstancePolicyKeyCreateImportAccess;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.SetInstancePoliciesOneOfSetInstancePolicyKeyCreateImportAccessResourcesItem;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.SetInstancePoliciesOneOfSetInstancePolicyMetrics;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.SetInstancePoliciesOneOfSetInstancePolicyMetricsResourcesItem;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.SetInstancePoliciesOneOfSetInstancePolicyRotation;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.SetInstancePoliciesOneOfSetInstancePolicyRotationResourcesItem;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.SetInstancePoliciesOneOfSetMultipleInstancePolicies;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.SetInstancePolicyDualAuthDeleteResourcesItem;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.SetKeyForDeletionOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.SetKeyPoliciesOneOf;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.SetKeyPoliciesOneOfSetKeyPolicyDualAuthDelete;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.SetKeyPoliciesOneOfSetKeyPolicyRotation;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.SetKeyPoliciesOneOfSetMultipleKeyPolicies;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.SetMultipleInstancePoliciesResourcesItem;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.SetMultipleInstancePoliciesResourcesItemPolicyData;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.SetMultipleInstancePoliciesResourcesItemPolicyDataAttributes;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.SetMultipleKeyPoliciesResource;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.SimpleProperty;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.SyncAssociatedResourcesOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.UnsetKeyForDeletionOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.UnwrapKeyOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.UnwrapKeyResponseBody;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.UpdateRegistrationOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.WrapKeyOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.WrapKeyResponseBody;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.http.Response;
+import com.ibm.cloud.sdk.core.security.Authenticator;
+import com.ibm.cloud.sdk.core.security.NoAuthAuthenticator;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
-import com.ibm.cloud.sdk.core.util.EnvironmentUtils;
+import com.ibm.cloud.sdk.core.util.DateUtils;
 import com.ibm.cloud.sdk.core.util.RequestUtils;
-import okhttp3.mockwebserver.MockResponse;
-import okhttp3.mockwebserver.MockWebServer;
-import okhttp3.mockwebserver.RecordedRequest;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PowerMockIgnore;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.testng.PowerMockTestCase;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
+import okhttp3.mockwebserver.RecordedRequest;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 /**
  * Unit test class for the IbmKeyProtectApi service.
  */
-@PrepareForTest({ EnvironmentUtils.class })
-@PowerMockIgnore({"javax.net.ssl.*", "org.mockito.*"})
-public class IbmKeyProtectApiTest extends PowerMockTestCase {
+public class IbmKeyProtectApiTest {
 
   final HashMap<String, InputStream> mockStreamMap = TestUtilities.createMockStreamMap();
   final List<FileWithMetadata> mockListFileWithMetadata = TestUtilities.creatMockListFileWithMetadata();
@@ -50,2043 +253,3401 @@ public class IbmKeyProtectApiTest extends PowerMockTestCase {
   protected MockWebServer server;
   protected IbmKeyProtectApi ibmKeyProtectApiService;
 
-  // Creates a mock set of environment variables that are returned by EnvironmentUtils.getenv().
-  private Map<String, String> getTestProcessEnvironment() {
-    Map<String, String> env = new HashMap<>();
-    env.put("TESTSERVICE_AUTH_TYPE", "noAuth");
-    return env;
-  }
-
-  public void constructClientService() throws Throwable {
-    PowerMockito.spy(EnvironmentUtils.class);
-    PowerMockito.when(EnvironmentUtils.getenv()).thenReturn(getTestProcessEnvironment());
-    final String serviceName = "testService";
-
-    ibmKeyProtectApiService = IbmKeyProtectApi.newInstance(serviceName);
-    String url = server.url("/").toString();
-    ibmKeyProtectApiService.setServiceUrl(url);
-  }
-
-  /**
-  * Negative Test - construct the service with a null authenticator.
-  */
+  // Construct the service with a null authenticator (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testConstructorWithNullAuthenticator() throws Throwable {
     final String serviceName = "testService";
-
     new IbmKeyProtectApi(serviceName, null);
   }
 
+  // Construct the service URL using the default server variable values
+  @Test
+  public void testConstructServiceURLwithDefaultValues() throws Throwable {
+    String defaultFormattedUrl = "https://us-south.kms.cloud.ibm.com";
+    String constructedUrl = IbmKeyProtectApi.constructServiceUrl(null);
+    assertEquals(constructedUrl, defaultFormattedUrl);
+  }
+
+  // Construct the service URL with an invalid server variable name (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testConstructServiceURLWithInvalidVariable() throws Throwable {
+    Map<String, String> variables = new HashMap<>();
+    variables.put("invalid_variable_name", "value");
+
+    IbmKeyProtectApi.constructServiceUrl(variables);
+  }
+
+  // Test the createKeyAlias operation with a valid options model parameter
   @Test
   public void testCreateKeyAliasWOptions() throws Throwable {
-    // Schedule some responses.
-    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"keyId\": \"84a53643-9ca8-4ff2-9c68-d7842526167b\", \"alias\": \"Example-test-key\", \"createdBy\": \"...\", \"creationDate\": \"2019-01-01T12:00:00.000Z\"}]}";
+    // Register a mock response
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"keyId\": \"fadedbee-0000-0000-0000-1234567890ab\", \"alias\": \"Example-test-key\", \"createdBy\": \"IBMid-0000000000\", \"creationDate\": \"2019-01-01T12:00:00.000Z\"}]}";
     String createKeyAliasPath = "/api/v2/keys/testString/aliases/testString";
-
     server.enqueue(new MockResponse()
-    .setHeader("Content-type", "application/json")
-    .setResponseCode(200)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the CreateKeyAliasOptions model
     CreateKeyAliasOptions createKeyAliasOptionsModel = new CreateKeyAliasOptions.Builder()
-    .id("testString")
-    .alias("testString")
-    .bluemixInstance("testString")
-    .correlationId("testString")
-    .xKmsKeyRing("testString")
-    .build();
+      .id("testString")
+      .alias("testString")
+      .bluemixInstance("testString")
+      .correlationId("testString")
+      .xKmsKeyRing("testString")
+      .build();
 
-    // Invoke operation with valid options model (positive test)
+    // Invoke createKeyAlias() with a valid options model and verify the result
     Response<KeyAlias> response = ibmKeyProtectApiService.createKeyAlias(createKeyAliasOptionsModel).execute();
     assertNotNull(response);
     KeyAlias responseObj = response.getResult();
     assertNotNull(responseObj);
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "POST");
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-
-    // Check request path
+    // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, createKeyAliasPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
   }
 
-  // Test the createKeyAlias operation with null options model parameter
+  // Test the createKeyAlias operation with and without retries enabled
+  @Test
+  public void testCreateKeyAliasWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testCreateKeyAliasWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testCreateKeyAliasWOptions();
+  }
+
+  // Test the createKeyAlias operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testCreateKeyAliasNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.createKeyAlias(null).execute();
   }
 
+  // Test the deleteKeyAlias operation with a valid options model parameter
   @Test
   public void testDeleteKeyAliasWOptions() throws Throwable {
-    // Schedule some responses.
+    // Register a mock response
     String mockResponseBody = "";
     String deleteKeyAliasPath = "/api/v2/keys/testString/aliases/testString";
-
     server.enqueue(new MockResponse()
-    .setResponseCode(204)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setResponseCode(204)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the DeleteKeyAliasOptions model
     DeleteKeyAliasOptions deleteKeyAliasOptionsModel = new DeleteKeyAliasOptions.Builder()
-    .id("testString")
-    .alias("testString")
-    .bluemixInstance("testString")
-    .correlationId("testString")
-    .xKmsKeyRing("testString")
-    .build();
+      .id("testString")
+      .alias("testString")
+      .bluemixInstance("testString")
+      .correlationId("testString")
+      .xKmsKeyRing("testString")
+      .build();
 
-    // Invoke operation with valid options model (positive test)
+    // Invoke deleteKeyAlias() with a valid options model and verify the result
     Response<Void> response = ibmKeyProtectApiService.deleteKeyAlias(deleteKeyAliasOptionsModel).execute();
     assertNotNull(response);
     Void responseObj = response.getResult();
-    // Response does not have a return type. Check that the result is null.
     assertNull(responseObj);
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "DELETE");
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-
-    // Check request path
+    // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, deleteKeyAliasPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
   }
 
-  // Test the deleteKeyAlias operation with null options model parameter
+  // Test the deleteKeyAlias operation with and without retries enabled
+  @Test
+  public void testDeleteKeyAliasWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testDeleteKeyAliasWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testDeleteKeyAliasWOptions();
+  }
+
+  // Test the deleteKeyAlias operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testDeleteKeyAliasNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.deleteKeyAlias(null).execute();
   }
 
+  // Test the cryptoV2GetInstanceEndpoints operation with a valid options model parameter
+  @Test
+  public void testCryptoV2GetInstanceEndpointsWOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "{\"kms\": {\"public\": \"us-south.kms.cloud.ibm.com\", \"private\": \"private.us-south.kms.cloud.ibm.com\"}}";
+    String cryptoV2GetInstanceEndpointsPath = "/crypto_v2/instances/testString";
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
+
+    // Construct an instance of the CryptoV2GetInstanceEndpointsOptions model
+    CryptoV2GetInstanceEndpointsOptions cryptoV2GetInstanceEndpointsOptionsModel = new CryptoV2GetInstanceEndpointsOptions.Builder()
+      .instanceId("testString")
+      .build();
+
+    // Invoke cryptoV2GetInstanceEndpoints() with a valid options model and verify the result
+    Response<GetInstanceEndpointInfo> response = ibmKeyProtectApiService.cryptoV2GetInstanceEndpoints(cryptoV2GetInstanceEndpointsOptionsModel).execute();
+    assertNotNull(response);
+    GetInstanceEndpointInfo responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request sent to the mock server
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "GET");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, cryptoV2GetInstanceEndpointsPath);
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
+  }
+
+  // Test the cryptoV2GetInstanceEndpoints operation with and without retries enabled
+  @Test
+  public void testCryptoV2GetInstanceEndpointsWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testCryptoV2GetInstanceEndpointsWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testCryptoV2GetInstanceEndpointsWOptions();
+  }
+
+  // Test the cryptoV2GetInstanceEndpoints operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testCryptoV2GetInstanceEndpointsNoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    ibmKeyProtectApiService.cryptoV2GetInstanceEndpoints(null).execute();
+  }
+
+  // Test the getGovernanceConfig operation with a valid options model parameter
+  @Test
+  public void testGetGovernanceConfigWOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "{\"next\": {\"href\": \"href\"}, \"account_id\": \"accountId\", \"service_name\": \"kms\", \"resource_kind\": \"instance\", \"config_request_id\": \"configRequestId\", \"timestamp\": \"YYYY-MM-DDTHH:mm:SSZ\", \"config_state\": [{\"resource_crn\": \"resourceCrn\", \"resource_group_id\": \"resourceGroupId\", \"additional_target_attributes\": {\"resource_id\": \"resourceId\", \"location\": \"location\", \"instance_id\": \"instanceId\"}, \"current_config\": [{\"property\": \"property\", \"value\": \"value\"}]}]}";
+    String getGovernanceConfigPath = "/governance/v1/configs";
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
+
+    // Construct an instance of the GetGovernanceConfigOptions model
+    GetGovernanceConfigOptions getGovernanceConfigOptionsModel = new GetGovernanceConfigOptions.Builder()
+      .configRequestId("testString")
+      .accountId("testString")
+      .resourceKind("instance")
+      .serviceInstanceCrn("testString")
+      .resourceGroupId("testString")
+      .transactionId("testString")
+      .limit(Long.valueOf("10"))
+      .offset(Long.valueOf("0"))
+      .build();
+
+    // Invoke getGovernanceConfig() with a valid options model and verify the result
+    Response<CIPResource> response = ibmKeyProtectApiService.getGovernanceConfig(getGovernanceConfigOptionsModel).execute();
+    assertNotNull(response);
+    CIPResource responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request sent to the mock server
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "GET");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, getGovernanceConfigPath);
+    // Verify query params
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNotNull(query);
+    assertEquals(query.get("config_request_id"), "testString");
+    assertEquals(query.get("account_id"), "testString");
+    assertEquals(query.get("resource_kind"), "instance");
+    assertEquals(query.get("service_instance_crn"), "testString");
+    assertEquals(query.get("resource_group_id"), "testString");
+    assertEquals(query.get("Transaction-Id"), "testString");
+    assertEquals(Long.valueOf(query.get("limit")), Long.valueOf("10"));
+    assertEquals(Long.valueOf(query.get("offset")), Long.valueOf("0"));
+  }
+
+  // Test the getGovernanceConfig operation with and without retries enabled
+  @Test
+  public void testGetGovernanceConfigWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testGetGovernanceConfigWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testGetGovernanceConfigWOptions();
+  }
+
+  // Test the getGovernanceConfig operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testGetGovernanceConfigNoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    ibmKeyProtectApiService.getGovernanceConfig(null).execute();
+  }
+
+  // Test the getGovernanceConfig operation using the GetGovernanceConfigPager.getNext() method
+  @Test
+  public void testGetGovernanceConfigWithPagerGetNext() throws Throwable {
+    // Set up the two-page mock response.
+    String mockResponsePage1 = "{\"next\":{\"href\":\"https://myhost.com/somePath?offset=1\"},\"total_count\":2,\"config_state\":[{\"resource_crn\":\"resourceCrn\",\"resource_group_id\":\"resourceGroupId\",\"additional_target_attributes\":{\"resource_id\":\"resourceId\",\"location\":\"location\",\"instance_id\":\"instanceId\"},\"current_config\":[{\"property\":\"property\",\"value\":\"value\"}]}],\"limit\":1}";
+    String mockResponsePage2 = "{\"total_count\":2,\"config_state\":[{\"resource_crn\":\"resourceCrn\",\"resource_group_id\":\"resourceGroupId\",\"additional_target_attributes\":{\"resource_id\":\"resourceId\",\"location\":\"location\",\"instance_id\":\"instanceId\"},\"current_config\":[{\"property\":\"property\",\"value\":\"value\"}]}],\"limit\":1}";
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponsePage1));
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponsePage2));
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(400)
+      .setBody("{\"message\": \"No more results available!\"}"));
+
+    GetGovernanceConfigOptions getGovernanceConfigOptions = new GetGovernanceConfigOptions.Builder()
+      .configRequestId("testString")
+      .accountId("testString")
+      .resourceKind("instance")
+      .serviceInstanceCrn("testString")
+      .resourceGroupId("testString")
+      .transactionId("testString")
+      .limit(Long.valueOf("10"))
+      .build();
+
+    List<CIPResourceConfigStateItem> allResults = new ArrayList<>();
+    GetGovernanceConfigPager pager = new GetGovernanceConfigPager(ibmKeyProtectApiService, getGovernanceConfigOptions);
+    while (pager.hasNext()) {
+      List<CIPResourceConfigStateItem> nextPage = pager.getNext();
+      assertNotNull(nextPage);
+      allResults.addAll(nextPage);
+    }
+    assertEquals(allResults.size(), 2);
+  }
+  
+  // Test the getGovernanceConfig operation using the GetGovernanceConfigPager.getAll() method
+  @Test
+  public void testGetGovernanceConfigWithPagerGetAll() throws Throwable {
+    // Set up the two-page mock response.
+    String mockResponsePage1 = "{\"next\":{\"href\":\"https://myhost.com/somePath?offset=1\"},\"total_count\":2,\"config_state\":[{\"resource_crn\":\"resourceCrn\",\"resource_group_id\":\"resourceGroupId\",\"additional_target_attributes\":{\"resource_id\":\"resourceId\",\"location\":\"location\",\"instance_id\":\"instanceId\"},\"current_config\":[{\"property\":\"property\",\"value\":\"value\"}]}],\"limit\":1}";
+    String mockResponsePage2 = "{\"total_count\":2,\"config_state\":[{\"resource_crn\":\"resourceCrn\",\"resource_group_id\":\"resourceGroupId\",\"additional_target_attributes\":{\"resource_id\":\"resourceId\",\"location\":\"location\",\"instance_id\":\"instanceId\"},\"current_config\":[{\"property\":\"property\",\"value\":\"value\"}]}],\"limit\":1}";
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponsePage1));
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponsePage2));
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(400)
+      .setBody("{\"message\": \"No more results available!\"}"));
+
+    GetGovernanceConfigOptions getGovernanceConfigOptions = new GetGovernanceConfigOptions.Builder()
+      .configRequestId("testString")
+      .accountId("testString")
+      .resourceKind("instance")
+      .serviceInstanceCrn("testString")
+      .resourceGroupId("testString")
+      .transactionId("testString")
+      .limit(Long.valueOf("10"))
+      .build();
+
+    GetGovernanceConfigPager pager = new GetGovernanceConfigPager(ibmKeyProtectApiService, getGovernanceConfigOptions);
+    List<CIPResourceConfigStateItem> allResults = pager.getAll();
+    assertNotNull(allResults);
+    assertEquals(allResults.size(), 2);
+  }
+  
+  // Test the postImportToken operation with a valid options model parameter
   @Test
   public void testPostImportTokenWOptions() throws Throwable {
-    // Schedule some responses.
-    String mockResponseBody = "{\"expiration\": 300, \"maxAllowedRetrievals\": 1, \"creationDate\": \"2018-04-12T23:20:50.520Z\", \"expirationDate\": \"2018-12-01T23:20:50.520Z\", \"remainingRetrievals\": 1}";
+    // Register a mock response
+    String mockResponseBody = "{\"expiration\": 600, \"maxAllowedRetrievals\": 1, \"creationDate\": \"2019-01-01T12:00:00.000Z\", \"expirationDate\": \"2019-01-01T12:00:00.000Z\", \"remainingRetrievals\": 1}";
     String postImportTokenPath = "/api/v2/import_token";
-
     server.enqueue(new MockResponse()
-    .setHeader("Content-type", "application/json")
-    .setResponseCode(200)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the PostImportTokenOptions model
     PostImportTokenOptions postImportTokenOptionsModel = new PostImportTokenOptions.Builder()
-    .bluemixInstance("testString")
-    .expiration(Double.valueOf("300"))
-    .maxAllowedRetrievals(Double.valueOf("1"))
-    .correlationId("testString")
-    .xKmsKeyRing("testString")
-    .build();
+      .bluemixInstance("testString")
+      .expiration(Double.valueOf("600"))
+      .maxAllowedRetrievals(Double.valueOf("1"))
+      .correlationId("testString")
+      .xKmsKeyRing("default")
+      .build();
 
-    // Invoke operation with valid options model (positive test)
+    // Invoke postImportToken() with a valid options model and verify the result
     Response<ImportToken> response = ibmKeyProtectApiService.postImportToken(postImportTokenOptionsModel).execute();
     assertNotNull(response);
     ImportToken responseObj = response.getResult();
     assertNotNull(responseObj);
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "POST");
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-
-    // Check request path
+    // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, postImportTokenPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
   }
 
-  // Test the postImportToken operation with null options model parameter
+  // Test the postImportToken operation with and without retries enabled
+  @Test
+  public void testPostImportTokenWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testPostImportTokenWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testPostImportTokenWOptions();
+  }
+
+  // Test the postImportToken operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testPostImportTokenNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.postImportToken(null).execute();
   }
 
+  // Test the getImportToken operation with a valid options model parameter
   @Test
   public void testGetImportTokenWOptions() throws Throwable {
-    // Schedule some responses.
-    String mockResponseBody = "{\"expiration\": 300, \"maxAllowedRetrievals\": 1, \"creationDate\": \"2018-04-12T23:20:50.520Z\", \"expirationDate\": \"2018-12-01T23:20:50.520Z\", \"remainingRetrievals\": 1, \"payload\": \"VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku\", \"nonce\": \"VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku\"}";
+    // Register a mock response
+    String mockResponseBody = "{\"expiration\": 600, \"maxAllowedRetrievals\": 1, \"creationDate\": \"2019-01-01T12:00:00.000Z\", \"expirationDate\": \"2019-01-01T12:00:00.000Z\", \"remainingRetrievals\": 1, \"payload\": \"VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku\", \"nonce\": \"VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku\"}";
     String getImportTokenPath = "/api/v2/import_token";
-
     server.enqueue(new MockResponse()
-    .setHeader("Content-type", "application/json")
-    .setResponseCode(200)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the GetImportTokenOptions model
     GetImportTokenOptions getImportTokenOptionsModel = new GetImportTokenOptions.Builder()
-    .bluemixInstance("testString")
-    .correlationId("testString")
-    .xKmsKeyRing("testString")
-    .build();
+      .bluemixInstance("testString")
+      .correlationId("testString")
+      .xKmsKeyRing("default")
+      .build();
 
-    // Invoke operation with valid options model (positive test)
+    // Invoke getImportToken() with a valid options model and verify the result
     Response<GetImportToken> response = ibmKeyProtectApiService.getImportToken(getImportTokenOptionsModel).execute();
     assertNotNull(response);
     GetImportToken responseObj = response.getResult();
     assertNotNull(responseObj);
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "GET");
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-
-    // Check request path
+    // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, getImportTokenPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
   }
 
-  // Test the getImportToken operation with null options model parameter
+  // Test the getImportToken operation with and without retries enabled
+  @Test
+  public void testGetImportTokenWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testGetImportTokenWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testGetImportTokenWOptions();
+  }
+
+  // Test the getImportToken operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testGetImportTokenNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.getImportToken(null).execute();
   }
 
+  // Test the getKmipAdapters operation with a valid options model parameter
+  @Test
+  public void testGetKmipAdaptersWOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1, \"totalCount\": 1}, \"resources\": [{\"id\": \"feddecaf-0000-0000-0000-1234567890ab\", \"name\": \"kmip-adapter-name\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"profile\": \"native_1.0\", \"description\": \"kmip adapter description\", \"profile_data\": {\"crk_id\": \"feddecaf-0000-0000-0000-1234567890ab\", \"target_key_ring_id\": \"targetKeyRingId\"}}]}";
+    String getKmipAdaptersPath = "/api/v2/kmip_adapters";
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
+
+    // Construct an instance of the GetKmipAdaptersOptions model
+    GetKmipAdaptersOptions getKmipAdaptersOptionsModel = new GetKmipAdaptersOptions.Builder()
+      .bluemixInstance("testString")
+      .correlationId("testString")
+      .limit(Long.valueOf("100"))
+      .offset(Long.valueOf("0"))
+      .totalCount(true)
+      .build();
+
+    // Invoke getKmipAdapters() with a valid options model and verify the result
+    Response<ListKMIPAdaptersWithTotalCount> response = ibmKeyProtectApiService.getKmipAdapters(getKmipAdaptersOptionsModel).execute();
+    assertNotNull(response);
+    ListKMIPAdaptersWithTotalCount responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request sent to the mock server
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "GET");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, getKmipAdaptersPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify query params
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNotNull(query);
+    assertEquals(Long.valueOf(query.get("limit")), Long.valueOf("100"));
+    assertEquals(Long.valueOf(query.get("offset")), Long.valueOf("0"));
+    assertEquals(Boolean.valueOf(query.get("totalCount")), Boolean.valueOf(true));
+  }
+
+  // Test the getKmipAdapters operation with and without retries enabled
+  @Test
+  public void testGetKmipAdaptersWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testGetKmipAdaptersWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testGetKmipAdaptersWOptions();
+  }
+
+  // Test the getKmipAdapters operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testGetKmipAdaptersNoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    ibmKeyProtectApiService.getKmipAdapters(null).execute();
+  }
+
+  // Test the createKmipAdapter operation with a valid options model parameter
+  @Test
+  public void testCreateKmipAdapterWOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1, \"totalCount\": 1}, \"resources\": [{\"id\": \"feddecaf-0000-0000-0000-1234567890ab\", \"name\": \"kmip-adapter-name\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"profile\": \"native_1.0\", \"description\": \"kmip adapter description\", \"profile_data\": {\"crk_id\": \"feddecaf-0000-0000-0000-1234567890ab\", \"target_key_ring_id\": \"targetKeyRingId\"}}]}";
+    String createKmipAdapterPath = "/api/v2/kmip_adapters";
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(201)
+      .setBody(mockResponseBody));
+
+    // Construct an instance of the CollectionMetadata model
+    CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
+      .collectionType("application/vnd.ibm.kms.kmip_adapter+json")
+      .collectionTotal(Long.valueOf("1"))
+      .build();
+
+    // Construct an instance of the KMIPProfileDataBodyKMIPProfileDataNative model
+    KMIPProfileDataBodyKMIPProfileDataNative kmipProfileDataBodyModel = new KMIPProfileDataBodyKMIPProfileDataNative.Builder()
+      .crkId("feddecaf-0000-0000-0000-1234567890ab")
+      .targetKeyRingId("testString")
+      .build();
+
+    // Construct an instance of the CreateKMIPAdapterRequestBodyResourcesItem model
+    CreateKMIPAdapterRequestBodyResourcesItem createKmipAdapterRequestBodyResourcesItemModel = new CreateKMIPAdapterRequestBodyResourcesItem.Builder()
+      .name("kmip-adapter-name")
+      .description("kmip adapter description")
+      .profile("native_1.0")
+      .profileData(kmipProfileDataBodyModel)
+      .build();
+
+    // Construct an instance of the CreateKmipAdapterOptions model
+    CreateKmipAdapterOptions createKmipAdapterOptionsModel = new CreateKmipAdapterOptions.Builder()
+      .bluemixInstance("testString")
+      .metadata(collectionMetadataModel)
+      .resources(java.util.Arrays.asList(createKmipAdapterRequestBodyResourcesItemModel))
+      .correlationId("testString")
+      .build();
+
+    // Invoke createKmipAdapter() with a valid options model and verify the result
+    Response<ListKMIPAdapters> response = ibmKeyProtectApiService.createKmipAdapter(createKmipAdapterOptionsModel).execute();
+    assertNotNull(response);
+    ListKMIPAdapters responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request sent to the mock server
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "POST");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, createKmipAdapterPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
+  }
+
+  // Test the createKmipAdapter operation with and without retries enabled
+  @Test
+  public void testCreateKmipAdapterWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testCreateKmipAdapterWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testCreateKmipAdapterWOptions();
+  }
+
+  // Test the createKmipAdapter operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testCreateKmipAdapterNoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    ibmKeyProtectApiService.createKmipAdapter(null).execute();
+  }
+
+  // Test the getKmipAdapter operation with a valid options model parameter
+  @Test
+  public void testGetKmipAdapterWOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1, \"totalCount\": 1}, \"resources\": [{\"id\": \"feddecaf-0000-0000-0000-1234567890ab\", \"name\": \"kmip-adapter-name\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"updated_at\": \"2019-01-01T12:00:00.000Z\", \"updated_by\": \"updatedBy\", \"profile\": \"native_1.0\", \"description\": \"kmip adapter description\", \"profile_data\": {\"crk_id\": \"feddecaf-0000-0000-0000-1234567890ab\", \"target_key_ring_id\": \"targetKeyRingId\"}}]}";
+    String getKmipAdapterPath = "/api/v2/kmip_adapters/testString";
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
+
+    // Construct an instance of the GetKmipAdapterOptions model
+    GetKmipAdapterOptions getKmipAdapterOptionsModel = new GetKmipAdapterOptions.Builder()
+      .bluemixInstance("testString")
+      .id("testString")
+      .correlationId("testString")
+      .build();
+
+    // Invoke getKmipAdapter() with a valid options model and verify the result
+    Response<ListKMIPAdapters> response = ibmKeyProtectApiService.getKmipAdapter(getKmipAdapterOptionsModel).execute();
+    assertNotNull(response);
+    ListKMIPAdapters responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request sent to the mock server
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "GET");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, getKmipAdapterPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
+  }
+
+  // Test the getKmipAdapter operation with and without retries enabled
+  @Test
+  public void testGetKmipAdapterWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testGetKmipAdapterWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testGetKmipAdapterWOptions();
+  }
+
+  // Test the getKmipAdapter operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testGetKmipAdapterNoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    ibmKeyProtectApiService.getKmipAdapter(null).execute();
+  }
+
+  // Test the deleteKmipAdapter operation with a valid options model parameter
+  @Test
+  public void testDeleteKmipAdapterWOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "";
+    String deleteKmipAdapterPath = "/api/v2/kmip_adapters/testString";
+    server.enqueue(new MockResponse()
+      .setResponseCode(204)
+      .setBody(mockResponseBody));
+
+    // Construct an instance of the DeleteKmipAdapterOptions model
+    DeleteKmipAdapterOptions deleteKmipAdapterOptionsModel = new DeleteKmipAdapterOptions.Builder()
+      .bluemixInstance("testString")
+      .id("testString")
+      .correlationId("testString")
+      .build();
+
+    // Invoke deleteKmipAdapter() with a valid options model and verify the result
+    Response<Void> response = ibmKeyProtectApiService.deleteKmipAdapter(deleteKmipAdapterOptionsModel).execute();
+    assertNotNull(response);
+    Void responseObj = response.getResult();
+    assertNull(responseObj);
+
+    // Verify the contents of the request sent to the mock server
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "DELETE");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, deleteKmipAdapterPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
+  }
+
+  // Test the deleteKmipAdapter operation with and without retries enabled
+  @Test
+  public void testDeleteKmipAdapterWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testDeleteKmipAdapterWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testDeleteKmipAdapterWOptions();
+  }
+
+  // Test the deleteKmipAdapter operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testDeleteKmipAdapterNoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    ibmKeyProtectApiService.deleteKmipAdapter(null).execute();
+  }
+
+  // Test the getKmipClientCertificates operation with a valid options model parameter
+  @Test
+  public void testGetKmipClientCertificatesWOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1, \"totalCount\": 1}, \"resources\": [{\"name\": \"name\", \"id\": \"feddecaf-0000-0000-0000-1234567890ab\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\"}]}";
+    String getKmipClientCertificatesPath = "/api/v2/kmip_adapters/testString/certificates";
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
+
+    // Construct an instance of the GetKmipClientCertificatesOptions model
+    GetKmipClientCertificatesOptions getKmipClientCertificatesOptionsModel = new GetKmipClientCertificatesOptions.Builder()
+      .bluemixInstance("testString")
+      .adapterId("testString")
+      .correlationId("testString")
+      .limit(Long.valueOf("100"))
+      .offset(Long.valueOf("0"))
+      .totalCount(true)
+      .build();
+
+    // Invoke getKmipClientCertificates() with a valid options model and verify the result
+    Response<ListKMIPPartialClientCertificatesWithTotalCount> response = ibmKeyProtectApiService.getKmipClientCertificates(getKmipClientCertificatesOptionsModel).execute();
+    assertNotNull(response);
+    ListKMIPPartialClientCertificatesWithTotalCount responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request sent to the mock server
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "GET");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, getKmipClientCertificatesPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify query params
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNotNull(query);
+    assertEquals(Long.valueOf(query.get("limit")), Long.valueOf("100"));
+    assertEquals(Long.valueOf(query.get("offset")), Long.valueOf("0"));
+    assertEquals(Boolean.valueOf(query.get("totalCount")), Boolean.valueOf(true));
+  }
+
+  // Test the getKmipClientCertificates operation with and without retries enabled
+  @Test
+  public void testGetKmipClientCertificatesWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testGetKmipClientCertificatesWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testGetKmipClientCertificatesWOptions();
+  }
+
+  // Test the getKmipClientCertificates operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testGetKmipClientCertificatesNoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    ibmKeyProtectApiService.getKmipClientCertificates(null).execute();
+  }
+
+  // Test the addKmipClientCertificate operation with a valid options model parameter
+  @Test
+  public void testAddKmipClientCertificateWOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1, \"totalCount\": 1}, \"resources\": [{\"name\": \"name\", \"id\": \"feddecaf-0000-0000-0000-1234567890ab\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"certificate\": \"certificate\"}]}";
+    String addKmipClientCertificatePath = "/api/v2/kmip_adapters/testString/certificates";
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(201)
+      .setBody(mockResponseBody));
+
+    // Construct an instance of the CollectionMetadata model
+    CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
+      .collectionType("application/vnd.ibm.kms.kmip_adapter_certificate+json")
+      .collectionTotal(Long.valueOf("1"))
+      .build();
+
+    // Construct an instance of the CreateKMIPClientCertificateObject model
+    CreateKMIPClientCertificateObject createKmipClientCertificateObjectModel = new CreateKMIPClientCertificateObject.Builder()
+      .certificate("testString")
+      .name("testString")
+      .build();
+
+    // Construct an instance of the AddKmipClientCertificateOptions model
+    AddKmipClientCertificateOptions addKmipClientCertificateOptionsModel = new AddKmipClientCertificateOptions.Builder()
+      .bluemixInstance("testString")
+      .adapterId("testString")
+      .metadata(collectionMetadataModel)
+      .resources(java.util.Arrays.asList(createKmipClientCertificateObjectModel))
+      .correlationId("testString")
+      .build();
+
+    // Invoke addKmipClientCertificate() with a valid options model and verify the result
+    Response<ListKMIPClientCertificates> response = ibmKeyProtectApiService.addKmipClientCertificate(addKmipClientCertificateOptionsModel).execute();
+    assertNotNull(response);
+    ListKMIPClientCertificates responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request sent to the mock server
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "POST");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, addKmipClientCertificatePath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
+  }
+
+  // Test the addKmipClientCertificate operation with and without retries enabled
+  @Test
+  public void testAddKmipClientCertificateWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testAddKmipClientCertificateWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testAddKmipClientCertificateWOptions();
+  }
+
+  // Test the addKmipClientCertificate operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testAddKmipClientCertificateNoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    ibmKeyProtectApiService.addKmipClientCertificate(null).execute();
+  }
+
+  // Test the getKmipClientCertificate operation with a valid options model parameter
+  @Test
+  public void testGetKmipClientCertificateWOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1, \"totalCount\": 1}, \"resources\": [{\"name\": \"name\", \"id\": \"feddecaf-0000-0000-0000-1234567890ab\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"created_by\": \"createdBy\", \"certificate\": \"certificate\"}]}";
+    String getKmipClientCertificatePath = "/api/v2/kmip_adapters/testString/certificates/testString";
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
+
+    // Construct an instance of the GetKmipClientCertificateOptions model
+    GetKmipClientCertificateOptions getKmipClientCertificateOptionsModel = new GetKmipClientCertificateOptions.Builder()
+      .bluemixInstance("testString")
+      .adapterId("testString")
+      .id("testString")
+      .correlationId("testString")
+      .build();
+
+    // Invoke getKmipClientCertificate() with a valid options model and verify the result
+    Response<ListKMIPClientCertificates> response = ibmKeyProtectApiService.getKmipClientCertificate(getKmipClientCertificateOptionsModel).execute();
+    assertNotNull(response);
+    ListKMIPClientCertificates responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request sent to the mock server
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "GET");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, getKmipClientCertificatePath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
+  }
+
+  // Test the getKmipClientCertificate operation with and without retries enabled
+  @Test
+  public void testGetKmipClientCertificateWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testGetKmipClientCertificateWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testGetKmipClientCertificateWOptions();
+  }
+
+  // Test the getKmipClientCertificate operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testGetKmipClientCertificateNoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    ibmKeyProtectApiService.getKmipClientCertificate(null).execute();
+  }
+
+  // Test the deleteKmipClientCertificate operation with a valid options model parameter
+  @Test
+  public void testDeleteKmipClientCertificateWOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "";
+    String deleteKmipClientCertificatePath = "/api/v2/kmip_adapters/testString/certificates/testString";
+    server.enqueue(new MockResponse()
+      .setResponseCode(204)
+      .setBody(mockResponseBody));
+
+    // Construct an instance of the DeleteKmipClientCertificateOptions model
+    DeleteKmipClientCertificateOptions deleteKmipClientCertificateOptionsModel = new DeleteKmipClientCertificateOptions.Builder()
+      .bluemixInstance("testString")
+      .adapterId("testString")
+      .id("testString")
+      .correlationId("testString")
+      .build();
+
+    // Invoke deleteKmipClientCertificate() with a valid options model and verify the result
+    Response<Void> response = ibmKeyProtectApiService.deleteKmipClientCertificate(deleteKmipClientCertificateOptionsModel).execute();
+    assertNotNull(response);
+    Void responseObj = response.getResult();
+    assertNull(responseObj);
+
+    // Verify the contents of the request sent to the mock server
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "DELETE");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, deleteKmipClientCertificatePath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
+  }
+
+  // Test the deleteKmipClientCertificate operation with and without retries enabled
+  @Test
+  public void testDeleteKmipClientCertificateWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testDeleteKmipClientCertificateWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testDeleteKmipClientCertificateWOptions();
+  }
+
+  // Test the deleteKmipClientCertificate operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testDeleteKmipClientCertificateNoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    ibmKeyProtectApiService.deleteKmipClientCertificate(null).execute();
+  }
+
+  // Test the wrapKey operation with a valid options model parameter
   @Test
   public void testWrapKeyWOptions() throws Throwable {
-    // Schedule some responses.
-    String mockResponseBody = "{\"plaintext\": \"plaintext\", \"ciphertext\": \"ciphertext\", \"keyVersion\": {\"id\": \"4a0225e9-17a0-46c1-ace7-f25bcf4237d4\", \"creationDate\": \"2019-01-01T12:00:00.000Z\"}}";
+    // Register a mock response
+    String mockResponseBody = "{\"plaintext\": \"plaintext\", \"ciphertext\": \"ciphertext\", \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\"}}";
     String wrapKeyPath = "/api/v2/keys/testString/actions/wrap";
-
     server.enqueue(new MockResponse()
-    .setHeader("Content-type", "application/json")
-    .setResponseCode(200)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the WrapKeyOptions model
     WrapKeyOptions wrapKeyOptionsModel = new WrapKeyOptions.Builder()
-    .id("testString")
-    .bluemixInstance("testString")
-    .keyActionWrapBody(TestUtilities.createMockStream("This is a mock file."))
-    .correlationId("testString")
-    .xKmsKeyRing("testString")
-    .build();
+      .id("testString")
+      .bluemixInstance("testString")
+      .keyActionWrapBody(TestUtilities.createMockStream("This is a mock file."))
+      .correlationId("testString")
+      .xKmsKeyRing("testString")
+      .build();
 
-    // Invoke operation with valid options model (positive test)
+    // Invoke wrapKey() with a valid options model and verify the result
     Response<WrapKeyResponseBody> response = ibmKeyProtectApiService.wrapKey(wrapKeyOptionsModel).execute();
     assertNotNull(response);
     WrapKeyResponseBody responseObj = response.getResult();
     assertNotNull(responseObj);
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "POST");
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-
-    // Check request path
+    // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, wrapKeyPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
   }
 
-  // Test the wrapKey operation with null options model parameter
+  // Test the wrapKey operation with and without retries enabled
+  @Test
+  public void testWrapKeyWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testWrapKeyWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testWrapKeyWOptions();
+  }
+
+  // Test the wrapKey operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testWrapKeyNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.wrapKey(null).execute();
   }
 
+  // Test the unwrapKey operation with a valid options model parameter
   @Test
   public void testUnwrapKeyWOptions() throws Throwable {
-    // Schedule some responses.
-    String mockResponseBody = "{\"plaintext\": \"plaintext\", \"ciphertext\": \"ciphertext\", \"keyVersion\": {\"id\": \"4a0225e9-17a0-46c1-ace7-f25bcf4237d4\", \"creationDate\": \"2019-01-01T12:00:00.000Z\"}, \"rewrappedKeyVersion\": {\"id\": \"4a0225e9-17a0-46c1-ace7-f25bcf4237d4\", \"creationDate\": \"2019-01-01T12:00:00.000Z\"}}";
+    // Register a mock response
+    String mockResponseBody = "{\"plaintext\": \"plaintext\", \"ciphertext\": \"ciphertext\", \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\"}, \"rewrappedKeyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\"}}";
     String unwrapKeyPath = "/api/v2/keys/testString/actions/unwrap";
-
     server.enqueue(new MockResponse()
-    .setHeader("Content-type", "application/json")
-    .setResponseCode(200)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the UnwrapKeyOptions model
     UnwrapKeyOptions unwrapKeyOptionsModel = new UnwrapKeyOptions.Builder()
-    .id("testString")
-    .bluemixInstance("testString")
-    .keyActionUnwrapBody(TestUtilities.createMockStream("This is a mock file."))
-    .correlationId("testString")
-    .xKmsKeyRing("testString")
-    .build();
+      .id("testString")
+      .bluemixInstance("testString")
+      .keyActionUnwrapBody(TestUtilities.createMockStream("This is a mock file."))
+      .correlationId("testString")
+      .xKmsKeyRing("testString")
+      .build();
 
-    // Invoke operation with valid options model (positive test)
+    // Invoke unwrapKey() with a valid options model and verify the result
     Response<UnwrapKeyResponseBody> response = ibmKeyProtectApiService.unwrapKey(unwrapKeyOptionsModel).execute();
     assertNotNull(response);
     UnwrapKeyResponseBody responseObj = response.getResult();
     assertNotNull(responseObj);
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "POST");
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-
-    // Check request path
+    // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, unwrapKeyPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
   }
 
-  // Test the unwrapKey operation with null options model parameter
+  // Test the unwrapKey operation with and without retries enabled
+  @Test
+  public void testUnwrapKeyWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testUnwrapKeyWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testUnwrapKeyWOptions();
+  }
+
+  // Test the unwrapKey operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testUnwrapKeyNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.unwrapKey(null).execute();
   }
 
+  // Test the rewrapKey operation with a valid options model parameter
   @Test
   public void testRewrapKeyWOptions() throws Throwable {
-    // Schedule some responses.
-    String mockResponseBody = "{\"ciphertext\": \"ciphertext\", \"keyVersion\": {\"id\": \"4a0225e9-17a0-46c1-ace7-f25bcf4237d4\", \"creationDate\": \"2019-01-01T12:00:00.000Z\"}, \"rewrappedKeyVersion\": {\"id\": \"4a0225e9-17a0-46c1-ace7-f25bcf4237d4\", \"creationDate\": \"2019-01-01T12:00:00.000Z\"}}";
+    // Register a mock response
+    String mockResponseBody = "{\"ciphertext\": \"ciphertext\", \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\"}, \"rewrappedKeyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\"}}";
     String rewrapKeyPath = "/api/v2/keys/testString/actions/rewrap";
-
     server.enqueue(new MockResponse()
-    .setHeader("Content-type", "application/json")
-    .setResponseCode(200)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the RewrapKeyOptions model
     RewrapKeyOptions rewrapKeyOptionsModel = new RewrapKeyOptions.Builder()
-    .id("testString")
-    .bluemixInstance("testString")
-    .keyActionRewrapBody(TestUtilities.createMockStream("This is a mock file."))
-    .correlationId("testString")
-    .xKmsKeyRing("testString")
-    .build();
+      .id("testString")
+      .bluemixInstance("testString")
+      .keyActionRewrapBody(TestUtilities.createMockStream("This is a mock file."))
+      .correlationId("testString")
+      .xKmsKeyRing("testString")
+      .build();
 
-    // Invoke operation with valid options model (positive test)
+    // Invoke rewrapKey() with a valid options model and verify the result
     Response<RewrapKeyResponseBody> response = ibmKeyProtectApiService.rewrapKey(rewrapKeyOptionsModel).execute();
     assertNotNull(response);
     RewrapKeyResponseBody responseObj = response.getResult();
     assertNotNull(responseObj);
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "POST");
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-
-    // Check request path
+    // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, rewrapKeyPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
   }
 
-  // Test the rewrapKey operation with null options model parameter
+  // Test the rewrapKey operation with and without retries enabled
+  @Test
+  public void testRewrapKeyWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testRewrapKeyWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testRewrapKeyWOptions();
+  }
+
+  // Test the rewrapKey operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testRewrapKeyNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.rewrapKey(null).execute();
   }
 
+  // Test the rotateKey operation with a valid options model parameter
   @Test
   public void testRotateKeyWOptions() throws Throwable {
-    // Schedule some responses.
+    // Register a mock response
     String mockResponseBody = "";
     String rotateKeyPath = "/api/v2/keys/testString/actions/rotate";
-
     server.enqueue(new MockResponse()
-    .setResponseCode(204)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setResponseCode(204)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the RotateKeyOptions model
     RotateKeyOptions rotateKeyOptionsModel = new RotateKeyOptions.Builder()
-    .id("testString")
-    .bluemixInstance("testString")
-    .keyActionRotateBody(TestUtilities.createMockStream("This is a mock file."))
-    .correlationId("testString")
-    .xKmsKeyRing("testString")
-    .prefer("return=representation")
-    .build();
+      .id("testString")
+      .bluemixInstance("testString")
+      .keyActionRotateBody(TestUtilities.createMockStream("This is a mock file."))
+      .correlationId("testString")
+      .xKmsKeyRing("testString")
+      .prefer("return=representation")
+      .build();
 
-    // Invoke operation with valid options model (positive test)
+    // Invoke rotateKey() with a valid options model and verify the result
     Response<Void> response = ibmKeyProtectApiService.rotateKey(rotateKeyOptionsModel).execute();
     assertNotNull(response);
     Void responseObj = response.getResult();
-    // Response does not have a return type. Check that the result is null.
     assertNull(responseObj);
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "POST");
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-
-    // Check request path
+    // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, rotateKeyPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
   }
 
-  // Test the rotateKey operation with null options model parameter
+  // Test the rotateKey operation with and without retries enabled
+  @Test
+  public void testRotateKeyWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testRotateKeyWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testRotateKeyWOptions();
+  }
+
+  // Test the rotateKey operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testRotateKeyNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.rotateKey(null).execute();
   }
 
+  // Test the setKeyForDeletion operation with a valid options model parameter
   @Test
   public void testSetKeyForDeletionWOptions() throws Throwable {
-    // Schedule some responses.
+    // Register a mock response
     String mockResponseBody = "";
     String setKeyForDeletionPath = "/api/v2/keys/testString/actions/setKeyForDeletion";
-
     server.enqueue(new MockResponse()
-    .setResponseCode(204)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setResponseCode(204)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the SetKeyForDeletionOptions model
     SetKeyForDeletionOptions setKeyForDeletionOptionsModel = new SetKeyForDeletionOptions.Builder()
-    .id("testString")
-    .bluemixInstance("testString")
-    .correlationId("testString")
-    .xKmsKeyRing("testString")
-    .build();
+      .id("testString")
+      .bluemixInstance("testString")
+      .correlationId("testString")
+      .xKmsKeyRing("testString")
+      .build();
 
-    // Invoke operation with valid options model (positive test)
+    // Invoke setKeyForDeletion() with a valid options model and verify the result
     Response<Void> response = ibmKeyProtectApiService.setKeyForDeletion(setKeyForDeletionOptionsModel).execute();
     assertNotNull(response);
     Void responseObj = response.getResult();
-    // Response does not have a return type. Check that the result is null.
     assertNull(responseObj);
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "POST");
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-
-    // Check request path
+    // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, setKeyForDeletionPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
   }
 
-  // Test the setKeyForDeletion operation with null options model parameter
+  // Test the setKeyForDeletion operation with and without retries enabled
+  @Test
+  public void testSetKeyForDeletionWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testSetKeyForDeletionWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testSetKeyForDeletionWOptions();
+  }
+
+  // Test the setKeyForDeletion operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testSetKeyForDeletionNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.setKeyForDeletion(null).execute();
   }
 
+  // Test the unsetKeyForDeletion operation with a valid options model parameter
   @Test
   public void testUnsetKeyForDeletionWOptions() throws Throwable {
-    // Schedule some responses.
+    // Register a mock response
     String mockResponseBody = "";
     String unsetKeyForDeletionPath = "/api/v2/keys/testString/actions/unsetKeyForDeletion";
-
     server.enqueue(new MockResponse()
-    .setResponseCode(204)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setResponseCode(204)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the UnsetKeyForDeletionOptions model
     UnsetKeyForDeletionOptions unsetKeyForDeletionOptionsModel = new UnsetKeyForDeletionOptions.Builder()
-    .id("testString")
-    .bluemixInstance("testString")
-    .correlationId("testString")
-    .xKmsKeyRing("testString")
-    .build();
+      .id("testString")
+      .bluemixInstance("testString")
+      .correlationId("testString")
+      .xKmsKeyRing("testString")
+      .build();
 
-    // Invoke operation with valid options model (positive test)
+    // Invoke unsetKeyForDeletion() with a valid options model and verify the result
     Response<Void> response = ibmKeyProtectApiService.unsetKeyForDeletion(unsetKeyForDeletionOptionsModel).execute();
     assertNotNull(response);
     Void responseObj = response.getResult();
-    // Response does not have a return type. Check that the result is null.
     assertNull(responseObj);
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "POST");
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-
-    // Check request path
+    // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, unsetKeyForDeletionPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
   }
 
-  // Test the unsetKeyForDeletion operation with null options model parameter
+  // Test the unsetKeyForDeletion operation with and without retries enabled
+  @Test
+  public void testUnsetKeyForDeletionWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testUnsetKeyForDeletionWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testUnsetKeyForDeletionWOptions();
+  }
+
+  // Test the unsetKeyForDeletion operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testUnsetKeyForDeletionNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.unsetKeyForDeletion(null).execute();
   }
 
+  // Test the enableKey operation with a valid options model parameter
   @Test
   public void testEnableKeyWOptions() throws Throwable {
-    // Schedule some responses.
+    // Register a mock response
     String mockResponseBody = "";
     String enableKeyPath = "/api/v2/keys/testString/actions/enable";
-
     server.enqueue(new MockResponse()
-    .setResponseCode(204)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setResponseCode(204)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the EnableKeyOptions model
     EnableKeyOptions enableKeyOptionsModel = new EnableKeyOptions.Builder()
-    .id("testString")
-    .bluemixInstance("testString")
-    .correlationId("testString")
-    .xKmsKeyRing("testString")
-    .build();
+      .id("testString")
+      .bluemixInstance("testString")
+      .correlationId("testString")
+      .xKmsKeyRing("testString")
+      .build();
 
-    // Invoke operation with valid options model (positive test)
+    // Invoke enableKey() with a valid options model and verify the result
     Response<Void> response = ibmKeyProtectApiService.enableKey(enableKeyOptionsModel).execute();
     assertNotNull(response);
     Void responseObj = response.getResult();
-    // Response does not have a return type. Check that the result is null.
     assertNull(responseObj);
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "POST");
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-
-    // Check request path
+    // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, enableKeyPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
   }
 
-  // Test the enableKey operation with null options model parameter
+  // Test the enableKey operation with and without retries enabled
+  @Test
+  public void testEnableKeyWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testEnableKeyWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testEnableKeyWOptions();
+  }
+
+  // Test the enableKey operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testEnableKeyNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.enableKey(null).execute();
   }
 
+  // Test the disableKey operation with a valid options model parameter
   @Test
   public void testDisableKeyWOptions() throws Throwable {
-    // Schedule some responses.
+    // Register a mock response
     String mockResponseBody = "";
     String disableKeyPath = "/api/v2/keys/testString/actions/disable";
-
     server.enqueue(new MockResponse()
-    .setResponseCode(204)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setResponseCode(204)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the DisableKeyOptions model
     DisableKeyOptions disableKeyOptionsModel = new DisableKeyOptions.Builder()
-    .id("testString")
-    .bluemixInstance("testString")
-    .correlationId("testString")
-    .xKmsKeyRing("testString")
-    .build();
+      .id("testString")
+      .bluemixInstance("testString")
+      .correlationId("testString")
+      .xKmsKeyRing("testString")
+      .build();
 
-    // Invoke operation with valid options model (positive test)
+    // Invoke disableKey() with a valid options model and verify the result
     Response<Void> response = ibmKeyProtectApiService.disableKey(disableKeyOptionsModel).execute();
     assertNotNull(response);
     Void responseObj = response.getResult();
-    // Response does not have a return type. Check that the result is null.
     assertNull(responseObj);
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "POST");
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-
-    // Check request path
+    // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, disableKeyPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
   }
 
-  // Test the disableKey operation with null options model parameter
+  // Test the disableKey operation with and without retries enabled
+  @Test
+  public void testDisableKeyWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testDisableKeyWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testDisableKeyWOptions();
+  }
+
+  // Test the disableKey operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testDisableKeyNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.disableKey(null).execute();
   }
 
+  // Test the syncAssociatedResources operation with a valid options model parameter
   @Test
   public void testSyncAssociatedResourcesWOptions() throws Throwable {
-    // Schedule some responses.
+    // Register a mock response
     String mockResponseBody = "";
     String syncAssociatedResourcesPath = "/api/v2/keys/testString/actions/sync";
-
     server.enqueue(new MockResponse()
-    .setResponseCode(204)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setResponseCode(204)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the SyncAssociatedResourcesOptions model
     SyncAssociatedResourcesOptions syncAssociatedResourcesOptionsModel = new SyncAssociatedResourcesOptions.Builder()
-    .id("testString")
-    .bluemixInstance("testString")
-    .correlationId("testString")
-    .xKmsKeyRing("testString")
-    .build();
+      .id("testString")
+      .bluemixInstance("testString")
+      .correlationId("testString")
+      .xKmsKeyRing("testString")
+      .build();
 
-    // Invoke operation with valid options model (positive test)
+    // Invoke syncAssociatedResources() with a valid options model and verify the result
     Response<Void> response = ibmKeyProtectApiService.syncAssociatedResources(syncAssociatedResourcesOptionsModel).execute();
     assertNotNull(response);
     Void responseObj = response.getResult();
-    // Response does not have a return type. Check that the result is null.
     assertNull(responseObj);
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "POST");
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-
-    // Check request path
+    // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, syncAssociatedResourcesPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
   }
 
-  // Test the syncAssociatedResources operation with null options model parameter
+  // Test the syncAssociatedResources operation with and without retries enabled
+  @Test
+  public void testSyncAssociatedResourcesWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testSyncAssociatedResourcesWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testSyncAssociatedResourcesWOptions();
+  }
+
+  // Test the syncAssociatedResources operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testSyncAssociatedResourcesNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.syncAssociatedResources(null).execute();
   }
 
+  // Test the eventAcknowledge operation with a valid options model parameter
   @Test
   public void testEventAcknowledgeWOptions() throws Throwable {
-    // Schedule some responses.
+    // Register a mock response
     String mockResponseBody = "";
     String eventAcknowledgePath = "/api/v2/event_ack";
-
     server.enqueue(new MockResponse()
-    .setResponseCode(204)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setResponseCode(204)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the EventAcknowledgeOptions model
     EventAcknowledgeOptions eventAcknowledgeOptionsModel = new EventAcknowledgeOptions.Builder()
-    .bluemixInstance("testString")
-    .body(TestUtilities.createMockStream("This is a mock file."))
-    .correlationId("testString")
-    .xKmsKeyRing("testString")
-    .build();
+      .bluemixInstance("testString")
+      .body(TestUtilities.createMockStream("This is a mock file."))
+      .correlationId("testString")
+      .xKmsKeyRing("default")
+      .build();
 
-    // Invoke operation with valid options model (positive test)
+    // Invoke eventAcknowledge() with a valid options model and verify the result
     Response<Void> response = ibmKeyProtectApiService.eventAcknowledge(eventAcknowledgeOptionsModel).execute();
     assertNotNull(response);
     Void responseObj = response.getResult();
-    // Response does not have a return type. Check that the result is null.
     assertNull(responseObj);
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "POST");
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-
-    // Check request path
+    // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, eventAcknowledgePath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
   }
 
-  // Test the eventAcknowledge operation with null options model parameter
+  // Test the eventAcknowledge operation with and without retries enabled
+  @Test
+  public void testEventAcknowledgeWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testEventAcknowledgeWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testEventAcknowledgeWOptions();
+  }
+
+  // Test the eventAcknowledge operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testEventAcknowledgeNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.eventAcknowledge(null).execute();
   }
 
+  // Test the listKeyRings operation with a valid options model parameter
   @Test
   public void testListKeyRingsWOptions() throws Throwable {
-    // Schedule some responses.
-    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"id\": \"id\", \"creationDate\": \"2019-01-01T12:00:00.000Z\", \"createdBy\": \"createdBy\"}]}";
+    // Register a mock response
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1, \"totalCount\": 1}, \"resources\": [{\"id\": \"id\", \"creationDate\": \"2019-01-01T12:00:00.000Z\", \"createdBy\": \"createdBy\"}]}";
     String listKeyRingsPath = "/api/v2/key_rings";
-
     server.enqueue(new MockResponse()
-    .setHeader("Content-type", "application/json")
-    .setResponseCode(200)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the ListKeyRingsOptions model
     ListKeyRingsOptions listKeyRingsOptionsModel = new ListKeyRingsOptions.Builder()
-    .bluemixInstance("testString")
-    .correlationId("testString")
-    .build();
+      .bluemixInstance("testString")
+      .limit(Long.valueOf("100"))
+      .offset(Long.valueOf("0"))
+      .totalCount(true)
+      .correlationId("testString")
+      .build();
 
-    // Invoke operation with valid options model (positive test)
-    Response<ListKeyRings> response = ibmKeyProtectApiService.listKeyRings(listKeyRingsOptionsModel).execute();
+    // Invoke listKeyRings() with a valid options model and verify the result
+    Response<ListKeyRingsWithTotalCount> response = ibmKeyProtectApiService.listKeyRings(listKeyRingsOptionsModel).execute();
     assertNotNull(response);
-    ListKeyRings responseObj = response.getResult();
+    ListKeyRingsWithTotalCount responseObj = response.getResult();
     assertNotNull(responseObj);
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "GET");
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-
-    // Check request path
+    // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, listKeyRingsPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify query params
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNotNull(query);
+    assertEquals(Long.valueOf(query.get("limit")), Long.valueOf("100"));
+    assertEquals(Long.valueOf(query.get("offset")), Long.valueOf("0"));
+    assertEquals(Boolean.valueOf(query.get("totalCount")), Boolean.valueOf(true));
   }
 
-  // Test the listKeyRings operation with null options model parameter
+  // Test the listKeyRings operation with and without retries enabled
+  @Test
+  public void testListKeyRingsWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testListKeyRingsWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testListKeyRingsWOptions();
+  }
+
+  // Test the listKeyRings operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testListKeyRingsNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.listKeyRings(null).execute();
   }
 
+  // Test the createKeyRing operation with a valid options model parameter
   @Test
   public void testCreateKeyRingWOptions() throws Throwable {
-    // Schedule some responses.
+    // Register a mock response
     String mockResponseBody = "";
     String createKeyRingPath = "/api/v2/key_rings/testString";
-
     server.enqueue(new MockResponse()
-    .setResponseCode(201)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setResponseCode(201)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the CreateKeyRingOptions model
     CreateKeyRingOptions createKeyRingOptionsModel = new CreateKeyRingOptions.Builder()
-    .keyRingId("testString")
-    .bluemixInstance("testString")
-    .correlationId("testString")
-    .build();
+      .keyRingId("testString")
+      .bluemixInstance("testString")
+      .correlationId("testString")
+      .build();
 
-    // Invoke operation with valid options model (positive test)
+    // Invoke createKeyRing() with a valid options model and verify the result
     Response<Void> response = ibmKeyProtectApiService.createKeyRing(createKeyRingOptionsModel).execute();
     assertNotNull(response);
     Void responseObj = response.getResult();
-    // Response does not have a return type. Check that the result is null.
     assertNull(responseObj);
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "POST");
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-
-    // Check request path
+    // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, createKeyRingPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
   }
 
-  // Test the createKeyRing operation with null options model parameter
+  // Test the createKeyRing operation with and without retries enabled
+  @Test
+  public void testCreateKeyRingWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testCreateKeyRingWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testCreateKeyRingWOptions();
+  }
+
+  // Test the createKeyRing operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testCreateKeyRingNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.createKeyRing(null).execute();
   }
 
+  // Test the deleteKeyRing operation with a valid options model parameter
   @Test
   public void testDeleteKeyRingWOptions() throws Throwable {
-    // Schedule some responses.
+    // Register a mock response
     String mockResponseBody = "";
     String deleteKeyRingPath = "/api/v2/key_rings/testString";
-
     server.enqueue(new MockResponse()
-    .setResponseCode(204)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setResponseCode(204)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the DeleteKeyRingOptions model
     DeleteKeyRingOptions deleteKeyRingOptionsModel = new DeleteKeyRingOptions.Builder()
-    .keyRingId("testString")
-    .bluemixInstance("testString")
-    .correlationId("testString")
-    .build();
+      .keyRingId("testString")
+      .bluemixInstance("testString")
+      .correlationId("testString")
+      .force(false)
+      .build();
 
-    // Invoke operation with valid options model (positive test)
+    // Invoke deleteKeyRing() with a valid options model and verify the result
     Response<Void> response = ibmKeyProtectApiService.deleteKeyRing(deleteKeyRingOptionsModel).execute();
     assertNotNull(response);
     Void responseObj = response.getResult();
-    // Response does not have a return type. Check that the result is null.
     assertNull(responseObj);
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "DELETE");
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-
-    // Check request path
+    // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, deleteKeyRingPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify query params
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNotNull(query);
+    assertEquals(Boolean.valueOf(query.get("force")), Boolean.valueOf(false));
   }
 
-  // Test the deleteKeyRing operation with null options model parameter
+  // Test the deleteKeyRing operation with and without retries enabled
+  @Test
+  public void testDeleteKeyRingWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testDeleteKeyRingWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testDeleteKeyRingWOptions();
+  }
+
+  // Test the deleteKeyRing operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testDeleteKeyRingNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.deleteKeyRing(null).execute();
   }
 
+  // Test the getKeyCollectionMetadata operation with a valid options model parameter
   @Test
   public void testGetKeyCollectionMetadataWOptions() throws Throwable {
-    // Schedule some responses.
+    // Register a mock response
     String mockResponseBody = "";
     String getKeyCollectionMetadataPath = "/api/v2/keys";
-
     server.enqueue(new MockResponse()
-    .setResponseCode(200)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the GetKeyCollectionMetadataOptions model
     GetKeyCollectionMetadataOptions getKeyCollectionMetadataOptionsModel = new GetKeyCollectionMetadataOptions.Builder()
-    .bluemixInstance("testString")
-    .correlationId("testString")
-    .state(new java.util.ArrayList<Long>(java.util.Arrays.asList(Long.valueOf("0"))))
-    .extractable(true)
-    .xKmsKeyRing("testString")
-    .build();
+      .bluemixInstance("testString")
+      .correlationId("testString")
+      .state(java.util.Arrays.asList(Long.valueOf("0"), Long.valueOf("1"), Long.valueOf("2"), Long.valueOf("3")))
+      .extractable(true)
+      .filter("testString")
+      .xKmsKeyRing("testString")
+      .build();
 
-    // Invoke operation with valid options model (positive test)
+    // Invoke getKeyCollectionMetadata() with a valid options model and verify the result
     Response<Void> response = ibmKeyProtectApiService.getKeyCollectionMetadata(getKeyCollectionMetadataOptionsModel).execute();
     assertNotNull(response);
     Void responseObj = response.getResult();
-    // Response does not have a return type. Check that the result is null.
     assertNull(responseObj);
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "HEAD");
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNotNull(query);
-    // Get query params
-    assertEquals(query.get("state"), RequestUtils.join(new java.util.ArrayList<Long>(java.util.Arrays.asList(Long.valueOf("0"))), ","));
-    assertEquals(Boolean.valueOf(query.get("extractable")), Boolean.valueOf(true));
-    // Check request path
+    // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, getKeyCollectionMetadataPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify query params
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNotNull(query);
+    assertEquals(query.get("state"), RequestUtils.join(java.util.Arrays.asList(Long.valueOf("0"), Long.valueOf("1"), Long.valueOf("2"), Long.valueOf("3")), ","));
+    assertEquals(Boolean.valueOf(query.get("extractable")), Boolean.valueOf(true));
+    assertEquals(query.get("filter"), "testString");
   }
 
-  // Test the getKeyCollectionMetadata operation with null options model parameter
+  // Test the getKeyCollectionMetadata operation with and without retries enabled
+  @Test
+  public void testGetKeyCollectionMetadataWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testGetKeyCollectionMetadataWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testGetKeyCollectionMetadataWOptions();
+  }
+
+  // Test the getKeyCollectionMetadata operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testGetKeyCollectionMetadataNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.getKeyCollectionMetadata(null).execute();
   }
 
+  // Test the createKey operation with a valid options model parameter
   @Test
   public void testCreateKeyWOptions() throws Throwable {
-    // Schedule some responses.
-    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"type\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2018-12-01T23:20:50.520Z\", \"extractable\": false, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": true, \"creationDate\": \"2018-04-12T23:20:50.520Z\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"128\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 128, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2018-04-12T23:20:50.520Z\", \"lastRotateDate\": \"2018-04-12T23:20:50.520Z\", \"keyVersion\": {\"id\": \"4a0225e9-17a0-46c1-ace7-f25bcf4237d4\", \"creationDate\": \"2019-01-01T12:00:00.000Z\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2019-01-01T12:00:00.000Z\"}, \"deleted\": false, \"deletionDate\": \"2019-01-01T12:00:00.000Z\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2019-01-01T12:00:00.000Z\", \"restoreAllowed\": true, \"purgeAllowed\": true, \"purgeAllowedFrom\": \"2019-01-01T12:00:00.000Z\", \"purgeScheduledOn\": \"2019-01-01T12:00:00.000Z\", \"payload\": \"VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku\"}]}";
+    // Register a mock response
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"application/vnd.ibm.kms.key+json\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2019-01-01T12:00:00.000Z\", \"extractable\": true, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": false, \"keyRingID\": \"keyRingId\", \"migrationIntent\": {\"sourceCRK\": \"sourceCrk\", \"targetCRK\": \"targetCrk\", \"creationDate\": \"2019-01-01T12:00:00.000Z\", \"createdBy\": \"createdBy\", \"id\": \"id\"}, \"creationDate\": \"2019-01-01T12:00:00.000Z\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"256\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 256, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2019-01-01T12:00:00.000Z\", \"lastRotateDate\": \"2019-01-01T12:00:00.000Z\", \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2019-01-01T12:00:00.000Z\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2019-01-01T12:00:00.000Z\"}, \"rotation\": {\"enabled\": true, \"interval_month\": 3}, \"deleted\": false, \"deletionDate\": \"2019-01-01T12:00:00.000Z\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2019-01-01T12:00:00.000Z\", \"restoreAllowed\": true, \"purgeAllowed\": true, \"purgeAllowedFrom\": \"2019-01-01T12:00:00.000Z\", \"purgeScheduledOn\": \"2019-01-01T12:00:00.000Z\", \"payload\": \"VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku\"}]}";
     String createKeyPath = "/api/v2/keys";
-
     server.enqueue(new MockResponse()
-    .setHeader("Content-type", "application/json")
-    .setResponseCode(201)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(201)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the CreateKeyOptions model
     CreateKeyOptions createKeyOptionsModel = new CreateKeyOptions.Builder()
-    .bluemixInstance("testString")
-    .body(TestUtilities.createMockStream("This is a mock file."))
-    .correlationId("testString")
-    .prefer("return=representation")
-    .xKmsKeyRing("testString")
-    .build();
+      .bluemixInstance("testString")
+      .body(TestUtilities.createMockStream("This is a mock file."))
+      .correlationId("testString")
+      .prefer("return=representation")
+      .xKmsKeyRing("default")
+      .build();
 
-    // Invoke operation with valid options model (positive test)
+    // Invoke createKey() with a valid options model and verify the result
     Response<Key> response = ibmKeyProtectApiService.createKey(createKeyOptionsModel).execute();
     assertNotNull(response);
     Key responseObj = response.getResult();
     assertNotNull(responseObj);
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "POST");
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-
-    // Check request path
+    // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, createKeyPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
   }
 
-  // Test the createKey operation with null options model parameter
+  // Test the createKey operation with and without retries enabled
+  @Test
+  public void testCreateKeyWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testCreateKeyWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testCreateKeyWOptions();
+  }
+
+  // Test the createKey operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testCreateKeyNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.createKey(null).execute();
   }
 
+  // Test the getKeys operation with a valid options model parameter
   @Test
   public void testGetKeysWOptions() throws Throwable {
-    // Schedule some responses.
-    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"type\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2018-12-01T23:20:50.520Z\", \"extractable\": false, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": true, \"creationDate\": \"2018-04-12T23:20:50.520Z\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"128\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 128, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2018-04-12T23:20:50.520Z\", \"lastRotateDate\": \"2018-04-12T23:20:50.520Z\", \"keyVersion\": {\"id\": \"4a0225e9-17a0-46c1-ace7-f25bcf4237d4\", \"creationDate\": \"2019-01-01T12:00:00.000Z\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2019-01-01T12:00:00.000Z\"}, \"deleted\": false, \"deletionDate\": \"2019-01-01T12:00:00.000Z\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2019-01-01T12:00:00.000Z\", \"restoreAllowed\": true, \"purgeAllowed\": true, \"purgeAllowedFrom\": \"2019-01-01T12:00:00.000Z\", \"purgeScheduledOn\": \"2019-01-01T12:00:00.000Z\"}]}";
+    // Register a mock response
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1, \"incompleteSearch\": true, \"searchQuery\": {\"query\": \"query\", \"scopes\": [\"name\"], \"not\": false, \"exact\": false}}, \"resources\": [{\"type\": \"application/vnd.ibm.kms.key+json\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2019-01-01T12:00:00.000Z\", \"extractable\": true, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": false, \"keyRingID\": \"keyRingId\", \"migrationIntent\": {\"sourceCRK\": \"sourceCrk\", \"targetCRK\": \"targetCrk\", \"creationDate\": \"2019-01-01T12:00:00.000Z\", \"createdBy\": \"createdBy\", \"id\": \"id\"}, \"creationDate\": \"2019-01-01T12:00:00.000Z\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"256\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 256, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2019-01-01T12:00:00.000Z\", \"lastRotateDate\": \"2019-01-01T12:00:00.000Z\", \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2019-01-01T12:00:00.000Z\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2019-01-01T12:00:00.000Z\"}, \"rotation\": {\"enabled\": true, \"interval_month\": 3}, \"deleted\": false, \"deletionDate\": \"2019-01-01T12:00:00.000Z\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2019-01-01T12:00:00.000Z\", \"restoreAllowed\": true, \"purgeAllowed\": true, \"purgeAllowedFrom\": \"2019-01-01T12:00:00.000Z\", \"purgeScheduledOn\": \"2019-01-01T12:00:00.000Z\"}]}";
     String getKeysPath = "/api/v2/keys";
-
     server.enqueue(new MockResponse()
-    .setHeader("Content-type", "application/json")
-    .setResponseCode(200)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the GetKeysOptions model
     GetKeysOptions getKeysOptionsModel = new GetKeysOptions.Builder()
-    .bluemixInstance("testString")
-    .correlationId("testString")
-    .limit(Long.valueOf("1"))
-    .offset(Long.valueOf("0"))
-    .state(new java.util.ArrayList<Long>(java.util.Arrays.asList(Long.valueOf("0"))))
-    .extractable(true)
-    .xKmsKeyRing("testString")
-    .build();
+      .bluemixInstance("testString")
+      .correlationId("testString")
+      .limit(Long.valueOf("200"))
+      .offset(Long.valueOf("0"))
+      .state(java.util.Arrays.asList(Long.valueOf("0"), Long.valueOf("1"), Long.valueOf("2"), Long.valueOf("3")))
+      .extractable(true)
+      .search("testString")
+      .sort("id")
+      .filter("testString")
+      .xKmsKeyRing("testString")
+      .build();
 
-    // Invoke operation with valid options model (positive test)
+    // Invoke getKeys() with a valid options model and verify the result
     Response<ListKeys> response = ibmKeyProtectApiService.getKeys(getKeysOptionsModel).execute();
     assertNotNull(response);
     ListKeys responseObj = response.getResult();
     assertNotNull(responseObj);
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "GET");
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNotNull(query);
-    // Get query params
-    assertEquals(Long.valueOf(query.get("limit")), Long.valueOf("1"));
-    assertEquals(Long.valueOf(query.get("offset")), Long.valueOf("0"));
-    assertEquals(query.get("state"), RequestUtils.join(new java.util.ArrayList<Long>(java.util.Arrays.asList(Long.valueOf("0"))), ","));
-    assertEquals(Boolean.valueOf(query.get("extractable")), Boolean.valueOf(true));
-    // Check request path
+    // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, getKeysPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify query params
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNotNull(query);
+    assertEquals(Long.valueOf(query.get("limit")), Long.valueOf("200"));
+    assertEquals(Long.valueOf(query.get("offset")), Long.valueOf("0"));
+    assertEquals(query.get("state"), RequestUtils.join(java.util.Arrays.asList(Long.valueOf("0"), Long.valueOf("1"), Long.valueOf("2"), Long.valueOf("3")), ","));
+    assertEquals(Boolean.valueOf(query.get("extractable")), Boolean.valueOf(true));
+    assertEquals(query.get("search"), "testString");
+    assertEquals(query.get("sort"), "id");
+    assertEquals(query.get("filter"), "testString");
   }
 
-  // Test the getKeys operation with null options model parameter
+  // Test the getKeys operation with and without retries enabled
+  @Test
+  public void testGetKeysWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testGetKeysWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testGetKeysWOptions();
+  }
+
+  // Test the getKeys operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testGetKeysNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.getKeys(null).execute();
   }
 
+  // Test the createKeyWithPoliciesOverrides operation with a valid options model parameter
+  @Test
+  public void testCreateKeyWithPoliciesOverridesWOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"application/vnd.ibm.kms.key+json\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2019-01-01T12:00:00.000Z\", \"extractable\": true, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": false, \"keyRingID\": \"keyRingId\", \"migrationIntent\": {\"sourceCRK\": \"sourceCrk\", \"targetCRK\": \"targetCrk\", \"creationDate\": \"2019-01-01T12:00:00.000Z\", \"createdBy\": \"createdBy\", \"id\": \"id\"}, \"creationDate\": \"2019-01-01T12:00:00.000Z\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"256\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 256, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2019-01-01T12:00:00.000Z\", \"lastRotateDate\": \"2019-01-01T12:00:00.000Z\", \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2019-01-01T12:00:00.000Z\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2019-01-01T12:00:00.000Z\"}, \"rotation\": {\"enabled\": true, \"interval_month\": 3}, \"deleted\": false, \"deletionDate\": \"2019-01-01T12:00:00.000Z\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2019-01-01T12:00:00.000Z\", \"restoreAllowed\": true, \"purgeAllowed\": true, \"purgeAllowedFrom\": \"2019-01-01T12:00:00.000Z\", \"purgeScheduledOn\": \"2019-01-01T12:00:00.000Z\", \"payload\": \"VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku\"}]}";
+    String createKeyWithPoliciesOverridesPath = "/api/v2/keys_with_policy_overrides";
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(201)
+      .setBody(mockResponseBody));
+
+    // Construct an instance of the CreateKeyWithPoliciesOverridesOptions model
+    CreateKeyWithPoliciesOverridesOptions createKeyWithPoliciesOverridesOptionsModel = new CreateKeyWithPoliciesOverridesOptions.Builder()
+      .bluemixInstance("testString")
+      .body(TestUtilities.createMockStream("This is a mock file."))
+      .correlationId("testString")
+      .prefer("return=representation")
+      .xKmsKeyRing("default")
+      .build();
+
+    // Invoke createKeyWithPoliciesOverrides() with a valid options model and verify the result
+    Response<Key> response = ibmKeyProtectApiService.createKeyWithPoliciesOverrides(createKeyWithPoliciesOverridesOptionsModel).execute();
+    assertNotNull(response);
+    Key responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request sent to the mock server
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "POST");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, createKeyWithPoliciesOverridesPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
+  }
+
+  // Test the createKeyWithPoliciesOverrides operation with and without retries enabled
+  @Test
+  public void testCreateKeyWithPoliciesOverridesWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testCreateKeyWithPoliciesOverridesWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testCreateKeyWithPoliciesOverridesWOptions();
+  }
+
+  // Test the createKeyWithPoliciesOverrides operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testCreateKeyWithPoliciesOverridesNoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    ibmKeyProtectApiService.createKeyWithPoliciesOverrides(null).execute();
+  }
+
+  // Test the getKey operation with a valid options model parameter
   @Test
   public void testGetKeyWOptions() throws Throwable {
-    // Schedule some responses.
-    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"type\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2018-12-01T23:20:50.520Z\", \"extractable\": false, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": true, \"creationDate\": \"2018-04-12T23:20:50.520Z\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"128\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 128, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2018-04-12T23:20:50.520Z\", \"lastRotateDate\": \"2018-04-12T23:20:50.520Z\", \"keyVersion\": {\"id\": \"4a0225e9-17a0-46c1-ace7-f25bcf4237d4\", \"creationDate\": \"2019-01-01T12:00:00.000Z\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2019-01-01T12:00:00.000Z\"}, \"deleted\": false, \"deletionDate\": \"2019-01-01T12:00:00.000Z\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2019-01-01T12:00:00.000Z\", \"restoreAllowed\": true, \"purgeAllowed\": true, \"purgeAllowedFrom\": \"2019-01-01T12:00:00.000Z\", \"purgeScheduledOn\": \"2019-01-01T12:00:00.000Z\", \"payload\": \"VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku\"}]}";
+    // Register a mock response
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"application/vnd.ibm.kms.key+json\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2019-01-01T12:00:00.000Z\", \"extractable\": true, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": false, \"keyRingID\": \"keyRingId\", \"migrationIntent\": {\"sourceCRK\": \"sourceCrk\", \"targetCRK\": \"targetCrk\", \"creationDate\": \"2019-01-01T12:00:00.000Z\", \"createdBy\": \"createdBy\", \"id\": \"id\"}, \"creationDate\": \"2019-01-01T12:00:00.000Z\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"256\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 256, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2019-01-01T12:00:00.000Z\", \"lastRotateDate\": \"2019-01-01T12:00:00.000Z\", \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2019-01-01T12:00:00.000Z\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2019-01-01T12:00:00.000Z\"}, \"rotation\": {\"enabled\": true, \"interval_month\": 3}, \"deleted\": false, \"deletionDate\": \"2019-01-01T12:00:00.000Z\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2019-01-01T12:00:00.000Z\", \"restoreAllowed\": true, \"purgeAllowed\": true, \"purgeAllowedFrom\": \"2019-01-01T12:00:00.000Z\", \"purgeScheduledOn\": \"2019-01-01T12:00:00.000Z\", \"payload\": \"VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku\"}]}";
     String getKeyPath = "/api/v2/keys/testString";
-
     server.enqueue(new MockResponse()
-    .setHeader("Content-type", "application/json")
-    .setResponseCode(200)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the GetKeyOptions model
     GetKeyOptions getKeyOptionsModel = new GetKeyOptions.Builder()
-    .id("testString")
-    .bluemixInstance("testString")
-    .correlationId("testString")
-    .xKmsKeyRing("testString")
-    .build();
+      .id("testString")
+      .bluemixInstance("testString")
+      .correlationId("testString")
+      .xKmsKeyRing("testString")
+      .build();
 
-    // Invoke operation with valid options model (positive test)
+    // Invoke getKey() with a valid options model and verify the result
     Response<GetKey> response = ibmKeyProtectApiService.getKey(getKeyOptionsModel).execute();
     assertNotNull(response);
     GetKey responseObj = response.getResult();
     assertNotNull(responseObj);
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "GET");
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-
-    // Check request path
+    // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, getKeyPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
   }
 
-  // Test the getKey operation with null options model parameter
+  // Test the getKey operation with and without retries enabled
+  @Test
+  public void testGetKeyWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testGetKeyWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testGetKeyWOptions();
+  }
+
+  // Test the getKey operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testGetKeyNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.getKey(null).execute();
   }
 
+  // Test the actionOnKey operation with a valid options model parameter
   @Test
   public void testActionOnKeyWOptions() throws Throwable {
-    // Schedule some responses.
-    String mockResponseBody = "{\"plaintext\": \"plaintext\", \"ciphertext\": \"ciphertext\", \"keyVersion\": {\"id\": \"4a0225e9-17a0-46c1-ace7-f25bcf4237d4\", \"creationDate\": \"2019-01-01T12:00:00.000Z\"}}";
+    // Register a mock response
+    String mockResponseBody = "{\"plaintext\": \"plaintext\", \"ciphertext\": \"ciphertext\", \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\"}}";
     String actionOnKeyPath = "/api/v2/keys/testString";
-
     server.enqueue(new MockResponse()
-    .setHeader("Content-type", "application/json")
-    .setResponseCode(200)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the ActionOnKeyOptions model
     ActionOnKeyOptions actionOnKeyOptionsModel = new ActionOnKeyOptions.Builder()
-    .id("testString")
-    .bluemixInstance("testString")
-    .action("disable")
-    .body(TestUtilities.createMockStream("This is a mock file."))
-    .correlationId("testString")
-    .xKmsKeyRing("testString")
-    .prefer("return=representation")
-    .build();
+      .id("testString")
+      .bluemixInstance("testString")
+      .action("disable")
+      .body(TestUtilities.createMockStream("This is a mock file."))
+      .correlationId("testString")
+      .xKmsKeyRing("testString")
+      .prefer("return=representation")
+      .build();
 
-    // Invoke operation with valid options model (positive test)
+    // Invoke actionOnKey() with a valid options model and verify the result
     Response<KeyActionOneOfResponse> response = ibmKeyProtectApiService.actionOnKey(actionOnKeyOptionsModel).execute();
     assertNotNull(response);
     KeyActionOneOfResponse responseObj = response.getResult();
     assertNotNull(responseObj);
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "POST");
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNotNull(query);
-    // Get query params
-    assertEquals(query.get("action"), "disable");
-    // Check request path
+    // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, actionOnKeyPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify query params
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNotNull(query);
+    assertEquals(query.get("action"), "disable");
   }
 
-  // Test the actionOnKey operation with null options model parameter
+  // Test the actionOnKey operation with and without retries enabled
+  @Test
+  public void testActionOnKeyWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testActionOnKeyWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testActionOnKeyWOptions();
+  }
+
+  // Test the actionOnKey operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testActionOnKeyNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.actionOnKey(null).execute();
   }
 
+  // Test the patchKey operation with a valid options model parameter
   @Test
   public void testPatchKeyWOptions() throws Throwable {
-    // Schedule some responses.
-    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"type\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2018-12-01T23:20:50.520Z\", \"extractable\": false, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": true, \"creationDate\": \"2018-04-12T23:20:50.520Z\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"128\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 128, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2018-04-12T23:20:50.520Z\", \"lastRotateDate\": \"2018-04-12T23:20:50.520Z\", \"keyVersion\": {\"id\": \"4a0225e9-17a0-46c1-ace7-f25bcf4237d4\", \"creationDate\": \"2019-01-01T12:00:00.000Z\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2019-01-01T12:00:00.000Z\"}, \"deleted\": false, \"deletionDate\": \"2019-01-01T12:00:00.000Z\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2019-01-01T12:00:00.000Z\", \"restoreAllowed\": true, \"purgeAllowed\": true, \"purgeAllowedFrom\": \"2019-01-01T12:00:00.000Z\", \"purgeScheduledOn\": \"2019-01-01T12:00:00.000Z\"}]}";
+    // Register a mock response
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"application/vnd.ibm.kms.key+json\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2019-01-01T12:00:00.000Z\", \"extractable\": true, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": false, \"keyRingID\": \"keyRingId\", \"migrationIntent\": {\"sourceCRK\": \"sourceCrk\", \"targetCRK\": \"targetCrk\", \"creationDate\": \"2019-01-01T12:00:00.000Z\", \"createdBy\": \"createdBy\", \"id\": \"id\"}, \"creationDate\": \"2019-01-01T12:00:00.000Z\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"256\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 256, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2019-01-01T12:00:00.000Z\", \"lastRotateDate\": \"2019-01-01T12:00:00.000Z\", \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2019-01-01T12:00:00.000Z\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2019-01-01T12:00:00.000Z\"}, \"rotation\": {\"enabled\": true, \"interval_month\": 3}, \"deleted\": false, \"deletionDate\": \"2019-01-01T12:00:00.000Z\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2019-01-01T12:00:00.000Z\", \"restoreAllowed\": true, \"purgeAllowed\": true, \"purgeAllowedFrom\": \"2019-01-01T12:00:00.000Z\", \"purgeScheduledOn\": \"2019-01-01T12:00:00.000Z\"}]}";
     String patchKeyPath = "/api/v2/keys/testString";
-
     server.enqueue(new MockResponse()
-    .setHeader("Content-type", "application/json")
-    .setResponseCode(200)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the PatchKeyOptions model
     PatchKeyOptions patchKeyOptionsModel = new PatchKeyOptions.Builder()
-    .id("testString")
-    .bluemixInstance("testString")
-    .keyPatchBody(TestUtilities.createMockStream("This is a mock file."))
-    .correlationId("testString")
-    .xKmsKeyRing("testString")
-    .build();
+      .id("testString")
+      .bluemixInstance("testString")
+      .keyPatchBody(TestUtilities.createMockStream("This is a mock file."))
+      .correlationId("testString")
+      .xKmsKeyRing("testString")
+      .build();
 
-    // Invoke operation with valid options model (positive test)
+    // Invoke patchKey() with a valid options model and verify the result
     Response<PatchKeyResponseBody> response = ibmKeyProtectApiService.patchKey(patchKeyOptionsModel).execute();
     assertNotNull(response);
     PatchKeyResponseBody responseObj = response.getResult();
     assertNotNull(responseObj);
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "PATCH");
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-
-    // Check request path
+    // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, patchKeyPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
   }
 
-  // Test the patchKey operation with null options model parameter
+  // Test the patchKey operation with and without retries enabled
+  @Test
+  public void testPatchKeyWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testPatchKeyWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testPatchKeyWOptions();
+  }
+
+  // Test the patchKey operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testPatchKeyNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.patchKey(null).execute();
   }
 
+  // Test the deleteKey operation with a valid options model parameter
   @Test
   public void testDeleteKeyWOptions() throws Throwable {
-    // Schedule some responses.
-    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"type\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2018-12-01T23:20:50.520Z\", \"extractable\": false, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": true, \"creationDate\": \"2018-04-12T23:20:50.520Z\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"128\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 128, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2018-04-12T23:20:50.520Z\", \"lastRotateDate\": \"2018-04-12T23:20:50.520Z\", \"keyVersion\": {\"id\": \"4a0225e9-17a0-46c1-ace7-f25bcf4237d4\", \"creationDate\": \"2019-01-01T12:00:00.000Z\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2019-01-01T12:00:00.000Z\"}, \"deleted\": false, \"deletionDate\": \"2019-01-01T12:00:00.000Z\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2019-01-01T12:00:00.000Z\", \"restoreAllowed\": true, \"purgeAllowed\": true, \"purgeAllowedFrom\": \"2019-01-01T12:00:00.000Z\", \"purgeScheduledOn\": \"2019-01-01T12:00:00.000Z\", \"payload\": \"VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku\"}]}";
+    // Register a mock response
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"application/vnd.ibm.kms.key+json\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2019-01-01T12:00:00.000Z\", \"extractable\": true, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": false, \"keyRingID\": \"keyRingId\", \"migrationIntent\": {\"sourceCRK\": \"sourceCrk\", \"targetCRK\": \"targetCrk\", \"creationDate\": \"2019-01-01T12:00:00.000Z\", \"createdBy\": \"createdBy\", \"id\": \"id\"}, \"creationDate\": \"2019-01-01T12:00:00.000Z\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"256\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 256, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2019-01-01T12:00:00.000Z\", \"lastRotateDate\": \"2019-01-01T12:00:00.000Z\", \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2019-01-01T12:00:00.000Z\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2019-01-01T12:00:00.000Z\"}, \"rotation\": {\"enabled\": true, \"interval_month\": 3}, \"deleted\": false, \"deletionDate\": \"2019-01-01T12:00:00.000Z\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2019-01-01T12:00:00.000Z\", \"restoreAllowed\": true, \"purgeAllowed\": true, \"purgeAllowedFrom\": \"2019-01-01T12:00:00.000Z\", \"purgeScheduledOn\": \"2019-01-01T12:00:00.000Z\", \"payload\": \"VGhpcyBpcyBhbiBlbmNvZGVkIGJ5dGUgYXJyYXku\"}]}";
     String deleteKeyPath = "/api/v2/keys/testString";
-
     server.enqueue(new MockResponse()
-    .setHeader("Content-type", "application/json")
-    .setResponseCode(200)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the DeleteKeyOptions model
     DeleteKeyOptions deleteKeyOptionsModel = new DeleteKeyOptions.Builder()
-    .id("testString")
-    .bluemixInstance("testString")
-    .correlationId("testString")
-    .xKmsKeyRing("testString")
-    .prefer("return=representation")
-    .force(true)
-    .build();
+      .id("testString")
+      .bluemixInstance("testString")
+      .correlationId("testString")
+      .xKmsKeyRing("testString")
+      .prefer("return=representation")
+      .force(false)
+      .build();
 
-    // Invoke operation with valid options model (positive test)
+    // Invoke deleteKey() with a valid options model and verify the result
     Response<DeleteKey> response = ibmKeyProtectApiService.deleteKey(deleteKeyOptionsModel).execute();
     assertNotNull(response);
     DeleteKey responseObj = response.getResult();
     assertNotNull(responseObj);
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "DELETE");
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNotNull(query);
-    // Get query params
-    assertEquals(Boolean.valueOf(query.get("force")), Boolean.valueOf(true));
-    // Check request path
+    // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, deleteKeyPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify query params
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNotNull(query);
+    assertEquals(Boolean.valueOf(query.get("force")), Boolean.valueOf(false));
   }
 
-  // Test the deleteKey operation with null options model parameter
+  // Test the deleteKey operation with and without retries enabled
+  @Test
+  public void testDeleteKeyWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testDeleteKeyWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testDeleteKeyWOptions();
+  }
+
+  // Test the deleteKey operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testDeleteKeyNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.deleteKey(null).execute();
   }
 
+  // Test the getKeyMetadata operation with a valid options model parameter
   @Test
   public void testGetKeyMetadataWOptions() throws Throwable {
-    // Schedule some responses.
-    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"type\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2018-12-01T23:20:50.520Z\", \"extractable\": false, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": true, \"creationDate\": \"2018-04-12T23:20:50.520Z\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"128\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 128, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2018-04-12T23:20:50.520Z\", \"lastRotateDate\": \"2018-04-12T23:20:50.520Z\", \"keyVersion\": {\"id\": \"4a0225e9-17a0-46c1-ace7-f25bcf4237d4\", \"creationDate\": \"2019-01-01T12:00:00.000Z\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2019-01-01T12:00:00.000Z\"}, \"deleted\": false, \"deletionDate\": \"2019-01-01T12:00:00.000Z\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2019-01-01T12:00:00.000Z\", \"restoreAllowed\": true, \"purgeAllowed\": true, \"purgeAllowedFrom\": \"2019-01-01T12:00:00.000Z\", \"purgeScheduledOn\": \"2019-01-01T12:00:00.000Z\"}]}";
+    // Register a mock response
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"application/vnd.ibm.kms.key+json\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2019-01-01T12:00:00.000Z\", \"extractable\": true, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": false, \"keyRingID\": \"keyRingId\", \"migrationIntent\": {\"sourceCRK\": \"sourceCrk\", \"targetCRK\": \"targetCrk\", \"creationDate\": \"2019-01-01T12:00:00.000Z\", \"createdBy\": \"createdBy\", \"id\": \"id\"}, \"creationDate\": \"2019-01-01T12:00:00.000Z\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"256\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 256, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2019-01-01T12:00:00.000Z\", \"lastRotateDate\": \"2019-01-01T12:00:00.000Z\", \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2019-01-01T12:00:00.000Z\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2019-01-01T12:00:00.000Z\"}, \"rotation\": {\"enabled\": true, \"interval_month\": 3}, \"deleted\": false, \"deletionDate\": \"2019-01-01T12:00:00.000Z\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2019-01-01T12:00:00.000Z\", \"restoreAllowed\": true, \"purgeAllowed\": true, \"purgeAllowedFrom\": \"2019-01-01T12:00:00.000Z\", \"purgeScheduledOn\": \"2019-01-01T12:00:00.000Z\"}]}";
     String getKeyMetadataPath = "/api/v2/keys/testString/metadata";
-
     server.enqueue(new MockResponse()
-    .setHeader("Content-type", "application/json")
-    .setResponseCode(200)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the GetKeyMetadataOptions model
     GetKeyMetadataOptions getKeyMetadataOptionsModel = new GetKeyMetadataOptions.Builder()
-    .id("testString")
-    .bluemixInstance("testString")
-    .correlationId("testString")
-    .xKmsKeyRing("testString")
-    .build();
+      .id("testString")
+      .bluemixInstance("testString")
+      .correlationId("testString")
+      .xKmsKeyRing("testString")
+      .build();
 
-    // Invoke operation with valid options model (positive test)
+    // Invoke getKeyMetadata() with a valid options model and verify the result
     Response<GetKeyMetadata> response = ibmKeyProtectApiService.getKeyMetadata(getKeyMetadataOptionsModel).execute();
     assertNotNull(response);
     GetKeyMetadata responseObj = response.getResult();
     assertNotNull(responseObj);
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "GET");
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-
-    // Check request path
+    // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, getKeyMetadataPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
   }
 
-  // Test the getKeyMetadata operation with null options model parameter
+  // Test the getKeyMetadata operation with and without retries enabled
+  @Test
+  public void testGetKeyMetadataWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testGetKeyMetadataWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testGetKeyMetadataWOptions();
+  }
+
+  // Test the getKeyMetadata operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testGetKeyMetadataNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.getKeyMetadata(null).execute();
   }
 
+  // Test the purgeKey operation with a valid options model parameter
   @Test
   public void testPurgeKeyWOptions() throws Throwable {
-    // Schedule some responses.
-    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"type\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2018-12-01T23:20:50.520Z\", \"extractable\": false, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": true, \"creationDate\": \"2018-04-12T23:20:50.520Z\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"128\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 128, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2018-04-12T23:20:50.520Z\", \"lastRotateDate\": \"2018-04-12T23:20:50.520Z\", \"keyVersion\": {\"id\": \"4a0225e9-17a0-46c1-ace7-f25bcf4237d4\", \"creationDate\": \"2019-01-01T12:00:00.000Z\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2019-01-01T12:00:00.000Z\"}, \"deleted\": false, \"deletionDate\": \"2019-01-01T12:00:00.000Z\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2019-01-01T12:00:00.000Z\", \"restoreAllowed\": true, \"purgeAllowed\": true, \"purgeAllowedFrom\": \"2019-01-01T12:00:00.000Z\", \"purgeScheduledOn\": \"2019-01-01T12:00:00.000Z\"}]}";
+    // Register a mock response
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"application/vnd.ibm.kms.key+json\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2019-01-01T12:00:00.000Z\", \"extractable\": true, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": false, \"keyRingID\": \"keyRingId\", \"migrationIntent\": {\"sourceCRK\": \"sourceCrk\", \"targetCRK\": \"targetCrk\", \"creationDate\": \"2019-01-01T12:00:00.000Z\", \"createdBy\": \"createdBy\", \"id\": \"id\"}, \"creationDate\": \"2019-01-01T12:00:00.000Z\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"256\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 256, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2019-01-01T12:00:00.000Z\", \"lastRotateDate\": \"2019-01-01T12:00:00.000Z\", \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2019-01-01T12:00:00.000Z\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2019-01-01T12:00:00.000Z\"}, \"rotation\": {\"enabled\": true, \"interval_month\": 3}, \"deleted\": false, \"deletionDate\": \"2019-01-01T12:00:00.000Z\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2019-01-01T12:00:00.000Z\", \"restoreAllowed\": true, \"purgeAllowed\": true, \"purgeAllowedFrom\": \"2019-01-01T12:00:00.000Z\", \"purgeScheduledOn\": \"2019-01-01T12:00:00.000Z\"}]}";
     String purgeKeyPath = "/api/v2/keys/testString/purge";
-
     server.enqueue(new MockResponse()
-    .setHeader("Content-type", "application/json")
-    .setResponseCode(200)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the PurgeKeyOptions model
     PurgeKeyOptions purgeKeyOptionsModel = new PurgeKeyOptions.Builder()
-    .id("testString")
-    .bluemixInstance("testString")
-    .correlationId("testString")
-    .xKmsKeyRing("testString")
-    .prefer("return=representation")
-    .build();
+      .id("testString")
+      .bluemixInstance("testString")
+      .correlationId("testString")
+      .xKmsKeyRing("testString")
+      .prefer("return=representation")
+      .build();
 
-    // Invoke operation with valid options model (positive test)
+    // Invoke purgeKey() with a valid options model and verify the result
     Response<PurgeKey> response = ibmKeyProtectApiService.purgeKey(purgeKeyOptionsModel).execute();
     assertNotNull(response);
     PurgeKey responseObj = response.getResult();
     assertNotNull(responseObj);
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "DELETE");
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-
-    // Check request path
+    // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, purgeKeyPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
   }
 
-  // Test the purgeKey operation with null options model parameter
+  // Test the purgeKey operation with and without retries enabled
+  @Test
+  public void testPurgeKeyWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testPurgeKeyWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testPurgeKeyWOptions();
+  }
+
+  // Test the purgeKey operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testPurgeKeyNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.purgeKey(null).execute();
   }
 
+  // Test the restoreKey operation with a valid options model parameter
   @Test
   public void testRestoreKeyWOptions() throws Throwable {
-    // Schedule some responses.
+    // Register a mock response
     String mockResponseBody = "This is a mock binary response.";
     String restoreKeyPath = "/api/v2/keys/testString/restore";
-
     server.enqueue(new MockResponse()
-    .setHeader("Content-type", "application/vnd.ibm.kms.key+json")
-    .setResponseCode(201)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setHeader("Content-type", "application/vnd.ibm.kms.key+json")
+      .setResponseCode(201)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the RestoreKeyOptions model
     RestoreKeyOptions restoreKeyOptionsModel = new RestoreKeyOptions.Builder()
-    .id("testString")
-    .bluemixInstance("testString")
-    .keyRestoreBody(TestUtilities.createMockStream("This is a mock file."))
-    .correlationId("testString")
-    .xKmsKeyRing("testString")
-    .prefer("return=representation")
-    .build();
+      .id("testString")
+      .bluemixInstance("testString")
+      .keyRestoreBody(TestUtilities.createMockStream("This is a mock file."))
+      .correlationId("testString")
+      .xKmsKeyRing("testString")
+      .prefer("return=representation")
+      .build();
 
-    // Invoke operation with valid options model (positive test)
+    // Invoke restoreKey() with a valid options model and verify the result
     Response<InputStream> response = ibmKeyProtectApiService.restoreKey(restoreKeyOptionsModel).execute();
     assertNotNull(response);
     InputStream responseObj = response.getResult();
     assertNotNull(responseObj);
+    responseObj.close();
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "POST");
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-
-    // Check request path
+    // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, restoreKeyPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
   }
 
-  // Test the restoreKey operation with null options model parameter
+  // Test the restoreKey operation with and without retries enabled
+  @Test
+  public void testRestoreKeyWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testRestoreKeyWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testRestoreKeyWOptions();
+  }
+
+  // Test the restoreKey operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testRestoreKeyNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.restoreKey(null).execute();
   }
 
+  // Test the getKeyVersions operation with a valid options model parameter
   @Test
   public void testGetKeyVersionsWOptions() throws Throwable {
-    // Schedule some responses.
-    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"id\": \"4a0225e9-17a0-46c1-ace7-f25bcf4237d4\", \"creationDate\": \"2019-01-01T12:00:00.000Z\"}]}";
+    // Register a mock response
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1, \"totalCount\": 1}, \"resources\": [{\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2019-01-01T12:00:00.000Z\"}]}";
     String getKeyVersionsPath = "/api/v2/keys/testString/versions";
-
     server.enqueue(new MockResponse()
-    .setHeader("Content-type", "application/json")
-    .setResponseCode(200)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the GetKeyVersionsOptions model
     GetKeyVersionsOptions getKeyVersionsOptionsModel = new GetKeyVersionsOptions.Builder()
-    .id("testString")
-    .bluemixInstance("testString")
-    .correlationId("testString")
-    .xKmsKeyRing("testString")
-    .limit(Long.valueOf("1"))
-    .offset(Long.valueOf("0"))
-    .build();
+      .id("testString")
+      .bluemixInstance("testString")
+      .correlationId("testString")
+      .xKmsKeyRing("testString")
+      .limit(Long.valueOf("200"))
+      .offset(Long.valueOf("0"))
+      .totalCount(true)
+      .allKeyStates(false)
+      .build();
 
-    // Invoke operation with valid options model (positive test)
+    // Invoke getKeyVersions() with a valid options model and verify the result
     Response<ListKeyVersions> response = ibmKeyProtectApiService.getKeyVersions(getKeyVersionsOptionsModel).execute();
     assertNotNull(response);
     ListKeyVersions responseObj = response.getResult();
     assertNotNull(responseObj);
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "GET");
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNotNull(query);
-    // Get query params
-    assertEquals(Long.valueOf(query.get("limit")), Long.valueOf("1"));
-    assertEquals(Long.valueOf(query.get("offset")), Long.valueOf("0"));
-    // Check request path
+    // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, getKeyVersionsPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify query params
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNotNull(query);
+    assertEquals(Long.valueOf(query.get("limit")), Long.valueOf("200"));
+    assertEquals(Long.valueOf(query.get("offset")), Long.valueOf("0"));
+    assertEquals(Boolean.valueOf(query.get("totalCount")), Boolean.valueOf(true));
+    assertEquals(Boolean.valueOf(query.get("allKeyStates")), Boolean.valueOf(false));
   }
 
-  // Test the getKeyVersions operation with null options model parameter
+  // Test the getKeyVersions operation with and without retries enabled
+  @Test
+  public void testGetKeyVersionsWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testGetKeyVersionsWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testGetKeyVersionsWOptions();
+  }
+
+  // Test the getKeyVersions operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testGetKeyVersionsNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.getKeyVersions(null).execute();
   }
 
+  // Test the createMigrationIntent operation with a valid options model parameter
   @Test
-  public void testPutPolicyWOptions() throws Throwable {
-    // Schedule some responses.
-    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"id\": \"id\", \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance:policy:<policy-id>\", \"creationDate\": \"2019-01-01T12:00:00.000Z\", \"createdBy\": \"createdBy\", \"lastUpdateDate\": \"2019-01-01T12:00:00.000Z\", \"updatedBy\": \"updatedBy\", \"type\": \"application/vnd.ibm.kms.policy+json\", \"dualAuthDelete\": {\"enabled\": true}}]}";
-    String putPolicyPath = "/api/v2/keys/testString/policies";
-
+  public void testCreateMigrationIntentWOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"sourceCRK\": \"sourceCrk\", \"targetCRK\": \"targetCrk\", \"creationDate\": \"2019-01-01T12:00:00.000Z\", \"createdBy\": \"createdBy\", \"id\": \"id\"}]}";
+    String createMigrationIntentPath = "/api/v2/keys/testString/migrationIntent";
     server.enqueue(new MockResponse()
-    .setHeader("Content-type", "application/json")
-    .setResponseCode(200)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(201)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the CollectionMetadata model
     CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
-    .collectionType("application/vnd.ibm.kms.crn+json")
-    .collectionTotal(Long.valueOf("1"))
-    .build();
+      .collectionType("application/vnd.ibm.kms.migration_intent_input+json")
+      .collectionTotal(Long.valueOf("1"))
+      .build();
+
+    // Construct an instance of the CreateMigrationIntentObject model
+    CreateMigrationIntentObject createMigrationIntentObjectModel = new CreateMigrationIntentObject.Builder()
+      .targetCrk("crn:v1:bluemix:public:hs-crypto:<region>:<account-ID>:<instance-ID>:key:<key-ID>")
+      .build();
+
+    // Construct an instance of the CreateMigrationIntentOptions model
+    CreateMigrationIntentOptions createMigrationIntentOptionsModel = new CreateMigrationIntentOptions.Builder()
+      .id("testString")
+      .bluemixInstance("testString")
+      .metadata(collectionMetadataModel)
+      .resources(java.util.Arrays.asList(createMigrationIntentObjectModel))
+      .correlationId("testString")
+      .xKmsKeyRing("testString")
+      .build();
+
+    // Invoke createMigrationIntent() with a valid options model and verify the result
+    Response<GetMigrationIntent> response = ibmKeyProtectApiService.createMigrationIntent(createMigrationIntentOptionsModel).execute();
+    assertNotNull(response);
+    GetMigrationIntent responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request sent to the mock server
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "POST");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, createMigrationIntentPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
+  }
+
+  // Test the createMigrationIntent operation with and without retries enabled
+  @Test
+  public void testCreateMigrationIntentWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testCreateMigrationIntentWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testCreateMigrationIntentWOptions();
+  }
+
+  // Test the createMigrationIntent operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testCreateMigrationIntentNoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    ibmKeyProtectApiService.createMigrationIntent(null).execute();
+  }
+
+  // Test the getMigrationIntent operation with a valid options model parameter
+  @Test
+  public void testGetMigrationIntentWOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"sourceCRK\": \"sourceCrk\", \"targetCRK\": \"targetCrk\", \"creationDate\": \"2019-01-01T12:00:00.000Z\", \"createdBy\": \"createdBy\", \"id\": \"id\"}]}";
+    String getMigrationIntentPath = "/api/v2/keys/testString/migrationIntent";
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
+
+    // Construct an instance of the GetMigrationIntentOptions model
+    GetMigrationIntentOptions getMigrationIntentOptionsModel = new GetMigrationIntentOptions.Builder()
+      .id("testString")
+      .bluemixInstance("testString")
+      .correlationId("testString")
+      .xKmsKeyRing("testString")
+      .build();
+
+    // Invoke getMigrationIntent() with a valid options model and verify the result
+    Response<GetMigrationIntent> response = ibmKeyProtectApiService.getMigrationIntent(getMigrationIntentOptionsModel).execute();
+    assertNotNull(response);
+    GetMigrationIntent responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request sent to the mock server
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "GET");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, getMigrationIntentPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
+  }
+
+  // Test the getMigrationIntent operation with and without retries enabled
+  @Test
+  public void testGetMigrationIntentWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testGetMigrationIntentWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testGetMigrationIntentWOptions();
+  }
+
+  // Test the getMigrationIntent operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testGetMigrationIntentNoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    ibmKeyProtectApiService.getMigrationIntent(null).execute();
+  }
+
+  // Test the deleteMigrationIntent operation with a valid options model parameter
+  @Test
+  public void testDeleteMigrationIntentWOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "";
+    String deleteMigrationIntentPath = "/api/v2/keys/testString/migrationIntent";
+    server.enqueue(new MockResponse()
+      .setResponseCode(204)
+      .setBody(mockResponseBody));
+
+    // Construct an instance of the DeleteMigrationIntentOptions model
+    DeleteMigrationIntentOptions deleteMigrationIntentOptionsModel = new DeleteMigrationIntentOptions.Builder()
+      .id("testString")
+      .bluemixInstance("testString")
+      .correlationId("testString")
+      .xKmsKeyRing("testString")
+      .build();
+
+    // Invoke deleteMigrationIntent() with a valid options model and verify the result
+    Response<Void> response = ibmKeyProtectApiService.deleteMigrationIntent(deleteMigrationIntentOptionsModel).execute();
+    assertNotNull(response);
+    Void responseObj = response.getResult();
+    assertNull(responseObj);
+
+    // Verify the contents of the request sent to the mock server
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "DELETE");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, deleteMigrationIntentPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
+  }
+
+  // Test the deleteMigrationIntent operation with and without retries enabled
+  @Test
+  public void testDeleteMigrationIntentWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testDeleteMigrationIntentWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testDeleteMigrationIntentWOptions();
+  }
+
+  // Test the deleteMigrationIntent operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testDeleteMigrationIntentNoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    ibmKeyProtectApiService.deleteMigrationIntent(null).execute();
+  }
+
+  // Test the putPolicy operation with a valid options model parameter
+  @Test
+  public void testPutPolicyWOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"id\": \"id\", \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:policy:<policy-id>\", \"creationDate\": \"2019-01-01T12:00:00.000Z\", \"createdBy\": \"createdBy\", \"lastUpdateDate\": \"2019-01-01T12:00:00.000Z\", \"updatedBy\": \"updatedBy\", \"type\": \"application/vnd.ibm.kms.policy+json\", \"dualAuthDelete\": {\"enabled\": true}}]}";
+    String putPolicyPath = "/api/v2/keys/testString/policies";
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
+
+    // Construct an instance of the CollectionMetadata model
+    CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
+      .collectionType("application/vnd.ibm.kms.crn+json")
+      .collectionTotal(Long.valueOf("1"))
+      .build();
 
     // Construct an instance of the KeyPolicyDualAuthDeleteDualAuthDelete model
     KeyPolicyDualAuthDeleteDualAuthDelete keyPolicyDualAuthDeleteDualAuthDeleteModel = new KeyPolicyDualAuthDeleteDualAuthDelete.Builder()
-    .enabled(true)
-    .build();
+      .enabled(true)
+      .build();
 
     // Construct an instance of the KeyPolicyDualAuthDelete model
     KeyPolicyDualAuthDelete keyPolicyDualAuthDeleteModel = new KeyPolicyDualAuthDelete.Builder()
-    .type("application/vnd.ibm.kms.policy+json")
-    .dualAuthDelete(keyPolicyDualAuthDeleteDualAuthDeleteModel)
-    .build();
+      .type("application/vnd.ibm.kms.policy+json")
+      .dualAuthDelete(keyPolicyDualAuthDeleteDualAuthDeleteModel)
+      .build();
 
     // Construct an instance of the SetKeyPoliciesOneOfSetKeyPolicyDualAuthDelete model
     SetKeyPoliciesOneOfSetKeyPolicyDualAuthDelete setKeyPoliciesOneOfModel = new SetKeyPoliciesOneOfSetKeyPolicyDualAuthDelete.Builder()
-    .metadata(collectionMetadataModel)
-    .resources(new java.util.ArrayList<KeyPolicyDualAuthDelete>(java.util.Arrays.asList(keyPolicyDualAuthDeleteModel)))
-    .build();
+      .metadata(collectionMetadataModel)
+      .resources(java.util.Arrays.asList(keyPolicyDualAuthDeleteModel))
+      .build();
 
     // Construct an instance of the PutPolicyOptions model
     PutPolicyOptions putPolicyOptionsModel = new PutPolicyOptions.Builder()
-    .id("testString")
-    .bluemixInstance("testString")
-    .setKeyPoliciesOneOf(setKeyPoliciesOneOfModel)
-    .correlationId("testString")
-    .xKmsKeyRing("testString")
-    .policy("dualAuthDelete")
-    .build();
+      .id("testString")
+      .bluemixInstance("testString")
+      .setKeyPoliciesOneOf(setKeyPoliciesOneOfModel)
+      .correlationId("testString")
+      .xKmsKeyRing("testString")
+      .policy("dualAuthDelete")
+      .build();
 
-    // Invoke operation with valid options model (positive test)
+    // Invoke putPolicy() with a valid options model and verify the result
     Response<GetKeyPoliciesOneOf> response = ibmKeyProtectApiService.putPolicy(putPolicyOptionsModel).execute();
     assertNotNull(response);
     GetKeyPoliciesOneOf responseObj = response.getResult();
     assertNotNull(responseObj);
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "PUT");
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNotNull(query);
-    // Get query params
-    assertEquals(query.get("policy"), "dualAuthDelete");
-    // Check request path
+    // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, putPolicyPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify query params
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNotNull(query);
+    assertEquals(query.get("policy"), "dualAuthDelete");
   }
 
-  // Test the putPolicy operation with null options model parameter
+  // Test the putPolicy operation with and without retries enabled
+  @Test
+  public void testPutPolicyWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testPutPolicyWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testPutPolicyWOptions();
+  }
+
+  // Test the putPolicy operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testPutPolicyNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.putPolicy(null).execute();
   }
 
+  // Test the getPolicy operation with a valid options model parameter
   @Test
   public void testGetPolicyWOptions() throws Throwable {
-    // Schedule some responses.
-    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"id\": \"id\", \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance:policy:<policy-id>\", \"creationDate\": \"2019-01-01T12:00:00.000Z\", \"createdBy\": \"createdBy\", \"lastUpdateDate\": \"2019-01-01T12:00:00.000Z\", \"updatedBy\": \"updatedBy\", \"type\": \"application/vnd.ibm.kms.policy+json\", \"dualAuthDelete\": {\"enabled\": true}}]}";
+    // Register a mock response
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"id\": \"id\", \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:policy:<policy-id>\", \"creationDate\": \"2019-01-01T12:00:00.000Z\", \"createdBy\": \"createdBy\", \"lastUpdateDate\": \"2019-01-01T12:00:00.000Z\", \"updatedBy\": \"updatedBy\", \"type\": \"application/vnd.ibm.kms.policy+json\", \"dualAuthDelete\": {\"enabled\": true}}]}";
     String getPolicyPath = "/api/v2/keys/testString/policies";
-
     server.enqueue(new MockResponse()
-    .setHeader("Content-type", "application/json")
-    .setResponseCode(200)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the GetPolicyOptions model
     GetPolicyOptions getPolicyOptionsModel = new GetPolicyOptions.Builder()
-    .id("testString")
-    .bluemixInstance("testString")
-    .correlationId("testString")
-    .xKmsKeyRing("testString")
-    .policy("dualAuthDelete")
-    .build();
+      .id("testString")
+      .bluemixInstance("testString")
+      .correlationId("testString")
+      .xKmsKeyRing("testString")
+      .policy("dualAuthDelete")
+      .build();
 
-    // Invoke operation with valid options model (positive test)
+    // Invoke getPolicy() with a valid options model and verify the result
     Response<GetKeyPoliciesOneOf> response = ibmKeyProtectApiService.getPolicy(getPolicyOptionsModel).execute();
     assertNotNull(response);
     GetKeyPoliciesOneOf responseObj = response.getResult();
     assertNotNull(responseObj);
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "GET");
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNotNull(query);
-    // Get query params
-    assertEquals(query.get("policy"), "dualAuthDelete");
-    // Check request path
+    // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, getPolicyPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify query params
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNotNull(query);
+    assertEquals(query.get("policy"), "dualAuthDelete");
   }
 
-  // Test the getPolicy operation with null options model parameter
+  // Test the getPolicy operation with and without retries enabled
+  @Test
+  public void testGetPolicyWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testGetPolicyWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testGetPolicyWOptions();
+  }
+
+  // Test the getPolicy operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testGetPolicyNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.getPolicy(null).execute();
   }
 
+  // Test the putInstancePolicy operation with a valid options model parameter
   @Test
   public void testPutInstancePolicyWOptions() throws Throwable {
-    // Schedule some responses.
+    // Register a mock response
     String mockResponseBody = "";
     String putInstancePolicyPath = "/api/v2/instance/policies";
-
     server.enqueue(new MockResponse()
-    .setResponseCode(204)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setResponseCode(204)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the CollectionMetadata model
     CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
-    .collectionType("application/vnd.ibm.kms.crn+json")
-    .collectionTotal(Long.valueOf("1"))
-    .build();
+      .collectionType("application/vnd.ibm.kms.crn+json")
+      .collectionTotal(Long.valueOf("1"))
+      .build();
 
     // Construct an instance of the InstancePolicyAllowedNetworkPolicyDataAttributes model
     InstancePolicyAllowedNetworkPolicyDataAttributes instancePolicyAllowedNetworkPolicyDataAttributesModel = new InstancePolicyAllowedNetworkPolicyDataAttributes.Builder()
-    .allowedNetwork("public-and-private")
-    .build();
+      .allowedNetwork("public-and-private")
+      .build();
 
     // Construct an instance of the InstancePolicyAllowedNetworkPolicyData model
     InstancePolicyAllowedNetworkPolicyData instancePolicyAllowedNetworkPolicyDataModel = new InstancePolicyAllowedNetworkPolicyData.Builder()
-    .enabled(true)
-    .attributes(instancePolicyAllowedNetworkPolicyDataAttributesModel)
-    .build();
+      .enabled(true)
+      .attributes(instancePolicyAllowedNetworkPolicyDataAttributesModel)
+      .build();
 
     // Construct an instance of the SetInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItem model
     SetInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItem setInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItemModel = new SetInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItem.Builder()
-    .policyType("allowedNetwork")
-    .policyData(instancePolicyAllowedNetworkPolicyDataModel)
-    .build();
+      .policyType("allowedNetwork")
+      .policyData(instancePolicyAllowedNetworkPolicyDataModel)
+      .build();
 
     // Construct an instance of the SetInstancePoliciesOneOfSetInstancePolicyAllowedNetwork model
     SetInstancePoliciesOneOfSetInstancePolicyAllowedNetwork setInstancePoliciesOneOfModel = new SetInstancePoliciesOneOfSetInstancePolicyAllowedNetwork.Builder()
-    .metadata(collectionMetadataModel)
-    .resources(new java.util.ArrayList<SetInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItem>(java.util.Arrays.asList(setInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItemModel)))
-    .build();
+      .metadata(collectionMetadataModel)
+      .resources(java.util.Arrays.asList(setInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItemModel))
+      .build();
 
     // Construct an instance of the PutInstancePolicyOptions model
     PutInstancePolicyOptions putInstancePolicyOptionsModel = new PutInstancePolicyOptions.Builder()
-    .bluemixInstance("testString")
-    .setInstancePoliciesOneOf(setInstancePoliciesOneOfModel)
-    .correlationId("testString")
-    .policy("allowedNetwork")
-    .build();
+      .bluemixInstance("testString")
+      .setInstancePoliciesOneOf(setInstancePoliciesOneOfModel)
+      .correlationId("testString")
+      .policy("allowedNetwork")
+      .build();
 
-    // Invoke operation with valid options model (positive test)
+    // Invoke putInstancePolicy() with a valid options model and verify the result
     Response<Void> response = ibmKeyProtectApiService.putInstancePolicy(putInstancePolicyOptionsModel).execute();
     assertNotNull(response);
     Void responseObj = response.getResult();
-    // Response does not have a return type. Check that the result is null.
     assertNull(responseObj);
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "PUT");
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNotNull(query);
-    // Get query params
-    assertEquals(query.get("policy"), "allowedNetwork");
-    // Check request path
+    // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, putInstancePolicyPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify query params
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNotNull(query);
+    assertEquals(query.get("policy"), "allowedNetwork");
   }
 
-  // Test the putInstancePolicy operation with null options model parameter
+  // Test the putInstancePolicy operation with and without retries enabled
+  @Test
+  public void testPutInstancePolicyWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testPutInstancePolicyWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testPutInstancePolicyWOptions();
+  }
+
+  // Test the putInstancePolicy operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testPutInstancePolicyNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.putInstancePolicy(null).execute();
   }
 
+  // Test the getInstancePolicy operation with a valid options model parameter
   @Test
   public void testGetInstancePolicyWOptions() throws Throwable {
-    // Schedule some responses.
+    // Register a mock response
     String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"creationDate\": \"2019-01-01T12:00:00.000Z\", \"createdBy\": \"createdBy\", \"updatedBy\": \"updatedBy\", \"lastUpdated\": \"2019-01-01T12:00:00.000Z\", \"policy_type\": \"policyType\", \"policy_data\": {\"enabled\": true, \"attributes\": {\"allowed_network\": \"public-and-private\"}}}]}";
     String getInstancePolicyPath = "/api/v2/instance/policies";
-
     server.enqueue(new MockResponse()
-    .setHeader("Content-type", "application/json")
-    .setResponseCode(200)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the GetInstancePolicyOptions model
     GetInstancePolicyOptions getInstancePolicyOptionsModel = new GetInstancePolicyOptions.Builder()
-    .bluemixInstance("testString")
-    .correlationId("testString")
-    .policy("allowedNetwork")
-    .build();
+      .bluemixInstance("testString")
+      .correlationId("testString")
+      .policy("allowedNetwork")
+      .build();
 
-    // Invoke operation with valid options model (positive test)
+    // Invoke getInstancePolicy() with a valid options model and verify the result
     Response<GetInstancePoliciesOneOf> response = ibmKeyProtectApiService.getInstancePolicy(getInstancePolicyOptionsModel).execute();
     assertNotNull(response);
     GetInstancePoliciesOneOf responseObj = response.getResult();
     assertNotNull(responseObj);
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "GET");
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNotNull(query);
-    // Get query params
-    assertEquals(query.get("policy"), "allowedNetwork");
-    // Check request path
+    // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, getInstancePolicyPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify query params
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNotNull(query);
+    assertEquals(query.get("policy"), "allowedNetwork");
   }
 
-  // Test the getInstancePolicy operation with null options model parameter
+  // Test the getInstancePolicy operation with and without retries enabled
+  @Test
+  public void testGetInstancePolicyWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testGetInstancePolicyWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testGetInstancePolicyWOptions();
+  }
+
+  // Test the getInstancePolicy operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testGetInstancePolicyNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.getInstancePolicy(null).execute();
   }
 
+  // Test the getAllowedIPPort operation with a valid options model parameter
   @Test
   public void testGetAllowedIpPortWOptions() throws Throwable {
-    // Schedule some responses.
+    // Register a mock response
     String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"private_endpoint_port\": 8888}]}";
     String getAllowedIpPortPath = "/api/v2/instance/allowed_ip_port";
-
     server.enqueue(new MockResponse()
-    .setHeader("Content-type", "application/json")
-    .setResponseCode(200)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the GetAllowedIPPortOptions model
     GetAllowedIPPortOptions getAllowedIpPortOptionsModel = new GetAllowedIPPortOptions.Builder()
-    .bluemixInstance("testString")
-    .correlationId("testString")
-    .build();
+      .bluemixInstance("testString")
+      .correlationId("testString")
+      .build();
 
-    // Invoke operation with valid options model (positive test)
+    // Invoke getAllowedIPPort() with a valid options model and verify the result
     Response<AllowedIPPort> response = ibmKeyProtectApiService.getAllowedIPPort(getAllowedIpPortOptionsModel).execute();
     assertNotNull(response);
     AllowedIPPort responseObj = response.getResult();
     assertNotNull(responseObj);
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "GET");
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-
-    // Check request path
+    // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, getAllowedIpPortPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
   }
 
-  // Test the getAllowedIPPort operation with null options model parameter
+  // Test the getAllowedIPPort operation with and without retries enabled
+  @Test
+  public void testGetAllowedIpPortWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testGetAllowedIpPortWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testGetAllowedIpPortWOptions();
+  }
+
+  // Test the getAllowedIPPort operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testGetAllowedIpPortNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.getAllowedIPPort(null).execute();
   }
 
+  // Test the createRegistration operation with a valid options model parameter
+  @Test
+  public void testCreateRegistrationWOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"keyId\": \"fadedbee-0000-0000-0000-1234567890ab\", \"keyName\": \"Example Key Name\", \"resourceCrn\": \"crn:v1:bluemix:public:<service-name>:<location>:a/<account-id>:<service-instance>:<resource-type>:<resource>\", \"createdBy\": \"examplecreator@ibm.com\", \"creationDate\": \"2019-01-01T12:00:00.000Z\", \"updatedBy\": \"exampleupdater@ibm.com\", \"lastUpdated\": \"2019-01-01T12:00:00.000Z\", \"description\": \"Example description\", \"registrationMetadata\": \"us-south\", \"preventKeyDeletion\": false, \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2019-01-01T12:00:00.000Z\"}}]}";
+    String createRegistrationPath = "/api/v2/keys/testString/registrations/crn%253av1%253abluemix%253apublic%253acloud-object-storage%253aglobal%253aa%252f00000000000000000000000000000000%253afeddecaf-0000-0000-0000-1234567890ab%253a%253abucket";
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
+
+    // Construct an instance of the CollectionMetadata model
+    CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
+      .collectionType("application/vnd.ibm.kms.registration_input+json")
+      .collectionTotal(Long.valueOf("1"))
+      .build();
+
+    // Construct an instance of the CreateRegistrationResourceBody model
+    CreateRegistrationResourceBody createRegistrationResourceBodyModel = new CreateRegistrationResourceBody.Builder()
+      .preventKeyDeletion(false)
+      .description("A resource registration on a Key Protect key")
+      .registrationMetadata("testString")
+      .build();
+
+    // Construct an instance of the CreateRegistrationOptions model
+    CreateRegistrationOptions createRegistrationOptionsModel = new CreateRegistrationOptions.Builder()
+      .id("testString")
+      .urlEncodedResourceCrn("crn%3av1%3abluemix%3apublic%3acloud-object-storage%3aglobal%3aa%2f00000000000000000000000000000000%3afeddecaf-0000-0000-0000-1234567890ab%3a%3abucket")
+      .bluemixInstance("testString")
+      .metadata(collectionMetadataModel)
+      .resources(java.util.Arrays.asList(createRegistrationResourceBodyModel))
+      .correlationId("testString")
+      .xKmsKeyRing("testString")
+      .build();
+
+    // Invoke createRegistration() with a valid options model and verify the result
+    Response<Registration> response = ibmKeyProtectApiService.createRegistration(createRegistrationOptionsModel).execute();
+    assertNotNull(response);
+    Registration responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request sent to the mock server
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "POST");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, createRegistrationPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
+  }
+
+  // Test the createRegistration operation with and without retries enabled
+  @Test
+  public void testCreateRegistrationWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testCreateRegistrationWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testCreateRegistrationWOptions();
+  }
+
+  // Test the createRegistration operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testCreateRegistrationNoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    ibmKeyProtectApiService.createRegistration(null).execute();
+  }
+
+  // Test the updateRegistration operation with a valid options model parameter
+  @Test
+  public void testUpdateRegistrationWOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"keyId\": \"fadedbee-0000-0000-0000-1234567890ab\", \"keyName\": \"Example Key Name\", \"resourceCrn\": \"crn:v1:bluemix:public:<service-name>:<location>:a/<account-id>:<service-instance>:<resource-type>:<resource>\", \"createdBy\": \"examplecreator@ibm.com\", \"creationDate\": \"2019-01-01T12:00:00.000Z\", \"updatedBy\": \"exampleupdater@ibm.com\", \"lastUpdated\": \"2019-01-01T12:00:00.000Z\", \"description\": \"Example description\", \"registrationMetadata\": \"us-south\", \"preventKeyDeletion\": false, \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2019-01-01T12:00:00.000Z\"}}]}";
+    String updateRegistrationPath = "/api/v2/keys/testString/registrations/crn%253av1%253abluemix%253apublic%253acloud-object-storage%253aglobal%253aa%252f00000000000000000000000000000000%253afeddecaf-0000-0000-0000-1234567890ab%253a%253abucket";
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
+
+    // Construct an instance of the CollectionMetadata model
+    CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
+      .collectionType("application/vnd.ibm.kms.registration_input+json")
+      .collectionTotal(Long.valueOf("1"))
+      .build();
+
+    // Construct an instance of the ModifiableRegistrationResourceBody model
+    ModifiableRegistrationResourceBody modifiableRegistrationResourceBodyModel = new ModifiableRegistrationResourceBody.Builder()
+      .preventKeyDeletion(false)
+      .description("A resource registration on a Key Protect key")
+      .registrationMetadata("testString")
+      .keyVersionId("testString")
+      .build();
+
+    // Construct an instance of the UpdateRegistrationOptions model
+    UpdateRegistrationOptions updateRegistrationOptionsModel = new UpdateRegistrationOptions.Builder()
+      .id("testString")
+      .urlEncodedResourceCrn("crn%3av1%3abluemix%3apublic%3acloud-object-storage%3aglobal%3aa%2f00000000000000000000000000000000%3afeddecaf-0000-0000-0000-1234567890ab%3a%3abucket")
+      .bluemixInstance("testString")
+      .metadata(collectionMetadataModel)
+      .resources(java.util.Arrays.asList(modifiableRegistrationResourceBodyModel))
+      .correlationId("testString")
+      .xKmsKeyRing("testString")
+      .ifMatch("W/\"c8f7e349e5a1f8d7255de81f2508e5914667fg5e4aeb88945002286f753064b7\"")
+      .build();
+
+    // Invoke updateRegistration() with a valid options model and verify the result
+    Response<Registration> response = ibmKeyProtectApiService.updateRegistration(updateRegistrationOptionsModel).execute();
+    assertNotNull(response);
+    Registration responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request sent to the mock server
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "PATCH");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, updateRegistrationPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
+  }
+
+  // Test the updateRegistration operation with and without retries enabled
+  @Test
+  public void testUpdateRegistrationWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testUpdateRegistrationWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testUpdateRegistrationWOptions();
+  }
+
+  // Test the updateRegistration operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testUpdateRegistrationNoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    ibmKeyProtectApiService.updateRegistration(null).execute();
+  }
+
+  // Test the replaceRegistration operation with a valid options model parameter
+  @Test
+  public void testReplaceRegistrationWOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"keyId\": \"fadedbee-0000-0000-0000-1234567890ab\", \"keyName\": \"Example Key Name\", \"resourceCrn\": \"crn:v1:bluemix:public:<service-name>:<location>:a/<account-id>:<service-instance>:<resource-type>:<resource>\", \"createdBy\": \"examplecreator@ibm.com\", \"creationDate\": \"2019-01-01T12:00:00.000Z\", \"updatedBy\": \"exampleupdater@ibm.com\", \"lastUpdated\": \"2019-01-01T12:00:00.000Z\", \"description\": \"Example description\", \"registrationMetadata\": \"us-south\", \"preventKeyDeletion\": false, \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2019-01-01T12:00:00.000Z\"}}]}";
+    String replaceRegistrationPath = "/api/v2/keys/testString/registrations/crn%253av1%253abluemix%253apublic%253acloud-object-storage%253aglobal%253aa%252f00000000000000000000000000000000%253afeddecaf-0000-0000-0000-1234567890ab%253a%253abucket";
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
+
+    // Construct an instance of the CollectionMetadata model
+    CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
+      .collectionType("application/vnd.ibm.kms.registration_input+json")
+      .collectionTotal(Long.valueOf("1"))
+      .build();
+
+    // Construct an instance of the ReplaceRegistrationResourceBody model
+    ReplaceRegistrationResourceBody replaceRegistrationResourceBodyModel = new ReplaceRegistrationResourceBody.Builder()
+      .preventKeyDeletion(false)
+      .description("A resource registration on a Key Protect key")
+      .registrationMetadata("testString")
+      .keyVersionId("fadedbee-0000-0000-0000-1234567890ab")
+      .build();
+
+    // Construct an instance of the ReplaceRegistrationOptions model
+    ReplaceRegistrationOptions replaceRegistrationOptionsModel = new ReplaceRegistrationOptions.Builder()
+      .id("testString")
+      .urlEncodedResourceCrn("crn%3av1%3abluemix%3apublic%3acloud-object-storage%3aglobal%3aa%2f00000000000000000000000000000000%3afeddecaf-0000-0000-0000-1234567890ab%3a%3abucket")
+      .bluemixInstance("testString")
+      .metadata(collectionMetadataModel)
+      .resources(java.util.Arrays.asList(replaceRegistrationResourceBodyModel))
+      .correlationId("testString")
+      .xKmsKeyRing("testString")
+      .ifMatch("W/\"c8f7e349e5a1f8d7255de81f2508e5914667fg5e4aeb88945002286f753064b7\"")
+      .build();
+
+    // Invoke replaceRegistration() with a valid options model and verify the result
+    Response<Registration> response = ibmKeyProtectApiService.replaceRegistration(replaceRegistrationOptionsModel).execute();
+    assertNotNull(response);
+    Registration responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request sent to the mock server
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "PUT");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, replaceRegistrationPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
+  }
+
+  // Test the replaceRegistration operation with and without retries enabled
+  @Test
+  public void testReplaceRegistrationWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testReplaceRegistrationWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testReplaceRegistrationWOptions();
+  }
+
+  // Test the replaceRegistration operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testReplaceRegistrationNoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    ibmKeyProtectApiService.replaceRegistration(null).execute();
+  }
+
+  // Test the deleteRegistration operation with a valid options model parameter
+  @Test
+  public void testDeleteRegistrationWOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"keyId\": \"fadedbee-0000-0000-0000-1234567890ab\", \"keyName\": \"Example Key Name\", \"resourceCrn\": \"crn:v1:bluemix:public:<service-name>:<location>:a/<account-id>:<service-instance>:<resource-type>:<resource>\", \"createdBy\": \"examplecreator@ibm.com\", \"creationDate\": \"2019-01-01T12:00:00.000Z\", \"updatedBy\": \"exampleupdater@ibm.com\", \"lastUpdated\": \"2019-01-01T12:00:00.000Z\", \"description\": \"Example description\", \"registrationMetadata\": \"us-south\", \"preventKeyDeletion\": false, \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2019-01-01T12:00:00.000Z\"}}]}";
+    String deleteRegistrationPath = "/api/v2/keys/testString/registrations/crn%253av1%253abluemix%253apublic%253acloud-object-storage%253aglobal%253aa%252f00000000000000000000000000000000%253afeddecaf-0000-0000-0000-1234567890ab%253a%253abucket";
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
+
+    // Construct an instance of the DeleteRegistrationOptions model
+    DeleteRegistrationOptions deleteRegistrationOptionsModel = new DeleteRegistrationOptions.Builder()
+      .id("testString")
+      .urlEncodedResourceCrn("crn%3av1%3abluemix%3apublic%3acloud-object-storage%3aglobal%3aa%2f00000000000000000000000000000000%3afeddecaf-0000-0000-0000-1234567890ab%3a%3abucket")
+      .bluemixInstance("testString")
+      .correlationId("testString")
+      .xKmsKeyRing("testString")
+      .prefer("return=representation")
+      .build();
+
+    // Invoke deleteRegistration() with a valid options model and verify the result
+    Response<Registration> response = ibmKeyProtectApiService.deleteRegistration(deleteRegistrationOptionsModel).execute();
+    assertNotNull(response);
+    Registration responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request sent to the mock server
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "DELETE");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, deleteRegistrationPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify that there is no query string
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNull(query);
+  }
+
+  // Test the deleteRegistration operation with and without retries enabled
+  @Test
+  public void testDeleteRegistrationWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testDeleteRegistrationWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testDeleteRegistrationWOptions();
+  }
+
+  // Test the deleteRegistration operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testDeleteRegistrationNoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    ibmKeyProtectApiService.deleteRegistration(null).execute();
+  }
+
+  // Test the actionOnRegistration operation with a valid options model parameter
+  @Test
+  public void testActionOnRegistrationWOptions() throws Throwable {
+    // Register a mock response
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1}, \"resources\": [{\"resourceCrn\": \"crn:v1:bluemix:public:<service-name>:<location>:a/<account-id>:<service-instance>:<resource-type>:<resource>\"}]}";
+    String actionOnRegistrationPath = "/api/v2/keys/testString/registrations";
+    server.enqueue(new MockResponse()
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
+
+    // Construct an instance of the CollectionMetadata model
+    CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
+      .collectionType("application/vnd.ibm.kms.crn+json")
+      .collectionTotal(Long.valueOf("1"))
+      .build();
+
+    // Construct an instance of the CloudResourceName model
+    CloudResourceName cloudResourceNameModel = new CloudResourceName.Builder()
+      .resourceCrn("crn:v1:bluemix:public:<service-name>:<location>:a/<account-id>:<service-instance>:<resource-type>:<resource>")
+      .build();
+
+    // Construct an instance of the RegistrationActionOneOfDeactivateRegistration model
+    RegistrationActionOneOfDeactivateRegistration registrationActionOneOfModel = new RegistrationActionOneOfDeactivateRegistration.Builder()
+      .metadata(collectionMetadataModel)
+      .resources(java.util.Arrays.asList(cloudResourceNameModel))
+      .build();
+
+    // Construct an instance of the ActionOnRegistrationOptions model
+    ActionOnRegistrationOptions actionOnRegistrationOptionsModel = new ActionOnRegistrationOptions.Builder()
+      .id("testString")
+      .bluemixInstance("testString")
+      .action("deactivate")
+      .registrationActionOneOf(registrationActionOneOfModel)
+      .correlationId("testString")
+      .xKmsKeyRing("testString")
+      .prefer("return=representation")
+      .build();
+
+    // Invoke actionOnRegistration() with a valid options model and verify the result
+    Response<ActionOnRegistrationResponse> response = ibmKeyProtectApiService.actionOnRegistration(actionOnRegistrationOptionsModel).execute();
+    assertNotNull(response);
+    ActionOnRegistrationResponse responseObj = response.getResult();
+    assertNotNull(responseObj);
+
+    // Verify the contents of the request sent to the mock server
+    RecordedRequest request = server.takeRequest();
+    assertNotNull(request);
+    assertEquals(request.getMethod(), "POST");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, actionOnRegistrationPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify query params
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNotNull(query);
+    assertEquals(query.get("action"), "deactivate");
+  }
+
+  // Test the actionOnRegistration operation with and without retries enabled
+  @Test
+  public void testActionOnRegistrationWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testActionOnRegistrationWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testActionOnRegistrationWOptions();
+  }
+
+  // Test the actionOnRegistration operation with a null options model (negative test)
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testActionOnRegistrationNoOptions() throws Throwable {
+    server.enqueue(new MockResponse());
+    ibmKeyProtectApiService.actionOnRegistration(null).execute();
+  }
+
+  // Test the getRegistrations operation with a valid options model parameter
   @Test
   public void testGetRegistrationsWOptions() throws Throwable {
-    // Schedule some responses.
-    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1, \"totalCount\": 1}, \"resources\": [{\"keyId\": \"84a53643-9ca8-4ff2-9c68-d7842526167b\", \"keyName\": \"Example Key Name\", \"resourceCrn\": \"crn:v1:bluemix:public:cloud-object-storage:global:a/<account-id>:<service-instance>:bucket:<bucket-name>\", \"createdBy\": \"examplecreator@ibm.com\", \"creationDate\": \"2019-01-01T12:00:00.000Z\", \"updatedBy\": \"exampleupdater@ibm.com\", \"lastUpdated\": \"2019-01-01T12:00:00.000Z\", \"description\": \"Example description\", \"registrationMetadata\": \"us-south\", \"preventKeyDeletion\": true, \"keyVersion\": {\"id\": \"4a0225e9-17a0-46c1-ace7-f25bcf4237d4\", \"creationDate\": \"2019-01-01T12:00:00.000Z\"}}]}";
+    // Register a mock response
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1, \"totalCount\": 1}, \"resources\": [{\"keyId\": \"fadedbee-0000-0000-0000-1234567890ab\", \"keyName\": \"Example Key Name\", \"resourceCrn\": \"crn:v1:bluemix:public:<service-name>:<location>:a/<account-id>:<service-instance>:<resource-type>:<resource>\", \"createdBy\": \"examplecreator@ibm.com\", \"creationDate\": \"2019-01-01T12:00:00.000Z\", \"updatedBy\": \"exampleupdater@ibm.com\", \"lastUpdated\": \"2019-01-01T12:00:00.000Z\", \"description\": \"Example description\", \"registrationMetadata\": \"us-south\", \"preventKeyDeletion\": false, \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2019-01-01T12:00:00.000Z\"}}]}";
     String getRegistrationsPath = "/api/v2/keys/testString/registrations";
-
     server.enqueue(new MockResponse()
-    .setHeader("Content-type", "application/json")
-    .setResponseCode(200)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the GetRegistrationsOptions model
     GetRegistrationsOptions getRegistrationsOptionsModel = new GetRegistrationsOptions.Builder()
-    .id("testString")
-    .bluemixInstance("testString")
-    .correlationId("testString")
-    .xKmsKeyRing("testString")
-    .limit(Long.valueOf("1"))
-    .offset(Long.valueOf("0"))
-    .urlEncodedResourceCrnQuery("crn%3Av1%3Abluemix%3Apublic%3Adatabases-for-postgresql%3Aus-south%3Aa%2F274074dce64e9c423ffc238516c755e1%3A29caf0e7-120f-4da8-9551-3abf57ebcfc7%3A*%3A*")
-    .preventKeyDeletion(true)
-    .totalCount(true)
-    .build();
+      .id("testString")
+      .bluemixInstance("testString")
+      .correlationId("testString")
+      .xKmsKeyRing("testString")
+      .limit(Long.valueOf("200"))
+      .offset(Long.valueOf("0"))
+      .urlEncodedResourceCrnQuery("crn%3Av1%3Abluemix%3Apublic%3Adatabases-for-postgresql%3Aus-south%3Aa%2F00000000000000000000000000000000%3Afeddecaf-0000-0000-0000-1234567890ab%3A*%3A*")
+      .preventKeyDeletion(true)
+      .totalCount(true)
+      .build();
 
-    // Invoke operation with valid options model (positive test)
+    // Invoke getRegistrations() with a valid options model and verify the result
     Response<RegistrationWithTotalCount> response = ibmKeyProtectApiService.getRegistrations(getRegistrationsOptionsModel).execute();
     assertNotNull(response);
     RegistrationWithTotalCount responseObj = response.getResult();
     assertNotNull(responseObj);
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "GET");
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNotNull(query);
-    // Get query params
-    assertEquals(Long.valueOf(query.get("limit")), Long.valueOf("1"));
-    assertEquals(Long.valueOf(query.get("offset")), Long.valueOf("0"));
-    assertEquals(query.get("urlEncodedResourceCRNQuery"), "crn%3Av1%3Abluemix%3Apublic%3Adatabases-for-postgresql%3Aus-south%3Aa%2F274074dce64e9c423ffc238516c755e1%3A29caf0e7-120f-4da8-9551-3abf57ebcfc7%3A*%3A*");
-    assertEquals(Boolean.valueOf(query.get("preventKeyDeletion")), Boolean.valueOf(true));
-    assertEquals(Boolean.valueOf(query.get("totalCount")), Boolean.valueOf(true));
-    // Check request path
+    // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, getRegistrationsPath);
+    // Verify header parameters
+    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
+    // Verify query params
+    Map<String, String> query = TestUtilities.parseQueryString(request);
+    assertNotNull(query);
+    assertEquals(Long.valueOf(query.get("limit")), Long.valueOf("200"));
+    assertEquals(Long.valueOf(query.get("offset")), Long.valueOf("0"));
+    assertEquals(query.get("urlEncodedResourceCRNQuery"), "crn%3Av1%3Abluemix%3Apublic%3Adatabases-for-postgresql%3Aus-south%3Aa%2F00000000000000000000000000000000%3Afeddecaf-0000-0000-0000-1234567890ab%3A*%3A*");
+    assertEquals(Boolean.valueOf(query.get("preventKeyDeletion")), Boolean.valueOf(true));
+    assertEquals(Boolean.valueOf(query.get("totalCount")), Boolean.valueOf(true));
   }
 
-  // Test the getRegistrations operation with null options model parameter
+  // Test the getRegistrations operation with and without retries enabled
+  @Test
+  public void testGetRegistrationsWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testGetRegistrationsWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testGetRegistrationsWOptions();
+  }
+
+  // Test the getRegistrations operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testGetRegistrationsNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.getRegistrations(null).execute();
   }
 
+  // Test the getRegistrationsAllKeys operation with a valid options model parameter
   @Test
   public void testGetRegistrationsAllKeysWOptions() throws Throwable {
-    // Schedule some responses.
-    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1, \"totalCount\": 1}, \"resources\": [{\"keyId\": \"84a53643-9ca8-4ff2-9c68-d7842526167b\", \"keyName\": \"Example Key Name\", \"resourceCrn\": \"crn:v1:bluemix:public:cloud-object-storage:global:a/<account-id>:<service-instance>:bucket:<bucket-name>\", \"createdBy\": \"examplecreator@ibm.com\", \"creationDate\": \"2019-01-01T12:00:00.000Z\", \"updatedBy\": \"exampleupdater@ibm.com\", \"lastUpdated\": \"2019-01-01T12:00:00.000Z\", \"description\": \"Example description\", \"registrationMetadata\": \"us-south\", \"preventKeyDeletion\": true, \"keyVersion\": {\"id\": \"4a0225e9-17a0-46c1-ace7-f25bcf4237d4\", \"creationDate\": \"2019-01-01T12:00:00.000Z\"}}]}";
+    // Register a mock response
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.crn+json\", \"collectionTotal\": 1, \"totalCount\": 1}, \"resources\": [{\"keyId\": \"fadedbee-0000-0000-0000-1234567890ab\", \"keyName\": \"Example Key Name\", \"resourceCrn\": \"crn:v1:bluemix:public:<service-name>:<location>:a/<account-id>:<service-instance>:<resource-type>:<resource>\", \"createdBy\": \"examplecreator@ibm.com\", \"creationDate\": \"2019-01-01T12:00:00.000Z\", \"updatedBy\": \"exampleupdater@ibm.com\", \"lastUpdated\": \"2019-01-01T12:00:00.000Z\", \"description\": \"Example description\", \"registrationMetadata\": \"us-south\", \"preventKeyDeletion\": false, \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2019-01-01T12:00:00.000Z\"}}]}";
     String getRegistrationsAllKeysPath = "/api/v2/keys/registrations";
-
     server.enqueue(new MockResponse()
-    .setHeader("Content-type", "application/json")
-    .setResponseCode(200)
-    .setBody(mockResponseBody));
-
-    constructClientService();
+      .setHeader("Content-type", "application/json")
+      .setResponseCode(200)
+      .setBody(mockResponseBody));
 
     // Construct an instance of the GetRegistrationsAllKeysOptions model
     GetRegistrationsAllKeysOptions getRegistrationsAllKeysOptionsModel = new GetRegistrationsAllKeysOptions.Builder()
-    .bluemixInstance("testString")
-    .correlationId("testString")
-    .xKmsKeyRing("testString")
-    .urlEncodedResourceCrnQuery("crn%3Av1%3Abluemix%3Apublic%3Adatabases-for-postgresql%3Aus-south%3Aa%2F274074dce64e9c423ffc238516c755e1%3A29caf0e7-120f-4da8-9551-3abf57ebcfc7%3A*%3A*")
-    .limit(Long.valueOf("1"))
-    .offset(Long.valueOf("0"))
-    .preventKeyDeletion(true)
-    .totalCount(true)
-    .build();
+      .bluemixInstance("testString")
+      .correlationId("testString")
+      .xKmsKeyRing("testString")
+      .urlEncodedResourceCrnQuery("crn%3Av1%3Abluemix%3Apublic%3Adatabases-for-postgresql%3Aus-south%3Aa%2F00000000000000000000000000000000%3Afeddecaf-0000-0000-0000-1234567890ab%3A*%3A*")
+      .limit(Long.valueOf("200"))
+      .offset(Long.valueOf("0"))
+      .preventKeyDeletion(true)
+      .totalCount(true)
+      .build();
 
-    // Invoke operation with valid options model (positive test)
+    // Invoke getRegistrationsAllKeys() with a valid options model and verify the result
     Response<RegistrationWithTotalCount> response = ibmKeyProtectApiService.getRegistrationsAllKeys(getRegistrationsAllKeysOptionsModel).execute();
     assertNotNull(response);
     RegistrationWithTotalCount responseObj = response.getResult();
     assertNotNull(responseObj);
 
-    // Verify the contents of the request
+    // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
     assertNotNull(request);
     assertEquals(request.getMethod(), "GET");
+    // Verify request path
+    String parsedPath = TestUtilities.parseReqPath(request);
+    assertEquals(parsedPath, getRegistrationsAllKeysPath);
+    // Verify header parameters
     assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-
-    // Check query
+    // Verify query params
     Map<String, String> query = TestUtilities.parseQueryString(request);
     assertNotNull(query);
-    // Get query params
-    assertEquals(query.get("urlEncodedResourceCRNQuery"), "crn%3Av1%3Abluemix%3Apublic%3Adatabases-for-postgresql%3Aus-south%3Aa%2F274074dce64e9c423ffc238516c755e1%3A29caf0e7-120f-4da8-9551-3abf57ebcfc7%3A*%3A*");
-    assertEquals(Long.valueOf(query.get("limit")), Long.valueOf("1"));
+    assertEquals(query.get("urlEncodedResourceCRNQuery"), "crn%3Av1%3Abluemix%3Apublic%3Adatabases-for-postgresql%3Aus-south%3Aa%2F00000000000000000000000000000000%3Afeddecaf-0000-0000-0000-1234567890ab%3A*%3A*");
+    assertEquals(Long.valueOf(query.get("limit")), Long.valueOf("200"));
     assertEquals(Long.valueOf(query.get("offset")), Long.valueOf("0"));
     assertEquals(Boolean.valueOf(query.get("preventKeyDeletion")), Boolean.valueOf(true));
     assertEquals(Boolean.valueOf(query.get("totalCount")), Boolean.valueOf(true));
-    // Check request path
-    String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, getRegistrationsAllKeysPath);
   }
 
-  // Test the getRegistrationsAllKeys operation with null options model parameter
+  // Test the getRegistrationsAllKeys operation with and without retries enabled
+  @Test
+  public void testGetRegistrationsAllKeysWRetries() throws Throwable {
+    ibmKeyProtectApiService.enableRetries(4, 30);
+    testGetRegistrationsAllKeysWOptions();
+
+    ibmKeyProtectApiService.disableRetries();
+    testGetRegistrationsAllKeysWOptions();
+  }
+
+  // Test the getRegistrationsAllKeys operation with a null options model (negative test)
   @Test(expectedExceptions = IllegalArgumentException.class)
   public void testGetRegistrationsAllKeysNoOptions() throws Throwable {
-    // construct the service
-    constructClientService();
-
     server.enqueue(new MockResponse());
-
-    // Invoke operation with null options model (negative test)
     ibmKeyProtectApiService.getRegistrationsAllKeys(null).execute();
   }
 
-  /** Initialize the server */
+  // Perform setup needed before each test method
   @BeforeMethod
-  public void setUpMockServer() {
+  public void beforeEachTest() {
+    // Start the mock server.
     try {
-        server = new MockWebServer();
-        // register handler
-        server.start();
-        }
-    catch (IOException err) {
-        fail("Failed to instantiate mock web server");
+      server = new MockWebServer();
+      server.start();
+    } catch (IOException err) {
+      fail("Failed to instantiate mock web server");
     }
+
+    // Construct an instance of the service
+    constructClientService();
   }
 
+  // Perform tear down after each test method
   @AfterMethod
-  public void tearDownMockServer() throws IOException {
+  public void afterEachTest() throws IOException {
     server.shutdown();
     ibmKeyProtectApiService = null;
+  }
+
+  // Constructs an instance of the service to be used by the tests
+  public void constructClientService() {
+    System.setProperty("TESTSERVICE_AUTH_TYPE", "noAuth");
+    final String serviceName = "testService";
+
+    ibmKeyProtectApiService = IbmKeyProtectApi.newInstance(serviceName);
+    String url = server.url("/").toString();
+    ibmKeyProtectApiService.setServiceUrl(url);
   }
 }

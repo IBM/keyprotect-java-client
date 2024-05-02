@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -45,6 +45,11 @@ public class GetPolicyOptions extends GenericModel {
     private String xKmsKeyRing;
     private String policy;
 
+    /**
+     * Instantiates a new Builder from an existing GetPolicyOptions instance.
+     *
+     * @param getPolicyOptions the instance to initialize the Builder with
+     */
     private Builder(GetPolicyOptions getPolicyOptions) {
       this.id = getPolicyOptions.id;
       this.bluemixInstance = getPolicyOptions.bluemixInstance;
@@ -135,6 +140,8 @@ public class GetPolicyOptions extends GenericModel {
     }
   }
 
+  protected GetPolicyOptions() { }
+
   protected GetPolicyOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.id,
       "id cannot be empty");
@@ -159,7 +166,7 @@ public class GetPolicyOptions extends GenericModel {
   /**
    * Gets the id.
    *
-   * The v4 UUID that uniquely identifies the key.
+   * The v4 UUID or alias that uniquely identifies the key.
    *
    * @return the id
    */

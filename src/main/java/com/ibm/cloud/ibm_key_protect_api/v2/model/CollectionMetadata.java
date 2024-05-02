@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -43,6 +43,12 @@ public class CollectionMetadata extends GenericModel {
     String APPLICATION_VND_IBM_KMS_REGISTRATION_JSON = "application/vnd.ibm.kms.registration+json";
     /** application/vnd.ibm.kms.resource_crn+json. */
     String APPLICATION_VND_IBM_KMS_RESOURCE_CRN_JSON = "application/vnd.ibm.kms.resource_crn+json";
+    /** application/vnd.ibm.kms.migration_intent+json. */
+    String APPLICATION_VND_IBM_KMS_MIGRATION_INTENT_JSON = "application/vnd.ibm.kms.migration_intent+json";
+    /** application/vnd.ibm.kms.kmip_adapter+json. */
+    String APPLICATION_VND_IBM_KMS_KMIP_ADAPTER_JSON = "application/vnd.ibm.kms.kmip_adapter+json";
+    /** application/vnd.ibm.kms.kmip_adapter_certificate+json. */
+    String APPLICATION_VND_IBM_KMS_KMIP_ADAPTER_CERTIFICATE_JSON = "application/vnd.ibm.kms.kmip_adapter_certificate+json";
   }
 
   protected String collectionType;
@@ -55,6 +61,11 @@ public class CollectionMetadata extends GenericModel {
     private String collectionType;
     private Long collectionTotal;
 
+    /**
+     * Instantiates a new Builder from an existing CollectionMetadata instance.
+     *
+     * @param collectionMetadata the instance to initialize the Builder with
+     */
     private Builder(CollectionMetadata collectionMetadata) {
       this.collectionType = collectionMetadata.collectionType;
       this.collectionTotal = collectionMetadata.collectionTotal;
@@ -108,6 +119,8 @@ public class CollectionMetadata extends GenericModel {
       return this;
     }
   }
+
+  protected CollectionMetadata() { }
 
   protected CollectionMetadata(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.collectionType,

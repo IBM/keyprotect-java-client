@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -28,6 +28,11 @@ public class SetInstancePoliciesOneOfSetInstancePolicyMetrics extends SetInstanc
     private CollectionMetadata metadata;
     private List<SetInstancePoliciesOneOfSetInstancePolicyMetricsResourcesItem> resources;
 
+    /**
+     * Instantiates a new Builder from an existing SetInstancePoliciesOneOfSetInstancePolicyMetrics instance.
+     *
+     * @param setInstancePoliciesOneOfSetInstancePolicyMetrics the instance to initialize the Builder with
+     */
     public Builder(SetInstancePoliciesOneOf setInstancePoliciesOneOfSetInstancePolicyMetrics) {
       this.metadata = setInstancePoliciesOneOfSetInstancePolicyMetrics.metadata;
       this.resources = setInstancePoliciesOneOfSetInstancePolicyMetrics.resources;
@@ -67,7 +72,7 @@ public class SetInstancePoliciesOneOfSetInstancePolicyMetrics extends SetInstanc
      */
     public Builder addResources(SetInstancePoliciesOneOfSetInstancePolicyMetricsResourcesItem resources) {
       com.ibm.cloud.sdk.core.util.Validator.notNull(resources,
-              "resources cannot be null");
+        "resources cannot be null");
       if (this.resources == null) {
         this.resources = new ArrayList<SetInstancePoliciesOneOfSetInstancePolicyMetricsResourcesItem>();
       }
@@ -99,11 +104,13 @@ public class SetInstancePoliciesOneOfSetInstancePolicyMetrics extends SetInstanc
     }
   }
 
+  protected SetInstancePoliciesOneOfSetInstancePolicyMetrics() { }
+
   protected SetInstancePoliciesOneOfSetInstancePolicyMetrics(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.metadata,
-            "metadata cannot be null");
+      "metadata cannot be null");
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.resources,
-            "resources cannot be null");
+      "resources cannot be null");
     metadata = builder.metadata;
     resources = builder.resources;
   }

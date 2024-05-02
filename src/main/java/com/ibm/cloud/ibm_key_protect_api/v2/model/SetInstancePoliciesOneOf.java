@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -25,15 +25,15 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  * - SetInstancePoliciesOneOfSetInstancePolicyAllowedIP
  * - SetInstancePoliciesOneOfSetInstancePolicyKeyCreateImportAccess
  * - SetInstancePoliciesOneOfSetInstancePolicyMetrics
+ * - SetInstancePoliciesOneOfSetInstancePolicyRotation
  * - SetInstancePoliciesOneOfSetMultipleInstancePolicies
  */
-public class SetInstancePoliciesOneOf<T> extends GenericModel {
+public class SetInstancePoliciesOneOf extends GenericModel {
 
   protected CollectionMetadata metadata;
-  protected List<T> resources;
+  protected List<SetInstancePoliciesOneOfResourcesItem> resources;
 
-  protected SetInstancePoliciesOneOf() {
-  }
+  protected SetInstancePoliciesOneOf() { }
 
   /**
    * Gets the metadata.
@@ -53,7 +53,7 @@ public class SetInstancePoliciesOneOf<T> extends GenericModel {
    *
    * @return the resources
    */
-  public List<T> resources() {
+  public List<SetInstancePoliciesOneOfResourcesItem> resources() {
     return resources;
   }
 }

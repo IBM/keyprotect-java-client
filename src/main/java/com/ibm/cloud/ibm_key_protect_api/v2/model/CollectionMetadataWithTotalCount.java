@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -43,11 +43,19 @@ public class CollectionMetadataWithTotalCount extends GenericModel {
     String APPLICATION_VND_IBM_KMS_REGISTRATION_JSON = "application/vnd.ibm.kms.registration+json";
     /** application/vnd.ibm.kms.resource_crn+json. */
     String APPLICATION_VND_IBM_KMS_RESOURCE_CRN_JSON = "application/vnd.ibm.kms.resource_crn+json";
+    /** application/vnd.ibm.kms.migration_intent+json. */
+    String APPLICATION_VND_IBM_KMS_MIGRATION_INTENT_JSON = "application/vnd.ibm.kms.migration_intent+json";
+    /** application/vnd.ibm.kms.kmip_adapter+json. */
+    String APPLICATION_VND_IBM_KMS_KMIP_ADAPTER_JSON = "application/vnd.ibm.kms.kmip_adapter+json";
+    /** application/vnd.ibm.kms.kmip_adapter_certificate+json. */
+    String APPLICATION_VND_IBM_KMS_KMIP_ADAPTER_CERTIFICATE_JSON = "application/vnd.ibm.kms.kmip_adapter_certificate+json";
   }
 
   protected String collectionType;
   protected Long collectionTotal;
   protected Long totalCount;
+
+  protected CollectionMetadataWithTotalCount() { }
 
   /**
    * Gets the collectionType.
@@ -74,7 +82,7 @@ public class CollectionMetadataWithTotalCount extends GenericModel {
   /**
    * Gets the totalCount.
    *
-   * The total number of registrations that match the request, disregarding limit and offset.
+   * The total number of elements that match the request, disregarding limit and offset.
    *
    * @return the totalCount
    */

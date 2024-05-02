@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -33,6 +33,11 @@ public class ModifiableRegistrationResourceBody extends GenericModel {
     private String registrationMetadata;
     private String keyVersionId;
 
+    /**
+     * Instantiates a new Builder from an existing ModifiableRegistrationResourceBody instance.
+     *
+     * @param modifiableRegistrationResourceBody the instance to initialize the Builder with
+     */
     private Builder(ModifiableRegistrationResourceBody modifiableRegistrationResourceBody) {
       this.preventKeyDeletion = modifiableRegistrationResourceBody.preventKeyDeletion;
       this.description = modifiableRegistrationResourceBody.description;
@@ -100,6 +105,8 @@ public class ModifiableRegistrationResourceBody extends GenericModel {
     }
   }
 
+  protected ModifiableRegistrationResourceBody() { }
+
   protected ModifiableRegistrationResourceBody(Builder builder) {
     preventKeyDeletion = builder.preventKeyDeletion;
     description = builder.description;
@@ -119,11 +126,10 @@ public class ModifiableRegistrationResourceBody extends GenericModel {
   /**
    * Gets the preventKeyDeletion.
    *
-   * A boolean that determines whether Key Protect must prevent deletion of a root key.
-   *
-   * If set to `true`, Key Protect prevents deletion of the specified root key and its associated protected resources.
-   * The system prevents the deletion of any key that has at least one registration where
-   * `preventKeyDeletion` is `true`.
+   * A boolean that determines whether Key Protect must prevent deletion of a root key. This policy should only be set
+   * if a WORM policy must be satisfied. If set to `true`, Key Protect prevents deletion of the specified root key and
+   * its associated protected resources. The system prevents the deletion of any key that has at least one registration
+   * where `preventKeyDeletion` is `true`.
    *
    * @return the preventKeyDeletion
    */

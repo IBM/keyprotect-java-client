@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -17,8 +17,6 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKeyCollectionMetadataOption
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import org.testng.annotations.Test;
@@ -36,14 +34,16 @@ public class GetKeyCollectionMetadataOptionsTest {
     GetKeyCollectionMetadataOptions getKeyCollectionMetadataOptionsModel = new GetKeyCollectionMetadataOptions.Builder()
       .bluemixInstance("testString")
       .correlationId("testString")
-      .state(new java.util.ArrayList<Long>(java.util.Arrays.asList(Long.valueOf("0"))))
+      .state(java.util.Arrays.asList(Long.valueOf("0"), Long.valueOf("1"), Long.valueOf("2"), Long.valueOf("3")))
       .extractable(true)
+      .filter("testString")
       .xKmsKeyRing("testString")
       .build();
     assertEquals(getKeyCollectionMetadataOptionsModel.bluemixInstance(), "testString");
     assertEquals(getKeyCollectionMetadataOptionsModel.correlationId(), "testString");
-    assertEquals(getKeyCollectionMetadataOptionsModel.state(), new java.util.ArrayList<Long>(java.util.Arrays.asList(Long.valueOf("0"))));
+    assertEquals(getKeyCollectionMetadataOptionsModel.state(), java.util.Arrays.asList(Long.valueOf("0"), Long.valueOf("1"), Long.valueOf("2"), Long.valueOf("3")));
     assertEquals(getKeyCollectionMetadataOptionsModel.extractable(), Boolean.valueOf(true));
+    assertEquals(getKeyCollectionMetadataOptionsModel.filter(), "testString");
     assertEquals(getKeyCollectionMetadataOptionsModel.xKmsKeyRing(), "testString");
   }
 

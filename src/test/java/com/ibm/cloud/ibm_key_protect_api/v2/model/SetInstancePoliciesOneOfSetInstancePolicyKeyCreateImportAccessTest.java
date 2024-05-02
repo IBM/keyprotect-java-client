@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -21,8 +21,6 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.SetInstancePoliciesOneOfSetIns
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import org.testng.annotations.Test;
@@ -44,25 +42,25 @@ public class SetInstancePoliciesOneOfSetInstancePolicyKeyCreateImportAccessTest 
     assertEquals(collectionMetadataModel.collectionType(), "application/vnd.ibm.kms.crn+json");
     assertEquals(collectionMetadataModel.collectionTotal(), Long.valueOf("1"));
 
-    InstancePolicyKeyCreateImportAccessPolicyDataAttributes instancePolicyKeyCreateImportAccessPolicyDataAttributes = new InstancePolicyKeyCreateImportAccessPolicyDataAttributes.Builder()
+    KeyCreateImportAccessProperties keyCreateImportAccessPropertiesModel = new KeyCreateImportAccessProperties.Builder()
       .createRootKey(true)
       .createStandardKey(true)
       .importRootKey(true)
       .importStandardKey(true)
       .enforceToken(true)
       .build();
-    assertEquals(instancePolicyKeyCreateImportAccessPolicyDataAttributes.createRootKey(), Boolean.valueOf(true));
-    assertEquals(instancePolicyKeyCreateImportAccessPolicyDataAttributes.createStandardKey(), Boolean.valueOf(true));
-    assertEquals(instancePolicyKeyCreateImportAccessPolicyDataAttributes.importRootKey(), Boolean.valueOf(true));
-    assertEquals(instancePolicyKeyCreateImportAccessPolicyDataAttributes.importStandardKey(), Boolean.valueOf(true));
-    assertEquals(instancePolicyKeyCreateImportAccessPolicyDataAttributes.enforceToken(), Boolean.valueOf(true));
+    assertEquals(keyCreateImportAccessPropertiesModel.createRootKey(), Boolean.valueOf(true));
+    assertEquals(keyCreateImportAccessPropertiesModel.createStandardKey(), Boolean.valueOf(true));
+    assertEquals(keyCreateImportAccessPropertiesModel.importRootKey(), Boolean.valueOf(true));
+    assertEquals(keyCreateImportAccessPropertiesModel.importStandardKey(), Boolean.valueOf(true));
+    assertEquals(keyCreateImportAccessPropertiesModel.enforceToken(), Boolean.valueOf(true));
 
     InstancePolicyKeyCreateImportAccessPolicyData instancePolicyKeyCreateImportAccessPolicyDataModel = new InstancePolicyKeyCreateImportAccessPolicyData.Builder()
       .enabled(true)
-      .attributes(instancePolicyKeyCreateImportAccessPolicyDataAttributes)
+      .attributes(keyCreateImportAccessPropertiesModel)
       .build();
     assertEquals(instancePolicyKeyCreateImportAccessPolicyDataModel.enabled(), Boolean.valueOf(true));
-    assertEquals(instancePolicyKeyCreateImportAccessPolicyDataModel.attributes(), instancePolicyKeyCreateImportAccessPolicyDataAttributes);
+    assertEquals(instancePolicyKeyCreateImportAccessPolicyDataModel.attributes(), keyCreateImportAccessPropertiesModel);
 
     SetInstancePoliciesOneOfSetInstancePolicyKeyCreateImportAccessResourcesItem setInstancePoliciesOneOfSetInstancePolicyKeyCreateImportAccessResourcesItemModel = new SetInstancePoliciesOneOfSetInstancePolicyKeyCreateImportAccessResourcesItem.Builder()
       .policyType("keyCreateImportAccess")
@@ -73,10 +71,10 @@ public class SetInstancePoliciesOneOfSetInstancePolicyKeyCreateImportAccessTest 
 
     SetInstancePoliciesOneOfSetInstancePolicyKeyCreateImportAccess setInstancePoliciesOneOfSetInstancePolicyKeyCreateImportAccessModel = new SetInstancePoliciesOneOfSetInstancePolicyKeyCreateImportAccess.Builder()
       .metadata(collectionMetadataModel)
-      .resources(new ArrayList<SetInstancePoliciesOneOfSetInstancePolicyKeyCreateImportAccessResourcesItem>(Arrays.asList(setInstancePoliciesOneOfSetInstancePolicyKeyCreateImportAccessResourcesItemModel)))
+      .resources(java.util.Arrays.asList(setInstancePoliciesOneOfSetInstancePolicyKeyCreateImportAccessResourcesItemModel))
       .build();
     assertEquals(setInstancePoliciesOneOfSetInstancePolicyKeyCreateImportAccessModel.metadata(), collectionMetadataModel);
-    assertEquals(setInstancePoliciesOneOfSetInstancePolicyKeyCreateImportAccessModel.resources(), new ArrayList<SetInstancePoliciesOneOfSetInstancePolicyKeyCreateImportAccessResourcesItem>(Arrays.asList(setInstancePoliciesOneOfSetInstancePolicyKeyCreateImportAccessResourcesItemModel)));
+    assertEquals(setInstancePoliciesOneOfSetInstancePolicyKeyCreateImportAccessModel.resources(), java.util.Arrays.asList(setInstancePoliciesOneOfSetInstancePolicyKeyCreateImportAccessResourcesItemModel));
 
     String json = TestUtilities.serialize(setInstancePoliciesOneOfSetInstancePolicyKeyCreateImportAccessModel);
 

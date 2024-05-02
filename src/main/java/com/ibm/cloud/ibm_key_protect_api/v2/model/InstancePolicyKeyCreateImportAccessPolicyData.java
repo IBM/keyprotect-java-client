@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -20,15 +20,20 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class InstancePolicyKeyCreateImportAccessPolicyData extends GenericModel {
 
   protected Boolean enabled;
-  protected InstancePolicyKeyCreateImportAccessPolicyDataAttributes attributes;
+  protected KeyCreateImportAccessProperties attributes;
 
   /**
    * Builder.
    */
   public static class Builder {
     private Boolean enabled;
-    private InstancePolicyKeyCreateImportAccessPolicyDataAttributes attributes;
+    private KeyCreateImportAccessProperties attributes;
 
+    /**
+     * Instantiates a new Builder from an existing InstancePolicyKeyCreateImportAccessPolicyData instance.
+     *
+     * @param instancePolicyKeyCreateImportAccessPolicyData the instance to initialize the Builder with
+     */
     private Builder(InstancePolicyKeyCreateImportAccessPolicyData instancePolicyKeyCreateImportAccessPolicyData) {
       this.enabled = instancePolicyKeyCreateImportAccessPolicyData.enabled;
       this.attributes = instancePolicyKeyCreateImportAccessPolicyData.attributes;
@@ -75,11 +80,13 @@ public class InstancePolicyKeyCreateImportAccessPolicyData extends GenericModel 
      * @param attributes the attributes
      * @return the InstancePolicyKeyCreateImportAccessPolicyData builder
      */
-    public Builder attributes(InstancePolicyKeyCreateImportAccessPolicyDataAttributes attributes) {
+    public Builder attributes(KeyCreateImportAccessProperties attributes) {
       this.attributes = attributes;
       return this;
     }
   }
+
+  protected InstancePolicyKeyCreateImportAccessPolicyData() { }
 
   protected InstancePolicyKeyCreateImportAccessPolicyData(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.enabled,
@@ -101,9 +108,8 @@ public class InstancePolicyKeyCreateImportAccessPolicyData extends GenericModel 
    * Gets the enabled.
    *
    * If set to `true`, Key Protect enables the specified policy for your service instance. If set to `false`, Key
-   * Protect disables the specified policy for your service instance, and the policy will no longer  affect Key Protect
+   * Protect disables the specified policy for your service instance, and the policy will no longer affect Key Protect
    * actions.
-   *
    * **Note:** If a policy with attributes is disabled, all attributes are reset and are not retained.
    *
    * @return the enabled
@@ -120,7 +126,7 @@ public class InstancePolicyKeyCreateImportAccessPolicyData extends GenericModel 
    *
    * @return the attributes
    */
-  public InstancePolicyKeyCreateImportAccessPolicyDataAttributes attributes() {
+  public KeyCreateImportAccessProperties attributes() {
     return attributes;
   }
 }
