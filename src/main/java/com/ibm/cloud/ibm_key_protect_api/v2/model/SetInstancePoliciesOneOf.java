@@ -28,10 +28,10 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  * - SetInstancePoliciesOneOfSetInstancePolicyRotation
  * - SetInstancePoliciesOneOfSetMultipleInstancePolicies
  */
-public class SetInstancePoliciesOneOf extends GenericModel {
+public class SetInstancePoliciesOneOf<T> extends GenericModel {
 
   protected CollectionMetadata metadata;
-  protected List<SetInstancePoliciesOneOfResourcesItem> resources;
+  protected List<T> resources;
 
   protected SetInstancePoliciesOneOf() { }
 
@@ -53,7 +53,7 @@ public class SetInstancePoliciesOneOf extends GenericModel {
    *
    * @return the resources
    */
-  public List<SetInstancePoliciesOneOfResourcesItem> resources() {
+  public List<T> resources() {
     return resources;
   }
 }
