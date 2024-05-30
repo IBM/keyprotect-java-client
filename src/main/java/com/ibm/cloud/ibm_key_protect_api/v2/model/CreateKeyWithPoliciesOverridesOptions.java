@@ -40,7 +40,7 @@ public class CreateKeyWithPoliciesOverridesOptions extends GenericModel {
   }
 
   protected String bluemixInstance;
-  protected InputStream body;
+  protected InputStream keyWithPolicyOverridesCreateBody;
   protected String correlationId;
   protected String prefer;
   protected String xKmsKeyRing;
@@ -50,7 +50,7 @@ public class CreateKeyWithPoliciesOverridesOptions extends GenericModel {
    */
   public static class Builder {
     private String bluemixInstance;
-    private InputStream body;
+    private InputStream keyWithPolicyOverridesCreateBody;
     private String correlationId;
     private String prefer;
     private String xKmsKeyRing;
@@ -62,7 +62,7 @@ public class CreateKeyWithPoliciesOverridesOptions extends GenericModel {
      */
     private Builder(CreateKeyWithPoliciesOverridesOptions createKeyWithPoliciesOverridesOptions) {
       this.bluemixInstance = createKeyWithPoliciesOverridesOptions.bluemixInstance;
-      this.body = createKeyWithPoliciesOverridesOptions.body;
+      this.keyWithPolicyOverridesCreateBody = createKeyWithPoliciesOverridesOptions.keyWithPolicyOverridesCreateBody;
       this.correlationId = createKeyWithPoliciesOverridesOptions.correlationId;
       this.prefer = createKeyWithPoliciesOverridesOptions.prefer;
       this.xKmsKeyRing = createKeyWithPoliciesOverridesOptions.xKmsKeyRing;
@@ -78,11 +78,11 @@ public class CreateKeyWithPoliciesOverridesOptions extends GenericModel {
      * Instantiates a new builder with required properties.
      *
      * @param bluemixInstance the bluemixInstance
-     * @param body the body
+     * @param keyWithPolicyOverridesCreateBody the keyWithPolicyOverridesCreateBody
      */
-    public Builder(String bluemixInstance, InputStream body) {
+    public Builder(String bluemixInstance, InputStream keyWithPolicyOverridesCreateBody) {
       this.bluemixInstance = bluemixInstance;
-      this.body = body;
+      this.keyWithPolicyOverridesCreateBody = keyWithPolicyOverridesCreateBody;
     }
 
     /**
@@ -106,13 +106,13 @@ public class CreateKeyWithPoliciesOverridesOptions extends GenericModel {
     }
 
     /**
-     * Set the body.
+     * Set the keyWithPolicyOverridesCreateBody.
      *
-     * @param body the body
+     * @param keyWithPolicyOverridesCreateBody the keyWithPolicyOverridesCreateBody
      * @return the CreateKeyWithPoliciesOverridesOptions builder
      */
-    public Builder body(InputStream body) {
-      this.body = body;
+    public Builder keyWithPolicyOverridesCreateBody(InputStream keyWithPolicyOverridesCreateBody) {
+      this.keyWithPolicyOverridesCreateBody = keyWithPolicyOverridesCreateBody;
       return this;
     }
 
@@ -150,15 +150,15 @@ public class CreateKeyWithPoliciesOverridesOptions extends GenericModel {
     }
 
     /**
-     * Set the body.
+     * Set the keyWithPolicyOverridesCreateBody.
      *
-     * @param body the body
+     * @param keyWithPolicyOverridesCreateBody the keyWithPolicyOverridesCreateBody
      * @return the CreateKeyWithPoliciesOverridesOptions builder
      *
      * @throws FileNotFoundException if the file could not be found
      */
-    public Builder body(File body) throws FileNotFoundException {
-      this.body = new FileInputStream(body);
+    public Builder keyWithPolicyOverridesCreateBody(File keyWithPolicyOverridesCreateBody) throws FileNotFoundException {
+      this.keyWithPolicyOverridesCreateBody = new FileInputStream(keyWithPolicyOverridesCreateBody);
       return this;
     }
   }
@@ -168,10 +168,10 @@ public class CreateKeyWithPoliciesOverridesOptions extends GenericModel {
   protected CreateKeyWithPoliciesOverridesOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.bluemixInstance,
       "bluemixInstance cannot be null");
-    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.body,
-      "body cannot be null");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.keyWithPolicyOverridesCreateBody,
+      "keyWithPolicyOverridesCreateBody cannot be null");
     bluemixInstance = builder.bluemixInstance;
-    body = builder.body;
+    keyWithPolicyOverridesCreateBody = builder.keyWithPolicyOverridesCreateBody;
     correlationId = builder.correlationId;
     prefer = builder.prefer;
     xKmsKeyRing = builder.xKmsKeyRing;
@@ -198,14 +198,14 @@ public class CreateKeyWithPoliciesOverridesOptions extends GenericModel {
   }
 
   /**
-   * Gets the body.
+   * Gets the keyWithPolicyOverridesCreateBody.
    *
    * The base request for creating a new key with policies.
    *
-   * @return the body
+   * @return the keyWithPolicyOverridesCreateBody
    */
-  public InputStream body() {
-    return body;
+  public InputStream keyWithPolicyOverridesCreateBody() {
+    return keyWithPolicyOverridesCreateBody;
   }
 
   /**

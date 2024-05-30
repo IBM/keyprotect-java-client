@@ -34,10 +34,10 @@ public class CreateRegistrationOptionsTest {
   @Test
   public void testCreateRegistrationOptions() throws Throwable {
     CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
-      .collectionType("application/vnd.ibm.kms.crn+json")
+      .collectionType("application/vnd.ibm.kms.allowed_ip_metadata+json")
       .collectionTotal(Long.valueOf("1"))
       .build();
-    assertEquals(collectionMetadataModel.collectionType(), "application/vnd.ibm.kms.crn+json");
+    assertEquals(collectionMetadataModel.collectionType(), "application/vnd.ibm.kms.allowed_ip_metadata+json");
     assertEquals(collectionMetadataModel.collectionTotal(), Long.valueOf("1"));
 
     CreateRegistrationResourceBody createRegistrationResourceBodyModel = new CreateRegistrationResourceBody.Builder()

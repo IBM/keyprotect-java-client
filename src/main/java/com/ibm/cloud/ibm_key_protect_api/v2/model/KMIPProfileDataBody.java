@@ -16,7 +16,7 @@ import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * The data specific to the KMIP Adapter profile. This is a required field for type `native_1.0`.
+ * The data specific to the KMIP Adapter profile. This is a required field for profile `native_1.0`.
  *
  * Classes which extend this class:
  * - KMIPProfileDataBodyKMIPProfileDataNative
@@ -25,8 +25,6 @@ public class KMIPProfileDataBody extends GenericModel {
 
   @SerializedName("crk_id")
   protected String crkId;
-  @SerializedName("target_key_ring_id")
-  protected String targetKeyRingId;
 
   protected KMIPProfileDataBody() { }
 
@@ -40,18 +38,6 @@ public class KMIPProfileDataBody extends GenericModel {
    */
   public String crkId() {
     return crkId;
-  }
-
-  /**
-   * Gets the targetKeyRingId.
-   *
-   * The unique identifier of the key ring to be used for creating standard keys in the kms instance. When this is not
-   * specified, the `default` key ring will be used.
-   *
-   * @return the targetKeyRingId
-   */
-  public String targetKeyRingId() {
-    return targetKeyRingId;
   }
 }
 

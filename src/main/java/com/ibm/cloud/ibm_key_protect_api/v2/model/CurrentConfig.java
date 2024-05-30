@@ -36,6 +36,8 @@ public class CurrentConfig extends GenericModel {
   /**
    * Gets the property.
    *
+   * Base config property.
+   *
    * @return the property
    */
   public String getProperty() {
@@ -45,6 +47,8 @@ public class CurrentConfig extends GenericModel {
   /**
    * Gets the value.
    *
+   * Base config property value.
+   *
    * @return the value
    */
   public String getValue() {
@@ -53,6 +57,8 @@ public class CurrentConfig extends GenericModel {
 
   /**
    * Gets the xProperties.
+   *
+   * Base config properties.
    *
    * @return the xProperties
    */

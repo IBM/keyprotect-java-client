@@ -34,10 +34,10 @@ public class AddKmipClientCertificateOptionsTest {
   @Test
   public void testAddKmipClientCertificateOptions() throws Throwable {
     CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
-      .collectionType("application/vnd.ibm.kms.kmip_adapter_certificate+json")
+      .collectionType("application/vnd.ibm.kms.kmip_client_certificate+json")
       .collectionTotal(Long.valueOf("1"))
       .build();
-    assertEquals(collectionMetadataModel.collectionType(), "application/vnd.ibm.kms.kmip_adapter_certificate+json");
+    assertEquals(collectionMetadataModel.collectionType(), "application/vnd.ibm.kms.kmip_client_certificate+json");
     assertEquals(collectionMetadataModel.collectionTotal(), Long.valueOf("1"));
 
     CreateKMIPClientCertificateObject createKmipClientCertificateObjectModel = new CreateKMIPClientCertificateObject.Builder()
@@ -48,14 +48,14 @@ public class AddKmipClientCertificateOptionsTest {
     assertEquals(createKmipClientCertificateObjectModel.name(), "testString");
 
     AddKmipClientCertificateOptions addKmipClientCertificateOptionsModel = new AddKmipClientCertificateOptions.Builder()
-      .bluemixInstance("testString")
       .adapterId("testString")
+      .bluemixInstance("testString")
       .metadata(collectionMetadataModel)
       .resources(java.util.Arrays.asList(createKmipClientCertificateObjectModel))
       .correlationId("testString")
       .build();
-    assertEquals(addKmipClientCertificateOptionsModel.bluemixInstance(), "testString");
     assertEquals(addKmipClientCertificateOptionsModel.adapterId(), "testString");
+    assertEquals(addKmipClientCertificateOptionsModel.bluemixInstance(), "testString");
     assertEquals(addKmipClientCertificateOptionsModel.metadata(), collectionMetadataModel);
     assertEquals(addKmipClientCertificateOptionsModel.resources(), java.util.Arrays.asList(createKmipClientCertificateObjectModel));
     assertEquals(addKmipClientCertificateOptionsModel.correlationId(), "testString");

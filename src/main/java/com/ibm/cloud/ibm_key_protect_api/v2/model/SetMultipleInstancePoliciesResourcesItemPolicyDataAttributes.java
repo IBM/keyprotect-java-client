@@ -98,9 +98,9 @@ public class SetMultipleInstancePoliciesResourcesItemPolicyDataAttributes extend
     }
 
     /**
-     * Adds an allowedIp to allowedIp.
+     * Adds a new element to allowedIp.
      *
-     * @param allowedIp the new allowedIp
+     * @param allowedIp the new element to be added
      * @return the SetMultipleInstancePoliciesResourcesItemPolicyDataAttributes builder
      */
     public Builder addAllowedIp(String allowedIp) {

@@ -65,9 +65,9 @@ public class SetKeyPoliciesOneOfSetKeyPolicyDualAuthDelete extends SetKeyPolicie
     }
 
     /**
-     * Adds an resources to resources.
+     * Adds a new element to resources.
      *
-     * @param resources the new resources
+     * @param resources the new element to be added
      * @return the SetKeyPoliciesOneOfSetKeyPolicyDualAuthDelete builder
      */
     public Builder addResources(KeyPolicyDualAuthDelete resources) {

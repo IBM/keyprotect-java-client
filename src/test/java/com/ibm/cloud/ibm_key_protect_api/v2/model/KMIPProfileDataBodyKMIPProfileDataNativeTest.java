@@ -33,17 +33,14 @@ public class KMIPProfileDataBodyKMIPProfileDataNativeTest {
   public void testKMIPProfileDataBodyKMIPProfileDataNative() throws Throwable {
     KMIPProfileDataBodyKMIPProfileDataNative kmipProfileDataBodyKmipProfileDataNativeModel = new KMIPProfileDataBodyKMIPProfileDataNative.Builder()
       .crkId("feddecaf-0000-0000-0000-1234567890ab")
-      .targetKeyRingId("testString")
       .build();
     assertEquals(kmipProfileDataBodyKmipProfileDataNativeModel.crkId(), "feddecaf-0000-0000-0000-1234567890ab");
-    assertEquals(kmipProfileDataBodyKmipProfileDataNativeModel.targetKeyRingId(), "testString");
 
     String json = TestUtilities.serialize(kmipProfileDataBodyKmipProfileDataNativeModel);
 
     KMIPProfileDataBodyKMIPProfileDataNative kmipProfileDataBodyKmipProfileDataNativeModelNew = TestUtilities.deserialize(json, KMIPProfileDataBodyKMIPProfileDataNative.class);
     assertTrue(kmipProfileDataBodyKmipProfileDataNativeModelNew instanceof KMIPProfileDataBodyKMIPProfileDataNative);
     assertEquals(kmipProfileDataBodyKmipProfileDataNativeModelNew.crkId(), "feddecaf-0000-0000-0000-1234567890ab");
-    assertEquals(kmipProfileDataBodyKmipProfileDataNativeModelNew.targetKeyRingId(), "testString");
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

@@ -34,10 +34,8 @@ public class CreateKMIPAdapterRequestBodyResourcesItemTest {
   public void testCreateKMIPAdapterRequestBodyResourcesItem() throws Throwable {
     KMIPProfileDataBodyKMIPProfileDataNative kmipProfileDataBodyModel = new KMIPProfileDataBodyKMIPProfileDataNative.Builder()
       .crkId("feddecaf-0000-0000-0000-1234567890ab")
-      .targetKeyRingId("testString")
       .build();
     assertEquals(kmipProfileDataBodyModel.crkId(), "feddecaf-0000-0000-0000-1234567890ab");
-    assertEquals(kmipProfileDataBodyModel.targetKeyRingId(), "testString");
 
     CreateKMIPAdapterRequestBodyResourcesItem createKmipAdapterRequestBodyResourcesItemModel = new CreateKMIPAdapterRequestBodyResourcesItem.Builder()
       .name("kmip-adapter-name")
@@ -59,4 +57,10 @@ public class CreateKMIPAdapterRequestBodyResourcesItemTest {
     assertEquals(createKmipAdapterRequestBodyResourcesItemModelNew.profile(), "native_1.0");
     assertEquals(createKmipAdapterRequestBodyResourcesItemModelNew.profileData().toString(), kmipProfileDataBodyModel.toString());
   }
+
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testCreateKMIPAdapterRequestBodyResourcesItemError() throws Throwable {
+    new CreateKMIPAdapterRequestBodyResourcesItem.Builder().build();
+  }
+
 }

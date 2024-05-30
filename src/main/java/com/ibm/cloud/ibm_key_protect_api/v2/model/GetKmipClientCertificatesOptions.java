@@ -19,23 +19,23 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class GetKmipClientCertificatesOptions extends GenericModel {
 
-  protected String bluemixInstance;
   protected String adapterId;
-  protected String correlationId;
+  protected String bluemixInstance;
   protected Long limit;
   protected Long offset;
   protected Boolean totalCount;
+  protected String correlationId;
 
   /**
    * Builder.
    */
   public static class Builder {
-    private String bluemixInstance;
     private String adapterId;
-    private String correlationId;
+    private String bluemixInstance;
     private Long limit;
     private Long offset;
     private Boolean totalCount;
+    private String correlationId;
 
     /**
      * Instantiates a new Builder from an existing GetKmipClientCertificatesOptions instance.
@@ -43,12 +43,12 @@ public class GetKmipClientCertificatesOptions extends GenericModel {
      * @param getKmipClientCertificatesOptions the instance to initialize the Builder with
      */
     private Builder(GetKmipClientCertificatesOptions getKmipClientCertificatesOptions) {
-      this.bluemixInstance = getKmipClientCertificatesOptions.bluemixInstance;
       this.adapterId = getKmipClientCertificatesOptions.adapterId;
-      this.correlationId = getKmipClientCertificatesOptions.correlationId;
+      this.bluemixInstance = getKmipClientCertificatesOptions.bluemixInstance;
       this.limit = getKmipClientCertificatesOptions.limit;
       this.offset = getKmipClientCertificatesOptions.offset;
       this.totalCount = getKmipClientCertificatesOptions.totalCount;
+      this.correlationId = getKmipClientCertificatesOptions.correlationId;
     }
 
     /**
@@ -60,12 +60,12 @@ public class GetKmipClientCertificatesOptions extends GenericModel {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param bluemixInstance the bluemixInstance
      * @param adapterId the adapterId
+     * @param bluemixInstance the bluemixInstance
      */
-    public Builder(String bluemixInstance, String adapterId) {
-      this.bluemixInstance = bluemixInstance;
+    public Builder(String adapterId, String bluemixInstance) {
       this.adapterId = adapterId;
+      this.bluemixInstance = bluemixInstance;
     }
 
     /**
@@ -75,17 +75,6 @@ public class GetKmipClientCertificatesOptions extends GenericModel {
      */
     public GetKmipClientCertificatesOptions build() {
       return new GetKmipClientCertificatesOptions(this);
-    }
-
-    /**
-     * Set the bluemixInstance.
-     *
-     * @param bluemixInstance the bluemixInstance
-     * @return the GetKmipClientCertificatesOptions builder
-     */
-    public Builder bluemixInstance(String bluemixInstance) {
-      this.bluemixInstance = bluemixInstance;
-      return this;
     }
 
     /**
@@ -100,13 +89,13 @@ public class GetKmipClientCertificatesOptions extends GenericModel {
     }
 
     /**
-     * Set the correlationId.
+     * Set the bluemixInstance.
      *
-     * @param correlationId the correlationId
+     * @param bluemixInstance the bluemixInstance
      * @return the GetKmipClientCertificatesOptions builder
      */
-    public Builder correlationId(String correlationId) {
-      this.correlationId = correlationId;
+    public Builder bluemixInstance(String bluemixInstance) {
+      this.bluemixInstance = bluemixInstance;
       return this;
     }
 
@@ -142,21 +131,32 @@ public class GetKmipClientCertificatesOptions extends GenericModel {
       this.totalCount = totalCount;
       return this;
     }
+
+    /**
+     * Set the correlationId.
+     *
+     * @param correlationId the correlationId
+     * @return the GetKmipClientCertificatesOptions builder
+     */
+    public Builder correlationId(String correlationId) {
+      this.correlationId = correlationId;
+      return this;
+    }
   }
 
   protected GetKmipClientCertificatesOptions() { }
 
   protected GetKmipClientCertificatesOptions(Builder builder) {
-    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.bluemixInstance,
-      "bluemixInstance cannot be null");
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.adapterId,
       "adapterId cannot be empty");
-    bluemixInstance = builder.bluemixInstance;
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.bluemixInstance,
+      "bluemixInstance cannot be null");
     adapterId = builder.adapterId;
-    correlationId = builder.correlationId;
+    bluemixInstance = builder.bluemixInstance;
     limit = builder.limit;
     offset = builder.offset;
     totalCount = builder.totalCount;
+    correlationId = builder.correlationId;
   }
 
   /**
@@ -166,17 +166,6 @@ public class GetKmipClientCertificatesOptions extends GenericModel {
    */
   public Builder newBuilder() {
     return new Builder(this);
-  }
-
-  /**
-   * Gets the bluemixInstance.
-   *
-   * The IBM Cloud instance ID that identifies your Key Protect service instance.
-   *
-   * @return the bluemixInstance
-   */
-  public String bluemixInstance() {
-    return bluemixInstance;
   }
 
   /**
@@ -191,24 +180,24 @@ public class GetKmipClientCertificatesOptions extends GenericModel {
   }
 
   /**
-   * Gets the correlationId.
+   * Gets the bluemixInstance.
    *
-   * The v4 UUID used to correlate and track transactions.
+   * The IBM Cloud instance ID that identifies your Key Protect service instance.
    *
-   * @return the correlationId
+   * @return the bluemixInstance
    */
-  public String correlationId() {
-    return correlationId;
+  public String bluemixInstance() {
+    return bluemixInstance;
   }
 
   /**
    * Gets the limit.
    *
-   * The number of KMIP Certificates to retrieve. By default, `GET /kmip_adapters/{id}/certificates` returns the first
-   * 100 KMIP Certificates. To retrieve a different set of certificates, use `limit` with `offset` to page through your
+   * The number of client certificates to retrieve. By default, `GET /kmip_adapters/{id}/certificates` returns the first
+   * 100 certificates. To retrieve a different set of certificates, use `limit` with `offset` to page through your
    * available resources. The maximum value for `limit` is 200.
-   * **Usage:** If you have 20 KMIP certificates associated with your KMIP adapter, and you want to retrieve only the
-   * first 5 certificates, use `../kmip_adapters/{id}/certificates?limit=5`.
+   * **Usage:** If you have 20 certificates associated with your KMIP adapter, and you want to retrieve only the first 5
+   * certificates, use `../kmip_adapters/{id}/certificates?limit=5`.
    *
    * @return the limit
    */
@@ -219,8 +208,8 @@ public class GetKmipClientCertificatesOptions extends GenericModel {
   /**
    * Gets the offset.
    *
-   * The number of KMIP Adapters to skip. By specifying `offset`, you retrieve a subset of certificates that starts with
-   * the `offset` value. Use `offset` with `limit` to page through your available resources.
+   * The number of client certificates to skip. By specifying `offset`, you retrieve a subset of certificates that
+   * starts with the `offset` value. Use `offset` with `limit` to page through your available resources.
    * **Usage:** If you have 20 certificates associated with your KMIP adapter, and you want to retrieve certificates 11
    * through 15, use `../kmip_adapters/{id}/certificates?offset=10&amp;limit=5`.
    *
@@ -234,15 +223,25 @@ public class GetKmipClientCertificatesOptions extends GenericModel {
    * Gets the totalCount.
    *
    * If set to `true`, returns `totalCount` in the response metadata for use with pagination. The `totalCount` value
-   * returned specifies the total number of kmip adapters that match the request, disregarding limit and offset. The
-   * default is set to false.
-   * **Usage:** To return the `totalCount` value for use with pagination, use
+   * returned specifies the total number of client certificates that match the request, disregarding limit and offset.
+   * The default is set to false. **Usage:** To return the `totalCount` value for use with pagination, use
    * `../kmip_adapters/{id}/certificates?totalCount=true`.
    *
    * @return the totalCount
    */
   public Boolean totalCount() {
     return totalCount;
+  }
+
+  /**
+   * Gets the correlationId.
+   *
+   * The v4 UUID used to correlate and track transactions.
+   *
+   * @return the correlationId
+   */
+  public String correlationId() {
+    return correlationId;
   }
 }
 

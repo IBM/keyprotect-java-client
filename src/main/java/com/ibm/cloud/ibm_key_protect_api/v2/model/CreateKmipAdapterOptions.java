@@ -24,7 +24,7 @@ public class CreateKmipAdapterOptions extends GenericModel {
 
   protected String bluemixInstance;
   protected CollectionMetadata metadata;
-  protected List<CreateKMIPAdapterRequestBodyResourcesItem> resources;
+  protected List<CreateKMIPAdapterRequestBodyResources> resources;
   protected String correlationId;
 
   /**
@@ -33,7 +33,7 @@ public class CreateKmipAdapterOptions extends GenericModel {
   public static class Builder {
     private String bluemixInstance;
     private CollectionMetadata metadata;
-    private List<CreateKMIPAdapterRequestBodyResourcesItem> resources;
+    private List<CreateKMIPAdapterRequestBodyResources> resources;
     private String correlationId;
 
     /**
@@ -61,7 +61,7 @@ public class CreateKmipAdapterOptions extends GenericModel {
      * @param metadata the metadata
      * @param resources the resources
      */
-    public Builder(String bluemixInstance, CollectionMetadata metadata, List<CreateKMIPAdapterRequestBodyResourcesItem> resources) {
+    public Builder(String bluemixInstance, CollectionMetadata metadata, List<CreateKMIPAdapterRequestBodyResources> resources) {
       this.bluemixInstance = bluemixInstance;
       this.metadata = metadata;
       this.resources = resources;
@@ -77,16 +77,16 @@ public class CreateKmipAdapterOptions extends GenericModel {
     }
 
     /**
-     * Adds an resources to resources.
+     * Adds a new element to resources.
      *
-     * @param resources the new resources
+     * @param resources the new element to be added
      * @return the CreateKmipAdapterOptions builder
      */
-    public Builder addResources(CreateKMIPAdapterRequestBodyResourcesItem resources) {
+    public Builder addResources(CreateKMIPAdapterRequestBodyResources resources) {
       com.ibm.cloud.sdk.core.util.Validator.notNull(resources,
         "resources cannot be null");
       if (this.resources == null) {
-        this.resources = new ArrayList<CreateKMIPAdapterRequestBodyResourcesItem>();
+        this.resources = new ArrayList<CreateKMIPAdapterRequestBodyResources>();
       }
       this.resources.add(resources);
       return this;
@@ -121,7 +121,7 @@ public class CreateKmipAdapterOptions extends GenericModel {
      * @param resources the resources
      * @return the CreateKmipAdapterOptions builder
      */
-    public Builder resources(List<CreateKMIPAdapterRequestBodyResourcesItem> resources) {
+    public Builder resources(List<CreateKMIPAdapterRequestBodyResources> resources) {
       this.resources = resources;
       return this;
     }
@@ -191,7 +191,7 @@ public class CreateKmipAdapterOptions extends GenericModel {
    *
    * @return the resources
    */
-  public List<CreateKMIPAdapterRequestBodyResourcesItem> resources() {
+  public List<CreateKMIPAdapterRequestBodyResources> resources() {
     return resources;
   }
 

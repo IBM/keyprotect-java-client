@@ -13,7 +13,7 @@
 
 package com.ibm.cloud.ibm_key_protect_api.v2.model;
 
-import com.ibm.cloud.ibm_key_protect_api.v2.model.KMIPProfileDataNative;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKmipObjectOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
@@ -23,16 +23,29 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 /**
- * Unit test class for the KMIPProfileDataNative model.
+ * Unit test class for the DeleteKmipObjectOptions model.
  */
-public class KMIPProfileDataNativeTest {
+public class DeleteKmipObjectOptionsTest {
   final HashMap<String, InputStream> mockStreamMap = TestUtilities.createMockStreamMap();
   final List<FileWithMetadata> mockListFileWithMetadata = TestUtilities.creatMockListFileWithMetadata();
 
   @Test
-  public void testKMIPProfileDataNative() throws Throwable {
-    KMIPProfileDataNative kmipProfileDataNativeModel = new KMIPProfileDataNative();
-    assertNull(kmipProfileDataNativeModel.getCrkId());
-    assertNull(kmipProfileDataNativeModel.getTargetKeyRingId());
+  public void testDeleteKmipObjectOptions() throws Throwable {
+    DeleteKmipObjectOptions deleteKmipObjectOptionsModel = new DeleteKmipObjectOptions.Builder()
+      .adapterId("testString")
+      .bluemixInstance("testString")
+      .id("testString")
+      .correlationId("testString")
+      .build();
+    assertEquals(deleteKmipObjectOptionsModel.adapterId(), "testString");
+    assertEquals(deleteKmipObjectOptionsModel.bluemixInstance(), "testString");
+    assertEquals(deleteKmipObjectOptionsModel.id(), "testString");
+    assertEquals(deleteKmipObjectOptionsModel.correlationId(), "testString");
   }
+
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testDeleteKmipObjectOptionsError() throws Throwable {
+    new DeleteKmipObjectOptions.Builder().build();
+  }
+
 }

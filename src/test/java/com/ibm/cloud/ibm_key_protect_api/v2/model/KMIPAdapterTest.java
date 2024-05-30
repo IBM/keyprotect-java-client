@@ -14,7 +14,7 @@
 package com.ibm.cloud.ibm_key_protect_api.v2.model;
 
 import com.ibm.cloud.ibm_key_protect_api.v2.model.KMIPAdapter;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.KMIPProfileDataNative;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KMIPProfileDataBodyKMIPProfileDataNative;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;

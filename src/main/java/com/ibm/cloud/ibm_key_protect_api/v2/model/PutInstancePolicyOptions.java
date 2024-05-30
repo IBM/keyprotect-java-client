@@ -38,7 +38,7 @@ public class PutInstancePolicyOptions extends GenericModel {
   }
 
   protected String bluemixInstance;
-  protected SetInstancePoliciesOneOf setInstancePoliciesOneOf;
+  protected SetInstancePoliciesOneOf instancePolicyPutBody;
   protected String correlationId;
   protected String policy;
 
@@ -47,7 +47,7 @@ public class PutInstancePolicyOptions extends GenericModel {
    */
   public static class Builder {
     private String bluemixInstance;
-    private SetInstancePoliciesOneOf setInstancePoliciesOneOf;
+    private SetInstancePoliciesOneOf instancePolicyPutBody;
     private String correlationId;
     private String policy;
 
@@ -58,7 +58,7 @@ public class PutInstancePolicyOptions extends GenericModel {
      */
     private Builder(PutInstancePolicyOptions putInstancePolicyOptions) {
       this.bluemixInstance = putInstancePolicyOptions.bluemixInstance;
-      this.setInstancePoliciesOneOf = putInstancePolicyOptions.setInstancePoliciesOneOf;
+      this.instancePolicyPutBody = putInstancePolicyOptions.instancePolicyPutBody;
       this.correlationId = putInstancePolicyOptions.correlationId;
       this.policy = putInstancePolicyOptions.policy;
     }
@@ -73,11 +73,11 @@ public class PutInstancePolicyOptions extends GenericModel {
      * Instantiates a new builder with required properties.
      *
      * @param bluemixInstance the bluemixInstance
-     * @param setInstancePoliciesOneOf the setInstancePoliciesOneOf
+     * @param instancePolicyPutBody the instancePolicyPutBody
      */
-    public Builder(String bluemixInstance, SetInstancePoliciesOneOf setInstancePoliciesOneOf) {
+    public Builder(String bluemixInstance, SetInstancePoliciesOneOf instancePolicyPutBody) {
       this.bluemixInstance = bluemixInstance;
-      this.setInstancePoliciesOneOf = setInstancePoliciesOneOf;
+      this.instancePolicyPutBody = instancePolicyPutBody;
     }
 
     /**
@@ -101,13 +101,13 @@ public class PutInstancePolicyOptions extends GenericModel {
     }
 
     /**
-     * Set the setInstancePoliciesOneOf.
+     * Set the instancePolicyPutBody.
      *
-     * @param setInstancePoliciesOneOf the setInstancePoliciesOneOf
+     * @param instancePolicyPutBody the instancePolicyPutBody
      * @return the PutInstancePolicyOptions builder
      */
-    public Builder setInstancePoliciesOneOf(SetInstancePoliciesOneOf setInstancePoliciesOneOf) {
-      this.setInstancePoliciesOneOf = setInstancePoliciesOneOf;
+    public Builder instancePolicyPutBody(SetInstancePoliciesOneOf instancePolicyPutBody) {
+      this.instancePolicyPutBody = instancePolicyPutBody;
       return this;
     }
 
@@ -139,10 +139,10 @@ public class PutInstancePolicyOptions extends GenericModel {
   protected PutInstancePolicyOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.bluemixInstance,
       "bluemixInstance cannot be null");
-    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.setInstancePoliciesOneOf,
-      "setInstancePoliciesOneOf cannot be null");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.instancePolicyPutBody,
+      "instancePolicyPutBody cannot be null");
     bluemixInstance = builder.bluemixInstance;
-    setInstancePoliciesOneOf = builder.setInstancePoliciesOneOf;
+    instancePolicyPutBody = builder.instancePolicyPutBody;
     correlationId = builder.correlationId;
     policy = builder.policy;
   }
@@ -168,14 +168,14 @@ public class PutInstancePolicyOptions extends GenericModel {
   }
 
   /**
-   * Gets the setInstancePoliciesOneOf.
+   * Gets the instancePolicyPutBody.
    *
    * The base request for the create or update of instance level policies.
    *
-   * @return the setInstancePoliciesOneOf
+   * @return the instancePolicyPutBody
    */
-  public SetInstancePoliciesOneOf setInstancePoliciesOneOf() {
-    return setInstancePoliciesOneOf;
+  public SetInstancePoliciesOneOf instancePolicyPutBody() {
+    return instancePolicyPutBody;
   }
 
   /**

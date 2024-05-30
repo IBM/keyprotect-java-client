@@ -13,9 +13,9 @@
 
 package com.ibm.cloud.ibm_key_protect_api.v2.model;
 
-import com.ibm.cloud.ibm_key_protect_api.v2.model.AllowedIPProperties;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CollectionMetadata;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.InstancePolicyAllowedIPPolicyData;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.InstancePolicyAllowedIPPolicyDataAttributes;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.SetInstancePoliciesOneOfSetInstancePolicyAllowedIP;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.SetInstancePoliciesOneOfSetInstancePolicyAllowedIPResourcesItem;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
@@ -36,23 +36,23 @@ public class SetInstancePoliciesOneOfSetInstancePolicyAllowedIPTest {
   @Test
   public void testSetInstancePoliciesOneOfSetInstancePolicyAllowedIP() throws Throwable {
     CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
-      .collectionType("application/vnd.ibm.kms.crn+json")
+      .collectionType("application/vnd.ibm.kms.allowed_ip_metadata+json")
       .collectionTotal(Long.valueOf("1"))
       .build();
-    assertEquals(collectionMetadataModel.collectionType(), "application/vnd.ibm.kms.crn+json");
+    assertEquals(collectionMetadataModel.collectionType(), "application/vnd.ibm.kms.allowed_ip_metadata+json");
     assertEquals(collectionMetadataModel.collectionTotal(), Long.valueOf("1"));
 
-    AllowedIPProperties allowedIpPropertiesModel = new AllowedIPProperties.Builder()
+    InstancePolicyAllowedIPPolicyDataAttributes instancePolicyAllowedIpPolicyDataAttributesModel = new InstancePolicyAllowedIPPolicyDataAttributes.Builder()
       .allowedIp(java.util.Arrays.asList("10.1.0.0/32", "10.0.0.0/24", "192.0.2.0/32", "198.51.100.0/24", "2001:db8::/60"))
       .build();
-    assertEquals(allowedIpPropertiesModel.allowedIp(), java.util.Arrays.asList("10.1.0.0/32", "10.0.0.0/24", "192.0.2.0/32", "198.51.100.0/24", "2001:db8::/60"));
+    assertEquals(instancePolicyAllowedIpPolicyDataAttributesModel.allowedIp(), java.util.Arrays.asList("10.1.0.0/32", "10.0.0.0/24", "192.0.2.0/32", "198.51.100.0/24", "2001:db8::/60"));
 
     InstancePolicyAllowedIPPolicyData instancePolicyAllowedIpPolicyDataModel = new InstancePolicyAllowedIPPolicyData.Builder()
       .enabled(true)
-      .attributes(allowedIpPropertiesModel)
+      .attributes(instancePolicyAllowedIpPolicyDataAttributesModel)
       .build();
     assertEquals(instancePolicyAllowedIpPolicyDataModel.enabled(), Boolean.valueOf(true));
-    assertEquals(instancePolicyAllowedIpPolicyDataModel.attributes(), allowedIpPropertiesModel);
+    assertEquals(instancePolicyAllowedIpPolicyDataModel.attributes(), instancePolicyAllowedIpPolicyDataAttributesModel);
 
     SetInstancePoliciesOneOfSetInstancePolicyAllowedIPResourcesItem setInstancePoliciesOneOfSetInstancePolicyAllowedIpResourcesItemModel = new SetInstancePoliciesOneOfSetInstancePolicyAllowedIPResourcesItem.Builder()
       .policyType("allowedIP")

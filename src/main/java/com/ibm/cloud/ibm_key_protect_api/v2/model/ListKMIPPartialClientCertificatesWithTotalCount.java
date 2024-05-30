@@ -17,7 +17,7 @@ import java.util.List;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * The base schema for listing kmip client certificates in a kmip adapter with total count.
+ * The base schema for listing client certificates in a kmip adapter with total count.
  */
 public class ListKMIPPartialClientCertificatesWithTotalCount extends GenericModel {
 

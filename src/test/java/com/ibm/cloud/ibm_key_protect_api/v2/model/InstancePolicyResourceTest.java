@@ -13,8 +13,8 @@
 
 package com.ibm.cloud.ibm_key_protect_api.v2.model;
 
-import com.ibm.cloud.ibm_key_protect_api.v2.model.InstancePolicyAllAttributes;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.InstancePolicyProperties;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.InstancePolicyPropertiesAttributes;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.InstancePolicyResource;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;

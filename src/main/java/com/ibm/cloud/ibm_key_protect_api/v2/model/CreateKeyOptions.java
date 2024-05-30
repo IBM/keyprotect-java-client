@@ -40,7 +40,7 @@ public class CreateKeyOptions extends GenericModel {
   }
 
   protected String bluemixInstance;
-  protected InputStream body;
+  protected InputStream keyCreateBody;
   protected String correlationId;
   protected String prefer;
   protected String xKmsKeyRing;
@@ -50,7 +50,7 @@ public class CreateKeyOptions extends GenericModel {
    */
   public static class Builder {
     private String bluemixInstance;
-    private InputStream body;
+    private InputStream keyCreateBody;
     private String correlationId;
     private String prefer;
     private String xKmsKeyRing;
@@ -62,7 +62,7 @@ public class CreateKeyOptions extends GenericModel {
      */
     private Builder(CreateKeyOptions createKeyOptions) {
       this.bluemixInstance = createKeyOptions.bluemixInstance;
-      this.body = createKeyOptions.body;
+      this.keyCreateBody = createKeyOptions.keyCreateBody;
       this.correlationId = createKeyOptions.correlationId;
       this.prefer = createKeyOptions.prefer;
       this.xKmsKeyRing = createKeyOptions.xKmsKeyRing;
@@ -78,11 +78,11 @@ public class CreateKeyOptions extends GenericModel {
      * Instantiates a new builder with required properties.
      *
      * @param bluemixInstance the bluemixInstance
-     * @param body the body
+     * @param keyCreateBody the keyCreateBody
      */
-    public Builder(String bluemixInstance, InputStream body) {
+    public Builder(String bluemixInstance, InputStream keyCreateBody) {
       this.bluemixInstance = bluemixInstance;
-      this.body = body;
+      this.keyCreateBody = keyCreateBody;
     }
 
     /**
@@ -106,13 +106,13 @@ public class CreateKeyOptions extends GenericModel {
     }
 
     /**
-     * Set the body.
+     * Set the keyCreateBody.
      *
-     * @param body the body
+     * @param keyCreateBody the keyCreateBody
      * @return the CreateKeyOptions builder
      */
-    public Builder body(InputStream body) {
-      this.body = body;
+    public Builder keyCreateBody(InputStream keyCreateBody) {
+      this.keyCreateBody = keyCreateBody;
       return this;
     }
 
@@ -150,15 +150,15 @@ public class CreateKeyOptions extends GenericModel {
     }
 
     /**
-     * Set the body.
+     * Set the keyCreateBody.
      *
-     * @param body the body
+     * @param keyCreateBody the keyCreateBody
      * @return the CreateKeyOptions builder
      *
      * @throws FileNotFoundException if the file could not be found
      */
-    public Builder body(File body) throws FileNotFoundException {
-      this.body = new FileInputStream(body);
+    public Builder keyCreateBody(File keyCreateBody) throws FileNotFoundException {
+      this.keyCreateBody = new FileInputStream(keyCreateBody);
       return this;
     }
   }
@@ -168,10 +168,10 @@ public class CreateKeyOptions extends GenericModel {
   protected CreateKeyOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.bluemixInstance,
       "bluemixInstance cannot be null");
-    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.body,
-      "body cannot be null");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.keyCreateBody,
+      "keyCreateBody cannot be null");
     bluemixInstance = builder.bluemixInstance;
-    body = builder.body;
+    keyCreateBody = builder.keyCreateBody;
     correlationId = builder.correlationId;
     prefer = builder.prefer;
     xKmsKeyRing = builder.xKmsKeyRing;
@@ -198,14 +198,14 @@ public class CreateKeyOptions extends GenericModel {
   }
 
   /**
-   * Gets the body.
+   * Gets the keyCreateBody.
    *
    * The base request for creating a new key.
    *
-   * @return the body
+   * @return the keyCreateBody
    */
-  public InputStream body() {
-    return body;
+  public InputStream keyCreateBody() {
+    return keyCreateBody;
   }
 
   /**

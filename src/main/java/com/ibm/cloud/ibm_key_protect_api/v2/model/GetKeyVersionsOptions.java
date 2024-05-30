@@ -290,9 +290,8 @@ public class GetKeyVersionsOptions extends GenericModel {
   /**
    * Gets the allKeyStates.
    *
-   * If set to `true`, returns the key versions of a key in any state.
-   * **Usage:** If you have deleted a key and still want to retrieve its key versions use
-   * `../versions?allKeyStates=true`.
+   * If set to `true`, returns the key versions of a key in any state. **Usage:** If you have deleted a key and still
+   * want to retrieve its key versions use `../versions?allKeyStates=true`.
    *
    * @return the allKeyStates
    */

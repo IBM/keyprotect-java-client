@@ -16,9 +16,10 @@ import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * Data associated with the policy type `rotation`.
+ * Attributes of a `rotation` instance policy. Must be provided if the `enabled` field is `true`. Cannot be provided if
+ * the `enabled` field is `false`.
  */
-public class RotationProperties extends GenericModel {
+public class InstancePolicyRotationPolicyDataAttributes extends GenericModel {
 
   @SerializedName("interval_month")
   protected Long intervalMonth;
@@ -30,12 +31,12 @@ public class RotationProperties extends GenericModel {
     private Long intervalMonth;
 
     /**
-     * Instantiates a new Builder from an existing RotationProperties instance.
+     * Instantiates a new Builder from an existing InstancePolicyRotationPolicyDataAttributes instance.
      *
-     * @param rotationProperties the instance to initialize the Builder with
+     * @param instancePolicyRotationPolicyDataAttributes the instance to initialize the Builder with
      */
-    private Builder(RotationProperties rotationProperties) {
-      this.intervalMonth = rotationProperties.intervalMonth;
+    private Builder(InstancePolicyRotationPolicyDataAttributes instancePolicyRotationPolicyDataAttributes) {
+      this.intervalMonth = instancePolicyRotationPolicyDataAttributes.intervalMonth;
     }
 
     /**
@@ -45,19 +46,19 @@ public class RotationProperties extends GenericModel {
     }
 
     /**
-     * Builds a RotationProperties.
+     * Builds a InstancePolicyRotationPolicyDataAttributes.
      *
-     * @return the new RotationProperties instance
+     * @return the new InstancePolicyRotationPolicyDataAttributes instance
      */
-    public RotationProperties build() {
-      return new RotationProperties(this);
+    public InstancePolicyRotationPolicyDataAttributes build() {
+      return new InstancePolicyRotationPolicyDataAttributes(this);
     }
 
     /**
      * Set the intervalMonth.
      *
      * @param intervalMonth the intervalMonth
-     * @return the RotationProperties builder
+     * @return the InstancePolicyRotationPolicyDataAttributes builder
      */
     public Builder intervalMonth(long intervalMonth) {
       this.intervalMonth = intervalMonth;
@@ -65,16 +66,16 @@ public class RotationProperties extends GenericModel {
     }
   }
 
-  protected RotationProperties() { }
+  protected InstancePolicyRotationPolicyDataAttributes() { }
 
-  protected RotationProperties(Builder builder) {
+  protected InstancePolicyRotationPolicyDataAttributes(Builder builder) {
     intervalMonth = builder.intervalMonth;
   }
 
   /**
    * New builder.
    *
-   * @return a RotationProperties builder
+   * @return a InstancePolicyRotationPolicyDataAttributes builder
    */
   public Builder newBuilder() {
     return new Builder(this);

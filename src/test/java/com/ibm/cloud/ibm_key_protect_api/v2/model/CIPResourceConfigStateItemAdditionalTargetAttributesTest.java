@@ -35,5 +35,6 @@ public class CIPResourceConfigStateItemAdditionalTargetAttributesTest {
     assertNull(cipResourceConfigStateItemAdditionalTargetAttributesModel.getResourceId());
     assertNull(cipResourceConfigStateItemAdditionalTargetAttributesModel.getLocation());
     assertNull(cipResourceConfigStateItemAdditionalTargetAttributesModel.getInstanceId());
+    assertNull(cipResourceConfigStateItemAdditionalTargetAttributesModel.getResourceName());
   }
 }

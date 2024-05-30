@@ -65,9 +65,9 @@ public class SetKeyPoliciesOneOfSetMultipleKeyPolicies extends SetKeyPoliciesOne
     }
 
     /**
-     * Adds an resources to resources.
+     * Adds a new element to resources.
      *
-     * @param resources the new resources
+     * @param resources the new element to be added
      * @return the SetKeyPoliciesOneOfSetMultipleKeyPolicies builder
      */
     public Builder addResources(SetMultipleKeyPoliciesResource resources) {

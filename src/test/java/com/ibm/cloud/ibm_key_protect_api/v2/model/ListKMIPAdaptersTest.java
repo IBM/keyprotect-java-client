@@ -14,7 +14,7 @@
 package com.ibm.cloud.ibm_key_protect_api.v2.model;
 
 import com.ibm.cloud.ibm_key_protect_api.v2.model.KMIPAdapter;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.KMIPProfileDataNative;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KMIPProfileDataBodyKMIPProfileDataNative;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.ListCollectionMetadataCollectionMetadataWithTotalCount;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.ListKMIPAdapters;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;

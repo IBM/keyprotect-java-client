@@ -35,16 +35,16 @@ public class ActionOnRegistrationOptionsTest {
   @Test
   public void testActionOnRegistrationOptions() throws Throwable {
     CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
-      .collectionType("application/vnd.ibm.kms.crn+json")
+      .collectionType("application/vnd.ibm.kms.allowed_ip_metadata+json")
       .collectionTotal(Long.valueOf("1"))
       .build();
-    assertEquals(collectionMetadataModel.collectionType(), "application/vnd.ibm.kms.crn+json");
+    assertEquals(collectionMetadataModel.collectionType(), "application/vnd.ibm.kms.allowed_ip_metadata+json");
     assertEquals(collectionMetadataModel.collectionTotal(), Long.valueOf("1"));
 
     CloudResourceName cloudResourceNameModel = new CloudResourceName.Builder()
-      .resourceCrn("crn:v1:bluemix:public:<service-name>:<location>:a/<account-id>:<service-instance>:<resource-type>:<resource>")
+      .resourceCrn("crn:v1:bluemix:public:cloud-object-storage:global:a/<account-id>:<service-instance>:bucket:<bucket-name>")
       .build();
-    assertEquals(cloudResourceNameModel.resourceCrn(), "crn:v1:bluemix:public:<service-name>:<location>:a/<account-id>:<service-instance>:<resource-type>:<resource>");
+    assertEquals(cloudResourceNameModel.resourceCrn(), "crn:v1:bluemix:public:cloud-object-storage:global:a/<account-id>:<service-instance>:bucket:<bucket-name>");
 
     RegistrationActionOneOfDeactivateRegistration registrationActionOneOfModel = new RegistrationActionOneOfDeactivateRegistration.Builder()
       .metadata(collectionMetadataModel)
@@ -57,7 +57,7 @@ public class ActionOnRegistrationOptionsTest {
       .id("testString")
       .bluemixInstance("testString")
       .action("deactivate")
-      .registrationActionOneOf(registrationActionOneOfModel)
+      .registrationDeactivateBody(registrationActionOneOfModel)
       .correlationId("testString")
       .xKmsKeyRing("testString")
       .prefer("return=representation")
@@ -65,7 +65,7 @@ public class ActionOnRegistrationOptionsTest {
     assertEquals(actionOnRegistrationOptionsModel.id(), "testString");
     assertEquals(actionOnRegistrationOptionsModel.bluemixInstance(), "testString");
     assertEquals(actionOnRegistrationOptionsModel.action(), "deactivate");
-    assertEquals(actionOnRegistrationOptionsModel.registrationActionOneOf(), registrationActionOneOfModel);
+    assertEquals(actionOnRegistrationOptionsModel.registrationDeactivateBody(), registrationActionOneOfModel);
     assertEquals(actionOnRegistrationOptionsModel.correlationId(), "testString");
     assertEquals(actionOnRegistrationOptionsModel.xKmsKeyRing(), "testString");
     assertEquals(actionOnRegistrationOptionsModel.prefer(), "return=representation");

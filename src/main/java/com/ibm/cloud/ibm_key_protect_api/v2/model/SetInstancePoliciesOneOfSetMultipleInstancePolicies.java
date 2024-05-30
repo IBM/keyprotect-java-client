@@ -65,9 +65,9 @@ public class SetInstancePoliciesOneOfSetMultipleInstancePolicies extends SetInst
     }
 
     /**
-     * Adds an resources to resources.
+     * Adds a new element to resources.
      *
-     * @param resources the new resources
+     * @param resources the new element to be added
      * @return the SetInstancePoliciesOneOfSetMultipleInstancePolicies builder
      */
     public Builder addResources(SetMultipleInstancePoliciesResourcesItem resources) {

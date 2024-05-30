@@ -37,10 +37,10 @@ public class PutInstancePolicyOptionsTest {
   @Test
   public void testPutInstancePolicyOptions() throws Throwable {
     CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
-      .collectionType("application/vnd.ibm.kms.crn+json")
+      .collectionType("application/vnd.ibm.kms.allowed_ip_metadata+json")
       .collectionTotal(Long.valueOf("1"))
       .build();
-    assertEquals(collectionMetadataModel.collectionType(), "application/vnd.ibm.kms.crn+json");
+    assertEquals(collectionMetadataModel.collectionType(), "application/vnd.ibm.kms.allowed_ip_metadata+json");
     assertEquals(collectionMetadataModel.collectionTotal(), Long.valueOf("1"));
 
     InstancePolicyAllowedNetworkPolicyDataAttributes instancePolicyAllowedNetworkPolicyDataAttributesModel = new InstancePolicyAllowedNetworkPolicyDataAttributes.Builder()
@@ -71,12 +71,12 @@ public class PutInstancePolicyOptionsTest {
 
     PutInstancePolicyOptions putInstancePolicyOptionsModel = new PutInstancePolicyOptions.Builder()
       .bluemixInstance("testString")
-      .setInstancePoliciesOneOf(setInstancePoliciesOneOfModel)
+      .instancePolicyPutBody(setInstancePoliciesOneOfModel)
       .correlationId("testString")
       .policy("allowedNetwork")
       .build();
     assertEquals(putInstancePolicyOptionsModel.bluemixInstance(), "testString");
-    assertEquals(putInstancePolicyOptionsModel.setInstancePoliciesOneOf(), setInstancePoliciesOneOfModel);
+    assertEquals(putInstancePolicyOptionsModel.instancePolicyPutBody(), setInstancePoliciesOneOfModel);
     assertEquals(putInstancePolicyOptionsModel.correlationId(), "testString");
     assertEquals(putInstancePolicyOptionsModel.policy(), "allowedNetwork");
   }

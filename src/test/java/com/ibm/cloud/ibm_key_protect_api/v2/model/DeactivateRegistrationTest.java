@@ -13,7 +13,9 @@
 
 package com.ibm.cloud.ibm_key_protect_api.v2.model;
 
-import com.ibm.cloud.ibm_key_protect_api.v2.model.CryptoV2GetInstanceEndpointsOptions;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.CloudResourceName;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.CollectionMetadata;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.DeactivateRegistration;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
@@ -23,23 +25,16 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 /**
- * Unit test class for the CryptoV2GetInstanceEndpointsOptions model.
+ * Unit test class for the DeactivateRegistration model.
  */
-public class CryptoV2GetInstanceEndpointsOptionsTest {
+public class DeactivateRegistrationTest {
   final HashMap<String, InputStream> mockStreamMap = TestUtilities.createMockStreamMap();
   final List<FileWithMetadata> mockListFileWithMetadata = TestUtilities.creatMockListFileWithMetadata();
 
   @Test
-  public void testCryptoV2GetInstanceEndpointsOptions() throws Throwable {
-    CryptoV2GetInstanceEndpointsOptions cryptoV2GetInstanceEndpointsOptionsModel = new CryptoV2GetInstanceEndpointsOptions.Builder()
-      .instanceId("testString")
-      .build();
-    assertEquals(cryptoV2GetInstanceEndpointsOptionsModel.instanceId(), "testString");
+  public void testDeactivateRegistration() throws Throwable {
+    DeactivateRegistration deactivateRegistrationModel = new DeactivateRegistration();
+    assertNull(deactivateRegistrationModel.getMetadata());
+    assertNull(deactivateRegistrationModel.getResources());
   }
-
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testCryptoV2GetInstanceEndpointsOptionsError() throws Throwable {
-    new CryptoV2GetInstanceEndpointsOptions.Builder().build();
-  }
-
 }

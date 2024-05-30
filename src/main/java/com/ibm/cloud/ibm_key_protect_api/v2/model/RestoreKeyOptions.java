@@ -82,10 +82,12 @@ public class RestoreKeyOptions extends GenericModel {
      *
      * @param id the id
      * @param bluemixInstance the bluemixInstance
+     * @param keyRestoreBody the keyRestoreBody
      */
-    public Builder(String id, String bluemixInstance) {
+    public Builder(String id, String bluemixInstance, InputStream keyRestoreBody) {
       this.id = id;
       this.bluemixInstance = bluemixInstance;
+      this.keyRestoreBody = keyRestoreBody;
     }
 
     /**
@@ -184,6 +186,8 @@ public class RestoreKeyOptions extends GenericModel {
       "id cannot be empty");
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.bluemixInstance,
       "bluemixInstance cannot be null");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.keyRestoreBody,
+      "keyRestoreBody cannot be null");
     id = builder.id;
     bluemixInstance = builder.bluemixInstance;
     keyRestoreBody = builder.keyRestoreBody;

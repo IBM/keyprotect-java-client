@@ -20,14 +20,14 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class InstancePolicyRotationPolicyData extends GenericModel {
 
   protected Boolean enabled;
-  protected RotationProperties attributes;
+  protected InstancePolicyRotationPolicyDataAttributes attributes;
 
   /**
    * Builder.
    */
   public static class Builder {
     private Boolean enabled;
-    private RotationProperties attributes;
+    private InstancePolicyRotationPolicyDataAttributes attributes;
 
     /**
      * Instantiates a new Builder from an existing InstancePolicyRotationPolicyData instance.
@@ -80,7 +80,7 @@ public class InstancePolicyRotationPolicyData extends GenericModel {
      * @param attributes the attributes
      * @return the InstancePolicyRotationPolicyData builder
      */
-    public Builder attributes(RotationProperties attributes) {
+    public Builder attributes(InstancePolicyRotationPolicyDataAttributes attributes) {
       this.attributes = attributes;
       return this;
     }
@@ -126,7 +126,7 @@ public class InstancePolicyRotationPolicyData extends GenericModel {
    *
    * @return the attributes
    */
-  public RotationProperties attributes() {
+  public InstancePolicyRotationPolicyDataAttributes attributes() {
     return attributes;
   }
 }

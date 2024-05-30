@@ -12,41 +12,40 @@
  */
 package com.ibm.cloud.ibm_key_protect_api.v2.model;
 
-import com.google.gson.annotations.SerializedName;
+import java.util.List;
+
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * GetInstanceEndpointInfoKms.
+ * The base schema for listing kmip objects in a kmip adapter with total count.
  */
-public class GetInstanceEndpointInfoKms extends GenericModel {
+public class ListKMIPObjectsWithTotalCount extends GenericModel {
 
-  @SerializedName("public")
-  protected String xPublic;
-  @SerializedName("private")
-  protected String xPrivate;
+  protected CollectionMetadataWithTotalCount metadata;
+  protected List<KMIPObject> resources;
 
-  protected GetInstanceEndpointInfoKms() { }
+  protected ListKMIPObjectsWithTotalCount() { }
 
   /**
-   * Gets the xPublic.
+   * Gets the metadata.
    *
-   * The endpoint that is accessible from the public network.
+   * The metadata that describes the resource array.
    *
-   * @return the xPublic
+   * @return the metadata
    */
-  public String getXPublic() {
-    return xPublic;
+  public CollectionMetadataWithTotalCount getMetadata() {
+    return metadata;
   }
 
   /**
-   * Gets the xPrivate.
+   * Gets the resources.
    *
-   * The endpoint that is accessible from the private network.
+   * A collection of resources.
    *
-   * @return the xPrivate
+   * @return the resources
    */
-  public String getXPrivate() {
-    return xPrivate;
+  public List<KMIPObject> getResources() {
+    return resources;
   }
 }
 

@@ -54,9 +54,9 @@ public class RegistrationActionOneOfDeactivateRegistration extends RegistrationA
     }
 
     /**
-     * Adds an resources to resources.
+     * Adds a new element to resources.
      *
-     * @param resources the new resources
+     * @param resources the new element to be added
      * @return the RegistrationActionOneOfDeactivateRegistration builder
      */
     public Builder addResources(CloudResourceName resources) {

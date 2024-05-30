@@ -23,6 +23,8 @@ public class CollectionMetadataListKeys extends GenericModel {
    * The type of resources in the resource array.
    */
   public interface CollectionType {
+    /** application/vnd.ibm.kms.allowed_ip_metadata+json. */
+    String APPLICATION_VND_IBM_KMS_ALLOWED_IP_METADATA_JSON = "application/vnd.ibm.kms.allowed_ip_metadata+json";
     /** application/vnd.ibm.kms.crn+json. */
     String APPLICATION_VND_IBM_KMS_CRN_JSON = "application/vnd.ibm.kms.crn+json";
     /** application/vnd.ibm.kms.error+json. */
@@ -31,10 +33,14 @@ public class CollectionMetadataListKeys extends GenericModel {
     String APPLICATION_VND_IBM_KMS_EVENT_ACKNOWLEDGE_JSON = "application/vnd.ibm.kms.event_acknowledge+json";
     /** application/vnd.ibm.kms.import_token+json. */
     String APPLICATION_VND_IBM_KMS_IMPORT_TOKEN_JSON = "application/vnd.ibm.kms.import_token+json";
-    /** application/vnd.ibm.kms.key_action+json. */
-    String APPLICATION_VND_IBM_KMS_KEY_ACTION_JSON = "application/vnd.ibm.kms.key_action+json";
     /** application/vnd.ibm.kms.key+json. */
     String APPLICATION_VND_IBM_KMS_KEY_JSON = "application/vnd.ibm.kms.key+json";
+    /** application/vnd.ibm.kms.key_action+json. */
+    String APPLICATION_VND_IBM_KMS_KEY_ACTION_JSON = "application/vnd.ibm.kms.key_action+json";
+    /** application/vnd.ibm.kms.alias+json. */
+    String APPLICATION_VND_IBM_KMS_ALIAS_JSON = "application/vnd.ibm.kms.alias+json";
+    /** application/vnd.ibm.kms.key_ring+json. */
+    String APPLICATION_VND_IBM_KMS_KEY_RING_JSON = "application/vnd.ibm.kms.key_ring+json";
     /** application/vnd.ibm.kms.policy+json. */
     String APPLICATION_VND_IBM_KMS_POLICY_JSON = "application/vnd.ibm.kms.policy+json";
     /** application/vnd.ibm.kms.registration_input+json. */
@@ -45,10 +51,14 @@ public class CollectionMetadataListKeys extends GenericModel {
     String APPLICATION_VND_IBM_KMS_RESOURCE_CRN_JSON = "application/vnd.ibm.kms.resource_crn+json";
     /** application/vnd.ibm.kms.migration_intent+json. */
     String APPLICATION_VND_IBM_KMS_MIGRATION_INTENT_JSON = "application/vnd.ibm.kms.migration_intent+json";
+    /** application/vnd.ibm.kms.migration_intent_input+json. */
+    String APPLICATION_VND_IBM_KMS_MIGRATION_INTENT_INPUT_JSON = "application/vnd.ibm.kms.migration_intent_input+json";
     /** application/vnd.ibm.kms.kmip_adapter+json. */
     String APPLICATION_VND_IBM_KMS_KMIP_ADAPTER_JSON = "application/vnd.ibm.kms.kmip_adapter+json";
-    /** application/vnd.ibm.kms.kmip_adapter_certificate+json. */
-    String APPLICATION_VND_IBM_KMS_KMIP_ADAPTER_CERTIFICATE_JSON = "application/vnd.ibm.kms.kmip_adapter_certificate+json";
+    /** application/vnd.ibm.kms.kmip_client_certificate+json. */
+    String APPLICATION_VND_IBM_KMS_KMIP_CLIENT_CERTIFICATE_JSON = "application/vnd.ibm.kms.kmip_client_certificate+json";
+    /** application/vnd.ibm.kms.kmip_object+json. */
+    String APPLICATION_VND_IBM_KMS_KMIP_OBJECT_JSON = "application/vnd.ibm.kms.kmip_object+json";
   }
 
   protected String collectionType;

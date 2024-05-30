@@ -22,6 +22,44 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class GetKeysOptions extends GenericModel {
 
+  /**
+   * When provided, sorts the list of keys returned based on one or more key properties. To sort on a property in
+   * descending order, prefix the term with "-". To sort on multiple key properties, use a comma to separate each
+   * properties. The first property in the comma-separated list will be evaluated before the next. The key properties
+   * that can be sorted at this time are:
+   *   - `id`
+   *   - `state`
+   *   - `extractable`
+   *   - `imported`
+   *   - `creationDate`
+   *   - `lastUpdateDate`
+   *   - `lastRotateDate`
+   *   - `deletionDate`
+   *   - `expirationDate`
+   *
+   * The list of keys returned is sorted on id by default, if this parameter is not provided.
+   */
+  public interface Sort {
+    /** id. */
+    String ID = "id";
+    /** state. */
+    String STATE = "state";
+    /** extractable. */
+    String EXTRACTABLE = "extractable";
+    /** imported. */
+    String IMPORTED = "imported";
+    /** creationDate. */
+    String CREATIONDATE = "creationDate";
+    /** lastUpdateDate. */
+    String LASTUPDATEDATE = "lastUpdateDate";
+    /** lastRotateDate. */
+    String LASTROTATEDATE = "lastRotateDate";
+    /** deletionDate. */
+    String DELETIONDATE = "deletionDate";
+    /** expirationDate. */
+    String EXPIRATIONDATE = "expirationDate";
+  }
+
   protected String bluemixInstance;
   protected String correlationId;
   protected Long limit;
@@ -91,9 +129,9 @@ public class GetKeysOptions extends GenericModel {
     }
 
     /**
-     * Adds an state to state.
+     * Adds a new element to state.
      *
-     * @param state the new state
+     * @param state the new element to be added
      * @return the GetKeysOptions builder
      */
     public Builder addState(Long state) {
@@ -428,23 +466,22 @@ public class GetKeysOptions extends GenericModel {
    * *Format with operator/value pair*: &lt;propertyA&gt;=&lt;operatorA&gt;:&lt;valueA&gt; Up to three of the same
    * property may be specified at a time. The key properties that can be filtered at this time are:
    * - `creationDate`
-   *   * Date in RFC 3339 format in double-quotes: “YYYY-MM-DDTHH:mm:SSZ”
+   *   * Date in RFC 3339 format in double-quotes: “2000-03-21T00:00:00Z”
    * - `deletionDate`
-   *   * Date in RFC 3339 format in double-quotes: “YYYY-MM-DDTHH:mm:SSZ”
+   *   * Date in RFC 3339 format in double-quotes: “2000-03-21T00:00:00Z”
    * - `expirationDate`
-   *   * Date in RFC 3339 format in double-quotes: “YYYY-MM-DDTHH:mm:SSZ”
+   *   * Date in RFC 3339 format in double-quotes: “2000-03-21T00:00:00Z”
    * - `extractable`
    *   * Boolean true or false without quotes, case-insensitive
    * - `lastRotateDate`
-   *   * Date in RFC 3339 format in double-quotes: “YYYY-MM-DDTHH:mm:SSZ”
+   *   * Date in RFC 3339 format in double-quotes: “2000-03-21T00:00:00Z”
    * - `lastUpdateDate`
-   *   * Date in RFC 3339 format in double-quotes: “YYYY-MM-DDTHH:mm:SSZ”
+   *   * Date in RFC 3339 format in double-quotes: “2000-03-21T00:00:00Z”
    * - `state`
    *   * A list of comma-separated integers with no space in between: 0,1,2,3,5
    * - `hasMigrationIntent`
-   *   * Boolean true or false without quotes, case-insensitive
-   *
-   * Comparison operations (operators) that can be performed on date values are:
+   *   * Boolean true or false without quotes, case-insensitive Comparison operations (operators) that can be performed
+   * on date values are:
    * - `lte:&lt;value&gt;` Less than or equal to - `lt:&lt;value&gt;` Less than - `gte:&lt;value&gt;` Greater than or
    * equal to - `gt:&lt;value&gt;` Greater than A special keyword for date, `none` (case-insensitive), may be used to
    * retreive keys that do not have that property. This is useful for `lastRotateDate`, where only keys that have never

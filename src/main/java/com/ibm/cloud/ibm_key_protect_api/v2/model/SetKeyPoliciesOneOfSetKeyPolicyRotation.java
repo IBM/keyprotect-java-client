@@ -65,9 +65,9 @@ public class SetKeyPoliciesOneOfSetKeyPolicyRotation extends SetKeyPoliciesOneOf
     }
 
     /**
-     * Adds an resources to resources.
+     * Adds a new element to resources.
      *
-     * @param resources the new resources
+     * @param resources the new element to be added
      * @return the SetKeyPoliciesOneOfSetKeyPolicyRotation builder
      */
     public Builder addResources(KeyPolicyRotation resources) {

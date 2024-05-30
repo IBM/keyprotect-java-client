@@ -25,6 +25,8 @@ public class CIPResourceConfigStateItemAdditionalTargetAttributes extends Generi
   protected String location;
   @SerializedName("instance_id")
   protected String instanceId;
+  @SerializedName("resource_name")
+  protected String resourceName;
 
   protected CIPResourceConfigStateItemAdditionalTargetAttributes() { }
 
@@ -59,6 +61,17 @@ public class CIPResourceConfigStateItemAdditionalTargetAttributes extends Generi
    */
   public String getInstanceId() {
     return instanceId;
+  }
+
+  /**
+   * Gets the resourceName.
+   *
+   * Key name (if requested `resource_kind` is `key`).
+   *
+   * @return the resourceName
+   */
+  public String getResourceName() {
+    return resourceName;
   }
 }
 

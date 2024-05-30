@@ -32,12 +32,12 @@ public class DeleteKmipAdapterOptionsTest {
   @Test
   public void testDeleteKmipAdapterOptions() throws Throwable {
     DeleteKmipAdapterOptions deleteKmipAdapterOptionsModel = new DeleteKmipAdapterOptions.Builder()
-      .bluemixInstance("testString")
       .id("testString")
+      .bluemixInstance("testString")
       .correlationId("testString")
       .build();
-    assertEquals(deleteKmipAdapterOptionsModel.bluemixInstance(), "testString");
     assertEquals(deleteKmipAdapterOptionsModel.id(), "testString");
+    assertEquals(deleteKmipAdapterOptionsModel.bluemixInstance(), "testString");
     assertEquals(deleteKmipAdapterOptionsModel.correlationId(), "testString");
   }
 

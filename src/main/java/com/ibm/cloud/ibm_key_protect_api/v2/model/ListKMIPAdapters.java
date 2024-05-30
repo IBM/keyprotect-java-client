@@ -17,7 +17,7 @@ import java.util.List;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * The base schema for listing kmip adapter.
+ * The base schema for listing kmip adapter(s).
  */
 public class ListKMIPAdapters extends GenericModel {
 

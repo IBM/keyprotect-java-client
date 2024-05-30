@@ -15,7 +15,7 @@ package com.ibm.cloud.ibm_key_protect_api.v2.model;
 
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CollectionMetadata;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.InstancePolicyRotationPolicyData;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.RotationProperties;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.InstancePolicyRotationPolicyDataAttributes;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.SetInstancePoliciesOneOfSetInstancePolicyRotation;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.SetInstancePoliciesOneOfSetInstancePolicyRotationResourcesItem;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
@@ -36,23 +36,23 @@ public class SetInstancePoliciesOneOfSetInstancePolicyRotationTest {
   @Test
   public void testSetInstancePoliciesOneOfSetInstancePolicyRotation() throws Throwable {
     CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
-      .collectionType("application/vnd.ibm.kms.crn+json")
+      .collectionType("application/vnd.ibm.kms.allowed_ip_metadata+json")
       .collectionTotal(Long.valueOf("1"))
       .build();
-    assertEquals(collectionMetadataModel.collectionType(), "application/vnd.ibm.kms.crn+json");
+    assertEquals(collectionMetadataModel.collectionType(), "application/vnd.ibm.kms.allowed_ip_metadata+json");
     assertEquals(collectionMetadataModel.collectionTotal(), Long.valueOf("1"));
 
-    RotationProperties rotationPropertiesModel = new RotationProperties.Builder()
+    InstancePolicyRotationPolicyDataAttributes instancePolicyRotationPolicyDataAttributesModel = new InstancePolicyRotationPolicyDataAttributes.Builder()
       .intervalMonth(Long.valueOf("3"))
       .build();
-    assertEquals(rotationPropertiesModel.intervalMonth(), Long.valueOf("3"));
+    assertEquals(instancePolicyRotationPolicyDataAttributesModel.intervalMonth(), Long.valueOf("3"));
 
     InstancePolicyRotationPolicyData instancePolicyRotationPolicyDataModel = new InstancePolicyRotationPolicyData.Builder()
       .enabled(true)
-      .attributes(rotationPropertiesModel)
+      .attributes(instancePolicyRotationPolicyDataAttributesModel)
       .build();
     assertEquals(instancePolicyRotationPolicyDataModel.enabled(), Boolean.valueOf(true));
-    assertEquals(instancePolicyRotationPolicyDataModel.attributes(), rotationPropertiesModel);
+    assertEquals(instancePolicyRotationPolicyDataModel.attributes(), instancePolicyRotationPolicyDataAttributesModel);
 
     SetInstancePoliciesOneOfSetInstancePolicyRotationResourcesItem setInstancePoliciesOneOfSetInstancePolicyRotationResourcesItemModel = new SetInstancePoliciesOneOfSetInstancePolicyRotationResourcesItem.Builder()
       .policyType("rotation")

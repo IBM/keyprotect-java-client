@@ -15,9 +15,9 @@ package com.ibm.cloud.ibm_key_protect_api.v2.model;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * The cryptoV2GetInstanceEndpoints options.
+ * The cryptoV2InstancesInstanceIdGet options.
  */
-public class CryptoV2GetInstanceEndpointsOptions extends GenericModel {
+public class CryptoV2InstancesInstanceIdGetOptions extends GenericModel {
 
   protected String instanceId;
 
@@ -28,12 +28,12 @@ public class CryptoV2GetInstanceEndpointsOptions extends GenericModel {
     private String instanceId;
 
     /**
-     * Instantiates a new Builder from an existing CryptoV2GetInstanceEndpointsOptions instance.
+     * Instantiates a new Builder from an existing CryptoV2InstancesInstanceIdGetOptions instance.
      *
-     * @param cryptoV2GetInstanceEndpointsOptions the instance to initialize the Builder with
+     * @param cryptoV2InstancesInstanceIdGetOptions the instance to initialize the Builder with
      */
-    private Builder(CryptoV2GetInstanceEndpointsOptions cryptoV2GetInstanceEndpointsOptions) {
-      this.instanceId = cryptoV2GetInstanceEndpointsOptions.instanceId;
+    private Builder(CryptoV2InstancesInstanceIdGetOptions cryptoV2InstancesInstanceIdGetOptions) {
+      this.instanceId = cryptoV2InstancesInstanceIdGetOptions.instanceId;
     }
 
     /**
@@ -52,19 +52,19 @@ public class CryptoV2GetInstanceEndpointsOptions extends GenericModel {
     }
 
     /**
-     * Builds a CryptoV2GetInstanceEndpointsOptions.
+     * Builds a CryptoV2InstancesInstanceIdGetOptions.
      *
-     * @return the new CryptoV2GetInstanceEndpointsOptions instance
+     * @return the new CryptoV2InstancesInstanceIdGetOptions instance
      */
-    public CryptoV2GetInstanceEndpointsOptions build() {
-      return new CryptoV2GetInstanceEndpointsOptions(this);
+    public CryptoV2InstancesInstanceIdGetOptions build() {
+      return new CryptoV2InstancesInstanceIdGetOptions(this);
     }
 
     /**
      * Set the instanceId.
      *
      * @param instanceId the instanceId
-     * @return the CryptoV2GetInstanceEndpointsOptions builder
+     * @return the CryptoV2InstancesInstanceIdGetOptions builder
      */
     public Builder instanceId(String instanceId) {
       this.instanceId = instanceId;
@@ -72,9 +72,9 @@ public class CryptoV2GetInstanceEndpointsOptions extends GenericModel {
     }
   }
 
-  protected CryptoV2GetInstanceEndpointsOptions() { }
+  protected CryptoV2InstancesInstanceIdGetOptions() { }
 
-  protected CryptoV2GetInstanceEndpointsOptions(Builder builder) {
+  protected CryptoV2InstancesInstanceIdGetOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.instanceId,
       "instanceId cannot be empty");
     instanceId = builder.instanceId;
@@ -83,7 +83,7 @@ public class CryptoV2GetInstanceEndpointsOptions extends GenericModel {
   /**
    * New builder.
    *
-   * @return a CryptoV2GetInstanceEndpointsOptions builder
+   * @return a CryptoV2InstancesInstanceIdGetOptions builder
    */
   public Builder newBuilder() {
     return new Builder(this);

@@ -21,8 +21,8 @@ public class UnwrapKeyResponseBody extends GenericModel {
 
   protected String plaintext;
   protected String ciphertext;
-  protected KeyVersionID keyVersion;
-  protected KeyVersionID rewrappedKeyVersion;
+  protected WrappedKeyVersionKeyVersion keyVersion;
+  protected RewrappedKeyVersionRewrappedKeyVersion rewrappedKeyVersion;
 
   protected UnwrapKeyResponseBody() { }
 
@@ -66,7 +66,7 @@ public class UnwrapKeyResponseBody extends GenericModel {
    *
    * @return the keyVersion
    */
-  public KeyVersionID getKeyVersion() {
+  public WrappedKeyVersionKeyVersion getKeyVersion() {
     return keyVersion;
   }
 
@@ -78,7 +78,7 @@ public class UnwrapKeyResponseBody extends GenericModel {
    *
    * @return the rewrappedKeyVersion
    */
-  public KeyVersionID getRewrappedKeyVersion() {
+  public RewrappedKeyVersionRewrappedKeyVersion getRewrappedKeyVersion() {
     return rewrappedKeyVersion;
   }
 }

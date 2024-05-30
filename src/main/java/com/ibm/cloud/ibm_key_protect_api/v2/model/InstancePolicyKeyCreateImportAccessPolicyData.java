@@ -20,14 +20,14 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class InstancePolicyKeyCreateImportAccessPolicyData extends GenericModel {
 
   protected Boolean enabled;
-  protected KeyCreateImportAccessProperties attributes;
+  protected InstancePolicyKeyCreateImportAccessPolicyDataAttributes attributes;
 
   /**
    * Builder.
    */
   public static class Builder {
     private Boolean enabled;
-    private KeyCreateImportAccessProperties attributes;
+    private InstancePolicyKeyCreateImportAccessPolicyDataAttributes attributes;
 
     /**
      * Instantiates a new Builder from an existing InstancePolicyKeyCreateImportAccessPolicyData instance.
@@ -80,7 +80,7 @@ public class InstancePolicyKeyCreateImportAccessPolicyData extends GenericModel 
      * @param attributes the attributes
      * @return the InstancePolicyKeyCreateImportAccessPolicyData builder
      */
-    public Builder attributes(KeyCreateImportAccessProperties attributes) {
+    public Builder attributes(InstancePolicyKeyCreateImportAccessPolicyDataAttributes attributes) {
       this.attributes = attributes;
       return this;
     }
@@ -126,7 +126,7 @@ public class InstancePolicyKeyCreateImportAccessPolicyData extends GenericModel 
    *
    * @return the attributes
    */
-  public KeyCreateImportAccessProperties attributes() {
+  public InstancePolicyKeyCreateImportAccessPolicyDataAttributes attributes() {
     return attributes;
   }
 }

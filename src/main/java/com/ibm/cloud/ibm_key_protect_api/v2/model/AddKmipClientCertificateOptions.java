@@ -22,8 +22,8 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class AddKmipClientCertificateOptions extends GenericModel {
 
-  protected String bluemixInstance;
   protected String adapterId;
+  protected String bluemixInstance;
   protected CollectionMetadata metadata;
   protected List<CreateKMIPClientCertificateObject> resources;
   protected String correlationId;
@@ -32,8 +32,8 @@ public class AddKmipClientCertificateOptions extends GenericModel {
    * Builder.
    */
   public static class Builder {
-    private String bluemixInstance;
     private String adapterId;
+    private String bluemixInstance;
     private CollectionMetadata metadata;
     private List<CreateKMIPClientCertificateObject> resources;
     private String correlationId;
@@ -44,8 +44,8 @@ public class AddKmipClientCertificateOptions extends GenericModel {
      * @param addKmipClientCertificateOptions the instance to initialize the Builder with
      */
     private Builder(AddKmipClientCertificateOptions addKmipClientCertificateOptions) {
-      this.bluemixInstance = addKmipClientCertificateOptions.bluemixInstance;
       this.adapterId = addKmipClientCertificateOptions.adapterId;
+      this.bluemixInstance = addKmipClientCertificateOptions.bluemixInstance;
       this.metadata = addKmipClientCertificateOptions.metadata;
       this.resources = addKmipClientCertificateOptions.resources;
       this.correlationId = addKmipClientCertificateOptions.correlationId;
@@ -60,14 +60,14 @@ public class AddKmipClientCertificateOptions extends GenericModel {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param bluemixInstance the bluemixInstance
      * @param adapterId the adapterId
+     * @param bluemixInstance the bluemixInstance
      * @param metadata the metadata
      * @param resources the resources
      */
-    public Builder(String bluemixInstance, String adapterId, CollectionMetadata metadata, List<CreateKMIPClientCertificateObject> resources) {
-      this.bluemixInstance = bluemixInstance;
+    public Builder(String adapterId, String bluemixInstance, CollectionMetadata metadata, List<CreateKMIPClientCertificateObject> resources) {
       this.adapterId = adapterId;
+      this.bluemixInstance = bluemixInstance;
       this.metadata = metadata;
       this.resources = resources;
     }
@@ -82,9 +82,9 @@ public class AddKmipClientCertificateOptions extends GenericModel {
     }
 
     /**
-     * Adds an resources to resources.
+     * Adds a new element to resources.
      *
-     * @param resources the new resources
+     * @param resources the new element to be added
      * @return the AddKmipClientCertificateOptions builder
      */
     public Builder addResources(CreateKMIPClientCertificateObject resources) {
@@ -98,17 +98,6 @@ public class AddKmipClientCertificateOptions extends GenericModel {
     }
 
     /**
-     * Set the bluemixInstance.
-     *
-     * @param bluemixInstance the bluemixInstance
-     * @return the AddKmipClientCertificateOptions builder
-     */
-    public Builder bluemixInstance(String bluemixInstance) {
-      this.bluemixInstance = bluemixInstance;
-      return this;
-    }
-
-    /**
      * Set the adapterId.
      *
      * @param adapterId the adapterId
@@ -116,6 +105,17 @@ public class AddKmipClientCertificateOptions extends GenericModel {
      */
     public Builder adapterId(String adapterId) {
       this.adapterId = adapterId;
+      return this;
+    }
+
+    /**
+     * Set the bluemixInstance.
+     *
+     * @param bluemixInstance the bluemixInstance
+     * @return the AddKmipClientCertificateOptions builder
+     */
+    public Builder bluemixInstance(String bluemixInstance) {
+      this.bluemixInstance = bluemixInstance;
       return this;
     }
 
@@ -157,16 +157,16 @@ public class AddKmipClientCertificateOptions extends GenericModel {
   protected AddKmipClientCertificateOptions() { }
 
   protected AddKmipClientCertificateOptions(Builder builder) {
-    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.bluemixInstance,
-      "bluemixInstance cannot be null");
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.adapterId,
       "adapterId cannot be empty");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.bluemixInstance,
+      "bluemixInstance cannot be null");
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.metadata,
       "metadata cannot be null");
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.resources,
       "resources cannot be null");
-    bluemixInstance = builder.bluemixInstance;
     adapterId = builder.adapterId;
+    bluemixInstance = builder.bluemixInstance;
     metadata = builder.metadata;
     resources = builder.resources;
     correlationId = builder.correlationId;
@@ -182,17 +182,6 @@ public class AddKmipClientCertificateOptions extends GenericModel {
   }
 
   /**
-   * Gets the bluemixInstance.
-   *
-   * The IBM Cloud instance ID that identifies your Key Protect service instance.
-   *
-   * @return the bluemixInstance
-   */
-  public String bluemixInstance() {
-    return bluemixInstance;
-  }
-
-  /**
    * Gets the adapterId.
    *
    * The name or v4 UUID of the KMIP Adapter that uniquely identifies it.
@@ -201,6 +190,17 @@ public class AddKmipClientCertificateOptions extends GenericModel {
    */
   public String adapterId() {
     return adapterId;
+  }
+
+  /**
+   * Gets the bluemixInstance.
+   *
+   * The IBM Cloud instance ID that identifies your Key Protect service instance.
+   *
+   * @return the bluemixInstance
+   */
+  public String bluemixInstance() {
+    return bluemixInstance;
   }
 
   /**

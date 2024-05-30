@@ -13,7 +13,7 @@
 
 package com.ibm.cloud.ibm_key_protect_api.v2.model;
 
-import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstanceEndpointInfoKms;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKmipObjectOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
@@ -23,16 +23,29 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 /**
- * Unit test class for the GetInstanceEndpointInfoKms model.
+ * Unit test class for the GetKmipObjectOptions model.
  */
-public class GetInstanceEndpointInfoKmsTest {
+public class GetKmipObjectOptionsTest {
   final HashMap<String, InputStream> mockStreamMap = TestUtilities.createMockStreamMap();
   final List<FileWithMetadata> mockListFileWithMetadata = TestUtilities.creatMockListFileWithMetadata();
 
   @Test
-  public void testGetInstanceEndpointInfoKms() throws Throwable {
-    GetInstanceEndpointInfoKms getInstanceEndpointInfoKmsModel = new GetInstanceEndpointInfoKms();
-    assertNull(getInstanceEndpointInfoKmsModel.getXPublic());
-    assertNull(getInstanceEndpointInfoKmsModel.getXPrivate());
+  public void testGetKmipObjectOptions() throws Throwable {
+    GetKmipObjectOptions getKmipObjectOptionsModel = new GetKmipObjectOptions.Builder()
+      .adapterId("testString")
+      .bluemixInstance("testString")
+      .id("testString")
+      .correlationId("testString")
+      .build();
+    assertEquals(getKmipObjectOptionsModel.adapterId(), "testString");
+    assertEquals(getKmipObjectOptionsModel.bluemixInstance(), "testString");
+    assertEquals(getKmipObjectOptionsModel.id(), "testString");
+    assertEquals(getKmipObjectOptionsModel.correlationId(), "testString");
   }
+
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testGetKmipObjectOptionsError() throws Throwable {
+    new GetKmipObjectOptions.Builder().build();
+  }
+
 }

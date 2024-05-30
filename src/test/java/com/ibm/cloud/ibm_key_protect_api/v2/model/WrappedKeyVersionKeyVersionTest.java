@@ -13,8 +13,7 @@
 
 package com.ibm.cloud.ibm_key_protect_api.v2.model;
 
-import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstanceEndpointInfo;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstanceEndpointInfoKms;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.WrappedKeyVersionKeyVersion;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
@@ -24,15 +23,14 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 /**
- * Unit test class for the GetInstanceEndpointInfo model.
+ * Unit test class for the WrappedKeyVersionKeyVersion model.
  */
-public class GetInstanceEndpointInfoTest {
+public class WrappedKeyVersionKeyVersionTest {
   final HashMap<String, InputStream> mockStreamMap = TestUtilities.createMockStreamMap();
   final List<FileWithMetadata> mockListFileWithMetadata = TestUtilities.creatMockListFileWithMetadata();
 
   @Test
-  public void testGetInstanceEndpointInfo() throws Throwable {
-    GetInstanceEndpointInfo getInstanceEndpointInfoModel = new GetInstanceEndpointInfo();
-    assertNull(getInstanceEndpointInfoModel.getKms());
+  public void testWrappedKeyVersionKeyVersion() throws Throwable {
+    WrappedKeyVersionKeyVersion wrappedKeyVersionKeyVersionModel = new WrappedKeyVersionKeyVersion();
   }
 }

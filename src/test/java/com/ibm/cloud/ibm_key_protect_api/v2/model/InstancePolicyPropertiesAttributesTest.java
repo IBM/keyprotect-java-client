@@ -13,7 +13,7 @@
 
 package com.ibm.cloud.ibm_key_protect_api.v2.model;
 
-import com.ibm.cloud.ibm_key_protect_api.v2.model.AllowedIPProperties;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.InstancePolicyPropertiesAttributes;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
@@ -23,22 +23,22 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 /**
- * Unit test class for the AllowedIPProperties model.
+ * Unit test class for the InstancePolicyPropertiesAttributes model.
  */
-public class AllowedIPPropertiesTest {
+public class InstancePolicyPropertiesAttributesTest {
   final HashMap<String, InputStream> mockStreamMap = TestUtilities.createMockStreamMap();
   final List<FileWithMetadata> mockListFileWithMetadata = TestUtilities.creatMockListFileWithMetadata();
 
   @Test
-  public void testAllowedIPProperties() throws Throwable {
-    AllowedIPProperties allowedIpPropertiesModel = new AllowedIPProperties.Builder()
-      .allowedIp(java.util.Arrays.asList("10.1.0.0/32", "10.0.0.0/24", "192.0.2.0/32", "198.51.100.0/24", "2001:db8::/60"))
-      .build();
-    assertEquals(allowedIpPropertiesModel.allowedIp(), java.util.Arrays.asList("10.1.0.0/32", "10.0.0.0/24", "192.0.2.0/32", "198.51.100.0/24", "2001:db8::/60"));
-
-    String json = TestUtilities.serialize(allowedIpPropertiesModel);
-
-    AllowedIPProperties allowedIpPropertiesModelNew = TestUtilities.deserialize(json, AllowedIPProperties.class);
-    assertTrue(allowedIpPropertiesModelNew instanceof AllowedIPProperties);
+  public void testInstancePolicyPropertiesAttributes() throws Throwable {
+    InstancePolicyPropertiesAttributes instancePolicyPropertiesAttributesModel = new InstancePolicyPropertiesAttributes();
+    assertNull(instancePolicyPropertiesAttributesModel.getAllowedNetwork());
+    assertNull(instancePolicyPropertiesAttributesModel.getAllowedIp());
+    assertNull(instancePolicyPropertiesAttributesModel.isCreateRootKey());
+    assertNull(instancePolicyPropertiesAttributesModel.isCreateStandardKey());
+    assertNull(instancePolicyPropertiesAttributesModel.isImportRootKey());
+    assertNull(instancePolicyPropertiesAttributesModel.isImportStandardKey());
+    assertNull(instancePolicyPropertiesAttributesModel.isEnforceToken());
+    assertNull(instancePolicyPropertiesAttributesModel.getIntervalMonth());
   }
 }

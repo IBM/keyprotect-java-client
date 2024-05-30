@@ -15,7 +15,7 @@ package com.ibm.cloud.ibm_key_protect_api.v2.model;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * URL to obtain the next set of data during pagination, given further resources matching the query can be found.
+ * Reference to next set of data during pagination, given further resources matching the query can be found.
  */
 public class CIPResourceNext extends GenericModel {
 
@@ -25,6 +25,8 @@ public class CIPResourceNext extends GenericModel {
 
   /**
    * Gets the href.
+   *
+   * URL to obtain the next set of data during pagination, given further resources matching the query can be found.
    *
    * @return the href
    */

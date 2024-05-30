@@ -13,7 +13,7 @@
 
 package com.ibm.cloud.ibm_key_protect_api.v2.model;
 
-import com.ibm.cloud.ibm_key_protect_api.v2.model.InstancePolicyAllAttributes;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.InstancePolicyRotationPolicyDataAttributes;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
@@ -23,22 +23,23 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 /**
- * Unit test class for the InstancePolicyAllAttributes model.
+ * Unit test class for the InstancePolicyRotationPolicyDataAttributes model.
  */
-public class InstancePolicyAllAttributesTest {
+public class InstancePolicyRotationPolicyDataAttributesTest {
   final HashMap<String, InputStream> mockStreamMap = TestUtilities.createMockStreamMap();
   final List<FileWithMetadata> mockListFileWithMetadata = TestUtilities.creatMockListFileWithMetadata();
 
   @Test
-  public void testInstancePolicyAllAttributes() throws Throwable {
-    InstancePolicyAllAttributes instancePolicyAllAttributesModel = new InstancePolicyAllAttributes();
-    assertNull(instancePolicyAllAttributesModel.getAllowedNetwork());
-    assertNull(instancePolicyAllAttributesModel.getAllowedIp());
-    assertNull(instancePolicyAllAttributesModel.isCreateRootKey());
-    assertNull(instancePolicyAllAttributesModel.isCreateStandardKey());
-    assertNull(instancePolicyAllAttributesModel.isImportRootKey());
-    assertNull(instancePolicyAllAttributesModel.isImportStandardKey());
-    assertNull(instancePolicyAllAttributesModel.isEnforceToken());
-    assertNull(instancePolicyAllAttributesModel.getIntervalMonth());
+  public void testInstancePolicyRotationPolicyDataAttributes() throws Throwable {
+    InstancePolicyRotationPolicyDataAttributes instancePolicyRotationPolicyDataAttributesModel = new InstancePolicyRotationPolicyDataAttributes.Builder()
+      .intervalMonth(Long.valueOf("3"))
+      .build();
+    assertEquals(instancePolicyRotationPolicyDataAttributesModel.intervalMonth(), Long.valueOf("3"));
+
+    String json = TestUtilities.serialize(instancePolicyRotationPolicyDataAttributesModel);
+
+    InstancePolicyRotationPolicyDataAttributes instancePolicyRotationPolicyDataAttributesModelNew = TestUtilities.deserialize(json, InstancePolicyRotationPolicyDataAttributes.class);
+    assertTrue(instancePolicyRotationPolicyDataAttributesModelNew instanceof InstancePolicyRotationPolicyDataAttributes);
+    assertEquals(instancePolicyRotationPolicyDataAttributesModelNew.intervalMonth(), Long.valueOf("3"));
   }
 }

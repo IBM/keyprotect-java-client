@@ -14,7 +14,7 @@
 package com.ibm.cloud.ibm_key_protect_api.v2.model;
 
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CollectionMetadata;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKMIPAdapterRequestBodyResourcesItem;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKMIPAdapterRequestBodyResources;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKmipAdapterOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.KMIPProfileDataBodyKMIPProfileDataNative;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
@@ -43,31 +43,29 @@ public class CreateKmipAdapterOptionsTest {
 
     KMIPProfileDataBodyKMIPProfileDataNative kmipProfileDataBodyModel = new KMIPProfileDataBodyKMIPProfileDataNative.Builder()
       .crkId("feddecaf-0000-0000-0000-1234567890ab")
-      .targetKeyRingId("testString")
       .build();
     assertEquals(kmipProfileDataBodyModel.crkId(), "feddecaf-0000-0000-0000-1234567890ab");
-    assertEquals(kmipProfileDataBodyModel.targetKeyRingId(), "testString");
 
-    CreateKMIPAdapterRequestBodyResourcesItem createKmipAdapterRequestBodyResourcesItemModel = new CreateKMIPAdapterRequestBodyResourcesItem.Builder()
+    CreateKMIPAdapterRequestBodyResources createKmipAdapterRequestBodyResourcesModel = new CreateKMIPAdapterRequestBodyResources.Builder()
       .name("kmip-adapter-name")
       .description("kmip adapter description")
       .profile("native_1.0")
       .profileData(kmipProfileDataBodyModel)
       .build();
-    assertEquals(createKmipAdapterRequestBodyResourcesItemModel.name(), "kmip-adapter-name");
-    assertEquals(createKmipAdapterRequestBodyResourcesItemModel.description(), "kmip adapter description");
-    assertEquals(createKmipAdapterRequestBodyResourcesItemModel.profile(), "native_1.0");
-    assertEquals(createKmipAdapterRequestBodyResourcesItemModel.profileData(), kmipProfileDataBodyModel);
+    assertEquals(createKmipAdapterRequestBodyResourcesModel.name(), "kmip-adapter-name");
+    assertEquals(createKmipAdapterRequestBodyResourcesModel.description(), "kmip adapter description");
+    assertEquals(createKmipAdapterRequestBodyResourcesModel.profile(), "native_1.0");
+    assertEquals(createKmipAdapterRequestBodyResourcesModel.profileData(), kmipProfileDataBodyModel);
 
     CreateKmipAdapterOptions createKmipAdapterOptionsModel = new CreateKmipAdapterOptions.Builder()
       .bluemixInstance("testString")
       .metadata(collectionMetadataModel)
-      .resources(java.util.Arrays.asList(createKmipAdapterRequestBodyResourcesItemModel))
+      .resources(java.util.Arrays.asList(createKmipAdapterRequestBodyResourcesModel))
       .correlationId("testString")
       .build();
     assertEquals(createKmipAdapterOptionsModel.bluemixInstance(), "testString");
     assertEquals(createKmipAdapterOptionsModel.metadata(), collectionMetadataModel);
-    assertEquals(createKmipAdapterOptionsModel.resources(), java.util.Arrays.asList(createKmipAdapterRequestBodyResourcesItemModel));
+    assertEquals(createKmipAdapterOptionsModel.resources(), java.util.Arrays.asList(createKmipAdapterRequestBodyResourcesModel));
     assertEquals(createKmipAdapterOptionsModel.correlationId(), "testString");
   }
 

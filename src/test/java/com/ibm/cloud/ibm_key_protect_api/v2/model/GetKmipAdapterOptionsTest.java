@@ -32,12 +32,12 @@ public class GetKmipAdapterOptionsTest {
   @Test
   public void testGetKmipAdapterOptions() throws Throwable {
     GetKmipAdapterOptions getKmipAdapterOptionsModel = new GetKmipAdapterOptions.Builder()
-      .bluemixInstance("testString")
       .id("testString")
+      .bluemixInstance("testString")
       .correlationId("testString")
       .build();
-    assertEquals(getKmipAdapterOptionsModel.bluemixInstance(), "testString");
     assertEquals(getKmipAdapterOptionsModel.id(), "testString");
+    assertEquals(getKmipAdapterOptionsModel.bluemixInstance(), "testString");
     assertEquals(getKmipAdapterOptionsModel.correlationId(), "testString");
   }
 

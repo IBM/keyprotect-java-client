@@ -15,13 +15,14 @@ package com.ibm.cloud.ibm_key_protect_api.v2.model;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * Properties associated with a specific key version.
+ * The latest key version that was used to rewrap the DEK. This key version is associated with the `ciphertext` value
+ * that's returned in the response.
  */
-public class KeyVersionID extends GenericModel {
+public class RewrappedKeyVersionRewrappedKeyVersion extends GenericModel {
 
   protected String id;
 
-  protected KeyVersionID() { }
+  protected RewrappedKeyVersionRewrappedKeyVersion() { }
 
   /**
    * Gets the id.

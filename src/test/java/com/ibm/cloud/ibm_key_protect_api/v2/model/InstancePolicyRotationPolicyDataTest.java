@@ -14,7 +14,7 @@
 package com.ibm.cloud.ibm_key_protect_api.v2.model;
 
 import com.ibm.cloud.ibm_key_protect_api.v2.model.InstancePolicyRotationPolicyData;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.RotationProperties;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.InstancePolicyRotationPolicyDataAttributes;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
@@ -32,24 +32,24 @@ public class InstancePolicyRotationPolicyDataTest {
 
   @Test
   public void testInstancePolicyRotationPolicyData() throws Throwable {
-    RotationProperties rotationPropertiesModel = new RotationProperties.Builder()
+    InstancePolicyRotationPolicyDataAttributes instancePolicyRotationPolicyDataAttributesModel = new InstancePolicyRotationPolicyDataAttributes.Builder()
       .intervalMonth(Long.valueOf("3"))
       .build();
-    assertEquals(rotationPropertiesModel.intervalMonth(), Long.valueOf("3"));
+    assertEquals(instancePolicyRotationPolicyDataAttributesModel.intervalMonth(), Long.valueOf("3"));
 
     InstancePolicyRotationPolicyData instancePolicyRotationPolicyDataModel = new InstancePolicyRotationPolicyData.Builder()
       .enabled(true)
-      .attributes(rotationPropertiesModel)
+      .attributes(instancePolicyRotationPolicyDataAttributesModel)
       .build();
     assertEquals(instancePolicyRotationPolicyDataModel.enabled(), Boolean.valueOf(true));
-    assertEquals(instancePolicyRotationPolicyDataModel.attributes(), rotationPropertiesModel);
+    assertEquals(instancePolicyRotationPolicyDataModel.attributes(), instancePolicyRotationPolicyDataAttributesModel);
 
     String json = TestUtilities.serialize(instancePolicyRotationPolicyDataModel);
 
     InstancePolicyRotationPolicyData instancePolicyRotationPolicyDataModelNew = TestUtilities.deserialize(json, InstancePolicyRotationPolicyData.class);
     assertTrue(instancePolicyRotationPolicyDataModelNew instanceof InstancePolicyRotationPolicyData);
     assertEquals(instancePolicyRotationPolicyDataModelNew.enabled(), Boolean.valueOf(true));
-    assertEquals(instancePolicyRotationPolicyDataModelNew.attributes().toString(), rotationPropertiesModel.toString());
+    assertEquals(instancePolicyRotationPolicyDataModelNew.attributes().toString(), instancePolicyRotationPolicyDataAttributesModel.toString());
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

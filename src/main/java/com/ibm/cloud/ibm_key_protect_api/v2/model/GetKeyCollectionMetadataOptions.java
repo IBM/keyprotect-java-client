@@ -79,9 +79,9 @@ public class GetKeyCollectionMetadataOptions extends GenericModel {
     }
 
     /**
-     * Adds an state to state.
+     * Adds a new element to state.
      *
-     * @param state the new state
+     * @param state the new element to be added
      * @return the GetKeyCollectionMetadataOptions builder
      */
     public Builder addState(Long state) {
@@ -248,23 +248,22 @@ public class GetKeyCollectionMetadataOptions extends GenericModel {
    * *Format with operator/value pair*: &lt;propertyA&gt;=&lt;operatorA&gt;:&lt;valueA&gt; Up to three of the same
    * property may be specified at a time. The key properties that can be filtered at this time are:
    * - `creationDate`
-   *   * Date in RFC 3339 format in double-quotes: “YYYY-MM-DDTHH:mm:SSZ”
+   *   * Date in RFC 3339 format in double-quotes: “2000-03-21T00:00:00Z”
    * - `deletionDate`
-   *   * Date in RFC 3339 format in double-quotes: “YYYY-MM-DDTHH:mm:SSZ”
+   *   * Date in RFC 3339 format in double-quotes: “2000-03-21T00:00:00Z”
    * - `expirationDate`
-   *   * Date in RFC 3339 format in double-quotes: “YYYY-MM-DDTHH:mm:SSZ”
+   *   * Date in RFC 3339 format in double-quotes: “2000-03-21T00:00:00Z”
    * - `extractable`
    *   * Boolean true or false without quotes, case-insensitive
    * - `lastRotateDate`
-   *   * Date in RFC 3339 format in double-quotes: “YYYY-MM-DDTHH:mm:SSZ”
+   *   * Date in RFC 3339 format in double-quotes: “2000-03-21T00:00:00Z”
    * - `lastUpdateDate`
-   *   * Date in RFC 3339 format in double-quotes: “YYYY-MM-DDTHH:mm:SSZ”
+   *   * Date in RFC 3339 format in double-quotes: “2000-03-21T00:00:00Z”
    * - `state`
    *   * A list of comma-separated integers with no space in between: 0,1,2,3,5
    * - `hasMigrationIntent`
-   *   * Boolean true or false without quotes, case-insensitive
-   *
-   * Comparison operations (operators) that can be performed on date values are:
+   *   * Boolean true or false without quotes, case-insensitive Comparison operations (operators) that can be performed
+   * on date values are:
    * - `lte:&lt;value&gt;` Less than or equal to - `lt:&lt;value&gt;` Less than - `gte:&lt;value&gt;` Greater than or
    * equal to - `gt:&lt;value&gt;` Greater than A special keyword for date, `none` (case-insensitive), may be used to
    * retreive keys that do not have that property. This is useful for `lastRotateDate`, where only keys that have never

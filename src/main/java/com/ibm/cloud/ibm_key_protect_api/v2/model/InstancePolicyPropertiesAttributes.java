@@ -12,14 +12,32 @@
  */
 package com.ibm.cloud.ibm_key_protect_api.v2.model;
 
+import java.util.List;
+
 import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * Data associated with the policy type `keyCreateImportAccess`.
+ * Attributes associated with any instance policy type.
  */
-public class KeyCreateImportAccessProperties extends GenericModel {
+public class InstancePolicyPropertiesAttributes extends GenericModel {
 
+  /**
+   * If set to `public-and-private`, Key Protect allows the instance to be accessible through public and private
+   * endpoints. If set to `private-only`, Key Protect restricts the instance to only be accessible through a private
+   * endpoint.
+   */
+  public interface AllowedNetwork {
+    /** public-and-private. */
+    String PUBLIC_AND_PRIVATE = "public-and-private";
+    /** private-only. */
+    String PRIVATE_ONLY = "private-only";
+  }
+
+  @SerializedName("allowed_network")
+  protected String allowedNetwork;
+  @SerializedName("allowed_ip")
+  protected List<String> allowedIp;
   @SerializedName("create_root_key")
   protected Boolean createRootKey;
   @SerializedName("create_standard_key")
@@ -30,118 +48,44 @@ public class KeyCreateImportAccessProperties extends GenericModel {
   protected Boolean importStandardKey;
   @SerializedName("enforce_token")
   protected Boolean enforceToken;
+  @SerializedName("interval_month")
+  protected Long intervalMonth;
+
+  protected InstancePolicyPropertiesAttributes() { }
 
   /**
-   * Builder.
-   */
-  public static class Builder {
-    private Boolean createRootKey;
-    private Boolean createStandardKey;
-    private Boolean importRootKey;
-    private Boolean importStandardKey;
-    private Boolean enforceToken;
-
-    /**
-     * Instantiates a new Builder from an existing KeyCreateImportAccessProperties instance.
-     *
-     * @param keyCreateImportAccessProperties the instance to initialize the Builder with
-     */
-    private Builder(KeyCreateImportAccessProperties keyCreateImportAccessProperties) {
-      this.createRootKey = keyCreateImportAccessProperties.createRootKey;
-      this.createStandardKey = keyCreateImportAccessProperties.createStandardKey;
-      this.importRootKey = keyCreateImportAccessProperties.importRootKey;
-      this.importStandardKey = keyCreateImportAccessProperties.importStandardKey;
-      this.enforceToken = keyCreateImportAccessProperties.enforceToken;
-    }
-
-    /**
-     * Instantiates a new builder.
-     */
-    public Builder() {
-    }
-
-    /**
-     * Builds a KeyCreateImportAccessProperties.
-     *
-     * @return the new KeyCreateImportAccessProperties instance
-     */
-    public KeyCreateImportAccessProperties build() {
-      return new KeyCreateImportAccessProperties(this);
-    }
-
-    /**
-     * Set the createRootKey.
-     *
-     * @param createRootKey the createRootKey
-     * @return the KeyCreateImportAccessProperties builder
-     */
-    public Builder createRootKey(Boolean createRootKey) {
-      this.createRootKey = createRootKey;
-      return this;
-    }
-
-    /**
-     * Set the createStandardKey.
-     *
-     * @param createStandardKey the createStandardKey
-     * @return the KeyCreateImportAccessProperties builder
-     */
-    public Builder createStandardKey(Boolean createStandardKey) {
-      this.createStandardKey = createStandardKey;
-      return this;
-    }
-
-    /**
-     * Set the importRootKey.
-     *
-     * @param importRootKey the importRootKey
-     * @return the KeyCreateImportAccessProperties builder
-     */
-    public Builder importRootKey(Boolean importRootKey) {
-      this.importRootKey = importRootKey;
-      return this;
-    }
-
-    /**
-     * Set the importStandardKey.
-     *
-     * @param importStandardKey the importStandardKey
-     * @return the KeyCreateImportAccessProperties builder
-     */
-    public Builder importStandardKey(Boolean importStandardKey) {
-      this.importStandardKey = importStandardKey;
-      return this;
-    }
-
-    /**
-     * Set the enforceToken.
-     *
-     * @param enforceToken the enforceToken
-     * @return the KeyCreateImportAccessProperties builder
-     */
-    public Builder enforceToken(Boolean enforceToken) {
-      this.enforceToken = enforceToken;
-      return this;
-    }
-  }
-
-  protected KeyCreateImportAccessProperties() { }
-
-  protected KeyCreateImportAccessProperties(Builder builder) {
-    createRootKey = builder.createRootKey;
-    createStandardKey = builder.createStandardKey;
-    importRootKey = builder.importRootKey;
-    importStandardKey = builder.importStandardKey;
-    enforceToken = builder.enforceToken;
-  }
-
-  /**
-   * New builder.
+   * Gets the allowedNetwork.
    *
-   * @return a KeyCreateImportAccessProperties builder
+   * If set to `public-and-private`, Key Protect allows the instance to be accessible through public and private
+   * endpoints. If set to `private-only`, Key Protect restricts the instance to only be accessible through a private
+   * endpoint.
+   *
+   * @return the allowedNetwork
    */
-  public Builder newBuilder() {
-    return new Builder(this);
+  public String getAllowedNetwork() {
+    return allowedNetwork;
+  }
+
+  /**
+   * Gets the allowedIp.
+   *
+   * A string array of IPv4 or IPv6 CIDR notated subnets that are authorized to interact with the instance. If both
+   * `allowedNetwork` and `allowedIP` policies are set, only traffic aligning with both the `allowed_network` allowed
+   * network policy attribute and the `allowed_ip` allowed IP policy attribute will be allowed. IPv4 and iIP6 addresses
+   * are accepted for public endpoints. Only the IPv4 private network gateway addresses from the array will be
+   * authorized to access your instance via private endpoint.
+   * **Important:** Once set, accessing your instance may require additional steps. For more information, see [Accessing
+   * an instance via public
+   * endpoint](/docs/key-protect?topic=key-protect-manage-allowed-ip#access-allowed-ip-public-endpoint) and [Accessing
+   * an instance via private
+   * endpoint](/docs/key-protect?topic=key-protect-manage-allowed-ip#access-allowed-ip-private-endpoint) for more
+   * details.
+   * **Note:** An allowed IP policy does not affect requests from other IBM Cloud services.
+   *
+   * @return the allowedIp
+   */
+  public List<String> getAllowedIp() {
+    return allowedIp;
   }
 
   /**
@@ -154,7 +98,7 @@ public class KeyCreateImportAccessProperties extends GenericModel {
    *
    * @return the createRootKey
    */
-  public Boolean createRootKey() {
+  public Boolean isCreateRootKey() {
     return createRootKey;
   }
 
@@ -168,7 +112,7 @@ public class KeyCreateImportAccessProperties extends GenericModel {
    *
    * @return the createStandardKey
    */
-  public Boolean createStandardKey() {
+  public Boolean isCreateStandardKey() {
     return createStandardKey;
   }
 
@@ -182,7 +126,7 @@ public class KeyCreateImportAccessProperties extends GenericModel {
    *
    * @return the importRootKey
    */
-  public Boolean importRootKey() {
+  public Boolean isImportRootKey() {
     return importRootKey;
   }
 
@@ -196,7 +140,7 @@ public class KeyCreateImportAccessProperties extends GenericModel {
    *
    * @return the importStandardKey
    */
-  public Boolean importStandardKey() {
+  public Boolean isImportStandardKey() {
     return importStandardKey;
   }
 
@@ -210,8 +154,20 @@ public class KeyCreateImportAccessProperties extends GenericModel {
    *
    * @return the enforceToken
    */
-  public Boolean enforceToken() {
+  public Boolean isEnforceToken() {
     return enforceToken;
+  }
+
+  /**
+   * Gets the intervalMonth.
+   *
+   * Specifies the key rotation time interval in approximate months, where a month is equivalent to 30 days. A minimum
+   * of 1 and a maximum of 12 can be set.
+   *
+   * @return the intervalMonth
+   */
+  public Long getIntervalMonth() {
+    return intervalMonth;
   }
 }
 

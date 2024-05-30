@@ -86,9 +86,9 @@ public class CreateRegistrationOptions extends GenericModel {
     }
 
     /**
-     * Adds an resources to resources.
+     * Adds a new element to resources.
      *
-     * @param resources the new resources
+     * @param resources the new element to be added
      * @return the CreateRegistrationOptions builder
      */
     public Builder addResources(CreateRegistrationResourceBody resources) {

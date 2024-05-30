@@ -20,14 +20,14 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class InstancePolicyAllowedIPPolicyData extends GenericModel {
 
   protected Boolean enabled;
-  protected AllowedIPProperties attributes;
+  protected InstancePolicyAllowedIPPolicyDataAttributes attributes;
 
   /**
    * Builder.
    */
   public static class Builder {
     private Boolean enabled;
-    private AllowedIPProperties attributes;
+    private InstancePolicyAllowedIPPolicyDataAttributes attributes;
 
     /**
      * Instantiates a new Builder from an existing InstancePolicyAllowedIPPolicyData instance.
@@ -80,7 +80,7 @@ public class InstancePolicyAllowedIPPolicyData extends GenericModel {
      * @param attributes the attributes
      * @return the InstancePolicyAllowedIPPolicyData builder
      */
-    public Builder attributes(AllowedIPProperties attributes) {
+    public Builder attributes(InstancePolicyAllowedIPPolicyDataAttributes attributes) {
       this.attributes = attributes;
       return this;
     }
@@ -126,7 +126,7 @@ public class InstancePolicyAllowedIPPolicyData extends GenericModel {
    *
    * @return the attributes
    */
-  public AllowedIPProperties attributes() {
+  public InstancePolicyAllowedIPPolicyDataAttributes attributes() {
     return attributes;
   }
 }

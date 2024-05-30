@@ -58,7 +58,7 @@ public class CIPResource extends GenericModel {
   /**
    * Gets the next.
    *
-   * URL to obtain the next set of data during pagination, given further resources matching the query can be found.
+   * Reference to next set of data during pagination, given further resources matching the query can be found.
    *
    * @return the next
    */

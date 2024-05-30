@@ -15,21 +15,24 @@ package com.ibm.cloud.ibm_key_protect_api.v2.model;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * Endpoints that can be used to access the instance.
+ * The key version that was used to wrap the DEK. This key version is associated with the `ciphertext` value that was
+ * used in the request.
  */
-public class GetInstanceEndpointInfo extends GenericModel {
+public class WrappedKeyVersionKeyVersion extends GenericModel {
 
-  protected GetInstanceEndpointInfoKms kms;
+  protected String id;
 
-  protected GetInstanceEndpointInfo() { }
+  protected WrappedKeyVersionKeyVersion() { }
 
   /**
-   * Gets the kms.
+   * Gets the id.
    *
-   * @return the kms
+   * The ID of the key version.
+   *
+   * @return the id
    */
-  public GetInstanceEndpointInfoKms getKms() {
-    return kms;
+  public String getId() {
+    return id;
   }
 }
 

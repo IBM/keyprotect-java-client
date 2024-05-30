@@ -36,10 +36,10 @@ public class PutPolicyOptionsTest {
   @Test
   public void testPutPolicyOptions() throws Throwable {
     CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
-      .collectionType("application/vnd.ibm.kms.crn+json")
+      .collectionType("application/vnd.ibm.kms.allowed_ip_metadata+json")
       .collectionTotal(Long.valueOf("1"))
       .build();
-    assertEquals(collectionMetadataModel.collectionType(), "application/vnd.ibm.kms.crn+json");
+    assertEquals(collectionMetadataModel.collectionType(), "application/vnd.ibm.kms.allowed_ip_metadata+json");
     assertEquals(collectionMetadataModel.collectionTotal(), Long.valueOf("1"));
 
     KeyPolicyDualAuthDeleteDualAuthDelete keyPolicyDualAuthDeleteDualAuthDeleteModel = new KeyPolicyDualAuthDeleteDualAuthDelete.Builder()
@@ -64,14 +64,14 @@ public class PutPolicyOptionsTest {
     PutPolicyOptions putPolicyOptionsModel = new PutPolicyOptions.Builder()
       .id("testString")
       .bluemixInstance("testString")
-      .setKeyPoliciesOneOf(setKeyPoliciesOneOfModel)
+      .keyPolicyPutBody(setKeyPoliciesOneOfModel)
       .correlationId("testString")
       .xKmsKeyRing("testString")
       .policy("dualAuthDelete")
       .build();
     assertEquals(putPolicyOptionsModel.id(), "testString");
     assertEquals(putPolicyOptionsModel.bluemixInstance(), "testString");
-    assertEquals(putPolicyOptionsModel.setKeyPoliciesOneOf(), setKeyPoliciesOneOfModel);
+    assertEquals(putPolicyOptionsModel.keyPolicyPutBody(), setKeyPoliciesOneOfModel);
     assertEquals(putPolicyOptionsModel.correlationId(), "testString");
     assertEquals(putPolicyOptionsModel.xKmsKeyRing(), "testString");
     assertEquals(putPolicyOptionsModel.policy(), "dualAuthDelete");

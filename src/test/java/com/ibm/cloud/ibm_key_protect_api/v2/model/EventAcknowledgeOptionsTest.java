@@ -34,12 +34,12 @@ public class EventAcknowledgeOptionsTest {
   public void testEventAcknowledgeOptions() throws Throwable {
     EventAcknowledgeOptions eventAcknowledgeOptionsModel = new EventAcknowledgeOptions.Builder()
       .bluemixInstance("testString")
-      .body(TestUtilities.createMockStream("This is a mock file."))
+      .eventAcknowledge(TestUtilities.createMockStream("This is a mock file."))
       .correlationId("testString")
       .xKmsKeyRing("default")
       .build();
     assertEquals(eventAcknowledgeOptionsModel.bluemixInstance(), "testString");
-    assertEquals(IOUtils.toString(eventAcknowledgeOptionsModel.body()), IOUtils.toString(TestUtilities.createMockStream("This is a mock file.")));
+    assertEquals(IOUtils.toString(eventAcknowledgeOptionsModel.eventAcknowledge()), IOUtils.toString(TestUtilities.createMockStream("This is a mock file.")));
     assertEquals(eventAcknowledgeOptionsModel.correlationId(), "testString");
     assertEquals(eventAcknowledgeOptionsModel.xKmsKeyRing(), "default");
   }

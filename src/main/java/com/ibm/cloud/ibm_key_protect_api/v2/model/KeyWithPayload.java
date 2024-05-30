@@ -24,11 +24,21 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class KeyWithPayload extends GenericModel {
 
   /**
+   * Specifies the MIME type that represents the key resource. Currently, only the default is supported.
+   */
+  public interface Type {
+    /** application/vnd.ibm.kms.key+json. */
+    String APPLICATION_VND_IBM_KMS_KEY_JSON = "application/vnd.ibm.kms.key+json";
+  }
+
+  /**
    * Deprecated.
    */
   public interface AlgorithmType {
     /** AES. */
     String AES = "AES";
+    /** Deprecated. */
+    String DEPRECATED = "Deprecated";
   }
 
   /**
@@ -37,6 +47,8 @@ public class KeyWithPayload extends GenericModel {
   public interface AlgorithmMode {
     /** CBC_PAD. */
     String CBC_PAD = "CBC_PAD";
+    /** Deprecated. */
+    String DEPRECATED = "Deprecated";
   }
 
   protected String type;

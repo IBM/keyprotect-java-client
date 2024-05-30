@@ -27,6 +27,8 @@ public class SimpleProperty extends GenericModel {
   /**
    * Gets the property.
    *
+   * Base config property.
+   *
    * @return the property
    */
   public String getProperty() {
@@ -35,6 +37,8 @@ public class SimpleProperty extends GenericModel {
 
   /**
    * Gets the value.
+   *
+   * Base config property value.
    *
    * @return the value
    */

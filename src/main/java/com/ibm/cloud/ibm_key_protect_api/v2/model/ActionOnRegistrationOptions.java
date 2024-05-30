@@ -45,7 +45,7 @@ public class ActionOnRegistrationOptions extends GenericModel {
   protected String id;
   protected String bluemixInstance;
   protected String action;
-  protected RegistrationActionOneOf registrationActionOneOf;
+  protected RegistrationActionOneOf registrationDeactivateBody;
   protected String correlationId;
   protected String xKmsKeyRing;
   protected String prefer;
@@ -57,7 +57,7 @@ public class ActionOnRegistrationOptions extends GenericModel {
     private String id;
     private String bluemixInstance;
     private String action;
-    private RegistrationActionOneOf registrationActionOneOf;
+    private RegistrationActionOneOf registrationDeactivateBody;
     private String correlationId;
     private String xKmsKeyRing;
     private String prefer;
@@ -71,7 +71,7 @@ public class ActionOnRegistrationOptions extends GenericModel {
       this.id = actionOnRegistrationOptions.id;
       this.bluemixInstance = actionOnRegistrationOptions.bluemixInstance;
       this.action = actionOnRegistrationOptions.action;
-      this.registrationActionOneOf = actionOnRegistrationOptions.registrationActionOneOf;
+      this.registrationDeactivateBody = actionOnRegistrationOptions.registrationDeactivateBody;
       this.correlationId = actionOnRegistrationOptions.correlationId;
       this.xKmsKeyRing = actionOnRegistrationOptions.xKmsKeyRing;
       this.prefer = actionOnRegistrationOptions.prefer;
@@ -89,13 +89,13 @@ public class ActionOnRegistrationOptions extends GenericModel {
      * @param id the id
      * @param bluemixInstance the bluemixInstance
      * @param action the action
-     * @param registrationActionOneOf the registrationActionOneOf
+     * @param registrationDeactivateBody the registrationDeactivateBody
      */
-    public Builder(String id, String bluemixInstance, String action, RegistrationActionOneOf registrationActionOneOf) {
+    public Builder(String id, String bluemixInstance, String action, RegistrationActionOneOf registrationDeactivateBody) {
       this.id = id;
       this.bluemixInstance = bluemixInstance;
       this.action = action;
-      this.registrationActionOneOf = registrationActionOneOf;
+      this.registrationDeactivateBody = registrationDeactivateBody;
     }
 
     /**
@@ -141,13 +141,13 @@ public class ActionOnRegistrationOptions extends GenericModel {
     }
 
     /**
-     * Set the registrationActionOneOf.
+     * Set the registrationDeactivateBody.
      *
-     * @param registrationActionOneOf the registrationActionOneOf
+     * @param registrationDeactivateBody the registrationDeactivateBody
      * @return the ActionOnRegistrationOptions builder
      */
-    public Builder registrationActionOneOf(RegistrationActionOneOf registrationActionOneOf) {
-      this.registrationActionOneOf = registrationActionOneOf;
+    public Builder registrationDeactivateBody(RegistrationActionOneOf registrationDeactivateBody) {
+      this.registrationDeactivateBody = registrationDeactivateBody;
       return this;
     }
 
@@ -194,12 +194,12 @@ public class ActionOnRegistrationOptions extends GenericModel {
       "bluemixInstance cannot be null");
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.action,
       "action cannot be null");
-    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.registrationActionOneOf,
-      "registrationActionOneOf cannot be null");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.registrationDeactivateBody,
+      "registrationDeactivateBody cannot be null");
     id = builder.id;
     bluemixInstance = builder.bluemixInstance;
     action = builder.action;
-    registrationActionOneOf = builder.registrationActionOneOf;
+    registrationDeactivateBody = builder.registrationDeactivateBody;
     correlationId = builder.correlationId;
     xKmsKeyRing = builder.xKmsKeyRing;
     prefer = builder.prefer;
@@ -248,14 +248,14 @@ public class ActionOnRegistrationOptions extends GenericModel {
   }
 
   /**
-   * Gets the registrationActionOneOf.
+   * Gets the registrationDeactivateBody.
    *
    * The base request for registration actions.
    *
-   * @return the registrationActionOneOf
+   * @return the registrationDeactivateBody
    */
-  public RegistrationActionOneOf registrationActionOneOf() {
-    return registrationActionOneOf;
+  public RegistrationActionOneOf registrationDeactivateBody() {
+    return registrationDeactivateBody;
   }
 
   /**

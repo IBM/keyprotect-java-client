@@ -19,9 +19,10 @@ import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * Data associated with the policy type `allowedIP`.
+ * Attributes of an `allowedIP` instance policy. Must be provided if the `enabled` field is `true`. Cannot be provided
+ * if the `enabled` field is `false`.
  */
-public class AllowedIPProperties extends GenericModel {
+public class InstancePolicyAllowedIPPolicyDataAttributes extends GenericModel {
 
   @SerializedName("allowed_ip")
   protected List<String> allowedIp;
@@ -33,12 +34,12 @@ public class AllowedIPProperties extends GenericModel {
     private List<String> allowedIp;
 
     /**
-     * Instantiates a new Builder from an existing AllowedIPProperties instance.
+     * Instantiates a new Builder from an existing InstancePolicyAllowedIPPolicyDataAttributes instance.
      *
-     * @param allowedIpProperties the instance to initialize the Builder with
+     * @param instancePolicyAllowedIpPolicyDataAttributes the instance to initialize the Builder with
      */
-    private Builder(AllowedIPProperties allowedIpProperties) {
-      this.allowedIp = allowedIpProperties.allowedIp;
+    private Builder(InstancePolicyAllowedIPPolicyDataAttributes instancePolicyAllowedIpPolicyDataAttributes) {
+      this.allowedIp = instancePolicyAllowedIpPolicyDataAttributes.allowedIp;
     }
 
     /**
@@ -48,19 +49,19 @@ public class AllowedIPProperties extends GenericModel {
     }
 
     /**
-     * Builds a AllowedIPProperties.
+     * Builds a InstancePolicyAllowedIPPolicyDataAttributes.
      *
-     * @return the new AllowedIPProperties instance
+     * @return the new InstancePolicyAllowedIPPolicyDataAttributes instance
      */
-    public AllowedIPProperties build() {
-      return new AllowedIPProperties(this);
+    public InstancePolicyAllowedIPPolicyDataAttributes build() {
+      return new InstancePolicyAllowedIPPolicyDataAttributes(this);
     }
 
     /**
-     * Adds an allowedIp to allowedIp.
+     * Adds a new element to allowedIp.
      *
-     * @param allowedIp the new allowedIp
-     * @return the AllowedIPProperties builder
+     * @param allowedIp the new element to be added
+     * @return the InstancePolicyAllowedIPPolicyDataAttributes builder
      */
     public Builder addAllowedIp(String allowedIp) {
       com.ibm.cloud.sdk.core.util.Validator.notNull(allowedIp,
@@ -77,7 +78,7 @@ public class AllowedIPProperties extends GenericModel {
      * Existing allowedIp will be replaced.
      *
      * @param allowedIp the allowedIp
-     * @return the AllowedIPProperties builder
+     * @return the InstancePolicyAllowedIPPolicyDataAttributes builder
      */
     public Builder allowedIp(List<String> allowedIp) {
       this.allowedIp = allowedIp;
@@ -85,16 +86,16 @@ public class AllowedIPProperties extends GenericModel {
     }
   }
 
-  protected AllowedIPProperties() { }
+  protected InstancePolicyAllowedIPPolicyDataAttributes() { }
 
-  protected AllowedIPProperties(Builder builder) {
+  protected InstancePolicyAllowedIPPolicyDataAttributes(Builder builder) {
     allowedIp = builder.allowedIp;
   }
 
   /**
    * New builder.
    *
-   * @return a AllowedIPProperties builder
+   * @return a InstancePolicyAllowedIPPolicyDataAttributes builder
    */
   public Builder newBuilder() {
     return new Builder(this);

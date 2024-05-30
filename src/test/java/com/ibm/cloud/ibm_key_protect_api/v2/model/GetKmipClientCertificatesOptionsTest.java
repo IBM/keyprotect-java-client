@@ -32,19 +32,19 @@ public class GetKmipClientCertificatesOptionsTest {
   @Test
   public void testGetKmipClientCertificatesOptions() throws Throwable {
     GetKmipClientCertificatesOptions getKmipClientCertificatesOptionsModel = new GetKmipClientCertificatesOptions.Builder()
-      .bluemixInstance("testString")
       .adapterId("testString")
-      .correlationId("testString")
+      .bluemixInstance("testString")
       .limit(Long.valueOf("100"))
       .offset(Long.valueOf("0"))
       .totalCount(true)
+      .correlationId("testString")
       .build();
-    assertEquals(getKmipClientCertificatesOptionsModel.bluemixInstance(), "testString");
     assertEquals(getKmipClientCertificatesOptionsModel.adapterId(), "testString");
-    assertEquals(getKmipClientCertificatesOptionsModel.correlationId(), "testString");
+    assertEquals(getKmipClientCertificatesOptionsModel.bluemixInstance(), "testString");
     assertEquals(getKmipClientCertificatesOptionsModel.limit(), Long.valueOf("100"));
     assertEquals(getKmipClientCertificatesOptionsModel.offset(), Long.valueOf("0"));
     assertEquals(getKmipClientCertificatesOptionsModel.totalCount(), Boolean.valueOf(true));
+    assertEquals(getKmipClientCertificatesOptionsModel.correlationId(), "testString");
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

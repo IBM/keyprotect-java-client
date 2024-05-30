@@ -24,6 +24,7 @@ public class GetKmipAdaptersOptions extends GenericModel {
   protected Long limit;
   protected Long offset;
   protected Boolean totalCount;
+  protected String crkId;
 
   /**
    * Builder.
@@ -34,6 +35,7 @@ public class GetKmipAdaptersOptions extends GenericModel {
     private Long limit;
     private Long offset;
     private Boolean totalCount;
+    private String crkId;
 
     /**
      * Instantiates a new Builder from an existing GetKmipAdaptersOptions instance.
@@ -46,6 +48,7 @@ public class GetKmipAdaptersOptions extends GenericModel {
       this.limit = getKmipAdaptersOptions.limit;
       this.offset = getKmipAdaptersOptions.offset;
       this.totalCount = getKmipAdaptersOptions.totalCount;
+      this.crkId = getKmipAdaptersOptions.crkId;
     }
 
     /**
@@ -126,6 +129,17 @@ public class GetKmipAdaptersOptions extends GenericModel {
       this.totalCount = totalCount;
       return this;
     }
+
+    /**
+     * Set the crkId.
+     *
+     * @param crkId the crkId
+     * @return the GetKmipAdaptersOptions builder
+     */
+    public Builder crkId(String crkId) {
+      this.crkId = crkId;
+      return this;
+    }
   }
 
   protected GetKmipAdaptersOptions() { }
@@ -138,6 +152,7 @@ public class GetKmipAdaptersOptions extends GenericModel {
     limit = builder.limit;
     offset = builder.offset;
     totalCount = builder.totalCount;
+    crkId = builder.crkId;
   }
 
   /**
@@ -176,7 +191,7 @@ public class GetKmipAdaptersOptions extends GenericModel {
    *
    * The number of KMIP Adapters to retrieve. By default, `GET /kmip_adapters` returns the first 100 KMIP Adapters. To
    * retrieve a different set of KMIP adapters, use `limit` with `offset` to page through your available resources. The
-   * maximum value for `limit` is 5000.
+   * maximum value for `limit` is 200.
    * **Usage:** If you have 20 KMIP Adapters, and you want to retrieve only the first 5 adapters, use
    * `../kmip_adapters?limit=5`.
    *
@@ -205,13 +220,26 @@ public class GetKmipAdaptersOptions extends GenericModel {
    *
    * If set to `true`, returns `totalCount` in the response metadata for use with pagination. The `totalCount` value
    * returned specifies the total number of kmip adapters that match the request, disregarding limit and offset. The
-   * default is set to false.
-   * **Usage:** To return the `totalCount` value for use with pagination, use `../kmip_adapters?totalCount=true`.
+   * default is set to false. **Usage:** To return the `totalCount` value for use with pagination, use
+   * `../kmip_adapters?totalCount=true`.
    *
    * @return the totalCount
    */
   public Boolean totalCount() {
     return totalCount;
+  }
+
+  /**
+   * Gets the crkId.
+   *
+   * The root key ID(`crk_id`) in the `profile_data` to filter on. This field is currently only applicable to profile
+   * `"native_1.0"`. It will only return adapters with profile_data that contains this field. Example usage
+   * `../kmip_adapters?crk_id=feddecaf-0000-0000-0000-1234567890ab`.
+   *
+   * @return the crkId
+   */
+  public String crkId() {
+    return crkId;
   }
 }
 

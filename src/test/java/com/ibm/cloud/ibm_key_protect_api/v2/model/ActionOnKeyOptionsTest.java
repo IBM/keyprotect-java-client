@@ -36,7 +36,7 @@ public class ActionOnKeyOptionsTest {
       .id("testString")
       .bluemixInstance("testString")
       .action("disable")
-      .body(TestUtilities.createMockStream("This is a mock file."))
+      .keyActionBody(TestUtilities.createMockStream("This is a mock file."))
       .correlationId("testString")
       .xKmsKeyRing("testString")
       .prefer("return=representation")
@@ -44,7 +44,7 @@ public class ActionOnKeyOptionsTest {
     assertEquals(actionOnKeyOptionsModel.id(), "testString");
     assertEquals(actionOnKeyOptionsModel.bluemixInstance(), "testString");
     assertEquals(actionOnKeyOptionsModel.action(), "disable");
-    assertEquals(IOUtils.toString(actionOnKeyOptionsModel.body()), IOUtils.toString(TestUtilities.createMockStream("This is a mock file.")));
+    assertEquals(IOUtils.toString(actionOnKeyOptionsModel.keyActionBody()), IOUtils.toString(TestUtilities.createMockStream("This is a mock file.")));
     assertEquals(actionOnKeyOptionsModel.correlationId(), "testString");
     assertEquals(actionOnKeyOptionsModel.xKmsKeyRing(), "testString");
     assertEquals(actionOnKeyOptionsModel.prefer(), "return=representation");

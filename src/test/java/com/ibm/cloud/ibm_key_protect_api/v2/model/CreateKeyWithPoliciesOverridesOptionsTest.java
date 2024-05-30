@@ -34,13 +34,13 @@ public class CreateKeyWithPoliciesOverridesOptionsTest {
   public void testCreateKeyWithPoliciesOverridesOptions() throws Throwable {
     CreateKeyWithPoliciesOverridesOptions createKeyWithPoliciesOverridesOptionsModel = new CreateKeyWithPoliciesOverridesOptions.Builder()
       .bluemixInstance("testString")
-      .body(TestUtilities.createMockStream("This is a mock file."))
+      .keyWithPolicyOverridesCreateBody(TestUtilities.createMockStream("This is a mock file."))
       .correlationId("testString")
       .prefer("return=representation")
       .xKmsKeyRing("default")
       .build();
     assertEquals(createKeyWithPoliciesOverridesOptionsModel.bluemixInstance(), "testString");
-    assertEquals(IOUtils.toString(createKeyWithPoliciesOverridesOptionsModel.body()), IOUtils.toString(TestUtilities.createMockStream("This is a mock file.")));
+    assertEquals(IOUtils.toString(createKeyWithPoliciesOverridesOptionsModel.keyWithPolicyOverridesCreateBody()), IOUtils.toString(TestUtilities.createMockStream("This is a mock file.")));
     assertEquals(createKeyWithPoliciesOverridesOptionsModel.correlationId(), "testString");
     assertEquals(createKeyWithPoliciesOverridesOptionsModel.prefer(), "return=representation");
     assertEquals(createKeyWithPoliciesOverridesOptionsModel.xKmsKeyRing(), "default");

@@ -32,17 +32,17 @@ public class CollectionMetadataTest {
   @Test
   public void testCollectionMetadata() throws Throwable {
     CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
-      .collectionType("application/vnd.ibm.kms.crn+json")
+      .collectionType("application/vnd.ibm.kms.allowed_ip_metadata+json")
       .collectionTotal(Long.valueOf("1"))
       .build();
-    assertEquals(collectionMetadataModel.collectionType(), "application/vnd.ibm.kms.crn+json");
+    assertEquals(collectionMetadataModel.collectionType(), "application/vnd.ibm.kms.allowed_ip_metadata+json");
     assertEquals(collectionMetadataModel.collectionTotal(), Long.valueOf("1"));
 
     String json = TestUtilities.serialize(collectionMetadataModel);
 
     CollectionMetadata collectionMetadataModelNew = TestUtilities.deserialize(json, CollectionMetadata.class);
     assertTrue(collectionMetadataModelNew instanceof CollectionMetadata);
-    assertEquals(collectionMetadataModelNew.collectionType(), "application/vnd.ibm.kms.crn+json");
+    assertEquals(collectionMetadataModelNew.collectionType(), "application/vnd.ibm.kms.allowed_ip_metadata+json");
     assertEquals(collectionMetadataModelNew.collectionTotal(), Long.valueOf("1"));
   }
 

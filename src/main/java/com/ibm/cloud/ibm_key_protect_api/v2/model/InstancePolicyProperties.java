@@ -20,7 +20,7 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class InstancePolicyProperties extends GenericModel {
 
   protected Boolean enabled;
-  protected InstancePolicyAllAttributes attributes;
+  protected InstancePolicyPropertiesAttributes attributes;
 
   protected InstancePolicyProperties() { }
 
@@ -45,7 +45,7 @@ public class InstancePolicyProperties extends GenericModel {
    *
    * @return the attributes
    */
-  public InstancePolicyAllAttributes getAttributes() {
+  public InstancePolicyPropertiesAttributes getAttributes() {
     return attributes;
   }
 }

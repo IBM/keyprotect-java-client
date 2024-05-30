@@ -13,9 +13,12 @@
 
 package com.ibm.cloud.ibm_key_protect_api.v2.model;
 
-import com.ibm.cloud.ibm_key_protect_api.v2.model.RotationProperties;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.CollectionMetadataWithTotalCount;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.KMIPObject;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.ListKMIPObjectsWithTotalCount;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
+import com.ibm.cloud.sdk.core.util.DateUtils;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
@@ -23,23 +26,16 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 /**
- * Unit test class for the RotationProperties model.
+ * Unit test class for the ListKMIPObjectsWithTotalCount model.
  */
-public class RotationPropertiesTest {
+public class ListKMIPObjectsWithTotalCountTest {
   final HashMap<String, InputStream> mockStreamMap = TestUtilities.createMockStreamMap();
   final List<FileWithMetadata> mockListFileWithMetadata = TestUtilities.creatMockListFileWithMetadata();
 
   @Test
-  public void testRotationProperties() throws Throwable {
-    RotationProperties rotationPropertiesModel = new RotationProperties.Builder()
-      .intervalMonth(Long.valueOf("3"))
-      .build();
-    assertEquals(rotationPropertiesModel.intervalMonth(), Long.valueOf("3"));
-
-    String json = TestUtilities.serialize(rotationPropertiesModel);
-
-    RotationProperties rotationPropertiesModelNew = TestUtilities.deserialize(json, RotationProperties.class);
-    assertTrue(rotationPropertiesModelNew instanceof RotationProperties);
-    assertEquals(rotationPropertiesModelNew.intervalMonth(), Long.valueOf("3"));
+  public void testListKMIPObjectsWithTotalCount() throws Throwable {
+    ListKMIPObjectsWithTotalCount listKmipObjectsWithTotalCountModel = new ListKMIPObjectsWithTotalCount();
+    assertNull(listKmipObjectsWithTotalCountModel.getMetadata());
+    assertNull(listKmipObjectsWithTotalCountModel.getResources());
   }
 }

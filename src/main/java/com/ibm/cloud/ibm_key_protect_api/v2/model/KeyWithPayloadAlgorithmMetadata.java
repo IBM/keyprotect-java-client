@@ -25,6 +25,8 @@ public class KeyWithPayloadAlgorithmMetadata extends GenericModel {
   public interface Mode {
     /** CBC_PAD. */
     String CBC_PAD = "CBC_PAD";
+    /** Deprecated. */
+    String DEPRECATED = "Deprecated";
   }
 
   protected String bitLength;

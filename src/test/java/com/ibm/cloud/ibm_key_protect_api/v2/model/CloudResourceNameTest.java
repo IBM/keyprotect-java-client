@@ -32,14 +32,14 @@ public class CloudResourceNameTest {
   @Test
   public void testCloudResourceName() throws Throwable {
     CloudResourceName cloudResourceNameModel = new CloudResourceName.Builder()
-      .resourceCrn("crn:v1:bluemix:public:<service-name>:<location>:a/<account-id>:<service-instance>:<resource-type>:<resource>")
+      .resourceCrn("crn:v1:bluemix:public:cloud-object-storage:global:a/<account-id>:<service-instance>:bucket:<bucket-name>")
       .build();
-    assertEquals(cloudResourceNameModel.resourceCrn(), "crn:v1:bluemix:public:<service-name>:<location>:a/<account-id>:<service-instance>:<resource-type>:<resource>");
+    assertEquals(cloudResourceNameModel.resourceCrn(), "crn:v1:bluemix:public:cloud-object-storage:global:a/<account-id>:<service-instance>:bucket:<bucket-name>");
 
     String json = TestUtilities.serialize(cloudResourceNameModel);
 
     CloudResourceName cloudResourceNameModelNew = TestUtilities.deserialize(json, CloudResourceName.class);
     assertTrue(cloudResourceNameModelNew instanceof CloudResourceName);
-    assertEquals(cloudResourceNameModelNew.resourceCrn(), "crn:v1:bluemix:public:<service-name>:<location>:a/<account-id>:<service-instance>:<resource-type>:<resource>");
+    assertEquals(cloudResourceNameModelNew.resourceCrn(), "crn:v1:bluemix:public:cloud-object-storage:global:a/<account-id>:<service-instance>:bucket:<bucket-name>");
   }
 }

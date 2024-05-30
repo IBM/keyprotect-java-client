@@ -34,13 +34,13 @@ public class CreateKeyOptionsTest {
   public void testCreateKeyOptions() throws Throwable {
     CreateKeyOptions createKeyOptionsModel = new CreateKeyOptions.Builder()
       .bluemixInstance("testString")
-      .body(TestUtilities.createMockStream("This is a mock file."))
+      .keyCreateBody(TestUtilities.createMockStream("This is a mock file."))
       .correlationId("testString")
       .prefer("return=representation")
       .xKmsKeyRing("default")
       .build();
     assertEquals(createKeyOptionsModel.bluemixInstance(), "testString");
-    assertEquals(IOUtils.toString(createKeyOptionsModel.body()), IOUtils.toString(TestUtilities.createMockStream("This is a mock file.")));
+    assertEquals(IOUtils.toString(createKeyOptionsModel.keyCreateBody()), IOUtils.toString(TestUtilities.createMockStream("This is a mock file.")));
     assertEquals(createKeyOptionsModel.correlationId(), "testString");
     assertEquals(createKeyOptionsModel.prefer(), "return=representation");
     assertEquals(createKeyOptionsModel.xKmsKeyRing(), "default");

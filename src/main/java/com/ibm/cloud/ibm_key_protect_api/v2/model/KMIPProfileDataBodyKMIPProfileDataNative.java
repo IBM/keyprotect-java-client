@@ -23,7 +23,6 @@ public class KMIPProfileDataBodyKMIPProfileDataNative extends KMIPProfileDataBod
    */
   public static class Builder {
     private String crkId;
-    private String targetKeyRingId;
 
     /**
      * Instantiates a new Builder from an existing KMIPProfileDataBodyKMIPProfileDataNative instance.
@@ -32,7 +31,6 @@ public class KMIPProfileDataBodyKMIPProfileDataNative extends KMIPProfileDataBod
      */
     public Builder(KMIPProfileDataBody kmipProfileDataBodyKmipProfileDataNative) {
       this.crkId = kmipProfileDataBodyKmipProfileDataNative.crkId;
-      this.targetKeyRingId = kmipProfileDataBodyKmipProfileDataNative.targetKeyRingId;
     }
 
     /**
@@ -69,17 +67,6 @@ public class KMIPProfileDataBodyKMIPProfileDataNative extends KMIPProfileDataBod
       this.crkId = crkId;
       return this;
     }
-
-    /**
-     * Set the targetKeyRingId.
-     *
-     * @param targetKeyRingId the targetKeyRingId
-     * @return the KMIPProfileDataBodyKMIPProfileDataNative builder
-     */
-    public Builder targetKeyRingId(String targetKeyRingId) {
-      this.targetKeyRingId = targetKeyRingId;
-      return this;
-    }
   }
 
   protected KMIPProfileDataBodyKMIPProfileDataNative() { }
@@ -88,7 +75,6 @@ public class KMIPProfileDataBodyKMIPProfileDataNative extends KMIPProfileDataBod
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.crkId,
       "crkId cannot be null");
     crkId = builder.crkId;
-    targetKeyRingId = builder.targetKeyRingId;
   }
 
   /**

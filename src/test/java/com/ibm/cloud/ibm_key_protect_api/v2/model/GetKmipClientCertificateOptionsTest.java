@@ -32,14 +32,14 @@ public class GetKmipClientCertificateOptionsTest {
   @Test
   public void testGetKmipClientCertificateOptions() throws Throwable {
     GetKmipClientCertificateOptions getKmipClientCertificateOptionsModel = new GetKmipClientCertificateOptions.Builder()
-      .bluemixInstance("testString")
       .adapterId("testString")
       .id("testString")
+      .bluemixInstance("testString")
       .correlationId("testString")
       .build();
-    assertEquals(getKmipClientCertificateOptionsModel.bluemixInstance(), "testString");
     assertEquals(getKmipClientCertificateOptionsModel.adapterId(), "testString");
     assertEquals(getKmipClientCertificateOptionsModel.id(), "testString");
+    assertEquals(getKmipClientCertificateOptionsModel.bluemixInstance(), "testString");
     assertEquals(getKmipClientCertificateOptionsModel.correlationId(), "testString");
   }
 

@@ -66,7 +66,7 @@ public class ActionOnKeyOptions extends GenericModel {
   protected String id;
   protected String bluemixInstance;
   protected String action;
-  protected InputStream body;
+  protected InputStream keyActionBody;
   protected String correlationId;
   protected String xKmsKeyRing;
   protected String prefer;
@@ -78,7 +78,7 @@ public class ActionOnKeyOptions extends GenericModel {
     private String id;
     private String bluemixInstance;
     private String action;
-    private InputStream body;
+    private InputStream keyActionBody;
     private String correlationId;
     private String xKmsKeyRing;
     private String prefer;
@@ -92,7 +92,7 @@ public class ActionOnKeyOptions extends GenericModel {
       this.id = actionOnKeyOptions.id;
       this.bluemixInstance = actionOnKeyOptions.bluemixInstance;
       this.action = actionOnKeyOptions.action;
-      this.body = actionOnKeyOptions.body;
+      this.keyActionBody = actionOnKeyOptions.keyActionBody;
       this.correlationId = actionOnKeyOptions.correlationId;
       this.xKmsKeyRing = actionOnKeyOptions.xKmsKeyRing;
       this.prefer = actionOnKeyOptions.prefer;
@@ -110,13 +110,13 @@ public class ActionOnKeyOptions extends GenericModel {
      * @param id the id
      * @param bluemixInstance the bluemixInstance
      * @param action the action
-     * @param body the body
+     * @param keyActionBody the keyActionBody
      */
-    public Builder(String id, String bluemixInstance, String action, InputStream body) {
+    public Builder(String id, String bluemixInstance, String action, InputStream keyActionBody) {
       this.id = id;
       this.bluemixInstance = bluemixInstance;
       this.action = action;
-      this.body = body;
+      this.keyActionBody = keyActionBody;
     }
 
     /**
@@ -162,13 +162,13 @@ public class ActionOnKeyOptions extends GenericModel {
     }
 
     /**
-     * Set the body.
+     * Set the keyActionBody.
      *
-     * @param body the body
+     * @param keyActionBody the keyActionBody
      * @return the ActionOnKeyOptions builder
      */
-    public Builder body(InputStream body) {
-      this.body = body;
+    public Builder keyActionBody(InputStream keyActionBody) {
+      this.keyActionBody = keyActionBody;
       return this;
     }
 
@@ -206,15 +206,15 @@ public class ActionOnKeyOptions extends GenericModel {
     }
 
     /**
-     * Set the body.
+     * Set the keyActionBody.
      *
-     * @param body the body
+     * @param keyActionBody the keyActionBody
      * @return the ActionOnKeyOptions builder
      *
      * @throws FileNotFoundException if the file could not be found
      */
-    public Builder body(File body) throws FileNotFoundException {
-      this.body = new FileInputStream(body);
+    public Builder keyActionBody(File keyActionBody) throws FileNotFoundException {
+      this.keyActionBody = new FileInputStream(keyActionBody);
       return this;
     }
   }
@@ -228,12 +228,12 @@ public class ActionOnKeyOptions extends GenericModel {
       "bluemixInstance cannot be null");
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.action,
       "action cannot be null");
-    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.body,
-      "body cannot be null");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.keyActionBody,
+      "keyActionBody cannot be null");
     id = builder.id;
     bluemixInstance = builder.bluemixInstance;
     action = builder.action;
-    body = builder.body;
+    keyActionBody = builder.keyActionBody;
     correlationId = builder.correlationId;
     xKmsKeyRing = builder.xKmsKeyRing;
     prefer = builder.prefer;
@@ -282,14 +282,14 @@ public class ActionOnKeyOptions extends GenericModel {
   }
 
   /**
-   * Gets the body.
+   * Gets the keyActionBody.
    *
    * The base request for key actions.
    *
-   * @return the body
+   * @return the keyActionBody
    */
-  public InputStream body() {
-    return body;
+  public InputStream keyActionBody() {
+    return keyActionBody;
   }
 
   /**

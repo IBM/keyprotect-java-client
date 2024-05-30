@@ -19,16 +19,16 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class GetKmipAdapterOptions extends GenericModel {
 
-  protected String bluemixInstance;
   protected String id;
+  protected String bluemixInstance;
   protected String correlationId;
 
   /**
    * Builder.
    */
   public static class Builder {
-    private String bluemixInstance;
     private String id;
+    private String bluemixInstance;
     private String correlationId;
 
     /**
@@ -37,8 +37,8 @@ public class GetKmipAdapterOptions extends GenericModel {
      * @param getKmipAdapterOptions the instance to initialize the Builder with
      */
     private Builder(GetKmipAdapterOptions getKmipAdapterOptions) {
-      this.bluemixInstance = getKmipAdapterOptions.bluemixInstance;
       this.id = getKmipAdapterOptions.id;
+      this.bluemixInstance = getKmipAdapterOptions.bluemixInstance;
       this.correlationId = getKmipAdapterOptions.correlationId;
     }
 
@@ -51,12 +51,12 @@ public class GetKmipAdapterOptions extends GenericModel {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param bluemixInstance the bluemixInstance
      * @param id the id
+     * @param bluemixInstance the bluemixInstance
      */
-    public Builder(String bluemixInstance, String id) {
-      this.bluemixInstance = bluemixInstance;
+    public Builder(String id, String bluemixInstance) {
       this.id = id;
+      this.bluemixInstance = bluemixInstance;
     }
 
     /**
@@ -69,17 +69,6 @@ public class GetKmipAdapterOptions extends GenericModel {
     }
 
     /**
-     * Set the bluemixInstance.
-     *
-     * @param bluemixInstance the bluemixInstance
-     * @return the GetKmipAdapterOptions builder
-     */
-    public Builder bluemixInstance(String bluemixInstance) {
-      this.bluemixInstance = bluemixInstance;
-      return this;
-    }
-
-    /**
      * Set the id.
      *
      * @param id the id
@@ -87,6 +76,17 @@ public class GetKmipAdapterOptions extends GenericModel {
      */
     public Builder id(String id) {
       this.id = id;
+      return this;
+    }
+
+    /**
+     * Set the bluemixInstance.
+     *
+     * @param bluemixInstance the bluemixInstance
+     * @return the GetKmipAdapterOptions builder
+     */
+    public Builder bluemixInstance(String bluemixInstance) {
+      this.bluemixInstance = bluemixInstance;
       return this;
     }
 
@@ -105,12 +105,12 @@ public class GetKmipAdapterOptions extends GenericModel {
   protected GetKmipAdapterOptions() { }
 
   protected GetKmipAdapterOptions(Builder builder) {
-    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.bluemixInstance,
-      "bluemixInstance cannot be null");
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.id,
       "id cannot be empty");
-    bluemixInstance = builder.bluemixInstance;
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.bluemixInstance,
+      "bluemixInstance cannot be null");
     id = builder.id;
+    bluemixInstance = builder.bluemixInstance;
     correlationId = builder.correlationId;
   }
 
@@ -124,17 +124,6 @@ public class GetKmipAdapterOptions extends GenericModel {
   }
 
   /**
-   * Gets the bluemixInstance.
-   *
-   * The IBM Cloud instance ID that identifies your Key Protect service instance.
-   *
-   * @return the bluemixInstance
-   */
-  public String bluemixInstance() {
-    return bluemixInstance;
-  }
-
-  /**
    * Gets the id.
    *
    * The name or v4 UUID of the KMIP Adapter that uniquely identifies it.
@@ -143,6 +132,17 @@ public class GetKmipAdapterOptions extends GenericModel {
    */
   public String id() {
     return id;
+  }
+
+  /**
+   * Gets the bluemixInstance.
+   *
+   * The IBM Cloud instance ID that identifies your Key Protect service instance.
+   *
+   * @return the bluemixInstance
+   */
+  public String bluemixInstance() {
+    return bluemixInstance;
   }
 
   /**

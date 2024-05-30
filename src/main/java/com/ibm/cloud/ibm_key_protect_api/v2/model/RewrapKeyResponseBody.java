@@ -20,8 +20,8 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class RewrapKeyResponseBody extends GenericModel {
 
   protected String ciphertext;
-  protected KeyVersionID keyVersion;
-  protected KeyVersionID rewrappedKeyVersion;
+  protected WrappedKeyVersionKeyVersion keyVersion;
+  protected RewrappedKeyVersionRewrappedKeyVersion rewrappedKeyVersion;
 
   protected RewrapKeyResponseBody() { }
 
@@ -46,7 +46,7 @@ public class RewrapKeyResponseBody extends GenericModel {
    *
    * @return the keyVersion
    */
-  public KeyVersionID getKeyVersion() {
+  public WrappedKeyVersionKeyVersion getKeyVersion() {
     return keyVersion;
   }
 
@@ -58,7 +58,7 @@ public class RewrapKeyResponseBody extends GenericModel {
    *
    * @return the rewrappedKeyVersion
    */
-  public KeyVersionID getRewrappedKeyVersion() {
+  public RewrappedKeyVersionRewrappedKeyVersion getRewrappedKeyVersion() {
     return rewrappedKeyVersion;
   }
 }

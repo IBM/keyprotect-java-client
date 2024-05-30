@@ -21,7 +21,7 @@ public class WrapKeyResponseBody extends GenericModel {
 
   protected String plaintext;
   protected String ciphertext;
-  protected KeyVersionID keyVersion;
+  protected WrappedKeyVersionKeyVersion keyVersion;
 
   protected WrapKeyResponseBody() { }
 
@@ -65,7 +65,7 @@ public class WrapKeyResponseBody extends GenericModel {
    *
    * @return the keyVersion
    */
-  public KeyVersionID getKeyVersion() {
+  public WrappedKeyVersionKeyVersion getKeyVersion() {
     return keyVersion;
   }
 }

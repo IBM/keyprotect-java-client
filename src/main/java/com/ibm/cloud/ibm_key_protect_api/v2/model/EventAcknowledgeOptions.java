@@ -25,7 +25,7 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class EventAcknowledgeOptions extends GenericModel {
 
   protected String bluemixInstance;
-  protected InputStream body;
+  protected InputStream eventAcknowledge;
   protected String correlationId;
   protected String xKmsKeyRing;
 
@@ -34,7 +34,7 @@ public class EventAcknowledgeOptions extends GenericModel {
    */
   public static class Builder {
     private String bluemixInstance;
-    private InputStream body;
+    private InputStream eventAcknowledge;
     private String correlationId;
     private String xKmsKeyRing;
 
@@ -45,7 +45,7 @@ public class EventAcknowledgeOptions extends GenericModel {
      */
     private Builder(EventAcknowledgeOptions eventAcknowledgeOptions) {
       this.bluemixInstance = eventAcknowledgeOptions.bluemixInstance;
-      this.body = eventAcknowledgeOptions.body;
+      this.eventAcknowledge = eventAcknowledgeOptions.eventAcknowledge;
       this.correlationId = eventAcknowledgeOptions.correlationId;
       this.xKmsKeyRing = eventAcknowledgeOptions.xKmsKeyRing;
     }
@@ -60,11 +60,11 @@ public class EventAcknowledgeOptions extends GenericModel {
      * Instantiates a new builder with required properties.
      *
      * @param bluemixInstance the bluemixInstance
-     * @param body the body
+     * @param eventAcknowledge the eventAcknowledge
      */
-    public Builder(String bluemixInstance, InputStream body) {
+    public Builder(String bluemixInstance, InputStream eventAcknowledge) {
       this.bluemixInstance = bluemixInstance;
-      this.body = body;
+      this.eventAcknowledge = eventAcknowledge;
     }
 
     /**
@@ -88,13 +88,13 @@ public class EventAcknowledgeOptions extends GenericModel {
     }
 
     /**
-     * Set the body.
+     * Set the eventAcknowledge.
      *
-     * @param body the body
+     * @param eventAcknowledge the eventAcknowledge
      * @return the EventAcknowledgeOptions builder
      */
-    public Builder body(InputStream body) {
-      this.body = body;
+    public Builder eventAcknowledge(InputStream eventAcknowledge) {
+      this.eventAcknowledge = eventAcknowledge;
       return this;
     }
 
@@ -121,15 +121,15 @@ public class EventAcknowledgeOptions extends GenericModel {
     }
 
     /**
-     * Set the body.
+     * Set the eventAcknowledge.
      *
-     * @param body the body
+     * @param eventAcknowledge the eventAcknowledge
      * @return the EventAcknowledgeOptions builder
      *
      * @throws FileNotFoundException if the file could not be found
      */
-    public Builder body(File body) throws FileNotFoundException {
-      this.body = new FileInputStream(body);
+    public Builder eventAcknowledge(File eventAcknowledge) throws FileNotFoundException {
+      this.eventAcknowledge = new FileInputStream(eventAcknowledge);
       return this;
     }
   }
@@ -139,10 +139,10 @@ public class EventAcknowledgeOptions extends GenericModel {
   protected EventAcknowledgeOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.bluemixInstance,
       "bluemixInstance cannot be null");
-    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.body,
-      "body cannot be null");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.eventAcknowledge,
+      "eventAcknowledge cannot be null");
     bluemixInstance = builder.bluemixInstance;
-    body = builder.body;
+    eventAcknowledge = builder.eventAcknowledge;
     correlationId = builder.correlationId;
     xKmsKeyRing = builder.xKmsKeyRing;
   }
@@ -168,14 +168,14 @@ public class EventAcknowledgeOptions extends GenericModel {
   }
 
   /**
-   * Gets the body.
+   * Gets the eventAcknowledge.
    *
    * The base request for acknowledging a key action events.
    *
-   * @return the body
+   * @return the eventAcknowledge
    */
-  public InputStream body() {
-    return body;
+  public InputStream eventAcknowledge() {
+    return eventAcknowledge;
   }
 
   /**
