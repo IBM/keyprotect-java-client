@@ -24,10 +24,10 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  * - SetKeyPoliciesOneOfSetKeyPolicyRotation
  * - SetKeyPoliciesOneOfSetMultipleKeyPolicies
  */
-public class SetKeyPoliciesOneOf extends GenericModel {
+public class SetKeyPoliciesOneOf<T> extends GenericModel {
 
   protected CollectionMetadata metadata;
-  protected List<KeyPolicyDualAuthDelete> resources;
+  protected List<T> resources;
 
   protected SetKeyPoliciesOneOf() { }
 
@@ -49,7 +49,7 @@ public class SetKeyPoliciesOneOf extends GenericModel {
    *
    * @return the resources
    */
-  public List<KeyPolicyDualAuthDelete> resources() {
+  public List<T> resources() {
     return resources;
   }
 }
