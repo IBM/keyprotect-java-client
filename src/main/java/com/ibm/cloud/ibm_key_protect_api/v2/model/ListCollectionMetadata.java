@@ -53,10 +53,6 @@ public class ListCollectionMetadata extends GenericModel {
     String APPLICATION_VND_IBM_KMS_REGISTRATION_JSON = "application/vnd.ibm.kms.registration+json";
     /** application/vnd.ibm.kms.resource_crn+json. */
     String APPLICATION_VND_IBM_KMS_RESOURCE_CRN_JSON = "application/vnd.ibm.kms.resource_crn+json";
-    /** application/vnd.ibm.kms.migration_intent+json. */
-    String APPLICATION_VND_IBM_KMS_MIGRATION_INTENT_JSON = "application/vnd.ibm.kms.migration_intent+json";
-    /** application/vnd.ibm.kms.migration_intent_input+json. */
-    String APPLICATION_VND_IBM_KMS_MIGRATION_INTENT_INPUT_JSON = "application/vnd.ibm.kms.migration_intent_input+json";
     /** application/vnd.ibm.kms.kmip_adapter+json. */
     String APPLICATION_VND_IBM_KMS_KMIP_ADAPTER_JSON = "application/vnd.ibm.kms.kmip_adapter+json";
     /** application/vnd.ibm.kms.kmip_client_certificate+json. */

@@ -64,7 +64,6 @@ public class KeyFullRepresentation extends GenericModel {
   protected Boolean imported;
   @SerializedName("keyRingID")
   protected String keyRingId;
-  protected MigrationIntent migrationIntent;
   protected Date creationDate;
   protected String createdBy;
   protected String algorithmType;
@@ -235,17 +234,6 @@ public class KeyFullRepresentation extends GenericModel {
    */
   public String getKeyRingId() {
     return keyRingId;
-  }
-
-  /**
-   * Gets the migrationIntent.
-   *
-   * Migration intent.
-   *
-   * @return the migrationIntent
-   */
-  public MigrationIntent getMigrationIntent() {
-    return migrationIntent;
   }
 
   /**

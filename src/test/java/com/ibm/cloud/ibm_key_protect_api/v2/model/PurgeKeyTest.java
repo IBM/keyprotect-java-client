@@ -16,7 +16,6 @@ package com.ibm.cloud.ibm_key_protect_api.v2.model;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CollectionMetadata;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DualAuthKeyMetadata;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyFullRepresentation;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.MigrationIntent;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.PurgeKey;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.RotationKeyMetadata;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;

@@ -23,13 +23,11 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.ActionOnKeyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.ActionOnRegistrationOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.AddKmipClientCertificateOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.AllowedIPPort;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.CIPResource;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKeyAliasOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKeyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKeyRingOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKeyWithPoliciesOverridesOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKmipAdapterOptions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateMigrationIntentOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateRegistrationOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DeactivateRegistration;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKey;
@@ -39,13 +37,11 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKeyRingOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKmipAdapterOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKmipClientCertificateOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKmipObjectOptions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteMigrationIntentOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteRegistrationOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DisableKeyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.EnableKeyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.EventAcknowledgeOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetAllowedIPPortOptions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.GetGovernanceConfigOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetImportToken;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetImportTokenOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstancePoliciesOneOf;
@@ -64,8 +60,6 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKmipClientCertificateOption
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKmipClientCertificatesOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKmipObjectOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKmipObjectsOptions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.GetMigrationIntent;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.GetMigrationIntentOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetPolicyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetRegistrationsAllKeysOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetRegistrationsOptions;
@@ -1337,9 +1331,6 @@ public class IbmKeyProtectApi extends BaseService {
     if (updateRegistrationOptions.xKmsKeyRing() != null) {
       builder.header("X-Kms-Key-Ring", updateRegistrationOptions.xKmsKeyRing());
     }
-    if (updateRegistrationOptions.ifMatch() != null) {
-      builder.header("If-Match", updateRegistrationOptions.ifMatch());
-    }
     final JsonObject contentJson = new JsonObject();
     if (updateRegistrationOptions.metadata() != null) {
       contentJson.add("metadata", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateRegistrationOptions.metadata()));
@@ -1384,9 +1375,6 @@ public class IbmKeyProtectApi extends BaseService {
     }
     if (replaceRegistrationOptions.xKmsKeyRing() != null) {
       builder.header("X-Kms-Key-Ring", replaceRegistrationOptions.xKmsKeyRing());
-    }
-    if (replaceRegistrationOptions.ifMatch() != null) {
-      builder.header("If-Match", replaceRegistrationOptions.ifMatch());
     }
     final JsonObject contentJson = new JsonObject();
     if (replaceRegistrationOptions.metadata() != null) {
@@ -1801,9 +1789,6 @@ public class IbmKeyProtectApi extends BaseService {
     if (getKmipAdaptersOptions.totalCount() != null) {
       builder.query("totalCount", String.valueOf(getKmipAdaptersOptions.totalCount()));
     }
-    if (getKmipAdaptersOptions.crkId() != null) {
-      builder.query("crk_id", String.valueOf(getKmipAdaptersOptions.crkId()));
-    }
     ResponseConverter<ListKMIPAdaptersWithTotalCount> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ListKMIPAdaptersWithTotalCount>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
@@ -2114,146 +2099,6 @@ public class IbmKeyProtectApi extends BaseService {
     builder.header("Bluemix-Instance", deleteKmipClientCertificateOptions.bluemixInstance());
     if (deleteKmipClientCertificateOptions.correlationId() != null) {
       builder.header("Correlation-Id", deleteKmipClientCertificateOptions.correlationId());
-    }
-    ResponseConverter<Void> responseConverter = ResponseConverterUtils.getVoid();
-    return createServiceCall(builder.build(), responseConverter);
-  }
-
-  /**
-   * List resource configurations.
-   *
-   * [Configuration Information
-   * Point](/docs/security-compliance?topic=security-compliance-internal-onboard-config#internal-cip) required to
-   * maintain ongoing monitoring of [IBM Cloud Security and Compliance
-   * Center](/docs/security-compliance?topic=security-compliance-getting-started) config rules. Returns the config
-   * status of the requested resource(s). **Note:** Configs returned may be slightly out of sync from the state's true
-   * configs at time of query.
-   *
-   * @param getGovernanceConfigOptions the {@link GetGovernanceConfigOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link CIPResource}
-   */
-  public ServiceCall<CIPResource> getGovernanceConfig(GetGovernanceConfigOptions getGovernanceConfigOptions) {
-    com.ibm.cloud.sdk.core.util.Validator.notNull(getGovernanceConfigOptions,
-      "getGovernanceConfigOptions cannot be null");
-    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/governance/v1/configs"));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("ibm_key_protect_api", "v2", "getGovernanceConfig");
-    for (Entry<String, String> header : sdkHeaders.entrySet()) {
-      builder.header(header.getKey(), header.getValue());
-    }
-    builder.header("Accept", "application/json");
-    builder.query("config_request_id", String.valueOf(getGovernanceConfigOptions.configRequestId()));
-    builder.query("account_id", String.valueOf(getGovernanceConfigOptions.accountId()));
-    builder.query("resource_kind", String.valueOf(getGovernanceConfigOptions.resourceKind()));
-    builder.query("service_instance_crn", String.valueOf(getGovernanceConfigOptions.serviceInstanceCrn()));
-    builder.query("resource_group_id", String.valueOf(getGovernanceConfigOptions.resourceGroupId()));
-    if (getGovernanceConfigOptions.transactionId() != null) {
-      builder.query("Transaction-Id", String.valueOf(getGovernanceConfigOptions.transactionId()));
-    }
-    if (getGovernanceConfigOptions.limit() != null) {
-      builder.query("limit", String.valueOf(getGovernanceConfigOptions.limit()));
-    }
-    if (getGovernanceConfigOptions.offset() != null) {
-      builder.query("offset", String.valueOf(getGovernanceConfigOptions.offset()));
-    }
-    ResponseConverter<CIPResource> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<CIPResource>() { }.getType());
-    return createServiceCall(builder.build(), responseConverter);
-  }
-
-  /**
-   * Creates a Migration Intent associated with Customer Root Key (CRK).
-   *
-   * Creates a Migration Intent associated with Customer Root Key (CRK).
-   *
-   * @param createMigrationIntentOptions the {@link CreateMigrationIntentOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link GetMigrationIntent}
-   */
-  public ServiceCall<GetMigrationIntent> createMigrationIntent(CreateMigrationIntentOptions createMigrationIntentOptions) {
-    com.ibm.cloud.sdk.core.util.Validator.notNull(createMigrationIntentOptions,
-      "createMigrationIntentOptions cannot be null");
-    Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("id", createMigrationIntentOptions.id());
-    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/api/v2/keys/{id}/migrationIntent", pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("ibm_key_protect_api", "v2", "createMigrationIntent");
-    for (Entry<String, String> header : sdkHeaders.entrySet()) {
-      builder.header(header.getKey(), header.getValue());
-    }
-    builder.header("Accept", "application/json");
-    builder.header("Bluemix-Instance", createMigrationIntentOptions.bluemixInstance());
-    if (createMigrationIntentOptions.correlationId() != null) {
-      builder.header("Correlation-Id", createMigrationIntentOptions.correlationId());
-    }
-    if (createMigrationIntentOptions.xKmsKeyRing() != null) {
-      builder.header("X-Kms-Key-Ring", createMigrationIntentOptions.xKmsKeyRing());
-    }
-    final JsonObject contentJson = new JsonObject();
-    if (createMigrationIntentOptions.metadata() != null) {
-      contentJson.add("metadata", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createMigrationIntentOptions.metadata()));
-    }
-    if (createMigrationIntentOptions.resources() != null) {
-      contentJson.add("resources", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createMigrationIntentOptions.resources()));
-    }
-    builder.bodyJson(contentJson);
-    ResponseConverter<GetMigrationIntent> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<GetMigrationIntent>() { }.getType());
-    return createServiceCall(builder.build(), responseConverter);
-  }
-
-  /**
-   * Retrieves a Migration Intent.
-   *
-   * Retrieves a Migration Intent.
-   *
-   * @param getMigrationIntentOptions the {@link GetMigrationIntentOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link GetMigrationIntent}
-   */
-  public ServiceCall<GetMigrationIntent> getMigrationIntent(GetMigrationIntentOptions getMigrationIntentOptions) {
-    com.ibm.cloud.sdk.core.util.Validator.notNull(getMigrationIntentOptions,
-      "getMigrationIntentOptions cannot be null");
-    Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("id", getMigrationIntentOptions.id());
-    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/api/v2/keys/{id}/migrationIntent", pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("ibm_key_protect_api", "v2", "getMigrationIntent");
-    for (Entry<String, String> header : sdkHeaders.entrySet()) {
-      builder.header(header.getKey(), header.getValue());
-    }
-    builder.header("Accept", "application/json");
-    builder.header("Bluemix-Instance", getMigrationIntentOptions.bluemixInstance());
-    if (getMigrationIntentOptions.correlationId() != null) {
-      builder.header("Correlation-Id", getMigrationIntentOptions.correlationId());
-    }
-    if (getMigrationIntentOptions.xKmsKeyRing() != null) {
-      builder.header("X-Kms-Key-Ring", getMigrationIntentOptions.xKmsKeyRing());
-    }
-    ResponseConverter<GetMigrationIntent> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<GetMigrationIntent>() { }.getType());
-    return createServiceCall(builder.build(), responseConverter);
-  }
-
-  /**
-   * Deletes a Migration Intent.
-   *
-   * Delete a Migration Intent.
-   *
-   * @param deleteMigrationIntentOptions the {@link DeleteMigrationIntentOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a void result
-   */
-  public ServiceCall<Void> deleteMigrationIntent(DeleteMigrationIntentOptions deleteMigrationIntentOptions) {
-    com.ibm.cloud.sdk.core.util.Validator.notNull(deleteMigrationIntentOptions,
-      "deleteMigrationIntentOptions cannot be null");
-    Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("id", deleteMigrationIntentOptions.id());
-    RequestBuilder builder = RequestBuilder.delete(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/api/v2/keys/{id}/migrationIntent", pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("ibm_key_protect_api", "v2", "deleteMigrationIntent");
-    for (Entry<String, String> header : sdkHeaders.entrySet()) {
-      builder.header(header.getKey(), header.getValue());
-    }
-    builder.header("Bluemix-Instance", deleteMigrationIntentOptions.bluemixInstance());
-    if (deleteMigrationIntentOptions.correlationId() != null) {
-      builder.header("Correlation-Id", deleteMigrationIntentOptions.correlationId());
-    }
-    if (deleteMigrationIntentOptions.xKmsKeyRing() != null) {
-      builder.header("X-Kms-Key-Ring", deleteMigrationIntentOptions.xKmsKeyRing());
     }
     ResponseConverter<Void> responseConverter = ResponseConverterUtils.getVoid();
     return createServiceCall(builder.build(), responseConverter);

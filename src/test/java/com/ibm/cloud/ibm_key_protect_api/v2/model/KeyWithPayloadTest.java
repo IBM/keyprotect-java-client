@@ -15,11 +15,9 @@ package com.ibm.cloud.ibm_key_protect_api.v2.model;
 
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DualAuthKeyMetadata;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyWithPayload;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.MigrationIntent;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.RotationKeyMetadata;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
-import com.ibm.cloud.sdk.core.util.DateUtils;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
@@ -44,7 +42,6 @@ public class KeyWithPayloadTest {
     assertNull(keyWithPayloadModel.getExpirationDate());
     assertNull(keyWithPayloadModel.isExtractable());
     assertNull(keyWithPayloadModel.getKeyRingId());
-    assertNull(keyWithPayloadModel.getMigrationIntent());
     assertNull(keyWithPayloadModel.getAlgorithmBitSize());
     assertNull(keyWithPayloadModel.getAlgorithmMode());
     assertNull(keyWithPayloadModel.getDualAuthDelete());

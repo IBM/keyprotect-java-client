@@ -37,14 +37,12 @@ public class GetKmipAdaptersOptionsTest {
       .limit(Long.valueOf("100"))
       .offset(Long.valueOf("0"))
       .totalCount(true)
-      .crkId("feddecaf-0000-0000-0000-1234567890ab")
       .build();
     assertEquals(getKmipAdaptersOptionsModel.bluemixInstance(), "testString");
     assertEquals(getKmipAdaptersOptionsModel.correlationId(), "testString");
     assertEquals(getKmipAdaptersOptionsModel.limit(), Long.valueOf("100"));
     assertEquals(getKmipAdaptersOptionsModel.offset(), Long.valueOf("0"));
     assertEquals(getKmipAdaptersOptionsModel.totalCount(), Boolean.valueOf(true));
-    assertEquals(getKmipAdaptersOptionsModel.crkId(), "feddecaf-0000-0000-0000-1234567890ab");
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

@@ -18,16 +18,11 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.ActionOnRegistrationOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.AddKmipClientCertificateOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.AllowedIPPort;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.AllowedIPPortResource;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.CIPResource;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.CIPResourceConfigStateItem;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.CIPResourceConfigStateItemAdditionalTargetAttributes;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.CIPResourceNext;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CloudResourceName;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CollectionMetadata;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CollectionMetadataListKeys;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CollectionMetadataOneOf;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CollectionMetadataOneOfCollectionMetadata;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.CollectionMetadataOneOfCollectionMetadataWithQuota;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CollectionMetadataWithTotalCount;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKMIPAdapterRequestBodyResources;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKMIPClientCertificateObject;
@@ -36,13 +31,8 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKeyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKeyRingOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKeyWithPoliciesOverridesOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKmipAdapterOptions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateMigrationIntentObject;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateMigrationIntentOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateRegistrationOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateRegistrationResourceBody;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.CurrentConfig;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.CurrentConfigNestedProperty;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.CurrentConfigSimpleProperty;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DeactivateRegistration;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKey;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKeyAliasOptions;
@@ -51,7 +41,6 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKeyRingOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKmipAdapterOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKmipClientCertificateOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKmipObjectOptions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteMigrationIntentOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteRegistrationOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DisableKeyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DualAuthDeleteProperties;
@@ -59,8 +48,6 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.DualAuthKeyMetadata;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.EnableKeyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.EventAcknowledgeOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetAllowedIPPortOptions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.GetGovernanceConfigOptions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.GetGovernanceConfigPager;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetImportToken;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetImportTokenOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetInstancePoliciesOneOf;
@@ -109,8 +96,6 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKmipClientCertificateOption
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKmipClientCertificatesOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKmipObjectOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetKmipObjectsOptions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.GetMigrationIntent;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.GetMigrationIntentOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetMultipleKeyPoliciesResource;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetMultipleKeyPoliciesResourceDualAuthDelete;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetPolicyOptions;
@@ -166,7 +151,6 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.ListKeyVersions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.ListKeys;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.ListKeysMetadataPropertiesSearchQuery;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.MetricsProperties;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.MigrationIntent;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.ModifiableRegistrationResourceBody;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.PatchKeyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.PatchKeyResponseBody;
@@ -175,7 +159,6 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.PurgeKey;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.PurgeKeyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.PutInstancePolicyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.PutPolicyOptions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.QuotaMetadataSatQuota;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.Registration;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.RegistrationActionOneOf;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.RegistrationActionOneOfDeactivateRegistration;
@@ -213,7 +196,6 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.SetMultipleInstancePoliciesRes
 import com.ibm.cloud.ibm_key_protect_api.v2.model.SetMultipleInstancePoliciesResourcesItemPolicyData;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.SetMultipleInstancePoliciesResourcesItemPolicyDataAttributes;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.SetMultipleKeyPoliciesResource;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.SimpleProperty;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.SyncAssociatedResourcesOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.UnsetKeyForDeletionOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.UnwrapKeyOptions;
@@ -231,7 +213,6 @@ import com.ibm.cloud.sdk.core.util.DateUtils;
 import com.ibm.cloud.sdk.core.util.RequestUtils;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -342,7 +323,7 @@ public class IbmKeyProtectApiTest {
   @Test
   public void testCreateKeyWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.allowed_ip_metadata+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"application/vnd.ibm.kms.key+json\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2000-03-21T00:00:00.000Z\", \"extractable\": true, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": false, \"keyRingID\": \"keyRingId\", \"migrationIntent\": {\"sourceCRK\": \"sourceCrk\", \"targetCRK\": \"targetCrk\", \"creationDate\": \"2000-03-21T00:00:00.000Z\", \"createdBy\": \"createdBy\", \"id\": \"id\"}, \"creationDate\": \"2000-03-21T00:00:00.000Z\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"256\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 256, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2000-03-21T00:00:00.000Z\", \"lastRotateDate\": \"2000-03-21T00:00:00.000Z\", \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2000-03-21T00:00:00.000Z\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2000-03-21T00:00:00.000Z\"}, \"rotation\": {\"enabled\": true, \"interval_month\": 3}, \"deleted\": false, \"deletionDate\": \"2000-03-21T00:00:00.000Z\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2000-03-21T00:00:00.000Z\", \"restoreAllowed\": true, \"purgeAllowed\": true, \"purgeAllowedFrom\": \"2000-03-21T00:00:00.000Z\", \"purgeScheduledOn\": \"2000-03-21T00:00:00.000Z\", \"payload\": \"VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=\"}]}";
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.allowed_ip_metadata+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"application/vnd.ibm.kms.key+json\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2000-03-21T00:00:00.000Z\", \"extractable\": true, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": false, \"keyRingID\": \"keyRingId\", \"creationDate\": \"2000-03-21T00:00:00.000Z\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"256\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 256, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2000-03-21T00:00:00.000Z\", \"lastRotateDate\": \"2000-03-21T00:00:00.000Z\", \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2000-03-21T00:00:00.000Z\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2000-03-21T00:00:00.000Z\"}, \"rotation\": {\"enabled\": true, \"interval_month\": 3}, \"deleted\": false, \"deletionDate\": \"2000-03-21T00:00:00.000Z\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2000-03-21T00:00:00.000Z\", \"restoreAllowed\": true, \"purgeAllowed\": true, \"purgeAllowedFrom\": \"2000-03-21T00:00:00.000Z\", \"purgeScheduledOn\": \"2000-03-21T00:00:00.000Z\", \"payload\": \"VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=\"}]}";
     String createKeyPath = "/api/v2/keys";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -399,7 +380,7 @@ public class IbmKeyProtectApiTest {
   @Test
   public void testGetKeysWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.allowed_ip_metadata+json\", \"collectionTotal\": 1, \"incompleteSearch\": true, \"searchQuery\": {\"query\": \"query\", \"scopes\": [\"name\"], \"not\": false, \"exact\": false}}, \"resources\": [{\"type\": \"application/vnd.ibm.kms.key+json\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2000-03-21T00:00:00.000Z\", \"extractable\": true, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": false, \"keyRingID\": \"keyRingId\", \"migrationIntent\": {\"sourceCRK\": \"sourceCrk\", \"targetCRK\": \"targetCrk\", \"creationDate\": \"2000-03-21T00:00:00.000Z\", \"createdBy\": \"createdBy\", \"id\": \"id\"}, \"creationDate\": \"2000-03-21T00:00:00.000Z\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"256\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 256, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2000-03-21T00:00:00.000Z\", \"lastRotateDate\": \"2000-03-21T00:00:00.000Z\", \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2000-03-21T00:00:00.000Z\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2000-03-21T00:00:00.000Z\"}, \"rotation\": {\"enabled\": true, \"interval_month\": 3}, \"deleted\": false, \"deletionDate\": \"2000-03-21T00:00:00.000Z\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2000-03-21T00:00:00.000Z\", \"restoreAllowed\": true, \"purgeAllowed\": true, \"purgeAllowedFrom\": \"2000-03-21T00:00:00.000Z\", \"purgeScheduledOn\": \"2000-03-21T00:00:00.000Z\"}]}";
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.allowed_ip_metadata+json\", \"collectionTotal\": 1, \"incompleteSearch\": true, \"searchQuery\": {\"query\": \"query\", \"scopes\": [\"name\"], \"not\": false, \"exact\": false}}, \"resources\": [{\"type\": \"application/vnd.ibm.kms.key+json\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2000-03-21T00:00:00.000Z\", \"extractable\": true, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": false, \"keyRingID\": \"keyRingId\", \"creationDate\": \"2000-03-21T00:00:00.000Z\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"256\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 256, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2000-03-21T00:00:00.000Z\", \"lastRotateDate\": \"2000-03-21T00:00:00.000Z\", \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2000-03-21T00:00:00.000Z\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2000-03-21T00:00:00.000Z\"}, \"rotation\": {\"enabled\": true, \"interval_month\": 3}, \"deleted\": false, \"deletionDate\": \"2000-03-21T00:00:00.000Z\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2000-03-21T00:00:00.000Z\", \"restoreAllowed\": true, \"purgeAllowed\": true, \"purgeAllowedFrom\": \"2000-03-21T00:00:00.000Z\", \"purgeScheduledOn\": \"2000-03-21T00:00:00.000Z\"}]}";
     String getKeysPath = "/api/v2/keys";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -468,7 +449,7 @@ public class IbmKeyProtectApiTest {
   @Test
   public void testCreateKeyWithPoliciesOverridesWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.allowed_ip_metadata+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"application/vnd.ibm.kms.key+json\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2000-03-21T00:00:00.000Z\", \"extractable\": true, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": false, \"keyRingID\": \"keyRingId\", \"migrationIntent\": {\"sourceCRK\": \"sourceCrk\", \"targetCRK\": \"targetCrk\", \"creationDate\": \"2000-03-21T00:00:00.000Z\", \"createdBy\": \"createdBy\", \"id\": \"id\"}, \"creationDate\": \"2000-03-21T00:00:00.000Z\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"256\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 256, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2000-03-21T00:00:00.000Z\", \"lastRotateDate\": \"2000-03-21T00:00:00.000Z\", \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2000-03-21T00:00:00.000Z\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2000-03-21T00:00:00.000Z\"}, \"rotation\": {\"enabled\": true, \"interval_month\": 3}, \"deleted\": false, \"deletionDate\": \"2000-03-21T00:00:00.000Z\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2000-03-21T00:00:00.000Z\", \"restoreAllowed\": true, \"purgeAllowed\": true, \"purgeAllowedFrom\": \"2000-03-21T00:00:00.000Z\", \"purgeScheduledOn\": \"2000-03-21T00:00:00.000Z\", \"payload\": \"VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=\"}]}";
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.allowed_ip_metadata+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"application/vnd.ibm.kms.key+json\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2000-03-21T00:00:00.000Z\", \"extractable\": true, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": false, \"keyRingID\": \"keyRingId\", \"creationDate\": \"2000-03-21T00:00:00.000Z\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"256\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 256, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2000-03-21T00:00:00.000Z\", \"lastRotateDate\": \"2000-03-21T00:00:00.000Z\", \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2000-03-21T00:00:00.000Z\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2000-03-21T00:00:00.000Z\"}, \"rotation\": {\"enabled\": true, \"interval_month\": 3}, \"deleted\": false, \"deletionDate\": \"2000-03-21T00:00:00.000Z\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2000-03-21T00:00:00.000Z\", \"restoreAllowed\": true, \"purgeAllowed\": true, \"purgeAllowedFrom\": \"2000-03-21T00:00:00.000Z\", \"purgeScheduledOn\": \"2000-03-21T00:00:00.000Z\", \"payload\": \"VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=\"}]}";
     String createKeyWithPoliciesOverridesPath = "/api/v2/keys_with_policy_overrides";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -525,7 +506,7 @@ public class IbmKeyProtectApiTest {
   @Test
   public void testGetKeyWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.allowed_ip_metadata+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"application/vnd.ibm.kms.key+json\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2000-03-21T00:00:00.000Z\", \"extractable\": true, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": false, \"keyRingID\": \"keyRingId\", \"migrationIntent\": {\"sourceCRK\": \"sourceCrk\", \"targetCRK\": \"targetCrk\", \"creationDate\": \"2000-03-21T00:00:00.000Z\", \"createdBy\": \"createdBy\", \"id\": \"id\"}, \"creationDate\": \"2000-03-21T00:00:00.000Z\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"256\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 256, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2000-03-21T00:00:00.000Z\", \"lastRotateDate\": \"2000-03-21T00:00:00.000Z\", \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2000-03-21T00:00:00.000Z\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2000-03-21T00:00:00.000Z\"}, \"rotation\": {\"enabled\": true, \"interval_month\": 3}, \"deleted\": false, \"deletionDate\": \"2000-03-21T00:00:00.000Z\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2000-03-21T00:00:00.000Z\", \"restoreAllowed\": true, \"purgeAllowed\": true, \"purgeAllowedFrom\": \"2000-03-21T00:00:00.000Z\", \"purgeScheduledOn\": \"2000-03-21T00:00:00.000Z\", \"payload\": \"VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=\"}]}";
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.allowed_ip_metadata+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"application/vnd.ibm.kms.key+json\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2000-03-21T00:00:00.000Z\", \"extractable\": true, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": false, \"keyRingID\": \"keyRingId\", \"creationDate\": \"2000-03-21T00:00:00.000Z\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"256\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 256, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2000-03-21T00:00:00.000Z\", \"lastRotateDate\": \"2000-03-21T00:00:00.000Z\", \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2000-03-21T00:00:00.000Z\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2000-03-21T00:00:00.000Z\"}, \"rotation\": {\"enabled\": true, \"interval_month\": 3}, \"deleted\": false, \"deletionDate\": \"2000-03-21T00:00:00.000Z\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2000-03-21T00:00:00.000Z\", \"restoreAllowed\": true, \"purgeAllowed\": true, \"purgeAllowedFrom\": \"2000-03-21T00:00:00.000Z\", \"purgeScheduledOn\": \"2000-03-21T00:00:00.000Z\", \"payload\": \"VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=\"}]}";
     String getKeyPath = "/api/v2/keys/testString";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -641,7 +622,7 @@ public class IbmKeyProtectApiTest {
   @Test
   public void testPatchKeyWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.allowed_ip_metadata+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"application/vnd.ibm.kms.key+json\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2000-03-21T00:00:00.000Z\", \"extractable\": true, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": false, \"keyRingID\": \"keyRingId\", \"migrationIntent\": {\"sourceCRK\": \"sourceCrk\", \"targetCRK\": \"targetCrk\", \"creationDate\": \"2000-03-21T00:00:00.000Z\", \"createdBy\": \"createdBy\", \"id\": \"id\"}, \"creationDate\": \"2000-03-21T00:00:00.000Z\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"256\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 256, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2000-03-21T00:00:00.000Z\", \"lastRotateDate\": \"2000-03-21T00:00:00.000Z\", \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2000-03-21T00:00:00.000Z\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2000-03-21T00:00:00.000Z\"}, \"rotation\": {\"enabled\": true, \"interval_month\": 3}, \"deleted\": false, \"deletionDate\": \"2000-03-21T00:00:00.000Z\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2000-03-21T00:00:00.000Z\", \"restoreAllowed\": true, \"purgeAllowed\": true, \"purgeAllowedFrom\": \"2000-03-21T00:00:00.000Z\", \"purgeScheduledOn\": \"2000-03-21T00:00:00.000Z\"}]}";
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.allowed_ip_metadata+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"application/vnd.ibm.kms.key+json\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2000-03-21T00:00:00.000Z\", \"extractable\": true, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": false, \"keyRingID\": \"keyRingId\", \"creationDate\": \"2000-03-21T00:00:00.000Z\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"256\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 256, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2000-03-21T00:00:00.000Z\", \"lastRotateDate\": \"2000-03-21T00:00:00.000Z\", \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2000-03-21T00:00:00.000Z\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2000-03-21T00:00:00.000Z\"}, \"rotation\": {\"enabled\": true, \"interval_month\": 3}, \"deleted\": false, \"deletionDate\": \"2000-03-21T00:00:00.000Z\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2000-03-21T00:00:00.000Z\", \"restoreAllowed\": true, \"purgeAllowed\": true, \"purgeAllowedFrom\": \"2000-03-21T00:00:00.000Z\", \"purgeScheduledOn\": \"2000-03-21T00:00:00.000Z\"}]}";
     String patchKeyPath = "/api/v2/keys/testString";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -698,7 +679,7 @@ public class IbmKeyProtectApiTest {
   @Test
   public void testDeleteKeyWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.allowed_ip_metadata+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"application/vnd.ibm.kms.key+json\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2000-03-21T00:00:00.000Z\", \"extractable\": true, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": false, \"keyRingID\": \"keyRingId\", \"migrationIntent\": {\"sourceCRK\": \"sourceCrk\", \"targetCRK\": \"targetCrk\", \"creationDate\": \"2000-03-21T00:00:00.000Z\", \"createdBy\": \"createdBy\", \"id\": \"id\"}, \"creationDate\": \"2000-03-21T00:00:00.000Z\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"256\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 256, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2000-03-21T00:00:00.000Z\", \"lastRotateDate\": \"2000-03-21T00:00:00.000Z\", \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2000-03-21T00:00:00.000Z\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2000-03-21T00:00:00.000Z\"}, \"rotation\": {\"enabled\": true, \"interval_month\": 3}, \"deleted\": false, \"deletionDate\": \"2000-03-21T00:00:00.000Z\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2000-03-21T00:00:00.000Z\", \"restoreAllowed\": true, \"purgeAllowed\": true, \"purgeAllowedFrom\": \"2000-03-21T00:00:00.000Z\", \"purgeScheduledOn\": \"2000-03-21T00:00:00.000Z\", \"payload\": \"VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=\"}]}";
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.allowed_ip_metadata+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"application/vnd.ibm.kms.key+json\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2000-03-21T00:00:00.000Z\", \"extractable\": true, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": false, \"keyRingID\": \"keyRingId\", \"creationDate\": \"2000-03-21T00:00:00.000Z\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"256\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 256, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2000-03-21T00:00:00.000Z\", \"lastRotateDate\": \"2000-03-21T00:00:00.000Z\", \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2000-03-21T00:00:00.000Z\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2000-03-21T00:00:00.000Z\"}, \"rotation\": {\"enabled\": true, \"interval_month\": 3}, \"deleted\": false, \"deletionDate\": \"2000-03-21T00:00:00.000Z\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2000-03-21T00:00:00.000Z\", \"restoreAllowed\": true, \"purgeAllowed\": true, \"purgeAllowedFrom\": \"2000-03-21T00:00:00.000Z\", \"purgeScheduledOn\": \"2000-03-21T00:00:00.000Z\", \"payload\": \"VGhpcyBpcyBhIG1vY2sgYnl0ZSBhcnJheSB2YWx1ZS4=\"}]}";
     String deleteKeyPath = "/api/v2/keys/testString";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -757,7 +738,7 @@ public class IbmKeyProtectApiTest {
   @Test
   public void testGetKeyMetadataWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.allowed_ip_metadata+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"application/vnd.ibm.kms.key+json\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2000-03-21T00:00:00.000Z\", \"extractable\": true, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": false, \"keyRingID\": \"keyRingId\", \"migrationIntent\": {\"sourceCRK\": \"sourceCrk\", \"targetCRK\": \"targetCrk\", \"creationDate\": \"2000-03-21T00:00:00.000Z\", \"createdBy\": \"createdBy\", \"id\": \"id\"}, \"creationDate\": \"2000-03-21T00:00:00.000Z\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"256\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 256, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2000-03-21T00:00:00.000Z\", \"lastRotateDate\": \"2000-03-21T00:00:00.000Z\", \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2000-03-21T00:00:00.000Z\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2000-03-21T00:00:00.000Z\"}, \"rotation\": {\"enabled\": true, \"interval_month\": 3}, \"deleted\": false, \"deletionDate\": \"2000-03-21T00:00:00.000Z\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2000-03-21T00:00:00.000Z\", \"restoreAllowed\": true, \"purgeAllowed\": true, \"purgeAllowedFrom\": \"2000-03-21T00:00:00.000Z\", \"purgeScheduledOn\": \"2000-03-21T00:00:00.000Z\"}]}";
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.allowed_ip_metadata+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"application/vnd.ibm.kms.key+json\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2000-03-21T00:00:00.000Z\", \"extractable\": true, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": false, \"keyRingID\": \"keyRingId\", \"creationDate\": \"2000-03-21T00:00:00.000Z\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"256\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 256, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2000-03-21T00:00:00.000Z\", \"lastRotateDate\": \"2000-03-21T00:00:00.000Z\", \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2000-03-21T00:00:00.000Z\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2000-03-21T00:00:00.000Z\"}, \"rotation\": {\"enabled\": true, \"interval_month\": 3}, \"deleted\": false, \"deletionDate\": \"2000-03-21T00:00:00.000Z\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2000-03-21T00:00:00.000Z\", \"restoreAllowed\": true, \"purgeAllowed\": true, \"purgeAllowedFrom\": \"2000-03-21T00:00:00.000Z\", \"purgeScheduledOn\": \"2000-03-21T00:00:00.000Z\"}]}";
     String getKeyMetadataPath = "/api/v2/keys/testString/metadata";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -813,7 +794,7 @@ public class IbmKeyProtectApiTest {
   @Test
   public void testPurgeKeyWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.allowed_ip_metadata+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"application/vnd.ibm.kms.key+json\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2000-03-21T00:00:00.000Z\", \"extractable\": true, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": false, \"keyRingID\": \"keyRingId\", \"migrationIntent\": {\"sourceCRK\": \"sourceCrk\", \"targetCRK\": \"targetCrk\", \"creationDate\": \"2000-03-21T00:00:00.000Z\", \"createdBy\": \"createdBy\", \"id\": \"id\"}, \"creationDate\": \"2000-03-21T00:00:00.000Z\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"256\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 256, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2000-03-21T00:00:00.000Z\", \"lastRotateDate\": \"2000-03-21T00:00:00.000Z\", \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2000-03-21T00:00:00.000Z\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2000-03-21T00:00:00.000Z\"}, \"rotation\": {\"enabled\": true, \"interval_month\": 3}, \"deleted\": false, \"deletionDate\": \"2000-03-21T00:00:00.000Z\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2000-03-21T00:00:00.000Z\", \"restoreAllowed\": true, \"purgeAllowed\": true, \"purgeAllowedFrom\": \"2000-03-21T00:00:00.000Z\", \"purgeScheduledOn\": \"2000-03-21T00:00:00.000Z\"}]}";
+    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.allowed_ip_metadata+json\", \"collectionTotal\": 1}, \"resources\": [{\"type\": \"application/vnd.ibm.kms.key+json\", \"id\": \"id\", \"name\": \"name\", \"aliases\": [\"aliases\"], \"description\": \"description\", \"tags\": [\"tags\"], \"state\": 0, \"expirationDate\": \"2000-03-21T00:00:00.000Z\", \"extractable\": true, \"crn\": \"crn:v1:bluemix:public:kms:<region>:a/<account-id>:<service-instance>:key:<key-id>\", \"imported\": false, \"keyRingID\": \"keyRingId\", \"creationDate\": \"2000-03-21T00:00:00.000Z\", \"createdBy\": \"createdBy\", \"algorithmType\": \"AES\", \"algorithmMetadata\": {\"bitLength\": \"256\", \"mode\": \"CBC_PAD\"}, \"algorithmBitSize\": 256, \"algorithmMode\": \"CBC_PAD\", \"nonactiveStateReason\": 20, \"lastUpdateDate\": \"2000-03-21T00:00:00.000Z\", \"lastRotateDate\": \"2000-03-21T00:00:00.000Z\", \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2000-03-21T00:00:00.000Z\"}, \"dualAuthDelete\": {\"enabled\": true, \"keySetForDeletion\": true, \"authExpiration\": \"2000-03-21T00:00:00.000Z\"}, \"rotation\": {\"enabled\": true, \"interval_month\": 3}, \"deleted\": false, \"deletionDate\": \"2000-03-21T00:00:00.000Z\", \"deletedBy\": \"deletedBy\", \"restoreExpirationDate\": \"2000-03-21T00:00:00.000Z\", \"restoreAllowed\": true, \"purgeAllowed\": true, \"purgeAllowedFrom\": \"2000-03-21T00:00:00.000Z\", \"purgeScheduledOn\": \"2000-03-21T00:00:00.000Z\"}]}";
     String purgeKeyPath = "/api/v2/keys/testString/purge";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -2045,7 +2026,6 @@ public class IbmKeyProtectApiTest {
       .resources(java.util.Arrays.asList(modifiableRegistrationResourceBodyModel))
       .correlationId("testString")
       .xKmsKeyRing("testString")
-      .ifMatch("W/c8f7e349e5a1f8d7255de81f2508e5914667fg5e4aeb88945002286f753064b7")
       .build();
 
     // Invoke updateRegistration() with a valid options model and verify the result
@@ -2119,7 +2099,6 @@ public class IbmKeyProtectApiTest {
       .resources(java.util.Arrays.asList(replaceRegistrationResourceBodyModel))
       .correlationId("testString")
       .xKmsKeyRing("testString")
-      .ifMatch("W/c8f7e349e5a1f8d7255de81f2508e5914667fg5e4aeb88945002286f753064b7")
       .build();
 
     // Invoke replaceRegistration() with a valid options model and verify the result
@@ -2781,7 +2760,6 @@ public class IbmKeyProtectApiTest {
       .limit(Long.valueOf("100"))
       .offset(Long.valueOf("0"))
       .totalCount(true)
-      .crkId("feddecaf-0000-0000-0000-1234567890ab")
       .build();
 
     // Invoke getKmipAdapters() with a valid options model and verify the result
@@ -2805,7 +2783,6 @@ public class IbmKeyProtectApiTest {
     assertEquals(Long.valueOf(query.get("limit")), Long.valueOf("100"));
     assertEquals(Long.valueOf(query.get("offset")), Long.valueOf("0"));
     assertEquals(Boolean.valueOf(query.get("totalCount")), Boolean.valueOf(true));
-    assertEquals(query.get("crk_id"), "feddecaf-0000-0000-0000-1234567890ab");
   }
 
   // Test the getKmipAdapters operation with and without retries enabled
@@ -3422,326 +3399,6 @@ public class IbmKeyProtectApiTest {
   public void testDeleteKmipClientCertificateNoOptions() throws Throwable {
     server.enqueue(new MockResponse());
     ibmKeyProtectApiService.deleteKmipClientCertificate(null).execute();
-  }
-
-  // Test the getGovernanceConfig operation with a valid options model parameter
-  @Test
-  public void testGetGovernanceConfigWOptions() throws Throwable {
-    // Register a mock response
-    String mockResponseBody = "{\"next\": {\"href\": \"href\"}, \"account_id\": \"accountId\", \"service_name\": \"kms\", \"resource_kind\": \"instance\", \"config_request_id\": \"configRequestId\", \"timestamp\": \"2000-03-21T00:00:00Z\", \"config_state\": [{\"resource_crn\": \"resourceCrn\", \"resource_group_id\": \"resourceGroupId\", \"additional_target_attributes\": {\"resource_id\": \"resourceId\", \"location\": \"location\", \"instance_id\": \"instanceId\", \"resource_name\": \"resourceName\"}, \"current_config\": [{\"property\": \"property\", \"value\": \"value\"}]}]}";
-    String getGovernanceConfigPath = "/governance/v1/configs";
-    server.enqueue(new MockResponse()
-      .setHeader("Content-type", "application/json")
-      .setResponseCode(200)
-      .setBody(mockResponseBody));
-
-    // Construct an instance of the GetGovernanceConfigOptions model
-    GetGovernanceConfigOptions getGovernanceConfigOptionsModel = new GetGovernanceConfigOptions.Builder()
-      .configRequestId("testString")
-      .accountId("testString")
-      .resourceKind("instance")
-      .serviceInstanceCrn("testString")
-      .resourceGroupId("testString")
-      .transactionId("testString")
-      .limit(Long.valueOf("10"))
-      .offset(Long.valueOf("0"))
-      .build();
-
-    // Invoke getGovernanceConfig() with a valid options model and verify the result
-    Response<CIPResource> response = ibmKeyProtectApiService.getGovernanceConfig(getGovernanceConfigOptionsModel).execute();
-    assertNotNull(response);
-    CIPResource responseObj = response.getResult();
-    assertNotNull(responseObj);
-
-    // Verify the contents of the request sent to the mock server
-    RecordedRequest request = server.takeRequest();
-    assertNotNull(request);
-    assertEquals(request.getMethod(), "GET");
-    // Verify request path
-    String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, getGovernanceConfigPath);
-    // Verify query params
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNotNull(query);
-    assertEquals(query.get("config_request_id"), "testString");
-    assertEquals(query.get("account_id"), "testString");
-    assertEquals(query.get("resource_kind"), "instance");
-    assertEquals(query.get("service_instance_crn"), "testString");
-    assertEquals(query.get("resource_group_id"), "testString");
-    assertEquals(query.get("Transaction-Id"), "testString");
-    assertEquals(Long.valueOf(query.get("limit")), Long.valueOf("10"));
-    assertEquals(Long.valueOf(query.get("offset")), Long.valueOf("0"));
-  }
-
-  // Test the getGovernanceConfig operation with and without retries enabled
-  @Test
-  public void testGetGovernanceConfigWRetries() throws Throwable {
-    ibmKeyProtectApiService.enableRetries(4, 30);
-    testGetGovernanceConfigWOptions();
-
-    ibmKeyProtectApiService.disableRetries();
-    testGetGovernanceConfigWOptions();
-  }
-
-  // Test the getGovernanceConfig operation with a null options model (negative test)
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testGetGovernanceConfigNoOptions() throws Throwable {
-    server.enqueue(new MockResponse());
-    ibmKeyProtectApiService.getGovernanceConfig(null).execute();
-  }
-
-  // Test the getGovernanceConfig operation using the GetGovernanceConfigPager.getNext() method
-  @Test
-  public void testGetGovernanceConfigWithPagerGetNext() throws Throwable {
-    // Set up the two-page mock response.
-    String mockResponsePage1 = "{\"next\":{\"href\":\"https://myhost.com/somePath?offset=1\"},\"total_count\":2,\"config_state\":[{\"resource_crn\":\"resourceCrn\",\"resource_group_id\":\"resourceGroupId\",\"additional_target_attributes\":{\"resource_id\":\"resourceId\",\"location\":\"location\",\"instance_id\":\"instanceId\",\"resource_name\":\"resourceName\"},\"current_config\":[{\"property\":\"property\",\"value\":\"value\"}]}],\"limit\":1}";
-    String mockResponsePage2 = "{\"total_count\":2,\"config_state\":[{\"resource_crn\":\"resourceCrn\",\"resource_group_id\":\"resourceGroupId\",\"additional_target_attributes\":{\"resource_id\":\"resourceId\",\"location\":\"location\",\"instance_id\":\"instanceId\",\"resource_name\":\"resourceName\"},\"current_config\":[{\"property\":\"property\",\"value\":\"value\"}]}],\"limit\":1}";
-    server.enqueue(new MockResponse()
-      .setHeader("Content-type", "application/json")
-      .setResponseCode(200)
-      .setBody(mockResponsePage1));
-    server.enqueue(new MockResponse()
-      .setHeader("Content-type", "application/json")
-      .setResponseCode(200)
-      .setBody(mockResponsePage2));
-    server.enqueue(new MockResponse()
-      .setHeader("Content-type", "application/json")
-      .setResponseCode(400)
-      .setBody("{\"message\": \"No more results available!\"}"));
-
-    GetGovernanceConfigOptions getGovernanceConfigOptions = new GetGovernanceConfigOptions.Builder()
-      .configRequestId("testString")
-      .accountId("testString")
-      .resourceKind("instance")
-      .serviceInstanceCrn("testString")
-      .resourceGroupId("testString")
-      .transactionId("testString")
-      .limit(Long.valueOf("10"))
-      .build();
-
-    List<CIPResourceConfigStateItem> allResults = new ArrayList<>();
-    GetGovernanceConfigPager pager = new GetGovernanceConfigPager(ibmKeyProtectApiService, getGovernanceConfigOptions);
-    while (pager.hasNext()) {
-      List<CIPResourceConfigStateItem> nextPage = pager.getNext();
-      assertNotNull(nextPage);
-      allResults.addAll(nextPage);
-    }
-    assertEquals(allResults.size(), 2);
-  }
-  
-  // Test the getGovernanceConfig operation using the GetGovernanceConfigPager.getAll() method
-  @Test
-  public void testGetGovernanceConfigWithPagerGetAll() throws Throwable {
-    // Set up the two-page mock response.
-    String mockResponsePage1 = "{\"next\":{\"href\":\"https://myhost.com/somePath?offset=1\"},\"total_count\":2,\"config_state\":[{\"resource_crn\":\"resourceCrn\",\"resource_group_id\":\"resourceGroupId\",\"additional_target_attributes\":{\"resource_id\":\"resourceId\",\"location\":\"location\",\"instance_id\":\"instanceId\",\"resource_name\":\"resourceName\"},\"current_config\":[{\"property\":\"property\",\"value\":\"value\"}]}],\"limit\":1}";
-    String mockResponsePage2 = "{\"total_count\":2,\"config_state\":[{\"resource_crn\":\"resourceCrn\",\"resource_group_id\":\"resourceGroupId\",\"additional_target_attributes\":{\"resource_id\":\"resourceId\",\"location\":\"location\",\"instance_id\":\"instanceId\",\"resource_name\":\"resourceName\"},\"current_config\":[{\"property\":\"property\",\"value\":\"value\"}]}],\"limit\":1}";
-    server.enqueue(new MockResponse()
-      .setHeader("Content-type", "application/json")
-      .setResponseCode(200)
-      .setBody(mockResponsePage1));
-    server.enqueue(new MockResponse()
-      .setHeader("Content-type", "application/json")
-      .setResponseCode(200)
-      .setBody(mockResponsePage2));
-    server.enqueue(new MockResponse()
-      .setHeader("Content-type", "application/json")
-      .setResponseCode(400)
-      .setBody("{\"message\": \"No more results available!\"}"));
-
-    GetGovernanceConfigOptions getGovernanceConfigOptions = new GetGovernanceConfigOptions.Builder()
-      .configRequestId("testString")
-      .accountId("testString")
-      .resourceKind("instance")
-      .serviceInstanceCrn("testString")
-      .resourceGroupId("testString")
-      .transactionId("testString")
-      .limit(Long.valueOf("10"))
-      .build();
-
-    GetGovernanceConfigPager pager = new GetGovernanceConfigPager(ibmKeyProtectApiService, getGovernanceConfigOptions);
-    List<CIPResourceConfigStateItem> allResults = pager.getAll();
-    assertNotNull(allResults);
-    assertEquals(allResults.size(), 2);
-  }
-  
-  // Test the createMigrationIntent operation with a valid options model parameter
-  @Test
-  public void testCreateMigrationIntentWOptions() throws Throwable {
-    // Register a mock response
-    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.allowed_ip_metadata+json\", \"collectionTotal\": 1}, \"resources\": [{\"sourceCRK\": \"sourceCrk\", \"targetCRK\": \"targetCrk\", \"creationDate\": \"2000-03-21T00:00:00.000Z\", \"createdBy\": \"createdBy\", \"id\": \"id\"}]}";
-    String createMigrationIntentPath = "/api/v2/keys/testString/migrationIntent";
-    server.enqueue(new MockResponse()
-      .setHeader("Content-type", "application/json")
-      .setResponseCode(201)
-      .setBody(mockResponseBody));
-
-    // Construct an instance of the CollectionMetadata model
-    CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
-      .collectionType("application/vnd.ibm.kms.migration_intent_input+json")
-      .collectionTotal(Long.valueOf("1"))
-      .build();
-
-    // Construct an instance of the CreateMigrationIntentObject model
-    CreateMigrationIntentObject createMigrationIntentObjectModel = new CreateMigrationIntentObject.Builder()
-      .targetCrk("crn:v1:bluemix:public:hs-crypto:<region>:<account-ID>:<instance-ID>:key:<key-ID>")
-      .build();
-
-    // Construct an instance of the CreateMigrationIntentOptions model
-    CreateMigrationIntentOptions createMigrationIntentOptionsModel = new CreateMigrationIntentOptions.Builder()
-      .id("testString")
-      .bluemixInstance("testString")
-      .metadata(collectionMetadataModel)
-      .resources(java.util.Arrays.asList(createMigrationIntentObjectModel))
-      .correlationId("testString")
-      .xKmsKeyRing("testString")
-      .build();
-
-    // Invoke createMigrationIntent() with a valid options model and verify the result
-    Response<GetMigrationIntent> response = ibmKeyProtectApiService.createMigrationIntent(createMigrationIntentOptionsModel).execute();
-    assertNotNull(response);
-    GetMigrationIntent responseObj = response.getResult();
-    assertNotNull(responseObj);
-
-    // Verify the contents of the request sent to the mock server
-    RecordedRequest request = server.takeRequest();
-    assertNotNull(request);
-    assertEquals(request.getMethod(), "POST");
-    // Verify request path
-    String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, createMigrationIntentPath);
-    // Verify header parameters
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-    // Verify that there is no query string
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-  }
-
-  // Test the createMigrationIntent operation with and without retries enabled
-  @Test
-  public void testCreateMigrationIntentWRetries() throws Throwable {
-    ibmKeyProtectApiService.enableRetries(4, 30);
-    testCreateMigrationIntentWOptions();
-
-    ibmKeyProtectApiService.disableRetries();
-    testCreateMigrationIntentWOptions();
-  }
-
-  // Test the createMigrationIntent operation with a null options model (negative test)
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testCreateMigrationIntentNoOptions() throws Throwable {
-    server.enqueue(new MockResponse());
-    ibmKeyProtectApiService.createMigrationIntent(null).execute();
-  }
-
-  // Test the getMigrationIntent operation with a valid options model parameter
-  @Test
-  public void testGetMigrationIntentWOptions() throws Throwable {
-    // Register a mock response
-    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.allowed_ip_metadata+json\", \"collectionTotal\": 1}, \"resources\": [{\"sourceCRK\": \"sourceCrk\", \"targetCRK\": \"targetCrk\", \"creationDate\": \"2000-03-21T00:00:00.000Z\", \"createdBy\": \"createdBy\", \"id\": \"id\"}]}";
-    String getMigrationIntentPath = "/api/v2/keys/testString/migrationIntent";
-    server.enqueue(new MockResponse()
-      .setHeader("Content-type", "application/json")
-      .setResponseCode(200)
-      .setBody(mockResponseBody));
-
-    // Construct an instance of the GetMigrationIntentOptions model
-    GetMigrationIntentOptions getMigrationIntentOptionsModel = new GetMigrationIntentOptions.Builder()
-      .id("testString")
-      .bluemixInstance("testString")
-      .correlationId("testString")
-      .xKmsKeyRing("testString")
-      .build();
-
-    // Invoke getMigrationIntent() with a valid options model and verify the result
-    Response<GetMigrationIntent> response = ibmKeyProtectApiService.getMigrationIntent(getMigrationIntentOptionsModel).execute();
-    assertNotNull(response);
-    GetMigrationIntent responseObj = response.getResult();
-    assertNotNull(responseObj);
-
-    // Verify the contents of the request sent to the mock server
-    RecordedRequest request = server.takeRequest();
-    assertNotNull(request);
-    assertEquals(request.getMethod(), "GET");
-    // Verify request path
-    String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, getMigrationIntentPath);
-    // Verify header parameters
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-    // Verify that there is no query string
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-  }
-
-  // Test the getMigrationIntent operation with and without retries enabled
-  @Test
-  public void testGetMigrationIntentWRetries() throws Throwable {
-    ibmKeyProtectApiService.enableRetries(4, 30);
-    testGetMigrationIntentWOptions();
-
-    ibmKeyProtectApiService.disableRetries();
-    testGetMigrationIntentWOptions();
-  }
-
-  // Test the getMigrationIntent operation with a null options model (negative test)
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testGetMigrationIntentNoOptions() throws Throwable {
-    server.enqueue(new MockResponse());
-    ibmKeyProtectApiService.getMigrationIntent(null).execute();
-  }
-
-  // Test the deleteMigrationIntent operation with a valid options model parameter
-  @Test
-  public void testDeleteMigrationIntentWOptions() throws Throwable {
-    // Register a mock response
-    String mockResponseBody = "";
-    String deleteMigrationIntentPath = "/api/v2/keys/testString/migrationIntent";
-    server.enqueue(new MockResponse()
-      .setResponseCode(204)
-      .setBody(mockResponseBody));
-
-    // Construct an instance of the DeleteMigrationIntentOptions model
-    DeleteMigrationIntentOptions deleteMigrationIntentOptionsModel = new DeleteMigrationIntentOptions.Builder()
-      .id("testString")
-      .bluemixInstance("testString")
-      .correlationId("testString")
-      .xKmsKeyRing("testString")
-      .build();
-
-    // Invoke deleteMigrationIntent() with a valid options model and verify the result
-    Response<Void> response = ibmKeyProtectApiService.deleteMigrationIntent(deleteMigrationIntentOptionsModel).execute();
-    assertNotNull(response);
-    Void responseObj = response.getResult();
-    assertNull(responseObj);
-
-    // Verify the contents of the request sent to the mock server
-    RecordedRequest request = server.takeRequest();
-    assertNotNull(request);
-    assertEquals(request.getMethod(), "DELETE");
-    // Verify request path
-    String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, deleteMigrationIntentPath);
-    // Verify header parameters
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-    // Verify that there is no query string
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-  }
-
-  // Test the deleteMigrationIntent operation with and without retries enabled
-  @Test
-  public void testDeleteMigrationIntentWRetries() throws Throwable {
-    ibmKeyProtectApiService.enableRetries(4, 30);
-    testDeleteMigrationIntentWOptions();
-
-    ibmKeyProtectApiService.disableRetries();
-    testDeleteMigrationIntentWOptions();
-  }
-
-  // Test the deleteMigrationIntent operation with a null options model (negative test)
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testDeleteMigrationIntentNoOptions() throws Throwable {
-    server.enqueue(new MockResponse());
-    ibmKeyProtectApiService.deleteMigrationIntent(null).execute();
   }
 
   // Perform setup needed before each test method

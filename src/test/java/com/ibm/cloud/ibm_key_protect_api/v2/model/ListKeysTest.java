@@ -18,7 +18,6 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.DualAuthKeyMetadata;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyFullRepresentation;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.ListKeys;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.ListKeysMetadataPropertiesSearchQuery;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.MigrationIntent;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.RotationKeyMetadata;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;

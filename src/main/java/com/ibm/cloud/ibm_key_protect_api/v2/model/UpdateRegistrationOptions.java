@@ -29,7 +29,6 @@ public class UpdateRegistrationOptions extends GenericModel {
   protected List<ModifiableRegistrationResourceBody> resources;
   protected String correlationId;
   protected String xKmsKeyRing;
-  protected String ifMatch;
 
   /**
    * Builder.
@@ -42,7 +41,6 @@ public class UpdateRegistrationOptions extends GenericModel {
     private List<ModifiableRegistrationResourceBody> resources;
     private String correlationId;
     private String xKmsKeyRing;
-    private String ifMatch;
 
     /**
      * Instantiates a new Builder from an existing UpdateRegistrationOptions instance.
@@ -57,7 +55,6 @@ public class UpdateRegistrationOptions extends GenericModel {
       this.resources = updateRegistrationOptions.resources;
       this.correlationId = updateRegistrationOptions.correlationId;
       this.xKmsKeyRing = updateRegistrationOptions.xKmsKeyRing;
-      this.ifMatch = updateRegistrationOptions.ifMatch;
     }
 
     /**
@@ -181,17 +178,6 @@ public class UpdateRegistrationOptions extends GenericModel {
       this.xKmsKeyRing = xKmsKeyRing;
       return this;
     }
-
-    /**
-     * Set the ifMatch.
-     *
-     * @param ifMatch the ifMatch
-     * @return the UpdateRegistrationOptions builder
-     */
-    public Builder ifMatch(String ifMatch) {
-      this.ifMatch = ifMatch;
-      return this;
-    }
   }
 
   protected UpdateRegistrationOptions() { }
@@ -210,7 +196,6 @@ public class UpdateRegistrationOptions extends GenericModel {
     resources = builder.resources;
     correlationId = builder.correlationId;
     xKmsKeyRing = builder.xKmsKeyRing;
-    ifMatch = builder.ifMatch;
   }
 
   /**
@@ -300,22 +285,6 @@ public class UpdateRegistrationOptions extends GenericModel {
    */
   public String xKmsKeyRing() {
     return xKmsKeyRing;
-  }
-
-  /**
-   * Gets the ifMatch.
-   *
-   * ETag is a hash value generated based on attributes representing a specific state/version of a Key Protect
-   * registration. It is only generated when a single registration is returned from a service to service call. This
-   * value can be passed in an If-Match header of a PUT/PATCH request to determine if there are any version conflicts
-   * during the process of updating registrations, preventing the problem of losing updated registration data. The
-   * If-Match header does a weak comparison between registration versions and is capable of handling multiple comma
-   * separated ETags.
-   *
-   * @return the ifMatch
-   */
-  public String ifMatch() {
-    return ifMatch;
   }
 }
 

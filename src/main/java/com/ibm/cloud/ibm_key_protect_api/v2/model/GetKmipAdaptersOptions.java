@@ -24,7 +24,6 @@ public class GetKmipAdaptersOptions extends GenericModel {
   protected Long limit;
   protected Long offset;
   protected Boolean totalCount;
-  protected String crkId;
 
   /**
    * Builder.
@@ -35,7 +34,6 @@ public class GetKmipAdaptersOptions extends GenericModel {
     private Long limit;
     private Long offset;
     private Boolean totalCount;
-    private String crkId;
 
     /**
      * Instantiates a new Builder from an existing GetKmipAdaptersOptions instance.
@@ -48,7 +46,6 @@ public class GetKmipAdaptersOptions extends GenericModel {
       this.limit = getKmipAdaptersOptions.limit;
       this.offset = getKmipAdaptersOptions.offset;
       this.totalCount = getKmipAdaptersOptions.totalCount;
-      this.crkId = getKmipAdaptersOptions.crkId;
     }
 
     /**
@@ -129,17 +126,6 @@ public class GetKmipAdaptersOptions extends GenericModel {
       this.totalCount = totalCount;
       return this;
     }
-
-    /**
-     * Set the crkId.
-     *
-     * @param crkId the crkId
-     * @return the GetKmipAdaptersOptions builder
-     */
-    public Builder crkId(String crkId) {
-      this.crkId = crkId;
-      return this;
-    }
   }
 
   protected GetKmipAdaptersOptions() { }
@@ -152,7 +138,6 @@ public class GetKmipAdaptersOptions extends GenericModel {
     limit = builder.limit;
     offset = builder.offset;
     totalCount = builder.totalCount;
-    crkId = builder.crkId;
   }
 
   /**
@@ -227,19 +212,6 @@ public class GetKmipAdaptersOptions extends GenericModel {
    */
   public Boolean totalCount() {
     return totalCount;
-  }
-
-  /**
-   * Gets the crkId.
-   *
-   * The root key ID(`crk_id`) in the `profile_data` to filter on. This field is currently only applicable to profile
-   * `"native_1.0"`. It will only return adapters with profile_data that contains this field. Example usage
-   * `../kmip_adapters?crk_id=feddecaf-0000-0000-0000-1234567890ab`.
-   *
-   * @return the crkId
-   */
-  public String crkId() {
-    return crkId;
   }
 }
 

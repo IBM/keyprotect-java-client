@@ -59,7 +59,6 @@ public class ReplaceRegistrationOptionsTest {
       .resources(java.util.Arrays.asList(replaceRegistrationResourceBodyModel))
       .correlationId("testString")
       .xKmsKeyRing("testString")
-      .ifMatch("W/c8f7e349e5a1f8d7255de81f2508e5914667fg5e4aeb88945002286f753064b7")
       .build();
     assertEquals(replaceRegistrationOptionsModel.id(), "testString");
     assertEquals(replaceRegistrationOptionsModel.urlEncodedResourceCrn(), "crn%3av1%3abluemix%3apublic%3acloud-object-storage%3aglobal%3aa%2f00000000000000000000000000000000%3afeddecaf-0000-0000-0000-1234567890ab%3a%3abucket");
@@ -68,7 +67,6 @@ public class ReplaceRegistrationOptionsTest {
     assertEquals(replaceRegistrationOptionsModel.resources(), java.util.Arrays.asList(replaceRegistrationResourceBodyModel));
     assertEquals(replaceRegistrationOptionsModel.correlationId(), "testString");
     assertEquals(replaceRegistrationOptionsModel.xKmsKeyRing(), "testString");
-    assertEquals(replaceRegistrationOptionsModel.ifMatch(), "W/c8f7e349e5a1f8d7255de81f2508e5914667fg5e4aeb88945002286f753064b7");
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

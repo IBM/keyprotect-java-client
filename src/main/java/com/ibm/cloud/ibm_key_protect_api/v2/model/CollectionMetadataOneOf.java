@@ -19,7 +19,6 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  *
  * Classes which extend this class:
  * - CollectionMetadataOneOfCollectionMetadata
- * - CollectionMetadataOneOfCollectionMetadataWithQuota
  */
 public class CollectionMetadataOneOf extends GenericModel {
 
@@ -53,10 +52,6 @@ public class CollectionMetadataOneOf extends GenericModel {
     String APPLICATION_VND_IBM_KMS_REGISTRATION_JSON = "application/vnd.ibm.kms.registration+json";
     /** application/vnd.ibm.kms.resource_crn+json. */
     String APPLICATION_VND_IBM_KMS_RESOURCE_CRN_JSON = "application/vnd.ibm.kms.resource_crn+json";
-    /** application/vnd.ibm.kms.migration_intent+json. */
-    String APPLICATION_VND_IBM_KMS_MIGRATION_INTENT_JSON = "application/vnd.ibm.kms.migration_intent+json";
-    /** application/vnd.ibm.kms.migration_intent_input+json. */
-    String APPLICATION_VND_IBM_KMS_MIGRATION_INTENT_INPUT_JSON = "application/vnd.ibm.kms.migration_intent_input+json";
     /** application/vnd.ibm.kms.kmip_adapter+json. */
     String APPLICATION_VND_IBM_KMS_KMIP_ADAPTER_JSON = "application/vnd.ibm.kms.kmip_adapter+json";
     /** application/vnd.ibm.kms.kmip_client_certificate+json. */
@@ -67,7 +62,6 @@ public class CollectionMetadataOneOf extends GenericModel {
 
   protected String collectionType;
   protected Long collectionTotal;
-  protected QuotaMetadataSatQuota satQuota;
 
   protected CollectionMetadataOneOf() { }
 
@@ -91,17 +85,6 @@ public class CollectionMetadataOneOf extends GenericModel {
    */
   public Long getCollectionTotal() {
     return collectionTotal;
-  }
-
-  /**
-   * Gets the satQuota.
-   *
-   * Properties relating to current usage with respect to a quota in a satellite location.
-   *
-   * @return the satQuota
-   */
-  public QuotaMetadataSatQuota getSatQuota() {
-    return satQuota;
   }
 }
 
