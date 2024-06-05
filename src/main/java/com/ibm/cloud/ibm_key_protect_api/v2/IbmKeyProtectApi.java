@@ -20,7 +20,6 @@ package com.ibm.cloud.ibm_key_protect_api.v2;
 import com.google.gson.JsonObject;
 import com.ibm.cloud.common.SdkCommon;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.ActionOnKeyOptions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.ActionOnRegistrationOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.AddKmipClientCertificateOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.AllowedIPPort;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKeyAliasOptions;
@@ -28,8 +27,6 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKeyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKeyRingOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKeyWithPoliciesOverridesOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKmipAdapterOptions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateRegistrationOptions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.DeactivateRegistration;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKey;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKeyAliasOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKeyOptions;
@@ -37,10 +34,8 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKeyRingOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKmipAdapterOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKmipClientCertificateOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKmipObjectOptions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteRegistrationOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DisableKeyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.EnableKeyOptions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.EventAcknowledgeOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetAllowedIPPortOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetImportToken;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetImportTokenOptions;
@@ -83,9 +78,7 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.PurgeKey;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.PurgeKeyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.PutInstancePolicyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.PutPolicyOptions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.Registration;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.RegistrationWithTotalCount;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.ReplaceRegistrationOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.RestoreKeyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.RewrapKeyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.RewrapKeyResponseBody;
@@ -95,7 +88,6 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.SyncAssociatedResourcesOptions
 import com.ibm.cloud.ibm_key_protect_api.v2.model.UnsetKeyForDeletionOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.UnwrapKeyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.UnwrapKeyResponseBody;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.UpdateRegistrationOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.WrapKeyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.WrapKeyResponseBody;
 import com.ibm.cloud.sdk.core.http.RequestBuilder;
@@ -1257,222 +1249,6 @@ public class IbmKeyProtectApi extends BaseService {
   }
 
   /**
-   * Create a registration.
-   *
-   * **Service to service calls only.** Creates a registration between a root key and a cloud resource, such as a Cloud
-   * Object Storage bucket. The key is identified by its ID, and the cloud resource is identified by its Cloud Resource
-   * Name (CRN).
-   *
-   * @param createRegistrationOptions the {@link CreateRegistrationOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link Registration}
-   */
-  public ServiceCall<Registration> createRegistration(CreateRegistrationOptions createRegistrationOptions) {
-    com.ibm.cloud.sdk.core.util.Validator.notNull(createRegistrationOptions,
-      "createRegistrationOptions cannot be null");
-    Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("id", createRegistrationOptions.id());
-    pathParamsMap.put("urlEncodedResourceCRN", createRegistrationOptions.urlEncodedResourceCrn());
-    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/api/v2/keys/{id}/registrations/{urlEncodedResourceCRN}", pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("ibm_key_protect_api", "v2", "createRegistration");
-    for (Entry<String, String> header : sdkHeaders.entrySet()) {
-      builder.header(header.getKey(), header.getValue());
-    }
-    builder.header("Accept", "application/json");
-    builder.header("Bluemix-Instance", createRegistrationOptions.bluemixInstance());
-    if (createRegistrationOptions.correlationId() != null) {
-      builder.header("Correlation-Id", createRegistrationOptions.correlationId());
-    }
-    if (createRegistrationOptions.xKmsKeyRing() != null) {
-      builder.header("X-Kms-Key-Ring", createRegistrationOptions.xKmsKeyRing());
-    }
-    final JsonObject contentJson = new JsonObject();
-    if (createRegistrationOptions.metadata() != null) {
-      contentJson.add("metadata", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createRegistrationOptions.metadata()));
-    }
-    if (createRegistrationOptions.resources() != null) {
-      contentJson.add("resources", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createRegistrationOptions.resources()));
-    }
-    builder.bodyJson(contentJson);
-    ResponseConverter<Registration> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<Registration>() { }.getType());
-    return createServiceCall(builder.build(), responseConverter);
-  }
-
-  /**
-   * Update a registration.
-   *
-   * **Service to service calls only.** Updates an existing registration based on the properties that you specify.
-   *
-   * When you call `PATCH /registrations`, Key Protect updates only the properties that you specify in the request
-   * entity-body. To replace the registration, use `PUT /registrations`. The `preventKeyDeletion` policy should  only be
-   * set if a WORM policy must be satisfied (as would be needed for this example:
-   * https://www.ibm.com/docs/en/spectrum-scale/5.0.1?topic=ics-how-write-once-read-many-worm-storage-works).  Do not
-   * set this policy by default.
-   *
-   * @param updateRegistrationOptions the {@link UpdateRegistrationOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link Registration}
-   */
-  public ServiceCall<Registration> updateRegistration(UpdateRegistrationOptions updateRegistrationOptions) {
-    com.ibm.cloud.sdk.core.util.Validator.notNull(updateRegistrationOptions,
-      "updateRegistrationOptions cannot be null");
-    Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("id", updateRegistrationOptions.id());
-    pathParamsMap.put("urlEncodedResourceCRN", updateRegistrationOptions.urlEncodedResourceCrn());
-    RequestBuilder builder = RequestBuilder.patch(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/api/v2/keys/{id}/registrations/{urlEncodedResourceCRN}", pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("ibm_key_protect_api", "v2", "updateRegistration");
-    for (Entry<String, String> header : sdkHeaders.entrySet()) {
-      builder.header(header.getKey(), header.getValue());
-    }
-    builder.header("Accept", "application/json");
-    builder.header("Bluemix-Instance", updateRegistrationOptions.bluemixInstance());
-    if (updateRegistrationOptions.correlationId() != null) {
-      builder.header("Correlation-Id", updateRegistrationOptions.correlationId());
-    }
-    if (updateRegistrationOptions.xKmsKeyRing() != null) {
-      builder.header("X-Kms-Key-Ring", updateRegistrationOptions.xKmsKeyRing());
-    }
-    final JsonObject contentJson = new JsonObject();
-    if (updateRegistrationOptions.metadata() != null) {
-      contentJson.add("metadata", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateRegistrationOptions.metadata()));
-    }
-    if (updateRegistrationOptions.resources() != null) {
-      contentJson.add("resources", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(updateRegistrationOptions.resources()));
-    }
-    builder.bodyJson(contentJson);
-    ResponseConverter<Registration> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<Registration>() { }.getType());
-    return createServiceCall(builder.build(), responseConverter);
-  }
-
-  /**
-   * Replace a registration.
-   *
-   * **Service to service calls only.** Replace an existing registration between a root key and a cloud resource. The
-   * key is identified by its ID, and the cloud resource is identified by its Cloud Resource Name
-   * (CRN).
-   *
-   * When you call `PUT /registrations`, Key Protect replaces the existing registration with the properties that you
-   * provide in the request entity-body.
-   *
-   * @param replaceRegistrationOptions the {@link ReplaceRegistrationOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link Registration}
-   */
-  public ServiceCall<Registration> replaceRegistration(ReplaceRegistrationOptions replaceRegistrationOptions) {
-    com.ibm.cloud.sdk.core.util.Validator.notNull(replaceRegistrationOptions,
-      "replaceRegistrationOptions cannot be null");
-    Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("id", replaceRegistrationOptions.id());
-    pathParamsMap.put("urlEncodedResourceCRN", replaceRegistrationOptions.urlEncodedResourceCrn());
-    RequestBuilder builder = RequestBuilder.put(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/api/v2/keys/{id}/registrations/{urlEncodedResourceCRN}", pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("ibm_key_protect_api", "v2", "replaceRegistration");
-    for (Entry<String, String> header : sdkHeaders.entrySet()) {
-      builder.header(header.getKey(), header.getValue());
-    }
-    builder.header("Accept", "application/json");
-    builder.header("Bluemix-Instance", replaceRegistrationOptions.bluemixInstance());
-    if (replaceRegistrationOptions.correlationId() != null) {
-      builder.header("Correlation-Id", replaceRegistrationOptions.correlationId());
-    }
-    if (replaceRegistrationOptions.xKmsKeyRing() != null) {
-      builder.header("X-Kms-Key-Ring", replaceRegistrationOptions.xKmsKeyRing());
-    }
-    final JsonObject contentJson = new JsonObject();
-    if (replaceRegistrationOptions.metadata() != null) {
-      contentJson.add("metadata", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceRegistrationOptions.metadata()));
-    }
-    if (replaceRegistrationOptions.resources() != null) {
-      contentJson.add("resources", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceRegistrationOptions.resources()));
-    }
-    builder.bodyJson(contentJson);
-    ResponseConverter<Registration> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<Registration>() { }.getType());
-    return createServiceCall(builder.build(), responseConverter);
-  }
-
-  /**
-   * Delete a registration.
-   *
-   * **Service to service calls only.** Deletes an existing registration between a root key and a cloud resource.
-   *
-   * This action permanently removes the registration from the Key Protect database.
-   *
-   * @param deleteRegistrationOptions the {@link DeleteRegistrationOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link Registration}
-   */
-  public ServiceCall<Registration> deleteRegistration(DeleteRegistrationOptions deleteRegistrationOptions) {
-    com.ibm.cloud.sdk.core.util.Validator.notNull(deleteRegistrationOptions,
-      "deleteRegistrationOptions cannot be null");
-    Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("id", deleteRegistrationOptions.id());
-    pathParamsMap.put("urlEncodedResourceCRN", deleteRegistrationOptions.urlEncodedResourceCrn());
-    RequestBuilder builder = RequestBuilder.delete(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/api/v2/keys/{id}/registrations/{urlEncodedResourceCRN}", pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("ibm_key_protect_api", "v2", "deleteRegistration");
-    for (Entry<String, String> header : sdkHeaders.entrySet()) {
-      builder.header(header.getKey(), header.getValue());
-    }
-    builder.header("Accept", "application/json");
-    builder.header("Bluemix-Instance", deleteRegistrationOptions.bluemixInstance());
-    if (deleteRegistrationOptions.correlationId() != null) {
-      builder.header("Correlation-Id", deleteRegistrationOptions.correlationId());
-    }
-    if (deleteRegistrationOptions.xKmsKeyRing() != null) {
-      builder.header("X-Kms-Key-Ring", deleteRegistrationOptions.xKmsKeyRing());
-    }
-    if (deleteRegistrationOptions.prefer() != null) {
-      builder.header("Prefer", deleteRegistrationOptions.prefer());
-    }
-    ResponseConverter<Registration> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<Registration>() { }.getType());
-    return createServiceCall(builder.build(), responseConverter);
-  }
-
-  /**
-   * Deactivate a registration.
-   *
-   * **Deprecated.** Invokes an action, such as a deactivate operation, on a registration with the specified key ID and
-   * CRN.
-   *
-   * When a customer deletes a root key that is associated with a cloud resource, the registration between the resources
-   * moves to the
-   * `Suspended` state. As an integrated service, use
-   * `POST /keys/{id}/registrations?action=deactivate` to acknowledge the deletion. This action moves the registration
-   * to a `Deactivated` state.
-   *
-   * @param actionOnRegistrationOptions the {@link ActionOnRegistrationOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link DeactivateRegistration}
-   * @deprecated this method is deprecated and may be removed in a future release
-   */
-   @Deprecated
-  public ServiceCall<DeactivateRegistration> actionOnRegistration(ActionOnRegistrationOptions actionOnRegistrationOptions) {
-    LOGGER.warning("A deprecated operation has been invoked: actionOnRegistration");
-    com.ibm.cloud.sdk.core.util.Validator.notNull(actionOnRegistrationOptions,
-      "actionOnRegistrationOptions cannot be null");
-    Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put("id", actionOnRegistrationOptions.id());
-    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/api/v2/keys/{id}/registrations", pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("ibm_key_protect_api", "v2", "actionOnRegistration");
-    for (Entry<String, String> header : sdkHeaders.entrySet()) {
-      builder.header(header.getKey(), header.getValue());
-    }
-    builder.header("Accept", "application/json");
-    builder.header("Bluemix-Instance", actionOnRegistrationOptions.bluemixInstance());
-    if (actionOnRegistrationOptions.correlationId() != null) {
-      builder.header("Correlation-Id", actionOnRegistrationOptions.correlationId());
-    }
-    if (actionOnRegistrationOptions.xKmsKeyRing() != null) {
-      builder.header("X-Kms-Key-Ring", actionOnRegistrationOptions.xKmsKeyRing());
-    }
-    if (actionOnRegistrationOptions.prefer() != null) {
-      builder.header("Prefer", actionOnRegistrationOptions.prefer());
-    }
-    builder.query("action", String.valueOf(actionOnRegistrationOptions.action()));
-    builder.bodyContent(com.ibm.cloud.sdk.core.util.GsonSingleton.getGsonWithoutPrettyPrinting().toJson(actionOnRegistrationOptions.registrationDeactivateBody()), "application/json");
-    ResponseConverter<DeactivateRegistration> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DeactivateRegistration>() { }.getType());
-    return createServiceCall(builder.build(), responseConverter);
-  }
-
-  /**
    * List registrations for a key.
    *
    * Retrieves a list of registrations that are associated with a specified root key.
@@ -1568,38 +1344,6 @@ public class IbmKeyProtectApi extends BaseService {
     }
     ResponseConverter<RegistrationWithTotalCount> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<RegistrationWithTotalCount>() { }.getType());
-    return createServiceCall(builder.build(), responseConverter);
-  }
-
-  /**
-   * Acknowledge key events.
-   *
-   * **Service to service calls only.** Acknowledges a key lifecycle event.
-   *
-   * When a customer performs an action on a root key, Key Protect uses Hyperwarp to notify the cloud services that are
-   * registered with the key. To acknowledge the Hyperwarp event, registered services must call
-   * `POST /api/v2/event_ack`.
-   *
-   * @param eventAcknowledgeOptions the {@link EventAcknowledgeOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a void result
-   */
-  public ServiceCall<Void> eventAcknowledge(EventAcknowledgeOptions eventAcknowledgeOptions) {
-    com.ibm.cloud.sdk.core.util.Validator.notNull(eventAcknowledgeOptions,
-      "eventAcknowledgeOptions cannot be null");
-    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/api/v2/event_ack"));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("ibm_key_protect_api", "v2", "eventAcknowledge");
-    for (Entry<String, String> header : sdkHeaders.entrySet()) {
-      builder.header(header.getKey(), header.getValue());
-    }
-    builder.header("Bluemix-Instance", eventAcknowledgeOptions.bluemixInstance());
-    if (eventAcknowledgeOptions.correlationId() != null) {
-      builder.header("Correlation-Id", eventAcknowledgeOptions.correlationId());
-    }
-    if (eventAcknowledgeOptions.xKmsKeyRing() != null) {
-      builder.header("X-Kms-Key-Ring", eventAcknowledgeOptions.xKmsKeyRing());
-    }
-    builder.bodyContent(eventAcknowledgeOptions.eventAcknowledge(), "application/vnd.ibm.kms.event_acknowledge+json");
-    ResponseConverter<Void> responseConverter = ResponseConverterUtils.getVoid();
     return createServiceCall(builder.build(), responseConverter);
   }
 

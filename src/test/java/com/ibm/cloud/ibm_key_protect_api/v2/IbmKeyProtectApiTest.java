@@ -14,11 +14,9 @@ package com.ibm.cloud.ibm_key_protect_api.v2;
 
 import com.ibm.cloud.ibm_key_protect_api.v2.IbmKeyProtectApi;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.ActionOnKeyOptions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.ActionOnRegistrationOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.AddKmipClientCertificateOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.AllowedIPPort;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.AllowedIPPortResource;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.CloudResourceName;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CollectionMetadata;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CollectionMetadataListKeys;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CollectionMetadataOneOf;
@@ -31,9 +29,6 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKeyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKeyRingOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKeyWithPoliciesOverridesOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateKmipAdapterOptions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateRegistrationOptions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.CreateRegistrationResourceBody;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.DeactivateRegistration;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKey;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKeyAliasOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKeyOptions;
@@ -41,12 +36,10 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKeyRingOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKmipAdapterOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKmipClientCertificateOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteKmipObjectOptions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.DeleteRegistrationOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DisableKeyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DualAuthDeleteProperties;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.DualAuthKeyMetadata;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.EnableKeyOptions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.EventAcknowledgeOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetAllowedIPPortOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetImportToken;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.GetImportTokenOptions;
@@ -151,7 +144,6 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.ListKeyVersions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.ListKeys;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.ListKeysMetadataPropertiesSearchQuery;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.MetricsProperties;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.ModifiableRegistrationResourceBody;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.PatchKeyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.PatchKeyResponseBody;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.PostImportTokenOptions;
@@ -159,13 +151,8 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.PurgeKey;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.PurgeKeyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.PutInstancePolicyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.PutPolicyOptions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.Registration;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.RegistrationActionOneOf;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.RegistrationActionOneOfDeactivateRegistration;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.RegistrationResource;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.RegistrationWithTotalCount;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.ReplaceRegistrationOptions;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.ReplaceRegistrationResourceBody;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.RestoreKeyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.RewrapKeyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.RewrapKeyResponseBody;
@@ -200,7 +187,6 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.SyncAssociatedResourcesOptions
 import com.ibm.cloud.ibm_key_protect_api.v2.model.UnsetKeyForDeletionOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.UnwrapKeyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.UnwrapKeyResponseBody;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.UpdateRegistrationOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.WrapKeyOptions;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.WrapKeyResponseBody;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.WrappedKeyVersionKeyVersion;
@@ -1920,359 +1906,6 @@ public class IbmKeyProtectApiTest {
     ibmKeyProtectApiService.getImportToken(null).execute();
   }
 
-  // Test the createRegistration operation with a valid options model parameter
-  @Test
-  public void testCreateRegistrationWOptions() throws Throwable {
-    // Register a mock response
-    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.allowed_ip_metadata+json\", \"collectionTotal\": 1}, \"resources\": [{\"keyId\": \"fadedbee-0000-0000-0000-1234567890ab\", \"keyName\": \"Example Key Name\", \"resourceCrn\": \"crn:v1:bluemix:public:<service-name>:<location>:a/<account-id>:<service-instance>:<resource-type>:<resource>\", \"createdBy\": \"IBMid-0000000000\", \"creationDate\": \"2000-03-21T00:00:00.000Z\", \"updatedBy\": \"IBMid-0000000000\", \"lastUpdated\": \"2000-03-21T00:00:00.000Z\", \"description\": \"Example description\", \"registrationMetadata\": \"us-south\", \"preventKeyDeletion\": false, \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2000-03-21T00:00:00.000Z\"}}]}";
-    String createRegistrationPath = "/api/v2/keys/testString/registrations/crn%253av1%253abluemix%253apublic%253acloud-object-storage%253aglobal%253aa%252f00000000000000000000000000000000%253afeddecaf-0000-0000-0000-1234567890ab%253a%253abucket";
-    server.enqueue(new MockResponse()
-      .setHeader("Content-type", "application/json")
-      .setResponseCode(200)
-      .setBody(mockResponseBody));
-
-    // Construct an instance of the CollectionMetadata model
-    CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
-      .collectionType("application/vnd.ibm.kms.registration_input+json")
-      .collectionTotal(Long.valueOf("1"))
-      .build();
-
-    // Construct an instance of the CreateRegistrationResourceBody model
-    CreateRegistrationResourceBody createRegistrationResourceBodyModel = new CreateRegistrationResourceBody.Builder()
-      .preventKeyDeletion(false)
-      .description("A resource registration on a Key Protect key")
-      .registrationMetadata("testString")
-      .build();
-
-    // Construct an instance of the CreateRegistrationOptions model
-    CreateRegistrationOptions createRegistrationOptionsModel = new CreateRegistrationOptions.Builder()
-      .id("testString")
-      .urlEncodedResourceCrn("crn%3av1%3abluemix%3apublic%3acloud-object-storage%3aglobal%3aa%2f00000000000000000000000000000000%3afeddecaf-0000-0000-0000-1234567890ab%3a%3abucket")
-      .bluemixInstance("testString")
-      .metadata(collectionMetadataModel)
-      .resources(java.util.Arrays.asList(createRegistrationResourceBodyModel))
-      .correlationId("testString")
-      .xKmsKeyRing("testString")
-      .build();
-
-    // Invoke createRegistration() with a valid options model and verify the result
-    Response<Registration> response = ibmKeyProtectApiService.createRegistration(createRegistrationOptionsModel).execute();
-    assertNotNull(response);
-    Registration responseObj = response.getResult();
-    assertNotNull(responseObj);
-
-    // Verify the contents of the request sent to the mock server
-    RecordedRequest request = server.takeRequest();
-    assertNotNull(request);
-    assertEquals(request.getMethod(), "POST");
-    // Verify request path
-    String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, createRegistrationPath);
-    // Verify header parameters
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-    // Verify that there is no query string
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-  }
-
-  // Test the createRegistration operation with and without retries enabled
-  @Test
-  public void testCreateRegistrationWRetries() throws Throwable {
-    ibmKeyProtectApiService.enableRetries(4, 30);
-    testCreateRegistrationWOptions();
-
-    ibmKeyProtectApiService.disableRetries();
-    testCreateRegistrationWOptions();
-  }
-
-  // Test the createRegistration operation with a null options model (negative test)
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testCreateRegistrationNoOptions() throws Throwable {
-    server.enqueue(new MockResponse());
-    ibmKeyProtectApiService.createRegistration(null).execute();
-  }
-
-  // Test the updateRegistration operation with a valid options model parameter
-  @Test
-  public void testUpdateRegistrationWOptions() throws Throwable {
-    // Register a mock response
-    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.allowed_ip_metadata+json\", \"collectionTotal\": 1}, \"resources\": [{\"keyId\": \"fadedbee-0000-0000-0000-1234567890ab\", \"keyName\": \"Example Key Name\", \"resourceCrn\": \"crn:v1:bluemix:public:<service-name>:<location>:a/<account-id>:<service-instance>:<resource-type>:<resource>\", \"createdBy\": \"IBMid-0000000000\", \"creationDate\": \"2000-03-21T00:00:00.000Z\", \"updatedBy\": \"IBMid-0000000000\", \"lastUpdated\": \"2000-03-21T00:00:00.000Z\", \"description\": \"Example description\", \"registrationMetadata\": \"us-south\", \"preventKeyDeletion\": false, \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2000-03-21T00:00:00.000Z\"}}]}";
-    String updateRegistrationPath = "/api/v2/keys/testString/registrations/crn%253av1%253abluemix%253apublic%253acloud-object-storage%253aglobal%253aa%252f00000000000000000000000000000000%253afeddecaf-0000-0000-0000-1234567890ab%253a%253abucket";
-    server.enqueue(new MockResponse()
-      .setHeader("Content-type", "application/json")
-      .setResponseCode(200)
-      .setBody(mockResponseBody));
-
-    // Construct an instance of the CollectionMetadata model
-    CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
-      .collectionType("application/vnd.ibm.kms.registration_input+json")
-      .collectionTotal(Long.valueOf("1"))
-      .build();
-
-    // Construct an instance of the ModifiableRegistrationResourceBody model
-    ModifiableRegistrationResourceBody modifiableRegistrationResourceBodyModel = new ModifiableRegistrationResourceBody.Builder()
-      .preventKeyDeletion(false)
-      .description("A resource registration on a Key Protect key")
-      .registrationMetadata("testString")
-      .keyVersionId("testString")
-      .build();
-
-    // Construct an instance of the UpdateRegistrationOptions model
-    UpdateRegistrationOptions updateRegistrationOptionsModel = new UpdateRegistrationOptions.Builder()
-      .id("testString")
-      .urlEncodedResourceCrn("crn%3av1%3abluemix%3apublic%3acloud-object-storage%3aglobal%3aa%2f00000000000000000000000000000000%3afeddecaf-0000-0000-0000-1234567890ab%3a%3abucket")
-      .bluemixInstance("testString")
-      .metadata(collectionMetadataModel)
-      .resources(java.util.Arrays.asList(modifiableRegistrationResourceBodyModel))
-      .correlationId("testString")
-      .xKmsKeyRing("testString")
-      .build();
-
-    // Invoke updateRegistration() with a valid options model and verify the result
-    Response<Registration> response = ibmKeyProtectApiService.updateRegistration(updateRegistrationOptionsModel).execute();
-    assertNotNull(response);
-    Registration responseObj = response.getResult();
-    assertNotNull(responseObj);
-
-    // Verify the contents of the request sent to the mock server
-    RecordedRequest request = server.takeRequest();
-    assertNotNull(request);
-    assertEquals(request.getMethod(), "PATCH");
-    // Verify request path
-    String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, updateRegistrationPath);
-    // Verify header parameters
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-    // Verify that there is no query string
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-  }
-
-  // Test the updateRegistration operation with and without retries enabled
-  @Test
-  public void testUpdateRegistrationWRetries() throws Throwable {
-    ibmKeyProtectApiService.enableRetries(4, 30);
-    testUpdateRegistrationWOptions();
-
-    ibmKeyProtectApiService.disableRetries();
-    testUpdateRegistrationWOptions();
-  }
-
-  // Test the updateRegistration operation with a null options model (negative test)
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testUpdateRegistrationNoOptions() throws Throwable {
-    server.enqueue(new MockResponse());
-    ibmKeyProtectApiService.updateRegistration(null).execute();
-  }
-
-  // Test the replaceRegistration operation with a valid options model parameter
-  @Test
-  public void testReplaceRegistrationWOptions() throws Throwable {
-    // Register a mock response
-    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.allowed_ip_metadata+json\", \"collectionTotal\": 1}, \"resources\": [{\"keyId\": \"fadedbee-0000-0000-0000-1234567890ab\", \"keyName\": \"Example Key Name\", \"resourceCrn\": \"crn:v1:bluemix:public:<service-name>:<location>:a/<account-id>:<service-instance>:<resource-type>:<resource>\", \"createdBy\": \"IBMid-0000000000\", \"creationDate\": \"2000-03-21T00:00:00.000Z\", \"updatedBy\": \"IBMid-0000000000\", \"lastUpdated\": \"2000-03-21T00:00:00.000Z\", \"description\": \"Example description\", \"registrationMetadata\": \"us-south\", \"preventKeyDeletion\": false, \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2000-03-21T00:00:00.000Z\"}}]}";
-    String replaceRegistrationPath = "/api/v2/keys/testString/registrations/crn%253av1%253abluemix%253apublic%253acloud-object-storage%253aglobal%253aa%252f00000000000000000000000000000000%253afeddecaf-0000-0000-0000-1234567890ab%253a%253abucket";
-    server.enqueue(new MockResponse()
-      .setHeader("Content-type", "application/json")
-      .setResponseCode(200)
-      .setBody(mockResponseBody));
-
-    // Construct an instance of the CollectionMetadata model
-    CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
-      .collectionType("application/vnd.ibm.kms.registration_input+json")
-      .collectionTotal(Long.valueOf("1"))
-      .build();
-
-    // Construct an instance of the ReplaceRegistrationResourceBody model
-    ReplaceRegistrationResourceBody replaceRegistrationResourceBodyModel = new ReplaceRegistrationResourceBody.Builder()
-      .preventKeyDeletion(false)
-      .description("A resource registration on a Key Protect key")
-      .registrationMetadata("Registration metadata")
-      .keyVersionId("fadedbee-0000-0000-0000-1234567890ab")
-      .build();
-
-    // Construct an instance of the ReplaceRegistrationOptions model
-    ReplaceRegistrationOptions replaceRegistrationOptionsModel = new ReplaceRegistrationOptions.Builder()
-      .id("testString")
-      .urlEncodedResourceCrn("crn%3av1%3abluemix%3apublic%3acloud-object-storage%3aglobal%3aa%2f00000000000000000000000000000000%3afeddecaf-0000-0000-0000-1234567890ab%3a%3abucket")
-      .bluemixInstance("testString")
-      .metadata(collectionMetadataModel)
-      .resources(java.util.Arrays.asList(replaceRegistrationResourceBodyModel))
-      .correlationId("testString")
-      .xKmsKeyRing("testString")
-      .build();
-
-    // Invoke replaceRegistration() with a valid options model and verify the result
-    Response<Registration> response = ibmKeyProtectApiService.replaceRegistration(replaceRegistrationOptionsModel).execute();
-    assertNotNull(response);
-    Registration responseObj = response.getResult();
-    assertNotNull(responseObj);
-
-    // Verify the contents of the request sent to the mock server
-    RecordedRequest request = server.takeRequest();
-    assertNotNull(request);
-    assertEquals(request.getMethod(), "PUT");
-    // Verify request path
-    String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, replaceRegistrationPath);
-    // Verify header parameters
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-    // Verify that there is no query string
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-  }
-
-  // Test the replaceRegistration operation with and without retries enabled
-  @Test
-  public void testReplaceRegistrationWRetries() throws Throwable {
-    ibmKeyProtectApiService.enableRetries(4, 30);
-    testReplaceRegistrationWOptions();
-
-    ibmKeyProtectApiService.disableRetries();
-    testReplaceRegistrationWOptions();
-  }
-
-  // Test the replaceRegistration operation with a null options model (negative test)
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testReplaceRegistrationNoOptions() throws Throwable {
-    server.enqueue(new MockResponse());
-    ibmKeyProtectApiService.replaceRegistration(null).execute();
-  }
-
-  // Test the deleteRegistration operation with a valid options model parameter
-  @Test
-  public void testDeleteRegistrationWOptions() throws Throwable {
-    // Register a mock response
-    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.allowed_ip_metadata+json\", \"collectionTotal\": 1}, \"resources\": [{\"keyId\": \"fadedbee-0000-0000-0000-1234567890ab\", \"keyName\": \"Example Key Name\", \"resourceCrn\": \"crn:v1:bluemix:public:<service-name>:<location>:a/<account-id>:<service-instance>:<resource-type>:<resource>\", \"createdBy\": \"IBMid-0000000000\", \"creationDate\": \"2000-03-21T00:00:00.000Z\", \"updatedBy\": \"IBMid-0000000000\", \"lastUpdated\": \"2000-03-21T00:00:00.000Z\", \"description\": \"Example description\", \"registrationMetadata\": \"us-south\", \"preventKeyDeletion\": false, \"keyVersion\": {\"id\": \"fadedbee-0000-0000-0000-1234567890ab\", \"creationDate\": \"2000-03-21T00:00:00.000Z\"}}]}";
-    String deleteRegistrationPath = "/api/v2/keys/testString/registrations/crn%253av1%253abluemix%253apublic%253acloud-object-storage%253aglobal%253aa%252f00000000000000000000000000000000%253afeddecaf-0000-0000-0000-1234567890ab%253a%253abucket";
-    server.enqueue(new MockResponse()
-      .setHeader("Content-type", "application/json")
-      .setResponseCode(200)
-      .setBody(mockResponseBody));
-
-    // Construct an instance of the DeleteRegistrationOptions model
-    DeleteRegistrationOptions deleteRegistrationOptionsModel = new DeleteRegistrationOptions.Builder()
-      .id("testString")
-      .urlEncodedResourceCrn("crn%3av1%3abluemix%3apublic%3acloud-object-storage%3aglobal%3aa%2f00000000000000000000000000000000%3afeddecaf-0000-0000-0000-1234567890ab%3a%3abucket")
-      .bluemixInstance("testString")
-      .correlationId("testString")
-      .xKmsKeyRing("testString")
-      .prefer("return=representation")
-      .build();
-
-    // Invoke deleteRegistration() with a valid options model and verify the result
-    Response<Registration> response = ibmKeyProtectApiService.deleteRegistration(deleteRegistrationOptionsModel).execute();
-    assertNotNull(response);
-    Registration responseObj = response.getResult();
-    assertNotNull(responseObj);
-
-    // Verify the contents of the request sent to the mock server
-    RecordedRequest request = server.takeRequest();
-    assertNotNull(request);
-    assertEquals(request.getMethod(), "DELETE");
-    // Verify request path
-    String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, deleteRegistrationPath);
-    // Verify header parameters
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-    // Verify that there is no query string
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-  }
-
-  // Test the deleteRegistration operation with and without retries enabled
-  @Test
-  public void testDeleteRegistrationWRetries() throws Throwable {
-    ibmKeyProtectApiService.enableRetries(4, 30);
-    testDeleteRegistrationWOptions();
-
-    ibmKeyProtectApiService.disableRetries();
-    testDeleteRegistrationWOptions();
-  }
-
-  // Test the deleteRegistration operation with a null options model (negative test)
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testDeleteRegistrationNoOptions() throws Throwable {
-    server.enqueue(new MockResponse());
-    ibmKeyProtectApiService.deleteRegistration(null).execute();
-  }
-
-  // Test the actionOnRegistration operation with a valid options model parameter
-  @Test
-  public void testActionOnRegistrationWOptions() throws Throwable {
-    // Register a mock response
-    String mockResponseBody = "{\"metadata\": {\"collectionType\": \"application/vnd.ibm.kms.allowed_ip_metadata+json\", \"collectionTotal\": 1}, \"resources\": [{\"resourceCrn\": \"crn:v1:bluemix:public:cloud-object-storage:global:a/<account-id>:<service-instance>:bucket:<bucket-name>\"}]}";
-    String actionOnRegistrationPath = "/api/v2/keys/testString/registrations";
-    server.enqueue(new MockResponse()
-      .setHeader("Content-type", "application/json")
-      .setResponseCode(200)
-      .setBody(mockResponseBody));
-
-    // Construct an instance of the CollectionMetadata model
-    CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
-      .collectionType("application/vnd.ibm.kms.allowed_ip_metadata+json")
-      .collectionTotal(Long.valueOf("1"))
-      .build();
-
-    // Construct an instance of the CloudResourceName model
-    CloudResourceName cloudResourceNameModel = new CloudResourceName.Builder()
-      .resourceCrn("crn:v1:bluemix:public:cloud-object-storage:global:a/<account-id>:<service-instance>:bucket:<bucket-name>")
-      .build();
-
-    // Construct an instance of the RegistrationActionOneOfDeactivateRegistration model
-    RegistrationActionOneOfDeactivateRegistration registrationActionOneOfModel = new RegistrationActionOneOfDeactivateRegistration.Builder()
-      .metadata(collectionMetadataModel)
-      .resources(java.util.Arrays.asList(cloudResourceNameModel))
-      .build();
-
-    // Construct an instance of the ActionOnRegistrationOptions model
-    ActionOnRegistrationOptions actionOnRegistrationOptionsModel = new ActionOnRegistrationOptions.Builder()
-      .id("testString")
-      .bluemixInstance("testString")
-      .action("deactivate")
-      .registrationDeactivateBody(registrationActionOneOfModel)
-      .correlationId("testString")
-      .xKmsKeyRing("testString")
-      .prefer("return=representation")
-      .build();
-
-    // Invoke actionOnRegistration() with a valid options model and verify the result
-    Response<DeactivateRegistration> response = ibmKeyProtectApiService.actionOnRegistration(actionOnRegistrationOptionsModel).execute();
-    assertNotNull(response);
-    DeactivateRegistration responseObj = response.getResult();
-    assertNotNull(responseObj);
-
-    // Verify the contents of the request sent to the mock server
-    RecordedRequest request = server.takeRequest();
-    assertNotNull(request);
-    assertEquals(request.getMethod(), "POST");
-    // Verify request path
-    String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, actionOnRegistrationPath);
-    // Verify header parameters
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-    // Verify query params
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNotNull(query);
-    assertEquals(query.get("action"), "deactivate");
-  }
-
-  // Test the actionOnRegistration operation with and without retries enabled
-  @Test
-  public void testActionOnRegistrationWRetries() throws Throwable {
-    ibmKeyProtectApiService.enableRetries(4, 30);
-    testActionOnRegistrationWOptions();
-
-    ibmKeyProtectApiService.disableRetries();
-    testActionOnRegistrationWOptions();
-  }
-
-  // Test the actionOnRegistration operation with a null options model (negative test)
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testActionOnRegistrationNoOptions() throws Throwable {
-    server.enqueue(new MockResponse());
-    ibmKeyProtectApiService.actionOnRegistration(null).execute();
-  }
-
   // Test the getRegistrations operation with a valid options model parameter
   @Test
   public void testGetRegistrationsWOptions() throws Throwable {
@@ -2402,61 +2035,6 @@ public class IbmKeyProtectApiTest {
   public void testGetRegistrationsAllKeysNoOptions() throws Throwable {
     server.enqueue(new MockResponse());
     ibmKeyProtectApiService.getRegistrationsAllKeys(null).execute();
-  }
-
-  // Test the eventAcknowledge operation with a valid options model parameter
-  @Test
-  public void testEventAcknowledgeWOptions() throws Throwable {
-    // Register a mock response
-    String mockResponseBody = "";
-    String eventAcknowledgePath = "/api/v2/event_ack";
-    server.enqueue(new MockResponse()
-      .setResponseCode(204)
-      .setBody(mockResponseBody));
-
-    // Construct an instance of the EventAcknowledgeOptions model
-    EventAcknowledgeOptions eventAcknowledgeOptionsModel = new EventAcknowledgeOptions.Builder()
-      .bluemixInstance("testString")
-      .eventAcknowledge(TestUtilities.createMockStream("This is a mock file."))
-      .correlationId("testString")
-      .xKmsKeyRing("default")
-      .build();
-
-    // Invoke eventAcknowledge() with a valid options model and verify the result
-    Response<Void> response = ibmKeyProtectApiService.eventAcknowledge(eventAcknowledgeOptionsModel).execute();
-    assertNotNull(response);
-    Void responseObj = response.getResult();
-    assertNull(responseObj);
-
-    // Verify the contents of the request sent to the mock server
-    RecordedRequest request = server.takeRequest();
-    assertNotNull(request);
-    assertEquals(request.getMethod(), "POST");
-    // Verify request path
-    String parsedPath = TestUtilities.parseReqPath(request);
-    assertEquals(parsedPath, eventAcknowledgePath);
-    // Verify header parameters
-    assertEquals(request.getHeader("Bluemix-Instance"), "testString");
-    // Verify that there is no query string
-    Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNull(query);
-  }
-
-  // Test the eventAcknowledge operation with and without retries enabled
-  @Test
-  public void testEventAcknowledgeWRetries() throws Throwable {
-    ibmKeyProtectApiService.enableRetries(4, 30);
-    testEventAcknowledgeWOptions();
-
-    ibmKeyProtectApiService.disableRetries();
-    testEventAcknowledgeWOptions();
-  }
-
-  // Test the eventAcknowledge operation with a null options model (negative test)
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testEventAcknowledgeNoOptions() throws Throwable {
-    server.enqueue(new MockResponse());
-    ibmKeyProtectApiService.eventAcknowledge(null).execute();
   }
 
   // Test the createKeyAlias operation with a valid options model parameter
