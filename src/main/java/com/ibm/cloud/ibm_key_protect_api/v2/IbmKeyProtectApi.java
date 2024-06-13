@@ -164,6 +164,20 @@ public class IbmKeyProtectApi extends BaseService {
   }
 
   /**
+   * Class method which constructs an instance of the `IbmKeyProtectApi` client.
+   * The default service name is used to configure the client instance.
+   * The specified authenticator is used to configure the client instance.
+   *
+   * @param authenticator the {@link Authenticator} instance to be configured for this client
+   * @return an instance of the `IbmKeyProtectApi` client using external configuration
+   */
+  public static IbmKeyProtectApi newInstance(Authenticator authenticator) {
+    IbmKeyProtectApi service = new IbmKeyProtectApi(DEFAULT_SERVICE_NAME, authenticator);
+    service.configureService(DEFAULT_SERVICE_NAME);
+    return service;
+  }
+
+  /**
    * Constructs an instance of the `IbmKeyProtectApi` client.
    * The specified service name and authenticator are used to configure the client instance.
    *
