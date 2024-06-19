@@ -84,23 +84,23 @@ public class KMIPExample {
             // Create a KMIP client cert
             logger.info("Create a KMIP adapter");
             // This is an example self-signed certificate.
-            String certPayload = "-----BEGIN CERTIFICATE-----\\n" + //
-                                "MIIC9zCCAd+gAwIBAgIUc0tA6jgIVaFUM9jeV7fkY5wRXwgwDQYJKoZIhvcNAQEL\\n" + //
-                                "BQAwADAeFw0yNDA2MTkxNzA5MDlaFw0yNTA2MTkxNzA5MDlaMAAwggEiMA0GCSqG\\n" + //
-                                "SIb3DQEBAQUAA4IBDwAwggEKAoIBAQCs/37mbKL6s0Ln8PGZRGVocjGIyUZM5fOu\\n" + //
-                                "qTjIf+6YvsCILr7HHG6+otBY9bldPcdTu1RNvoEj7JKiQhbefiGh3aeN/j1/JYXS\\n" + //
-                                "EXD02s9lfZnAbgMQGo6dtf7ONM0E07pNpoAdOxMPAdFsc4IN4lM6x1qVQIYiMR3A\\n" + //
-                                "Uz/xkKvJYPv8Dti6R6VAGVrXoy+De2HjwDw/7rNyf9s0I70Yy6eDmnWLj8mLfy/L\\n" + //
-                                "4YcaQuMtNEQRYmNggskUkJyFuDRddbcs+Ffq9CaK3jAGlceC9lBbYXbhU46uRxUd\\n" + //
-                                "P5jb1B8uV7IZ9qPG6j3oVqeX36If3RkiJBAELbc53XtbvPxEecuDAgMBAAGjaTBn\\n" + //
-                                "MB0GA1UdDgQWBBQKQpXelJJb0wa60VtDtGNyFgO0ZDAfBgNVHSMEGDAWgBQKQpXe\\n" + //
-                                "lJJb0wa60VtDtGNyFgO0ZDAPBgNVHRMBAf8EBTADAQH/MBQGA1UdEQQNMAuCCTEy\\n" + //
-                                "Ny4wLjAuMTANBgkqhkiG9w0BAQsFAAOCAQEAAQbW2z5xUsw6AykHqknps4XoeigP\\n" + //
-                                "mWthNVo6dAZ+udE7jmGSUiwrHlbeb/rlc4mgVh7DVG1UnaOwJQmKjSDl/RdMtibP\\n" + //
-                                "6AEIdoeDNDTygeIxn+mVlmpUw8LGeUU8m1SgctVdsaugQjyuYxHZJLP7RewYKftv\\n" + //
-                                "MHkSt26YO8kIYQ0K4+IV0synz6ITUpsUenxrbsOY2UyAX1e4yIF9M5yZ67+r9zUN\\n" + //
-                                "A23L2o1IifHBcWbFZagoGv0aZrF9iqZOV0dkcJgZ1XnjW/Lny4SSg4J4tRLFlEtU\\n" + //
-                                "vg6GwJVcti/wHF6cgBay02gNRABiLeP7jaTbmy8ntuGG42Hi5yDbEourFA==\\n" + //
+            String certPayload = "-----BEGIN CERTIFICATE-----\n" + //
+                                "MIIC9zCCAd+gAwIBAgIUc0tA6jgIVaFUM9jeV7fkY5wRXwgwDQYJKoZIhvcNAQEL\n" + //
+                                "BQAwADAeFw0yNDA2MTkxNzA5MDlaFw0yNTA2MTkxNzA5MDlaMAAwggEiMA0GCSqG\n" + //
+                                "SIb3DQEBAQUAA4IBDwAwggEKAoIBAQCs/37mbKL6s0Ln8PGZRGVocjGIyUZM5fOu\n" + //
+                                "qTjIf+6YvsCILr7HHG6+otBY9bldPcdTu1RNvoEj7JKiQhbefiGh3aeN/j1/JYXS\n" + //
+                                "EXD02s9lfZnAbgMQGo6dtf7ONM0E07pNpoAdOxMPAdFsc4IN4lM6x1qVQIYiMR3A\n" + //
+                                "Uz/xkKvJYPv8Dti6R6VAGVrXoy+De2HjwDw/7rNyf9s0I70Yy6eDmnWLj8mLfy/L\n" + //
+                                "4YcaQuMtNEQRYmNggskUkJyFuDRddbcs+Ffq9CaK3jAGlceC9lBbYXbhU46uRxUd\n" + //
+                                "P5jb1B8uV7IZ9qPG6j3oVqeX36If3RkiJBAELbc53XtbvPxEecuDAgMBAAGjaTBn\n" + //
+                                "MB0GA1UdDgQWBBQKQpXelJJb0wa60VtDtGNyFgO0ZDAfBgNVHSMEGDAWgBQKQpXe\n" + //
+                                "lJJb0wa60VtDtGNyFgO0ZDAPBgNVHRMBAf8EBTADAQH/MBQGA1UdEQQNMAuCCTEy\n" + //
+                                "Ny4wLjAuMTANBgkqhkiG9w0BAQsFAAOCAQEAAQbW2z5xUsw6AykHqknps4XoeigP\n" + //
+                                "mWthNVo6dAZ+udE7jmGSUiwrHlbeb/rlc4mgVh7DVG1UnaOwJQmKjSDl/RdMtibP\n" + //
+                                "6AEIdoeDNDTygeIxn+mVlmpUw8LGeUU8m1SgctVdsaugQjyuYxHZJLP7RewYKftv\n" + //
+                                "MHkSt26YO8kIYQ0K4+IV0synz6ITUpsUenxrbsOY2UyAX1e4yIF9M5yZ67+r9zUN\n" + //
+                                "A23L2o1IifHBcWbFZagoGv0aZrF9iqZOV0dkcJgZ1XnjW/Lny4SSg4J4tRLFlEtU\n" + //
+                                "vg6GwJVcti/wHF6cgBay02gNRABiLeP7jaTbmy8ntuGG42Hi5yDbEourFA==\n" + //
                                 "-----END CERTIFICATE-----";
             KMIPClientCertificate cert = KpUtilities.addKmipClientCertificate(exampleService, exampleInstance, "myadapter",certPayload, "mycert");
             logger.info("KMIP client cert created with ID " + cert.getId());
