@@ -11,86 +11,89 @@
  * specific language governing permissions and limitations under the License.
  */
 
- package com.ibm.cloud;
+package com.ibm.cloud;
 
 import com.ibm.cloud.utils.KpUtilities;
 import com.ibm.cloud.ibm_key_protect_api.v2.*;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.*;
- import com.ibm.cloud.platform_services.resource_controller.v2.ResourceController;
- import com.ibm.cloud.sdk.core.security.IamAuthenticator;
- import com.ibm.cloud.sdk.core.service.exception.ServiceResponseException;
- import org.slf4j.Logger;
- import org.slf4j.LoggerFactory;
- 
- import java.util.ArrayList;
- import java.util.Base64;
- import java.util.List;
- import java.util.Map;
- import java.util.concurrent.TimeUnit;
- 
- //
- // This class provides examples of how to use the Key Protect key services.
- //
- // The following configuration properties are assumed to be exported as environment variables
- //
- // APIKEY=<IBM Cloud APIKEY for the User>
- // AUTH_URL=<IAM Token Service URL>
- // RESOURCE_GROUP=<ID of the User's Resource Group>
- // KP_SERVICE_URL=<Service URL>
- //
- // API docs: https://cloud.ibm.com/apidocs/key-protect
- 
- public class KMIPExample {
- 
-     private static final Logger logger = LoggerFactory.getLogger(KMIPExample.class);
- 
-     //values to be read from the env setting
-     private static Map<String, String> config;
-     private static String exampleInstance;
-     private static String resourceGroup;
-     private static String serviceUrl;
- 
-     static {
-         config = System.getenv();
-         resourceGroup = config.get("RESOURCE_GROUP");
-         serviceUrl = config.get("KP_SERVICE_URL");
-     }
- 
-     public static void kmipExamples() {
-         IamAuthenticator authenticator = IamAuthenticator.fromConfiguration(config);
- 
-         String keyName = "example-root-key";
-         String keyDesc = "created via java sdk";
- 
-         try {
-             // Create an instance
-             ResourceController controllerService = KpUtilities.getResourceController(authenticator);
-             exampleInstance = KpUtilities.createInstance(controllerService, resourceGroup);
- 
-             IbmKeyProtectApi exampleService = IbmKeyProtectApi.newInstance(authenticator);
-             exampleService.setServiceUrl(serviceUrl);
- 
-             // Create key
-             logger.info("Create a key");
-             String keyId = KpUtilities.createKey(exampleService, exampleInstance, keyName, keyDesc,
-                     null, false);
-             logger.info(String.format("Key with ID %s created", keyId));
- 
-             // Get a key
-             logger.info("Get a key");
-             KeyWithPayload keyWithPayload = KpUtilities.getKey(exampleService, exampleInstance, keyId);
-             logger.info(String.format("Got key with ID %s, key description is: ", keyId) + keyWithPayload.getDescription());
- 
-             // Delete a key
-             logger.info("Delete a key");
-             KpUtilities.deleteKey(exampleService, exampleInstance, keyId);
-             logger.info(String.format("Key with ID %s deleted", keyId));
- 
-             KpUtilities.deleteInstance(controllerService, exampleInstance);
-         }catch (ServiceResponseException sre) {
-             logger.error(String.format("Service returned status code %s: %s\nError details: %s",
-                     sre.getStatusCode(), sre.getMessage(), sre.getDebuggingInfo()), sre);
-         } 
-     }
- 
- }
+import com.ibm.cloud.platform_services.resource_controller.v2.ResourceController;
+import com.ibm.cloud.sdk.core.security.IamAuthenticator;
+import com.ibm.cloud.sdk.core.service.exception.ServiceResponseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
+//
+// This class provides examples of how to use the Key Protect key services.
+//
+// The following configuration properties are assumed to be exported as environment variables
+//
+// APIKEY=<IBM Cloud APIKEY for the User>
+// AUTH_URL=<IAM Token Service URL>
+// RESOURCE_GROUP=<ID of the User's Resource Group>
+// KP_SERVICE_URL=<Service URL>
+//
+// API docs: https://cloud.ibm.com/apidocs/key-protect
+
+public class KMIPExample {
+
+    private static final Logger logger = LoggerFactory.getLogger(KMIPExample.class);
+
+    // values to be read from the env setting
+    private static Map<String, String> config;
+    private static String exampleInstance;
+    private static String resourceGroup;
+    private static String serviceUrl;
+
+    static {
+        config = System.getenv();
+        resourceGroup = config.get("RESOURCE_GROUP");
+        serviceUrl = config.get("KP_SERVICE_URL");
+    }
+
+    public static void kmipExamples() {
+        IamAuthenticator authenticator = IamAuthenticator.fromConfiguration(config);
+
+        String keyName = "example-root-key";
+        String keyDesc = "created via java sdk";
+
+        try {
+            // Create an instance
+            ResourceController controllerService = KpUtilities.getResourceController(authenticator);
+            exampleInstance = KpUtilities.createInstance(controllerService, resourceGroup);
+
+            IbmKeyProtectApi exampleService = IbmKeyProtectApi.newInstance(authenticator);
+            exampleService.setServiceUrl(serviceUrl);
+
+            // Create key
+            logger.info("Create a key");
+            String keyId = KpUtilities.createKey(exampleService, exampleInstance, keyName, keyDesc,
+                    null, false);
+            logger.info(String.format("Key with ID %s created", keyId));
+
+            // Create a KMIP adapter
+            logger.info("Create a KMIP adapter");
+            KMIPAdapter adapter = KpUtilities.createKmipAdapterNative(exampleService, exampleInstance, keyId, "myadapter", null);
+
+            // Delete a KMIP adapter
+            logger.info("Delete a KMIP adapter with ID" + adapter.getId());
+            KpUtilities.deleteKmipAdapter(exampleService, exampleInstance, adapter.getId());
+
+            // Delete a key
+            logger.info("Delete a key");
+            KpUtilities.deleteKey(exampleService, exampleInstance, keyId);
+            logger.info(String.format("Key with ID %s deleted", keyId));
+
+            KpUtilities.deleteInstance(controllerService, exampleInstance);
+        } catch (ServiceResponseException sre) {
+            logger.error(String.format("Service returned status code %s: %s\nError details: %s",
+                    sre.getStatusCode(), sre.getMessage(), sre.getDebuggingInfo()), sre);
+        }
+    }
+
+}
