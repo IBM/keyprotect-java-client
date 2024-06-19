@@ -1547,6 +1547,9 @@ public class IbmKeyProtectApi extends BaseService {
     if (getKmipAdaptersOptions.totalCount() != null) {
       builder.query("totalCount", String.valueOf(getKmipAdaptersOptions.totalCount()));
     }
+    if (getKmipAdaptersOptions.crkId() != null) {
+      builder.query("crk_id", String.valueOf(getKmipAdaptersOptions.crkId()));
+    }
     ResponseConverter<ListKMIPAdaptersWithTotalCount> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ListKMIPAdaptersWithTotalCount>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
