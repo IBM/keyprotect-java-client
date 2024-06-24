@@ -82,7 +82,7 @@ public class KMIPExample {
             logger.info("KMIP adapter created with ID " + adapter.getId());
 
             // Create a KMIP client cert
-            logger.info("Create a KMIP adapter");
+            logger.info("Create a KMIP client certificate");
             // This is an example self-signed certificate.
             String certPayload = "-----BEGIN CERTIFICATE-----\n" + //
                                 "MIIC9zCCAd+gAwIBAgIUc0tA6jgIVaFUM9jeV7fkY5wRXwgwDQYJKoZIhvcNAQEL\n" + //
