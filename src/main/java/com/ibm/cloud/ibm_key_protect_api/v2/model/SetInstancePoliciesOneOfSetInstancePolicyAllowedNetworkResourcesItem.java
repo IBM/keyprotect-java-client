@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -40,6 +40,11 @@ public class SetInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesIte
     private String policyType;
     private InstancePolicyAllowedNetworkPolicyData policyData;
 
+    /**
+     * Instantiates a new Builder from an existing SetInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItem instance.
+     *
+     * @param setInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItem the instance to initialize the Builder with
+     */
     private Builder(SetInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItem setInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItem) {
       this.policyType = setInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItem.policyType;
       this.policyData = setInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItem.policyData;
@@ -93,6 +98,8 @@ public class SetInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesIte
       return this;
     }
   }
+
+  protected SetInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItem() { }
 
   protected SetInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItem(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.policyType,

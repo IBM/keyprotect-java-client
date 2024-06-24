@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -35,6 +35,11 @@ public class DeleteKeyAliasOptions extends GenericModel {
     private String correlationId;
     private String xKmsKeyRing;
 
+    /**
+     * Instantiates a new Builder from an existing DeleteKeyAliasOptions instance.
+     *
+     * @param deleteKeyAliasOptions the instance to initialize the Builder with
+     */
     private Builder(DeleteKeyAliasOptions deleteKeyAliasOptions) {
       this.id = deleteKeyAliasOptions.id;
       this.alias = deleteKeyAliasOptions.alias;
@@ -127,6 +132,8 @@ public class DeleteKeyAliasOptions extends GenericModel {
     }
   }
 
+  protected DeleteKeyAliasOptions() { }
+
   protected DeleteKeyAliasOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.id,
       "id cannot be empty");
@@ -153,7 +160,7 @@ public class DeleteKeyAliasOptions extends GenericModel {
   /**
    * Gets the id.
    *
-   * The v4 UUID that uniquely identifies the key.
+   * The v4 UUID or alias that uniquely identifies the key.
    *
    * @return the id
    */
@@ -164,14 +171,13 @@ public class DeleteKeyAliasOptions extends GenericModel {
   /**
    * Gets the alias.
    *
-   * An alias that identifies a key. Each alias is unique only within the given instance and is not reserved across the
-   * Key Protect service. Each key can have up to five aliases. There is a limit of 1000 aliases per instance. Alias
-   * must be alphanumeric and cannot contain spaces or special characters other than '-' or '_'.
-   *
-   * The alias cannot be a version 4 UUID and must not be a Key Protect reserved name: `allowed_ip`, `key`, `keys`,
-   * `metadata`, `policy`,
-   * `policies`, `registration`, `registrations`, `ring`, `rings`, `rotate`,
-   * `wrap`, `unwrap`, `rewrap`, `version`, `versions`. Alias size can be between 2 - 90 characters.
+   * A human-readable alias that uniquely identifies a key. Each alias is unique  only within the given instance and is
+   * not reserved across the Key Protect service.  Each key can have up to five aliases. There is no limit to the number
+   * of aliases  per instance. The length of the alias can be between 2 - 90 characters, inclusive.  An alias must be
+   * alphanumeric and cannot contain spaces or special characters other  than '-' or '_'. Also, the alias cannot be a
+   * version 4 UUID and must not be  a Key Protect reserved name: `allowed_ip`, `key`, `keys`, `metadata`, `policy`,
+   * `policies`, `registration`, `registrations`, `ring`, `rings`, `rotate`, `wrap`, `unwrap`, `rewrap`, `version`,
+   * `versions`.
    *
    * @return the alias
    */

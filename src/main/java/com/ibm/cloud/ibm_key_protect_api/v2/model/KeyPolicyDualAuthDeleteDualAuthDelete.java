@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -27,6 +27,11 @@ public class KeyPolicyDualAuthDeleteDualAuthDelete extends GenericModel {
   public static class Builder {
     private Boolean enabled;
 
+    /**
+     * Instantiates a new Builder from an existing KeyPolicyDualAuthDeleteDualAuthDelete instance.
+     *
+     * @param keyPolicyDualAuthDeleteDualAuthDelete the instance to initialize the Builder with
+     */
     private Builder(KeyPolicyDualAuthDeleteDualAuthDelete keyPolicyDualAuthDeleteDualAuthDelete) {
       this.enabled = keyPolicyDualAuthDeleteDualAuthDelete.enabled;
     }
@@ -67,6 +72,8 @@ public class KeyPolicyDualAuthDeleteDualAuthDelete extends GenericModel {
     }
   }
 
+  protected KeyPolicyDualAuthDeleteDualAuthDelete() { }
+
   protected KeyPolicyDualAuthDeleteDualAuthDelete(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.enabled,
       "enabled cannot be null");
@@ -85,13 +92,10 @@ public class KeyPolicyDualAuthDeleteDualAuthDelete extends GenericModel {
   /**
    * Gets the enabled.
    *
-   * If set to `true`, Key Protect enables a dual authorization policy on a single key.
-   *
-   * After you enable the policy, Key Protect requires an authorization from two users to delete this key. For example,
-   * you can authorize the deletion first by using the
-   * [SetKeyForDeletion](#invoke-an-action-on-a-key) action. Then, a different user provides a second authorization
-   * implicitly by calling `DELETE /keys` to delete the key.
-   *
+   * If set to `true`, Key Protect enables a dual authorization policy on a single key. After you enable the policy, Key
+   * Protect requires an authorization from two users to delete this key. For example, you can authorize the deletion
+   * first by using the [SetKeyForDeletion](#invoke-an-action-on-a-key) action. Then, a different user provides a second
+   * authorization implicitly by calling `DELETE /keys` to delete the key.
    * **Note:** Once the dual authorization policy is set on the key, it cannot be reverted.
    *
    * @return the enabled

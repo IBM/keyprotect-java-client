@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -36,7 +36,9 @@ public class GetKeyPolicyRotationResourcesItem extends GenericModel {
   protected Date lastUpdateDate;
   protected String updatedBy;
   protected String type;
-  protected GetKeyPolicyRotationResourcesItemRotation rotation;
+  protected KeyPolicyRotationRotation rotation;
+
+  protected GetKeyPolicyRotationResourcesItem() { }
 
   /**
    * Gets the id.
@@ -52,7 +54,7 @@ public class GetKeyPolicyRotationResourcesItem extends GenericModel {
   /**
    * Gets the crn.
    *
-   * The Cloud Resource Name (CRN) that uniquely identifies your cloud. resources.
+   * The Cloud Resource Name (CRN) that uniquely identifies your cloud resources.
    *
    * @return the crn
    */
@@ -118,11 +120,11 @@ public class GetKeyPolicyRotationResourcesItem extends GenericModel {
   /**
    * Gets the rotation.
    *
-   * Specifies the key rotation time interval in months, with a minimum of 1, and a maximum of 12.
+   * Data associated with the automatic key rotation policy.
    *
    * @return the rotation
    */
-  public GetKeyPolicyRotationResourcesItemRotation getRotation() {
+  public KeyPolicyRotationRotation getRotation() {
     return rotation;
   }
 }

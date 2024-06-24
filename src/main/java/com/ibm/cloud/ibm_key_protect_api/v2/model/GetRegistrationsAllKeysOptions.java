@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -41,6 +41,11 @@ public class GetRegistrationsAllKeysOptions extends GenericModel {
     private Boolean preventKeyDeletion;
     private Boolean totalCount;
 
+    /**
+     * Instantiates a new Builder from an existing GetRegistrationsAllKeysOptions instance.
+     *
+     * @param getRegistrationsAllKeysOptions the instance to initialize the Builder with
+     */
     private Builder(GetRegistrationsAllKeysOptions getRegistrationsAllKeysOptions) {
       this.bluemixInstance = getRegistrationsAllKeysOptions.bluemixInstance;
       this.correlationId = getRegistrationsAllKeysOptions.correlationId;
@@ -165,6 +170,8 @@ public class GetRegistrationsAllKeysOptions extends GenericModel {
     }
   }
 
+  protected GetRegistrationsAllKeysOptions() { }
+
   protected GetRegistrationsAllKeysOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.bluemixInstance,
       "bluemixInstance cannot be null");
@@ -225,13 +232,10 @@ public class GetRegistrationsAllKeysOptions extends GenericModel {
   /**
    * Gets the urlEncodedResourceCrnQuery.
    *
-   * Filters for resources that are associated with a specified
-   * [Cloud Resource Name](/docs/account?topic=account-crn)
+   * Filters for resources that are associated with a specified [Cloud Resource Name](/docs/account?topic=account-crn)
    * (CRN) by using URL encoded wildcard characters (`*`). The parameter should contain all CRN segments and must be URL
-   * encoded.
-   *
-   * If provided, the parameter should not contain (`*`) in the first eight segments. If this parameter is not provided,
-   * registrations for all keys in the requested Key Protect instance are returned.
+   * encoded. If provided, the parameter should not contain (`*`) in the first eight segments. If this parameter is not
+   * provided, registrations for all keys in the requested Key Protect instance are returned.
    *
    * @return the urlEncodedResourceCrnQuery
    */
@@ -243,12 +247,10 @@ public class GetRegistrationsAllKeysOptions extends GenericModel {
    * Gets the limit.
    *
    * The number of registrations to retrieve. By default returns the first 200 registrations. To retrieve a different
-   * set of registrations, use
-   * `limit` with `offset` to page through your available resources. The maximum value for `limit` is 5,000.
-   *
+   * set of registrations, use `limit` with `offset` to page through your available resources. The maximum value for
+   * `limit` is 5,000.
    * **Usage:** If you have 20 registrations that are associated with a key, and you want to retrieve only the first 5
-   * registrations, use
-   * `../registrations?limit=5`.
+   * registrations, use `../registrations?limit=5`.
    *
    * @return the limit
    */
@@ -261,10 +263,8 @@ public class GetRegistrationsAllKeysOptions extends GenericModel {
    *
    * The number of registrations to skip. By specifying `offset`, you retrieve a subset of registrations that starts
    * with the `offset` value. Use `offset` with `limit` to page through your available resources.
-   *
    * **Usage:** If you have 100 registrations that are associated with a key, and you want to retrieve registrations 26
-   * through 50, use
-   * `../registrations?offset=25&amp;limit=25`.
+   * through 50, use `../registrations?offset=25&amp;limit=25`.
    *
    * @return the offset
    */
@@ -276,8 +276,10 @@ public class GetRegistrationsAllKeysOptions extends GenericModel {
    * Gets the preventKeyDeletion.
    *
    * Filters registrations based on the `preventKeyDeletion` property. You can use this query parameter to search for
-   * registered cloud resources that are non-erasable due to a retention policy.
-   *
+   * registered cloud resources that are non-erasable due to a retention policy. This policy should only be set if a
+   * WORM policy
+   * (https://www.ibm.com/docs/en/spectrum-scale/5.0.1?topic=ics-how-write-once-read-many-worm-storage-works) must be
+   * satisfied.  Do not set this policy by default.
    * **Usage:** To search for registered cloud resources that have a retention policy, use
    * `../registrations?preventKeyDeletion=true`.
    *
@@ -292,9 +294,7 @@ public class GetRegistrationsAllKeysOptions extends GenericModel {
    *
    * If set to `true`, returns `totalCount` in the response metadata for use with pagination. The `totalCount` value
    * returned specifies the total number of registrations that match the request, disregarding limit and offset.
-   *
-   * **Usage:** To return the `totalCount` value for use with pagination, use
-   * `../registrations?totalCount=true`.
+   * **Usage:** To return the `totalCount` value for use with pagination, use `../registrations?totalCount=true`.
    *
    * @return the totalCount
    */

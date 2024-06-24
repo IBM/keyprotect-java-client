@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -20,13 +20,17 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class RewrapKeyResponseBody extends GenericModel {
 
   protected String ciphertext;
-  protected KeyVersion keyVersion;
-  protected KeyVersion rewrappedKeyVersion;
+  protected WrappedKeyVersionKeyVersion keyVersion;
+  protected RewrappedKeyVersionRewrappedKeyVersion rewrappedKeyVersion;
+
+  protected RewrapKeyResponseBody() { }
 
   /**
    * Gets the ciphertext.
    *
-   * The wrapped data encryption key (WDEK) that you can export to your app or service. The value is base64 encoded.
+   * The wrapped data encryption key (WDEK) that you can export to your app or service. The ciphertext contains the DEK
+   * wrapped by the latest version  of the key (WDEK). It is recommended to store and use  this WDEK in future calls to
+   * Key Protect. The value is base64 encoded.
    *
    * @return the ciphertext
    */
@@ -42,7 +46,7 @@ public class RewrapKeyResponseBody extends GenericModel {
    *
    * @return the keyVersion
    */
-  public KeyVersion getKeyVersion() {
+  public WrappedKeyVersionKeyVersion getKeyVersion() {
     return keyVersion;
   }
 
@@ -54,7 +58,7 @@ public class RewrapKeyResponseBody extends GenericModel {
    *
    * @return the rewrappedKeyVersion
    */
-  public KeyVersion getRewrappedKeyVersion() {
+  public RewrappedKeyVersionRewrappedKeyVersion getRewrappedKeyVersion() {
     return rewrappedKeyVersion;
   }
 }

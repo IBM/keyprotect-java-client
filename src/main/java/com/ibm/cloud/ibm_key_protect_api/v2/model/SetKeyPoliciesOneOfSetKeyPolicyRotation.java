@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -28,6 +28,11 @@ public class SetKeyPoliciesOneOfSetKeyPolicyRotation extends SetKeyPoliciesOneOf
     private CollectionMetadata metadata;
     private List<KeyPolicyRotation> resources;
 
+    /**
+     * Instantiates a new Builder from an existing SetKeyPoliciesOneOfSetKeyPolicyRotation instance.
+     *
+     * @param setKeyPoliciesOneOfSetKeyPolicyRotation the instance to initialize the Builder with
+     */
     public Builder(SetKeyPoliciesOneOf setKeyPoliciesOneOfSetKeyPolicyRotation) {
       this.metadata = setKeyPoliciesOneOfSetKeyPolicyRotation.metadata;
       this.resources = setKeyPoliciesOneOfSetKeyPolicyRotation.resources;
@@ -60,9 +65,9 @@ public class SetKeyPoliciesOneOfSetKeyPolicyRotation extends SetKeyPoliciesOneOf
     }
 
     /**
-     * Adds an resources to resources.
+     * Adds a new element to resources.
      *
-     * @param resources the new resources
+     * @param resources the new element to be added
      * @return the SetKeyPoliciesOneOfSetKeyPolicyRotation builder
      */
     public Builder addResources(KeyPolicyRotation resources) {
@@ -98,6 +103,8 @@ public class SetKeyPoliciesOneOfSetKeyPolicyRotation extends SetKeyPoliciesOneOf
       return this;
     }
   }
+
+  protected SetKeyPoliciesOneOfSetKeyPolicyRotation() { }
 
   protected SetKeyPoliciesOneOfSetKeyPolicyRotation(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.metadata,

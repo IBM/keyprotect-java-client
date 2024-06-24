@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -36,7 +36,7 @@ public class ActionOnKeyOptionsTest {
       .id("testString")
       .bluemixInstance("testString")
       .action("disable")
-      .body(TestUtilities.createMockStream("This is a mock file."))
+      .keyActionBody(TestUtilities.createMockStream("This is a mock file."))
       .correlationId("testString")
       .xKmsKeyRing("testString")
       .prefer("return=representation")
@@ -44,7 +44,7 @@ public class ActionOnKeyOptionsTest {
     assertEquals(actionOnKeyOptionsModel.id(), "testString");
     assertEquals(actionOnKeyOptionsModel.bluemixInstance(), "testString");
     assertEquals(actionOnKeyOptionsModel.action(), "disable");
-    assertEquals(IOUtils.toString(actionOnKeyOptionsModel.body()), IOUtils.toString(TestUtilities.createMockStream("This is a mock file.")));
+    assertEquals(IOUtils.toString(actionOnKeyOptionsModel.keyActionBody()), IOUtils.toString(TestUtilities.createMockStream("This is a mock file.")));
     assertEquals(actionOnKeyOptionsModel.correlationId(), "testString");
     assertEquals(actionOnKeyOptionsModel.xKmsKeyRing(), "testString");
     assertEquals(actionOnKeyOptionsModel.prefer(), "return=representation");

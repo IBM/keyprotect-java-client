@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -38,6 +38,8 @@ public class GetKeyPoliciesOneOfGetKeyPolicyDualAuthDeleteResourcesItem extends 
   protected String type;
   protected KeyPolicyDualAuthDeleteDualAuthDelete dualAuthDelete;
 
+  protected GetKeyPoliciesOneOfGetKeyPolicyDualAuthDeleteResourcesItem() { }
+
   /**
    * Gets the id.
    *
@@ -52,7 +54,7 @@ public class GetKeyPoliciesOneOfGetKeyPolicyDualAuthDeleteResourcesItem extends 
   /**
    * Gets the crn.
    *
-   * The Cloud Resource Name (CRN) that uniquely identifies your cloud. resources.
+   * The Cloud Resource Name (CRN) that uniquely identifies your cloud resources.
    *
    * @return the crn
    */

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -21,23 +21,38 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class GetMultipleKeyPoliciesResource extends GenericModel {
 
-  /**
-   * Specifies the MIME type that represents the policy resource. Currently, only the default is supported.
-   */
-  public interface Type {
-    /** application/vnd.ibm.kms.policy+json. */
-    String APPLICATION_VND_IBM_KMS_POLICY_JSON = "application/vnd.ibm.kms.policy+json";
-  }
-
+  protected GetMultipleKeyPoliciesResourceDualAuthDelete dualAuthDelete;
+  protected KeyPolicyRotationNonRequiredRotation rotation;
   protected String id;
   protected String crn;
   protected Date creationDate;
   protected String createdBy;
   protected Date lastUpdateDate;
   protected String updatedBy;
-  protected String type;
-  protected GetMultipleKeyPoliciesResourceDualAuthDelete dualAuthDelete;
-  protected KeyPolicyRotationNonRequiredRotation rotation;
+
+  protected GetMultipleKeyPoliciesResource() { }
+
+  /**
+   * Gets the dualAuthDelete.
+   *
+   * Data associated with the dual authorization delete policy.
+   *
+   * @return the dualAuthDelete
+   */
+  public GetMultipleKeyPoliciesResourceDualAuthDelete getDualAuthDelete() {
+    return dualAuthDelete;
+  }
+
+  /**
+   * Gets the rotation.
+   *
+   * Data associated with the automatic key rotation policy.
+   *
+   * @return the rotation
+   */
+  public KeyPolicyRotationNonRequiredRotation getRotation() {
+    return rotation;
+  }
 
   /**
    * Gets the id.
@@ -53,7 +68,7 @@ public class GetMultipleKeyPoliciesResource extends GenericModel {
   /**
    * Gets the crn.
    *
-   * The Cloud Resource Name (CRN) that uniquely identifies your cloud. resources.
+   * The Cloud Resource Name (CRN) that uniquely identifies your cloud resources.
    *
    * @return the crn
    */
@@ -103,39 +118,6 @@ public class GetMultipleKeyPoliciesResource extends GenericModel {
    */
   public String getUpdatedBy() {
     return updatedBy;
-  }
-
-  /**
-   * Gets the type.
-   *
-   * Specifies the MIME type that represents the policy resource. Currently, only the default is supported.
-   *
-   * @return the type
-   */
-  public String getType() {
-    return type;
-  }
-
-  /**
-   * Gets the dualAuthDelete.
-   *
-   * Data associated with the dual authorization delete policy.
-   *
-   * @return the dualAuthDelete
-   */
-  public GetMultipleKeyPoliciesResourceDualAuthDelete getDualAuthDelete() {
-    return dualAuthDelete;
-  }
-
-  /**
-   * Gets the rotation.
-   *
-   * Specifies the key rotation time interval in months, with a minimum of 1, and a maximum of 12.
-   *
-   * @return the rotation
-   */
-  public KeyPolicyRotationNonRequiredRotation getRotation() {
-    return rotation;
   }
 }
 

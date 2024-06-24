@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -15,6 +15,7 @@ package com.ibm.cloud.ibm_key_protect_api.v2.model;
 import java.util.Date;
 import java.util.List;
 
+import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
@@ -23,19 +24,31 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class KeyWithPayload extends GenericModel {
 
   /**
-   * The algorithm type used to generate the key. Currently, AES is supported.
+   * Specifies the MIME type that represents the key resource. Currently, only the default is supported.
+   */
+  public interface Type {
+    /** application/vnd.ibm.kms.key+json. */
+    String APPLICATION_VND_IBM_KMS_KEY_JSON = "application/vnd.ibm.kms.key+json";
+  }
+
+  /**
+   * Deprecated.
    */
   public interface AlgorithmType {
     /** AES. */
     String AES = "AES";
+    /** Deprecated. */
+    String DEPRECATED = "Deprecated";
   }
 
   /**
-   * The encryption scheme used to generate the key. Currently, `CBC_PAD` is supported.
+   * Deprecated.
    */
   public interface AlgorithmMode {
     /** CBC_PAD. */
     String CBC_PAD = "CBC_PAD";
+    /** Deprecated. */
+    String DEPRECATED = "Deprecated";
   }
 
   protected String type;
@@ -49,6 +62,8 @@ public class KeyWithPayload extends GenericModel {
   protected Boolean extractable;
   protected String crn;
   protected Boolean imported;
+  @SerializedName("keyRingID")
+  protected String keyRingId;
   protected Date creationDate;
   protected String createdBy;
   protected String algorithmType;
@@ -60,6 +75,7 @@ public class KeyWithPayload extends GenericModel {
   protected Date lastRotateDate;
   protected KeyVersion keyVersion;
   protected DualAuthKeyMetadata dualAuthDelete;
+  protected RotationKeyMetadata rotation;
   protected Boolean deleted;
   protected Date deletionDate;
   protected String deletedBy;
@@ -69,6 +85,8 @@ public class KeyWithPayload extends GenericModel {
   protected Date purgeAllowedFrom;
   protected Date purgeScheduledOn;
   protected byte[] payload;
+
+  protected KeyWithPayload() { }
 
   /**
    * Gets the type.
@@ -95,9 +113,8 @@ public class KeyWithPayload extends GenericModel {
   /**
    * Gets the name.
    *
-   * A human-readable name to assign to your key.
-   *
-   * To protect your privacy, do not use personal data, such as your name or location as the name for your key.
+   * A human-readable name assigned to your key for convenience. To protect your privacy do not use personal data, such
+   * as your name or location, as the name for your key.
    *
    * @return the name
    */
@@ -108,15 +125,11 @@ public class KeyWithPayload extends GenericModel {
   /**
    * Gets the aliases.
    *
-   * One or more, up to a total of five unique, human-readable aliases  assigned to your key.
-   *
-   * To protect your privacy, do not use personal data, such as your name or location as an alias for your key.
-   *
-   * Each alias must be alphanumeric and cannot contain spaces or special characters other than `-` or `_`. The alias
-   * cannot be a UUID and must not be a Key Protect reserved name: `allowed_ip`, `key`,
-   * `keys`, `metadata`, `policy`, `policies`, `registration`,
-   * `registrations`, `ring`, `rings`, `rotate`, `wrap`, `unwrap`,
-   * `rewrap`, `version`, `versions`.
+   * One or more, up to a total of five, human-readable unique aliases assigned  to your key. To protect your privacy do
+   * not use personal data, such as your name or location, as an alias for your key. Each alias must be alphanumeric and
+   * cannot contain spaces or special characters other than `-` or `_`. The alias cannot be a UUID and must not be a Key
+   * Protect reserved name: `allowed_ip`, `key`, `keys`, `metadata`, `policy`, `policies`, `registration`,
+   * `registrations`, `ring`, `rings`, `rotate`, `wrap`, `unwrap`, `rewrap`, `version`, `versions`.
    *
    * @return the aliases
    */
@@ -127,9 +140,8 @@ public class KeyWithPayload extends GenericModel {
   /**
    * Gets the description.
    *
-   * A text field used to provide a more detailed description of the key. The maximum length is 240 characters.
-   *
-   * To protect your privacy, do not use personal data, such as your name or location, as a description for your key.
+   * A text field used to provide a more detailed description of the key. The maximum length is 240 characters. To
+   * protect your privacy, do not use personal data, such as your name or location, as a description for your key.
    *
    * @return the description
    */
@@ -141,10 +153,8 @@ public class KeyWithPayload extends GenericModel {
    * Gets the tags.
    *
    * Up to 30 tags can be created. Tags can be between 0-30 characters, including spaces. Special characters not
-   * permitted include the angled bracket, comma, colon, ampersand, and vertical pipe character
-   * (|).
-   *
-   * To protect your privacy, do not use personal data, such as your name or location, as a tag for your key.
+   * permitted include angled  brackets, comma, colon, ampersand, and vertical pipe character (|). To protect your
+   * privacy, do not use personal data, such as your name or location, as a tag for your key.
    *
    * @return the tags
    */
@@ -179,11 +189,10 @@ public class KeyWithPayload extends GenericModel {
   /**
    * Gets the extractable.
    *
-   * A boolean that determines whether the key material can leave the service.
-   *
-   * If set to `false`, Key Protect designates the key as a nonextractable root key used for `wrap` and `unwrap`
-   * actions. If set to `true`, Key Protect designates the key as a standard key that you can store in your apps and
-   * services. Once set to `false` it cannot be changed to `true`.
+   * A boolean that determines whether the key material can leave the service. If set to `false`, Key Protect designates
+   * the key as a nonextractable root key used for `wrap` and `unwrap` actions. If set to `true`, Key Protect designates
+   * the key as a standard key that you can store in your apps and services. Once set to `false` it cannot be changed to
+   * `true`.
    *
    * @return the extractable
    */
@@ -194,7 +203,7 @@ public class KeyWithPayload extends GenericModel {
   /**
    * Gets the crn.
    *
-   * The Cloud Resource Name (CRN) that uniquely identifies your cloud. resources.
+   * The Cloud Resource Name (CRN) that uniquely identifies your cloud resources.
    *
    * @return the crn
    */
@@ -206,16 +215,26 @@ public class KeyWithPayload extends GenericModel {
    * Gets the imported.
    *
    * A boolean that shows whether your key was originally imported or generated in Key Protect. The value is set by Key
-   * Protect based on how the key material is initially added to the service.
-   *
-   * A value of `true` indicates that you must provide new key material when it's time to rotate the key. A value of
-   * `false` indicates that Key Protect will generate the new key material on a `rotate` operation, as it did in key
-   * creation.
+   * Protect based on how the key material is initially added to the service. A value of `true` indicates that you must
+   * provide new key material when it's time to rotate the key. A value of `false` indicates that Key Protect will
+   * generate the new key material on a `rotate` operation, as it did in key creation.
    *
    * @return the imported
    */
   public Boolean isImported() {
     return imported;
+  }
+
+  /**
+   * Gets the keyRingId.
+   *
+   * An ID that identifies the key ring. Each ID is unique only within the given instance and is not reserved across the
+   * Key Protect service.
+   *
+   * @return the keyRingId
+   */
+  public String getKeyRingId() {
+    return keyRingId;
   }
 
   /**
@@ -243,10 +262,12 @@ public class KeyWithPayload extends GenericModel {
   /**
    * Gets the algorithmType.
    *
-   * The algorithm type used to generate the key. Currently, AES is supported.
+   * Deprecated.
    *
    * @return the algorithmType
+   * @deprecated this method is deprecated and may be removed in a future release
    */
+  @Deprecated
   public String getAlgorithmType() {
     return algorithmType;
   }
@@ -254,7 +275,7 @@ public class KeyWithPayload extends GenericModel {
   /**
    * Gets the algorithmMetadata.
    *
-   * The metadata for the key algorithm.
+   * Deprecated.
    *
    * @return the algorithmMetadata
    */
@@ -265,10 +286,12 @@ public class KeyWithPayload extends GenericModel {
   /**
    * Gets the algorithmBitSize.
    *
-   * The algorithm bit size used for key encryption.
+   * Deprecated.
    *
    * @return the algorithmBitSize
+   * @deprecated this method is deprecated and may be removed in a future release
    */
+  @Deprecated
   public Long getAlgorithmBitSize() {
     return algorithmBitSize;
   }
@@ -276,10 +299,12 @@ public class KeyWithPayload extends GenericModel {
   /**
    * Gets the algorithmMode.
    *
-   * The encryption scheme used to generate the key. Currently, `CBC_PAD` is supported.
+   * Deprecated.
    *
    * @return the algorithmMode
+   * @deprecated this method is deprecated and may be removed in a future release
    */
+  @Deprecated
   public String getAlgorithmMode() {
     return algorithmMode;
   }
@@ -340,6 +365,17 @@ public class KeyWithPayload extends GenericModel {
   }
 
   /**
+   * Gets the rotation.
+   *
+   * Metadata that indicates the status of a rotation policy on the key.
+   *
+   * @return the rotation
+   */
+  public RotationKeyMetadata getRotation() {
+    return rotation;
+  }
+
+  /**
    * Gets the deleted.
    *
    * A boolean that determines whether the key has been deleted.
@@ -386,10 +422,8 @@ public class KeyWithPayload extends GenericModel {
   /**
    * Gets the restoreAllowed.
    *
-   * A boolean that specifies if your key has the ability to be restored.
-   *
-   * A value of `true` indicates that the key can be restored. A value of
-   * `false` indicates that the key is unable to be restored.
+   * A boolean that specifies if your key has the ability to be restored. A value of `true` indicates that the key can
+   * be restored. A value of `false` indicates that the key is unable to be restored.
    *
    * @return the restoreAllowed
    */
@@ -435,7 +469,6 @@ public class KeyWithPayload extends GenericModel {
    * Gets the payload.
    *
    * The key material that you can export to external apps or services.
-   *
    * **Note:** If the key has been designated as a root key, the system cannot return the key material.
    *
    * @return the payload

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -33,9 +33,15 @@ public class ListKeyRingsOptionsTest {
   public void testListKeyRingsOptions() throws Throwable {
     ListKeyRingsOptions listKeyRingsOptionsModel = new ListKeyRingsOptions.Builder()
       .bluemixInstance("testString")
+      .limit(Long.valueOf("100"))
+      .offset(Long.valueOf("0"))
+      .totalCount(true)
       .correlationId("testString")
       .build();
     assertEquals(listKeyRingsOptionsModel.bluemixInstance(), "testString");
+    assertEquals(listKeyRingsOptionsModel.limit(), Long.valueOf("100"));
+    assertEquals(listKeyRingsOptionsModel.offset(), Long.valueOf("0"));
+    assertEquals(listKeyRingsOptionsModel.totalCount(), Boolean.valueOf(true));
     assertEquals(listKeyRingsOptionsModel.correlationId(), "testString");
   }
 

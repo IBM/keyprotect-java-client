@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -35,6 +35,11 @@ public class PostImportTokenOptions extends GenericModel {
     private String correlationId;
     private String xKmsKeyRing;
 
+    /**
+     * Instantiates a new Builder from an existing PostImportTokenOptions instance.
+     *
+     * @param postImportTokenOptions the instance to initialize the Builder with
+     */
     private Builder(PostImportTokenOptions postImportTokenOptions) {
       this.bluemixInstance = postImportTokenOptions.bluemixInstance;
       this.expiration = postImportTokenOptions.expiration;
@@ -135,6 +140,8 @@ public class PostImportTokenOptions extends GenericModel {
     }
   }
 
+  protected PostImportTokenOptions() { }
+
   protected PostImportTokenOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.bluemixInstance,
       "bluemixInstance cannot be null");
@@ -169,11 +176,8 @@ public class PostImportTokenOptions extends GenericModel {
    * Gets the expiration.
    *
    * The time in seconds from the creation of an import token that determines how long its associated public key remains
-   * valid.
-   *
-   * The minimum value is `300` seconds (5 minutes), and the maximum value is `86400` (24 hours). The default value is
-   * `600`
-   * (10 minutes).
+   * valid. The minimum value is `300` seconds (5 minutes), and the maximum value is `86400` (24 hours). The default
+   * value is `600` (10 minutes).
    *
    * @return the expiration
    */

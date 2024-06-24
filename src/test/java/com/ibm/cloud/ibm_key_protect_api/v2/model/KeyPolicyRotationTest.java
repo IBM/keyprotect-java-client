@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -33,8 +33,10 @@ public class KeyPolicyRotationTest {
   @Test
   public void testKeyPolicyRotation() throws Throwable {
     KeyPolicyRotationRotation keyPolicyRotationRotationModel = new KeyPolicyRotationRotation.Builder()
+      .enabled(true)
       .intervalMonth(Long.valueOf("1"))
       .build();
+    assertEquals(keyPolicyRotationRotationModel.enabled(), Boolean.valueOf(true));
     assertEquals(keyPolicyRotationRotationModel.intervalMonth(), Long.valueOf("1"));
 
     KeyPolicyRotation keyPolicyRotationModel = new KeyPolicyRotation.Builder()

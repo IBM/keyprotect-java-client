@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -25,6 +25,8 @@ public class GetKeyVersionsOptions extends GenericModel {
   protected String xKmsKeyRing;
   protected Long limit;
   protected Long offset;
+  protected Boolean totalCount;
+  protected Boolean allKeyStates;
 
   /**
    * Builder.
@@ -36,7 +38,14 @@ public class GetKeyVersionsOptions extends GenericModel {
     private String xKmsKeyRing;
     private Long limit;
     private Long offset;
+    private Boolean totalCount;
+    private Boolean allKeyStates;
 
+    /**
+     * Instantiates a new Builder from an existing GetKeyVersionsOptions instance.
+     *
+     * @param getKeyVersionsOptions the instance to initialize the Builder with
+     */
     private Builder(GetKeyVersionsOptions getKeyVersionsOptions) {
       this.id = getKeyVersionsOptions.id;
       this.bluemixInstance = getKeyVersionsOptions.bluemixInstance;
@@ -44,6 +53,8 @@ public class GetKeyVersionsOptions extends GenericModel {
       this.xKmsKeyRing = getKeyVersionsOptions.xKmsKeyRing;
       this.limit = getKeyVersionsOptions.limit;
       this.offset = getKeyVersionsOptions.offset;
+      this.totalCount = getKeyVersionsOptions.totalCount;
+      this.allKeyStates = getKeyVersionsOptions.allKeyStates;
     }
 
     /**
@@ -137,7 +148,31 @@ public class GetKeyVersionsOptions extends GenericModel {
       this.offset = offset;
       return this;
     }
+
+    /**
+     * Set the totalCount.
+     *
+     * @param totalCount the totalCount
+     * @return the GetKeyVersionsOptions builder
+     */
+    public Builder totalCount(Boolean totalCount) {
+      this.totalCount = totalCount;
+      return this;
+    }
+
+    /**
+     * Set the allKeyStates.
+     *
+     * @param allKeyStates the allKeyStates
+     * @return the GetKeyVersionsOptions builder
+     */
+    public Builder allKeyStates(Boolean allKeyStates) {
+      this.allKeyStates = allKeyStates;
+      return this;
+    }
   }
+
+  protected GetKeyVersionsOptions() { }
 
   protected GetKeyVersionsOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.id,
@@ -150,6 +185,8 @@ public class GetKeyVersionsOptions extends GenericModel {
     xKmsKeyRing = builder.xKmsKeyRing;
     limit = builder.limit;
     offset = builder.offset;
+    totalCount = builder.totalCount;
+    allKeyStates = builder.allKeyStates;
   }
 
   /**
@@ -164,7 +201,7 @@ public class GetKeyVersionsOptions extends GenericModel {
   /**
    * Gets the id.
    *
-   * The v4 UUID that uniquely identifies the key.
+   * The v4 UUID or alias that uniquely identifies the key.
    *
    * @return the id
    */
@@ -213,7 +250,6 @@ public class GetKeyVersionsOptions extends GenericModel {
    * The number of key versions to retrieve. By default, `GET /versions` returns the first 200 key versions. To retrieve
    * a different set of key versions, use `limit` with `offset` to page through your available resources. The maximum
    * value for `limit` is 5,000.
-   *
    * **Usage:** If you have a key with 20 versions in your instance, and you want to retrieve only the first 5 versions,
    * use `../versions?limit=5`.
    *
@@ -227,17 +263,40 @@ public class GetKeyVersionsOptions extends GenericModel {
    * Gets the offset.
    *
    * The number of key versions to skip. By specifying `offset`, you retrieve a subset of key versions that starts with
-   * the `offset` value. Use
-   * `offset` with `limit` to page through your available resources.
-   *
+   * the `offset` value. Use `offset` with `limit` to page through your available resources.
    * **Usage:** If you have a key with 100 versions in your instance, and you want to retrieve versions 26 through 50,
-   * use
-   * `../versions?offset=25&amp;limit=25`.
+   * use `../versions?offset=25&amp;limit=25`.
    *
    * @return the offset
    */
   public Long offset() {
     return offset;
+  }
+
+  /**
+   * Gets the totalCount.
+   *
+   * If set to `true`, returns `totalCount` in the response metadata for use with pagination. The `totalCount` value
+   * returned specifies the total number of key versions that match the request, disregarding limit and offset. The
+   * default is set to false.
+   * **Usage:** To return the `totalCount` value for use with pagination, use `../versions?totalCount=true`.
+   *
+   * @return the totalCount
+   */
+  public Boolean totalCount() {
+    return totalCount;
+  }
+
+  /**
+   * Gets the allKeyStates.
+   *
+   * If set to `true`, returns the key versions of a key in any state. **Usage:** If you have deleted a key and still
+   * want to retrieve its key versions use `../versions?allKeyStates=true`.
+   *
+   * @return the allKeyStates
+   */
+  public Boolean allKeyStates() {
+    return allKeyStates;
   }
 }
 

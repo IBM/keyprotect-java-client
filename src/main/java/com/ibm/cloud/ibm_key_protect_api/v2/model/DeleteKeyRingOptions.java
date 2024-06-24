@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -22,6 +22,7 @@ public class DeleteKeyRingOptions extends GenericModel {
   protected String keyRingId;
   protected String bluemixInstance;
   protected String correlationId;
+  protected Boolean force;
 
   /**
    * Builder.
@@ -30,11 +31,18 @@ public class DeleteKeyRingOptions extends GenericModel {
     private String keyRingId;
     private String bluemixInstance;
     private String correlationId;
+    private Boolean force;
 
+    /**
+     * Instantiates a new Builder from an existing DeleteKeyRingOptions instance.
+     *
+     * @param deleteKeyRingOptions the instance to initialize the Builder with
+     */
     private Builder(DeleteKeyRingOptions deleteKeyRingOptions) {
       this.keyRingId = deleteKeyRingOptions.keyRingId;
       this.bluemixInstance = deleteKeyRingOptions.bluemixInstance;
       this.correlationId = deleteKeyRingOptions.correlationId;
+      this.force = deleteKeyRingOptions.force;
     }
 
     /**
@@ -95,7 +103,20 @@ public class DeleteKeyRingOptions extends GenericModel {
       this.correlationId = correlationId;
       return this;
     }
+
+    /**
+     * Set the force.
+     *
+     * @param force the force
+     * @return the DeleteKeyRingOptions builder
+     */
+    public Builder force(Boolean force) {
+      this.force = force;
+      return this;
+    }
   }
+
+  protected DeleteKeyRingOptions() { }
 
   protected DeleteKeyRingOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.keyRingId,
@@ -105,6 +126,7 @@ public class DeleteKeyRingOptions extends GenericModel {
     keyRingId = builder.keyRingId;
     bluemixInstance = builder.bluemixInstance;
     correlationId = builder.correlationId;
+    force = builder.force;
   }
 
   /**
@@ -148,6 +170,19 @@ public class DeleteKeyRingOptions extends GenericModel {
    */
   public String correlationId() {
     return correlationId;
+  }
+
+  /**
+   * Gets the force.
+   *
+   * Force delete the key ring. All keys in the key ring are required to be deleted (in state `5`) before this action
+   * can be performed.  If the key ring to be deleted contains keys, they will be moved to the `default` key ring which
+   * requires the `kms.secrets.patch` IAM action.
+   *
+   * @return the force
+   */
+  public Boolean force() {
+    return force;
   }
 }
 

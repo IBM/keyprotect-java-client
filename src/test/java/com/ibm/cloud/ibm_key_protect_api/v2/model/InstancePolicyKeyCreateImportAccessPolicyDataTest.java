@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -14,7 +14,7 @@
 package com.ibm.cloud.ibm_key_protect_api.v2.model;
 
 import com.ibm.cloud.ibm_key_protect_api.v2.model.InstancePolicyKeyCreateImportAccessPolicyData;
-import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyCreateImportAccessProperties;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.InstancePolicyKeyCreateImportAccessPolicyDataAttributes;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
@@ -32,32 +32,32 @@ public class InstancePolicyKeyCreateImportAccessPolicyDataTest {
 
   @Test
   public void testInstancePolicyKeyCreateImportAccessPolicyData() throws Throwable {
-    InstancePolicyKeyCreateImportAccessPolicyDataAttributes instancePolicyKeyCreateImportAccessPolicyDataAttributes = new InstancePolicyKeyCreateImportAccessPolicyDataAttributes.Builder()
+    InstancePolicyKeyCreateImportAccessPolicyDataAttributes instancePolicyKeyCreateImportAccessPolicyDataAttributesModel = new InstancePolicyKeyCreateImportAccessPolicyDataAttributes.Builder()
       .createRootKey(true)
       .createStandardKey(true)
       .importRootKey(true)
       .importStandardKey(true)
       .enforceToken(true)
       .build();
-    assertEquals(instancePolicyKeyCreateImportAccessPolicyDataAttributes.createRootKey(), Boolean.valueOf(true));
-    assertEquals(instancePolicyKeyCreateImportAccessPolicyDataAttributes.createStandardKey(), Boolean.valueOf(true));
-    assertEquals(instancePolicyKeyCreateImportAccessPolicyDataAttributes.importRootKey(), Boolean.valueOf(true));
-    assertEquals(instancePolicyKeyCreateImportAccessPolicyDataAttributes.importStandardKey(), Boolean.valueOf(true));
-    assertEquals(instancePolicyKeyCreateImportAccessPolicyDataAttributes.enforceToken(), Boolean.valueOf(true));
+    assertEquals(instancePolicyKeyCreateImportAccessPolicyDataAttributesModel.createRootKey(), Boolean.valueOf(true));
+    assertEquals(instancePolicyKeyCreateImportAccessPolicyDataAttributesModel.createStandardKey(), Boolean.valueOf(true));
+    assertEquals(instancePolicyKeyCreateImportAccessPolicyDataAttributesModel.importRootKey(), Boolean.valueOf(true));
+    assertEquals(instancePolicyKeyCreateImportAccessPolicyDataAttributesModel.importStandardKey(), Boolean.valueOf(true));
+    assertEquals(instancePolicyKeyCreateImportAccessPolicyDataAttributesModel.enforceToken(), Boolean.valueOf(true));
 
     InstancePolicyKeyCreateImportAccessPolicyData instancePolicyKeyCreateImportAccessPolicyDataModel = new InstancePolicyKeyCreateImportAccessPolicyData.Builder()
       .enabled(true)
-      .attributes(instancePolicyKeyCreateImportAccessPolicyDataAttributes)
+      .attributes(instancePolicyKeyCreateImportAccessPolicyDataAttributesModel)
       .build();
     assertEquals(instancePolicyKeyCreateImportAccessPolicyDataModel.enabled(), Boolean.valueOf(true));
-    assertEquals(instancePolicyKeyCreateImportAccessPolicyDataModel.attributes(), instancePolicyKeyCreateImportAccessPolicyDataAttributes);
+    assertEquals(instancePolicyKeyCreateImportAccessPolicyDataModel.attributes(), instancePolicyKeyCreateImportAccessPolicyDataAttributesModel);
 
     String json = TestUtilities.serialize(instancePolicyKeyCreateImportAccessPolicyDataModel);
 
     InstancePolicyKeyCreateImportAccessPolicyData instancePolicyKeyCreateImportAccessPolicyDataModelNew = TestUtilities.deserialize(json, InstancePolicyKeyCreateImportAccessPolicyData.class);
     assertTrue(instancePolicyKeyCreateImportAccessPolicyDataModelNew instanceof InstancePolicyKeyCreateImportAccessPolicyData);
     assertEquals(instancePolicyKeyCreateImportAccessPolicyDataModelNew.enabled(), Boolean.valueOf(true));
-    assertEquals(instancePolicyKeyCreateImportAccessPolicyDataModelNew.attributes().toString(), instancePolicyKeyCreateImportAccessPolicyDataAttributes.toString());
+    assertEquals(instancePolicyKeyCreateImportAccessPolicyDataModelNew.attributes().toString(), instancePolicyKeyCreateImportAccessPolicyDataAttributesModel.toString());
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

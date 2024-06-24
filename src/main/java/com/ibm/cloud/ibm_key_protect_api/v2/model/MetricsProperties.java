@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -27,6 +27,11 @@ public class MetricsProperties extends GenericModel {
   public static class Builder {
     private Boolean enabled;
 
+    /**
+     * Instantiates a new Builder from an existing MetricsProperties instance.
+     *
+     * @param metricsProperties the instance to initialize the Builder with
+     */
     private Builder(MetricsProperties metricsProperties) {
       this.enabled = metricsProperties.enabled;
     }
@@ -67,6 +72,8 @@ public class MetricsProperties extends GenericModel {
     }
   }
 
+  protected MetricsProperties() { }
+
   protected MetricsProperties(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.enabled,
       "enabled cannot be null");
@@ -85,19 +92,14 @@ public class MetricsProperties extends GenericModel {
   /**
    * Gets the enabled.
    *
-   * If set to `true`, Key Protect will send service instance metrics to your
-   * [Cloud Monitoring With Sysdig](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-getting-started)
-   * monitoring instance.
-   *
-   * By default, sending metrics to your
-   * [Cloud Monitoring With Sysdig](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-getting-started)
-   * monitoring instance is disabled.
-   *
-   * **Note:** A metrics policy will add an additional metrics source to your
-   * [Cloud Monitoring With Sysdig](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-getting-started)
-   * monitoring instance. Please visit
-   * [Enabling Platform Metrics](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-platform_metrics_enabling)
-   * for more information.
+   * If set to `true`, Key Protect will send service instance metrics to your [Cloud Monitoring With
+   * Sysdig](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-getting-started) monitoring instance. By default,
+   * sending metrics to your [Cloud Monitoring With
+   * Sysdig](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-getting-started) monitoring instance is disabled.
+   * **Note:** A metrics policy will add an additional metrics source to your [Cloud Monitoring With
+   * Sysdig](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-getting-started) monitoring instance. For more
+   * information, see [Enabling Platform
+   * Metrics](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-platform_metrics_enabling) for more information.
    *
    * @return the enabled
    */

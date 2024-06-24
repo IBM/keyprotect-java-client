@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -33,16 +33,16 @@ public class PostImportTokenOptionsTest {
   public void testPostImportTokenOptions() throws Throwable {
     PostImportTokenOptions postImportTokenOptionsModel = new PostImportTokenOptions.Builder()
       .bluemixInstance("testString")
-      .expiration(Double.valueOf("300"))
+      .expiration(Double.valueOf("600"))
       .maxAllowedRetrievals(Double.valueOf("1"))
       .correlationId("testString")
-      .xKmsKeyRing("testString")
+      .xKmsKeyRing("default")
       .build();
     assertEquals(postImportTokenOptionsModel.bluemixInstance(), "testString");
-    assertEquals(postImportTokenOptionsModel.expiration(), Double.valueOf("300"));
+    assertEquals(postImportTokenOptionsModel.expiration(), Double.valueOf("600"));
     assertEquals(postImportTokenOptionsModel.maxAllowedRetrievals(), Double.valueOf("1"));
     assertEquals(postImportTokenOptionsModel.correlationId(), "testString");
-    assertEquals(postImportTokenOptionsModel.xKmsKeyRing(), "testString");
+    assertEquals(postImportTokenOptionsModel.xKmsKeyRing(), "default");
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

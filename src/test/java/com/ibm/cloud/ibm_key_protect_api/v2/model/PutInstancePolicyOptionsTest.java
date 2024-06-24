@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -22,8 +22,6 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.SetInstancePoliciesOneOfSetIns
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import org.testng.annotations.Test;
@@ -39,10 +37,10 @@ public class PutInstancePolicyOptionsTest {
   @Test
   public void testPutInstancePolicyOptions() throws Throwable {
     CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
-      .collectionType("application/vnd.ibm.kms.crn+json")
+      .collectionType("application/vnd.ibm.kms.allowed_ip_metadata+json")
       .collectionTotal(Long.valueOf("1"))
       .build();
-    assertEquals(collectionMetadataModel.collectionType(), "application/vnd.ibm.kms.crn+json");
+    assertEquals(collectionMetadataModel.collectionType(), "application/vnd.ibm.kms.allowed_ip_metadata+json");
     assertEquals(collectionMetadataModel.collectionTotal(), Long.valueOf("1"));
 
     InstancePolicyAllowedNetworkPolicyDataAttributes instancePolicyAllowedNetworkPolicyDataAttributesModel = new InstancePolicyAllowedNetworkPolicyDataAttributes.Builder()
@@ -66,19 +64,19 @@ public class PutInstancePolicyOptionsTest {
 
     SetInstancePoliciesOneOfSetInstancePolicyAllowedNetwork setInstancePoliciesOneOfModel = new SetInstancePoliciesOneOfSetInstancePolicyAllowedNetwork.Builder()
       .metadata(collectionMetadataModel)
-      .resources(new java.util.ArrayList<SetInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItem>(java.util.Arrays.asList(setInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItemModel)))
+      .resources(java.util.Arrays.asList(setInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItemModel))
       .build();
     assertEquals(setInstancePoliciesOneOfModel.metadata(), collectionMetadataModel);
-    assertEquals(setInstancePoliciesOneOfModel.resources(), new java.util.ArrayList<SetInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItem>(java.util.Arrays.asList(setInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItemModel)));
+    assertEquals(setInstancePoliciesOneOfModel.resources(), java.util.Arrays.asList(setInstancePoliciesOneOfSetInstancePolicyAllowedNetworkResourcesItemModel));
 
     PutInstancePolicyOptions putInstancePolicyOptionsModel = new PutInstancePolicyOptions.Builder()
       .bluemixInstance("testString")
-      .setInstancePoliciesOneOf(setInstancePoliciesOneOfModel)
+      .instancePolicyPutBody(setInstancePoliciesOneOfModel)
       .correlationId("testString")
       .policy("allowedNetwork")
       .build();
     assertEquals(putInstancePolicyOptionsModel.bluemixInstance(), "testString");
-    assertEquals(putInstancePolicyOptionsModel.setInstancePoliciesOneOf(), setInstancePoliciesOneOfModel);
+    assertEquals(putInstancePolicyOptionsModel.instancePolicyPutBody(), setInstancePoliciesOneOfModel);
     assertEquals(putInstancePolicyOptionsModel.correlationId(), "testString");
     assertEquals(putInstancePolicyOptionsModel.policy(), "allowedNetwork");
   }

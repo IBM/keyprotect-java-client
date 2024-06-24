@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -13,13 +13,11 @@
 
 package com.ibm.cloud.ibm_key_protect_api.v2.model;
 
-import com.ibm.cloud.ibm_key_protect_api.v2.model.AllowedIPProperties;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.InstancePolicyAllowedIPPolicyData;
+import com.ibm.cloud.ibm_key_protect_api.v2.model.InstancePolicyAllowedIPPolicyDataAttributes;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import org.testng.annotations.Test;
@@ -34,24 +32,24 @@ public class InstancePolicyAllowedIPPolicyDataTest {
 
   @Test
   public void testInstancePolicyAllowedIPPolicyData() throws Throwable {
-    AllowedIPProperties allowedIpPropertiesModel = new AllowedIPProperties.Builder()
-      .allowedIp(new java.util.ArrayList<String>(java.util.Arrays.asList("10.1.0.0/32", "10.0.0.0/24", "192.0.2.0/32", "198.51.100.0/24", "2001:db8::/60")))
+    InstancePolicyAllowedIPPolicyDataAttributes instancePolicyAllowedIpPolicyDataAttributesModel = new InstancePolicyAllowedIPPolicyDataAttributes.Builder()
+      .allowedIp(java.util.Arrays.asList("10.1.0.0/32", "10.0.0.0/24", "192.0.2.0/32", "198.51.100.0/24", "2001:db8::/60"))
       .build();
-    assertEquals(allowedIpPropertiesModel.allowedIp(), new java.util.ArrayList<String>(java.util.Arrays.asList("10.1.0.0/32", "10.0.0.0/24", "192.0.2.0/32", "198.51.100.0/24", "2001:db8::/60")));
+    assertEquals(instancePolicyAllowedIpPolicyDataAttributesModel.allowedIp(), java.util.Arrays.asList("10.1.0.0/32", "10.0.0.0/24", "192.0.2.0/32", "198.51.100.0/24", "2001:db8::/60"));
 
     InstancePolicyAllowedIPPolicyData instancePolicyAllowedIpPolicyDataModel = new InstancePolicyAllowedIPPolicyData.Builder()
       .enabled(true)
-      .attributes(allowedIpPropertiesModel)
+      .attributes(instancePolicyAllowedIpPolicyDataAttributesModel)
       .build();
     assertEquals(instancePolicyAllowedIpPolicyDataModel.enabled(), Boolean.valueOf(true));
-    assertEquals(instancePolicyAllowedIpPolicyDataModel.attributes(), allowedIpPropertiesModel);
+    assertEquals(instancePolicyAllowedIpPolicyDataModel.attributes(), instancePolicyAllowedIpPolicyDataAttributesModel);
 
     String json = TestUtilities.serialize(instancePolicyAllowedIpPolicyDataModel);
 
     InstancePolicyAllowedIPPolicyData instancePolicyAllowedIpPolicyDataModelNew = TestUtilities.deserialize(json, InstancePolicyAllowedIPPolicyData.class);
     assertTrue(instancePolicyAllowedIpPolicyDataModelNew instanceof InstancePolicyAllowedIPPolicyData);
     assertEquals(instancePolicyAllowedIpPolicyDataModelNew.enabled(), Boolean.valueOf(true));
-    assertEquals(instancePolicyAllowedIpPolicyDataModelNew.attributes().toString(), allowedIpPropertiesModel.toString());
+    assertEquals(instancePolicyAllowedIpPolicyDataModelNew.attributes().toString(), instancePolicyAllowedIpPolicyDataAttributesModel.toString());
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

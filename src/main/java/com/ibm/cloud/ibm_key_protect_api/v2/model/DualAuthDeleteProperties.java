@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -27,6 +27,11 @@ public class DualAuthDeleteProperties extends GenericModel {
   public static class Builder {
     private Boolean enabled;
 
+    /**
+     * Instantiates a new Builder from an existing DualAuthDeleteProperties instance.
+     *
+     * @param dualAuthDeleteProperties the instance to initialize the Builder with
+     */
     private Builder(DualAuthDeleteProperties dualAuthDeleteProperties) {
       this.enabled = dualAuthDeleteProperties.enabled;
     }
@@ -67,6 +72,8 @@ public class DualAuthDeleteProperties extends GenericModel {
     }
   }
 
+  protected DualAuthDeleteProperties() { }
+
   protected DualAuthDeleteProperties(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.enabled,
       "enabled cannot be null");
@@ -85,12 +92,9 @@ public class DualAuthDeleteProperties extends GenericModel {
   /**
    * Gets the enabled.
    *
-   * If set to `true`, Key Protect enables a dual authorization deletion policy for your service instance.
-   *
-   * By default, Key Protect requires only one authorization to delete a key. After you enable a dual authorization
-   * policy, any new key that you create or add to the instance will require an authorization from two users to delete
-   * keys.
-   *
+   * If set to `true`, Key Protect enables a dual authorization deletion policy for your service instance. By default,
+   * Key Protect requires only one authorization to delete a key. After you enable a dual authorization policy, any new
+   * key that you create or add to the instance will require an authorization from two users to delete keys.
    * **Note:** This change does not affect existing keys in your instance.
    *
    * @return the enabled

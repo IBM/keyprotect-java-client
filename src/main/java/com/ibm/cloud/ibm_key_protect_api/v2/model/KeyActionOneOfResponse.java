@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -26,26 +26,23 @@ public class KeyActionOneOfResponse extends GenericModel {
 
   protected String plaintext;
   protected String ciphertext;
-  protected KeyVersion keyVersion;
-  protected KeyVersion rewrappedKeyVersion;
+  protected WrappedKeyVersionKeyVersion keyVersion;
+  protected RewrappedKeyVersionRewrappedKeyVersion rewrappedKeyVersion;
 
-  protected KeyActionOneOfResponse() {
-  }
+  protected KeyActionOneOfResponse() { }
 
   /**
    * Gets the plaintext.
    *
    * The data encryption key (DEK) used in wrap actions when the query parameter is set to `wrap`. The system returns a
-   * base64 encoded plaintext in the response entity-body when you perform an `unwrap` action on a key.
-   *
-   * To wrap an existing DEK, provide a base64 encoded plaintext during a
-   * `wrap` action. To generate a new DEK, omit the `plaintext` property. Key Protect generates a random plaintext (32
-   * bytes) that is rooted in an HSM and then wraps that value.
-   *
+   * base64 encoded plaintext in the response entity-body when you perform an `unwrap` action on a key. To wrap an
+   * existing DEK, provide a base64 encoded plaintext during a `wrap` action. To generate a new DEK, omit the
+   * `plaintext` property. Key Protect generates a random plaintext (32 bytes) that is rooted in an HSM and then wraps
+   * that value.
    * **Note:** When you unwrap a wrapped data encryption key (WDEK) by using a rotated root key, the service returns a
-   * new ciphertext in the response entity-body. Each ciphertext remains available for
-   * `unwrap` actions. If you unwrap a DEK with a previous ciphertext, the service also returns the latest ciphertext in
-   * the response. Use the latest ciphertext for future unwrap operations.
+   * new ciphertext in the response entity-body. Each ciphertext remains available for `unwrap` actions. If you unwrap a
+   * DEK with a previous ciphertext, the service also returns the latest ciphertext in the response. Use the latest
+   * ciphertext for future unwrap operations.
    *
    * @return the plaintext
    */
@@ -56,7 +53,9 @@ public class KeyActionOneOfResponse extends GenericModel {
   /**
    * Gets the ciphertext.
    *
-   * The wrapped data encryption key (WDEK) that you can export to your app or service. The value is base64 encoded.
+   * The wrapped data encryption key (WDEK) that you can export to your app or service. The ciphertext contains the DEK
+   * wrapped by the latest version  of the key (WDEK). It is recommended to store and use  this WDEK in future calls to
+   * Key Protect. The value is base64 encoded.
    *
    * @return the ciphertext
    */
@@ -72,7 +71,7 @@ public class KeyActionOneOfResponse extends GenericModel {
    *
    * @return the keyVersion
    */
-  public KeyVersion getKeyVersion() {
+  public WrappedKeyVersionKeyVersion getKeyVersion() {
     return keyVersion;
   }
 
@@ -84,7 +83,7 @@ public class KeyActionOneOfResponse extends GenericModel {
    *
    * @return the rewrappedKeyVersion
    */
-  public KeyVersion getRewrappedKeyVersion() {
+  public RewrappedKeyVersionRewrappedKeyVersion getRewrappedKeyVersion() {
     return rewrappedKeyVersion;
   }
 }

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -28,17 +28,22 @@ public class SetMultipleKeyPoliciesResource extends GenericModel {
   }
 
   protected String type;
-  protected SetMultipleKeyPoliciesResourceDualAuthDelete dualAuthDelete;
-  protected SetMultipleKeyPoliciesResourceRotation rotation;
+  protected KeyPolicyDualAuthDeleteDualAuthDelete dualAuthDelete;
+  protected KeyPolicyRotationRotation rotation;
 
   /**
    * Builder.
    */
   public static class Builder {
     private String type;
-    private SetMultipleKeyPoliciesResourceDualAuthDelete dualAuthDelete;
-    private SetMultipleKeyPoliciesResourceRotation rotation;
+    private KeyPolicyDualAuthDeleteDualAuthDelete dualAuthDelete;
+    private KeyPolicyRotationRotation rotation;
 
+    /**
+     * Instantiates a new Builder from an existing SetMultipleKeyPoliciesResource instance.
+     *
+     * @param setMultipleKeyPoliciesResource the instance to initialize the Builder with
+     */
     private Builder(SetMultipleKeyPoliciesResource setMultipleKeyPoliciesResource) {
       this.type = setMultipleKeyPoliciesResource.type;
       this.dualAuthDelete = setMultipleKeyPoliciesResource.dualAuthDelete;
@@ -58,7 +63,7 @@ public class SetMultipleKeyPoliciesResource extends GenericModel {
      * @param dualAuthDelete the dualAuthDelete
      * @param rotation the rotation
      */
-    public Builder(String type, SetMultipleKeyPoliciesResourceDualAuthDelete dualAuthDelete, SetMultipleKeyPoliciesResourceRotation rotation) {
+    public Builder(String type, KeyPolicyDualAuthDeleteDualAuthDelete dualAuthDelete, KeyPolicyRotationRotation rotation) {
       this.type = type;
       this.dualAuthDelete = dualAuthDelete;
       this.rotation = rotation;
@@ -90,7 +95,7 @@ public class SetMultipleKeyPoliciesResource extends GenericModel {
      * @param dualAuthDelete the dualAuthDelete
      * @return the SetMultipleKeyPoliciesResource builder
      */
-    public Builder dualAuthDelete(SetMultipleKeyPoliciesResourceDualAuthDelete dualAuthDelete) {
+    public Builder dualAuthDelete(KeyPolicyDualAuthDeleteDualAuthDelete dualAuthDelete) {
       this.dualAuthDelete = dualAuthDelete;
       return this;
     }
@@ -101,11 +106,13 @@ public class SetMultipleKeyPoliciesResource extends GenericModel {
      * @param rotation the rotation
      * @return the SetMultipleKeyPoliciesResource builder
      */
-    public Builder rotation(SetMultipleKeyPoliciesResourceRotation rotation) {
+    public Builder rotation(KeyPolicyRotationRotation rotation) {
       this.rotation = rotation;
       return this;
     }
   }
+
+  protected SetMultipleKeyPoliciesResource() { }
 
   protected SetMultipleKeyPoliciesResource(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.type,
@@ -146,18 +153,18 @@ public class SetMultipleKeyPoliciesResource extends GenericModel {
    *
    * @return the dualAuthDelete
    */
-  public SetMultipleKeyPoliciesResourceDualAuthDelete dualAuthDelete() {
+  public KeyPolicyDualAuthDeleteDualAuthDelete dualAuthDelete() {
     return dualAuthDelete;
   }
 
   /**
    * Gets the rotation.
    *
-   * Specifies the key rotation time interval in months, with a minimum of 1, and a maximum of 12.
+   * Data associated with the automatic key rotation policy.
    *
    * @return the rotation
    */
-  public SetMultipleKeyPoliciesResourceRotation rotation() {
+  public KeyPolicyRotationRotation rotation() {
     return rotation;
   }
 }

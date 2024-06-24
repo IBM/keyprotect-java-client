@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -31,13 +31,14 @@ public class GetInstancePoliciesOneOfGetInstancePolicyKeyCreateImportAccessResou
   @SerializedName("enforce_token")
   protected Boolean enforceToken;
 
+  protected GetInstancePoliciesOneOfGetInstancePolicyKeyCreateImportAccessResourcesItemPolicyDataAttributes() { }
+
   /**
    * Gets the createRootKey.
    *
    * If set to `false`, the service prevents you or any authorized users from using Key Protect to create root keys in
    * the specified service instance. If set to `true`, Key Protect allows you or any authorized users to create root
    * keys in the instance.
-   *
    * **Note:** If omitted, `POST /instance/policies` will set this attribute to the default value (`true`).
    *
    * @return the createRootKey
@@ -52,7 +53,6 @@ public class GetInstancePoliciesOneOfGetInstancePolicyKeyCreateImportAccessResou
    * If set to `false`, the service prevents you or any authorized users from using Key Protect to create standard keys
    * in the specified service instance. If set to `true`, Key Protect allows you or any authorized users to create
    * standard keys in the instance.
-   *
    * **Note:** If omitted, `POST /instance/policies` will set this attribute to the default value (`true`).
    *
    * @return the createStandardKey
@@ -67,7 +67,6 @@ public class GetInstancePoliciesOneOfGetInstancePolicyKeyCreateImportAccessResou
    * If set to `false`, the service prevents you or any authorized users from importing root keys into the specified
    * service instance. If set to `true`, Key Protect allows you or any authorized users to import root keys into the
    * instance.
-   *
    * **Note:** If omitted, `POST /instance/policies` will set this attribute to the default value (`true`).
    *
    * @return the importRootKey
@@ -82,7 +81,6 @@ public class GetInstancePoliciesOneOfGetInstancePolicyKeyCreateImportAccessResou
    * If set to `false`, the service prevents you or any authorized users from importing standard keys into the specified
    * service instance. If set to `true`, Key Protect allows you or any authorized users to import standard keys into the
    * instance.
-   *
    * **Note:** If omitted, `POST /instance/policies` will set this attribute to the default value (`true`).
    *
    * @return the importStandardKey
@@ -97,7 +95,6 @@ public class GetInstancePoliciesOneOfGetInstancePolicyKeyCreateImportAccessResou
    * If set to `true`, the service prevents you or any authorized users from importing key material into the specified
    * service instance without using an import token. If set to `false`, Key Protect allows you or any authorized users
    * to import key material into the instance without the use of an import token.
-   *
    * **Note:** If omitted, `POST /instance/policies` will set this attribute to the default value (`false`).
    *
    * @return the enforceToken
