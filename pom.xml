@@ -65,7 +65,7 @@
     <git-repository-name>keyprotect-java-client</git-repository-name>
 
     <!-- version props -->
-    <sdk-core-version>9.17.3</sdk-core-version>
+    <sdk-core-version>9.22.0</sdk-core-version>
     <testng-version>7.4.0</testng-version>
     <okhttp3-version>4.10.0</okhttp3-version>
     <surefire-version>3.0.0-M7</surefire-version>
