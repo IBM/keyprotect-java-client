@@ -62,7 +62,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-    <git-repository-name>keyprotect-java-client</git-repository-name> 
+    <git-repository-name>keyprotect-java-client</git-repository-name>
 
     <!-- version props -->
     <sdk-core-version>9.22.0</sdk-core-version>
