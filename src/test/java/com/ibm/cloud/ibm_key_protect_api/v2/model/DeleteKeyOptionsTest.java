@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -37,14 +37,14 @@ public class DeleteKeyOptionsTest {
       .correlationId("testString")
       .xKmsKeyRing("testString")
       .prefer("return=representation")
-      .force(true)
+      .force(false)
       .build();
     assertEquals(deleteKeyOptionsModel.id(), "testString");
     assertEquals(deleteKeyOptionsModel.bluemixInstance(), "testString");
     assertEquals(deleteKeyOptionsModel.correlationId(), "testString");
     assertEquals(deleteKeyOptionsModel.xKmsKeyRing(), "testString");
     assertEquals(deleteKeyOptionsModel.prefer(), "return=representation");
-    assertEquals(deleteKeyOptionsModel.force(), Boolean.valueOf(true));
+    assertEquals(deleteKeyOptionsModel.force(), Boolean.valueOf(false));
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

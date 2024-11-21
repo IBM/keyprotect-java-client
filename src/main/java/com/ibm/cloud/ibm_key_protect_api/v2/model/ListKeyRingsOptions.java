@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -20,6 +20,9 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class ListKeyRingsOptions extends GenericModel {
 
   protected String bluemixInstance;
+  protected Long limit;
+  protected Long offset;
+  protected Boolean totalCount;
   protected String correlationId;
 
   /**
@@ -27,10 +30,21 @@ public class ListKeyRingsOptions extends GenericModel {
    */
   public static class Builder {
     private String bluemixInstance;
+    private Long limit;
+    private Long offset;
+    private Boolean totalCount;
     private String correlationId;
 
+    /**
+     * Instantiates a new Builder from an existing ListKeyRingsOptions instance.
+     *
+     * @param listKeyRingsOptions the instance to initialize the Builder with
+     */
     private Builder(ListKeyRingsOptions listKeyRingsOptions) {
       this.bluemixInstance = listKeyRingsOptions.bluemixInstance;
+      this.limit = listKeyRingsOptions.limit;
+      this.offset = listKeyRingsOptions.offset;
+      this.totalCount = listKeyRingsOptions.totalCount;
       this.correlationId = listKeyRingsOptions.correlationId;
     }
 
@@ -70,6 +84,39 @@ public class ListKeyRingsOptions extends GenericModel {
     }
 
     /**
+     * Set the limit.
+     *
+     * @param limit the limit
+     * @return the ListKeyRingsOptions builder
+     */
+    public Builder limit(long limit) {
+      this.limit = limit;
+      return this;
+    }
+
+    /**
+     * Set the offset.
+     *
+     * @param offset the offset
+     * @return the ListKeyRingsOptions builder
+     */
+    public Builder offset(long offset) {
+      this.offset = offset;
+      return this;
+    }
+
+    /**
+     * Set the totalCount.
+     *
+     * @param totalCount the totalCount
+     * @return the ListKeyRingsOptions builder
+     */
+    public Builder totalCount(Boolean totalCount) {
+      this.totalCount = totalCount;
+      return this;
+    }
+
+    /**
      * Set the correlationId.
      *
      * @param correlationId the correlationId
@@ -81,10 +128,15 @@ public class ListKeyRingsOptions extends GenericModel {
     }
   }
 
+  protected ListKeyRingsOptions() { }
+
   protected ListKeyRingsOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.bluemixInstance,
       "bluemixInstance cannot be null");
     bluemixInstance = builder.bluemixInstance;
+    limit = builder.limit;
+    offset = builder.offset;
+    totalCount = builder.totalCount;
     correlationId = builder.correlationId;
   }
 
@@ -106,6 +158,49 @@ public class ListKeyRingsOptions extends GenericModel {
    */
   public String bluemixInstance() {
     return bluemixInstance;
+  }
+
+  /**
+   * Gets the limit.
+   *
+   * The number of key rings to retrieve. By default, `GET /key_rings` returns  100 key rings including the default key
+   * ring. To retrieve a different set of key rings, use `limit` with `offset` to page through your available resources.
+   * The maximum value for `limit` is 5,000.
+   * **Usage:** If you have 20 key rings in your instance, and you want to retrieve only the first 5 key rings, use
+   * `../key_rings?limit=5`.
+   *
+   * @return the limit
+   */
+  public Long limit() {
+    return limit;
+  }
+
+  /**
+   * Gets the offset.
+   *
+   * The number of key rings to skip. By specifying `offset`, you retrieve a subset of key rings that starts with the
+   * `offset` value. Use `offset` with `limit` to page through your available resources.
+   * **Usage:** If you have 20 key rings in your instance, and you want to retrieve keys 10 through 20, use
+   * `../keys?offset=10&amp;limit=10`.
+   *
+   * @return the offset
+   */
+  public Long offset() {
+    return offset;
+  }
+
+  /**
+   * Gets the totalCount.
+   *
+   * If set to `true`, returns `totalCount` in the response metadata for use with pagination. The `totalCount` value
+   * returned specifies the total number of key rings that match the request, disregarding limit and offset. The default
+   * is set to false.
+   * **Usage:** To return the `totalCount` value for use with pagination, use `../key_rings?totalCount=true`.
+   *
+   * @return the totalCount
+   */
+  public Boolean totalCount() {
+    return totalCount;
   }
 
   /**

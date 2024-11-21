@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -13,7 +13,6 @@
 
 package com.ibm.cloud.ibm_key_protect_api.v2.model;
 
-import com.ibm.cloud.ibm_key_protect_api.v2.model.KeyVersion;
 import com.ibm.cloud.ibm_key_protect_api.v2.model.WrapKeyResponseBody;
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
@@ -35,6 +34,5 @@ public class WrapKeyResponseBodyTest {
     WrapKeyResponseBody wrapKeyResponseBodyModel = new WrapKeyResponseBody();
     assertNull(wrapKeyResponseBodyModel.getPlaintext());
     assertNull(wrapKeyResponseBodyModel.getCiphertext());
-    assertNull(wrapKeyResponseBodyModel.getKeyVersion());
   }
 }

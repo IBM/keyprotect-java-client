@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -35,8 +35,8 @@ public class GetRegistrationsAllKeysOptionsTest {
       .bluemixInstance("testString")
       .correlationId("testString")
       .xKmsKeyRing("testString")
-      .urlEncodedResourceCrnQuery("crn%3Av1%3Abluemix%3Apublic%3Adatabases-for-postgresql%3Aus-south%3Aa%2F274074dce64e9c423ffc238516c755e1%3A29caf0e7-120f-4da8-9551-3abf57ebcfc7%3A*%3A*")
-      .limit(Long.valueOf("1"))
+      .urlEncodedResourceCrnQuery("crn%3Av1%3Abluemix%3Apublic%3Adatabases-for-postgresql%3Aus-south%3Aa%2F00000000000000000000000000000000%3Afeddecaf-0000-0000-0000-1234567890ab%3A*%3A*")
+      .limit(Long.valueOf("200"))
       .offset(Long.valueOf("0"))
       .preventKeyDeletion(true)
       .totalCount(true)
@@ -44,8 +44,8 @@ public class GetRegistrationsAllKeysOptionsTest {
     assertEquals(getRegistrationsAllKeysOptionsModel.bluemixInstance(), "testString");
     assertEquals(getRegistrationsAllKeysOptionsModel.correlationId(), "testString");
     assertEquals(getRegistrationsAllKeysOptionsModel.xKmsKeyRing(), "testString");
-    assertEquals(getRegistrationsAllKeysOptionsModel.urlEncodedResourceCrnQuery(), "crn%3Av1%3Abluemix%3Apublic%3Adatabases-for-postgresql%3Aus-south%3Aa%2F274074dce64e9c423ffc238516c755e1%3A29caf0e7-120f-4da8-9551-3abf57ebcfc7%3A*%3A*");
-    assertEquals(getRegistrationsAllKeysOptionsModel.limit(), Long.valueOf("1"));
+    assertEquals(getRegistrationsAllKeysOptionsModel.urlEncodedResourceCrnQuery(), "crn%3Av1%3Abluemix%3Apublic%3Adatabases-for-postgresql%3Aus-south%3Aa%2F00000000000000000000000000000000%3Afeddecaf-0000-0000-0000-1234567890ab%3A*%3A*");
+    assertEquals(getRegistrationsAllKeysOptionsModel.limit(), Long.valueOf("200"));
     assertEquals(getRegistrationsAllKeysOptionsModel.offset(), Long.valueOf("0"));
     assertEquals(getRegistrationsAllKeysOptionsModel.preventKeyDeletion(), Boolean.valueOf(true));
     assertEquals(getRegistrationsAllKeysOptionsModel.totalCount(), Boolean.valueOf(true));

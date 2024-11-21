@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -31,7 +31,7 @@ public class PutPolicyOptions extends GenericModel {
 
   protected String id;
   protected String bluemixInstance;
-  protected SetKeyPoliciesOneOf setKeyPoliciesOneOf;
+  protected SetKeyPoliciesOneOf keyPolicyPutBody;
   protected String correlationId;
   protected String xKmsKeyRing;
   protected String policy;
@@ -42,15 +42,20 @@ public class PutPolicyOptions extends GenericModel {
   public static class Builder {
     private String id;
     private String bluemixInstance;
-    private SetKeyPoliciesOneOf setKeyPoliciesOneOf;
+    private SetKeyPoliciesOneOf keyPolicyPutBody;
     private String correlationId;
     private String xKmsKeyRing;
     private String policy;
 
+    /**
+     * Instantiates a new Builder from an existing PutPolicyOptions instance.
+     *
+     * @param putPolicyOptions the instance to initialize the Builder with
+     */
     private Builder(PutPolicyOptions putPolicyOptions) {
       this.id = putPolicyOptions.id;
       this.bluemixInstance = putPolicyOptions.bluemixInstance;
-      this.setKeyPoliciesOneOf = putPolicyOptions.setKeyPoliciesOneOf;
+      this.keyPolicyPutBody = putPolicyOptions.keyPolicyPutBody;
       this.correlationId = putPolicyOptions.correlationId;
       this.xKmsKeyRing = putPolicyOptions.xKmsKeyRing;
       this.policy = putPolicyOptions.policy;
@@ -67,12 +72,12 @@ public class PutPolicyOptions extends GenericModel {
      *
      * @param id the id
      * @param bluemixInstance the bluemixInstance
-     * @param setKeyPoliciesOneOf the setKeyPoliciesOneOf
+     * @param keyPolicyPutBody the keyPolicyPutBody
      */
-    public Builder(String id, String bluemixInstance, SetKeyPoliciesOneOf setKeyPoliciesOneOf) {
+    public Builder(String id, String bluemixInstance, SetKeyPoliciesOneOf keyPolicyPutBody) {
       this.id = id;
       this.bluemixInstance = bluemixInstance;
-      this.setKeyPoliciesOneOf = setKeyPoliciesOneOf;
+      this.keyPolicyPutBody = keyPolicyPutBody;
     }
 
     /**
@@ -107,13 +112,13 @@ public class PutPolicyOptions extends GenericModel {
     }
 
     /**
-     * Set the setKeyPoliciesOneOf.
+     * Set the keyPolicyPutBody.
      *
-     * @param setKeyPoliciesOneOf the setKeyPoliciesOneOf
+     * @param keyPolicyPutBody the keyPolicyPutBody
      * @return the PutPolicyOptions builder
      */
-    public Builder setKeyPoliciesOneOf(SetKeyPoliciesOneOf setKeyPoliciesOneOf) {
-      this.setKeyPoliciesOneOf = setKeyPoliciesOneOf;
+    public Builder keyPolicyPutBody(SetKeyPoliciesOneOf keyPolicyPutBody) {
+      this.keyPolicyPutBody = keyPolicyPutBody;
       return this;
     }
 
@@ -151,16 +156,18 @@ public class PutPolicyOptions extends GenericModel {
     }
   }
 
+  protected PutPolicyOptions() { }
+
   protected PutPolicyOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.id,
       "id cannot be empty");
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.bluemixInstance,
       "bluemixInstance cannot be null");
-    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.setKeyPoliciesOneOf,
-      "setKeyPoliciesOneOf cannot be null");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.keyPolicyPutBody,
+      "keyPolicyPutBody cannot be null");
     id = builder.id;
     bluemixInstance = builder.bluemixInstance;
-    setKeyPoliciesOneOf = builder.setKeyPoliciesOneOf;
+    keyPolicyPutBody = builder.keyPolicyPutBody;
     correlationId = builder.correlationId;
     xKmsKeyRing = builder.xKmsKeyRing;
     policy = builder.policy;
@@ -178,7 +185,7 @@ public class PutPolicyOptions extends GenericModel {
   /**
    * Gets the id.
    *
-   * The v4 UUID that uniquely identifies the key.
+   * The v4 UUID or alias that uniquely identifies the key.
    *
    * @return the id
    */
@@ -198,14 +205,14 @@ public class PutPolicyOptions extends GenericModel {
   }
 
   /**
-   * Gets the setKeyPoliciesOneOf.
+   * Gets the keyPolicyPutBody.
    *
    * The base request for key policy create or update.
    *
-   * @return the setKeyPoliciesOneOf
+   * @return the keyPolicyPutBody
    */
-  public SetKeyPoliciesOneOf setKeyPoliciesOneOf() {
-    return setKeyPoliciesOneOf;
+  public SetKeyPoliciesOneOf keyPolicyPutBody() {
+    return keyPolicyPutBody;
   }
 
   /**

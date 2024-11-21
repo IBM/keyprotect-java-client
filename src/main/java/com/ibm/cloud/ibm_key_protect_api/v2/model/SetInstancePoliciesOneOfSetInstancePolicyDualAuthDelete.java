@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -28,6 +28,11 @@ public class SetInstancePoliciesOneOfSetInstancePolicyDualAuthDelete extends Set
     private CollectionMetadata metadata;
     private List<SetInstancePolicyDualAuthDeleteResourcesItem> resources;
 
+    /**
+     * Instantiates a new Builder from an existing SetInstancePoliciesOneOfSetInstancePolicyDualAuthDelete instance.
+     *
+     * @param setInstancePoliciesOneOfSetInstancePolicyDualAuthDelete the instance to initialize the Builder with
+     */
     public Builder(SetInstancePoliciesOneOf setInstancePoliciesOneOfSetInstancePolicyDualAuthDelete) {
       this.metadata = setInstancePoliciesOneOfSetInstancePolicyDualAuthDelete.metadata;
       this.resources = setInstancePoliciesOneOfSetInstancePolicyDualAuthDelete.resources;
@@ -60,9 +65,9 @@ public class SetInstancePoliciesOneOfSetInstancePolicyDualAuthDelete extends Set
     }
 
     /**
-     * Adds an resources to resources.
+     * Adds a new element to resources.
      *
-     * @param resources the new resources
+     * @param resources the new element to be added
      * @return the SetInstancePoliciesOneOfSetInstancePolicyDualAuthDelete builder
      */
     public Builder addResources(SetInstancePolicyDualAuthDeleteResourcesItem resources) {
@@ -98,6 +103,8 @@ public class SetInstancePoliciesOneOfSetInstancePolicyDualAuthDelete extends Set
       return this;
     }
   }
+
+  protected SetInstancePoliciesOneOfSetInstancePolicyDualAuthDelete() { }
 
   protected SetInstancePoliciesOneOfSetInstancePolicyDualAuthDelete(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.metadata,

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -25,24 +25,22 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  * - GetInstancePoliciesOneOfGetInstancePolicyAllowedIP
  * - GetInstancePoliciesOneOfGetInstancePolicyKeyCreateImportAccess
  * - GetInstancePoliciesOneOfGetInstancePolicyMetrics
+ * - GetInstancePoliciesOneOfGetInstancePolicyRotation
  * - GetInstancePoliciesOneOfGetMultipleInstancePolicies
  */
 public class GetInstancePoliciesOneOf extends GenericModel {
 
-  protected CollectionMetadata metadata;
+  protected CollectionMetadataOneOf metadata;
   protected List<GetInstancePoliciesOneOfResourcesItem> resources;
 
-  protected GetInstancePoliciesOneOf() {
-  }
+  protected GetInstancePoliciesOneOf() { }
 
   /**
    * Gets the metadata.
    *
-   * The metadata that describes the resource array.
-   *
    * @return the metadata
    */
-  public CollectionMetadata getMetadata() {
+  public CollectionMetadataOneOf getMetadata() {
     return metadata;
   }
 

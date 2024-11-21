@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -36,9 +36,9 @@ public class GetRegistrationsOptionsTest {
       .bluemixInstance("testString")
       .correlationId("testString")
       .xKmsKeyRing("testString")
-      .limit(Long.valueOf("1"))
+      .limit(Long.valueOf("200"))
       .offset(Long.valueOf("0"))
-      .urlEncodedResourceCrnQuery("crn%3Av1%3Abluemix%3Apublic%3Adatabases-for-postgresql%3Aus-south%3Aa%2F274074dce64e9c423ffc238516c755e1%3A29caf0e7-120f-4da8-9551-3abf57ebcfc7%3A*%3A*")
+      .urlEncodedResourceCrnQuery("crn%3Av1%3Abluemix%3Apublic%3Adatabases-for-postgresql%3Aus-south%3Aa%2F00000000000000000000000000000000%3Afeddecaf-0000-0000-0000-1234567890ab%3A*%3A*")
       .preventKeyDeletion(true)
       .totalCount(true)
       .build();
@@ -46,9 +46,9 @@ public class GetRegistrationsOptionsTest {
     assertEquals(getRegistrationsOptionsModel.bluemixInstance(), "testString");
     assertEquals(getRegistrationsOptionsModel.correlationId(), "testString");
     assertEquals(getRegistrationsOptionsModel.xKmsKeyRing(), "testString");
-    assertEquals(getRegistrationsOptionsModel.limit(), Long.valueOf("1"));
+    assertEquals(getRegistrationsOptionsModel.limit(), Long.valueOf("200"));
     assertEquals(getRegistrationsOptionsModel.offset(), Long.valueOf("0"));
-    assertEquals(getRegistrationsOptionsModel.urlEncodedResourceCrnQuery(), "crn%3Av1%3Abluemix%3Apublic%3Adatabases-for-postgresql%3Aus-south%3Aa%2F274074dce64e9c423ffc238516c755e1%3A29caf0e7-120f-4da8-9551-3abf57ebcfc7%3A*%3A*");
+    assertEquals(getRegistrationsOptionsModel.urlEncodedResourceCrnQuery(), "crn%3Av1%3Abluemix%3Apublic%3Adatabases-for-postgresql%3Aus-south%3Aa%2F00000000000000000000000000000000%3Afeddecaf-0000-0000-0000-1234567890ab%3A*%3A*");
     assertEquals(getRegistrationsOptionsModel.preventKeyDeletion(), Boolean.valueOf(true));
     assertEquals(getRegistrationsOptionsModel.totalCount(), Boolean.valueOf(true));
   }

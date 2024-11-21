@@ -3,7 +3,7 @@
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![JavaDoc](https://img.shields.io/badge/javadoc-reference-blue.svg)](https://www.javadoc.io/doc/com.ibm.cloud/ibm-key-protect-sdk/latest/index.html)
 
-# IBM Cloud Key Protect Java SDK Version 0.2.4
+# IBM Cloud Key Protect Java SDK Version 1.0.0
 Java client library to interact with [IBM Key Protect](https://cloud.ibm.com/apidocs/key-protect).
 
 <!--
@@ -52,14 +52,14 @@ To define a dependency on the entire set of services contained in the project, u
 <dependency>
 	<groupId>com.ibm.cloud</groupId>
 	<artifactId>ibm-key-protect-sdk</artifactId>
-	<version>0.2.4</version>
+	<version>1.0.0</version>
 </dependency>
 ```
 
 ##### Gradle
 
 ```gradle
-'com.ibm.cloud:ibm-key-protect-sdk:0.2.4'
+'com.ibm.cloud:ibm-key-protect-sdk:1.0.0'
 ```
 
 ##### Local Install

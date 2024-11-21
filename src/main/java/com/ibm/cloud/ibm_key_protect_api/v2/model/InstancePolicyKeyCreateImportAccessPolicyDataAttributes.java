@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -42,6 +42,11 @@ public class InstancePolicyKeyCreateImportAccessPolicyDataAttributes extends Gen
     private Boolean importStandardKey;
     private Boolean enforceToken;
 
+    /**
+     * Instantiates a new Builder from an existing InstancePolicyKeyCreateImportAccessPolicyDataAttributes instance.
+     *
+     * @param instancePolicyKeyCreateImportAccessPolicyDataAttributes the instance to initialize the Builder with
+     */
     private Builder(InstancePolicyKeyCreateImportAccessPolicyDataAttributes instancePolicyKeyCreateImportAccessPolicyDataAttributes) {
       this.createRootKey = instancePolicyKeyCreateImportAccessPolicyDataAttributes.createRootKey;
       this.createStandardKey = instancePolicyKeyCreateImportAccessPolicyDataAttributes.createStandardKey;
@@ -121,6 +126,8 @@ public class InstancePolicyKeyCreateImportAccessPolicyDataAttributes extends Gen
     }
   }
 
+  protected InstancePolicyKeyCreateImportAccessPolicyDataAttributes() { }
+
   protected InstancePolicyKeyCreateImportAccessPolicyDataAttributes(Builder builder) {
     createRootKey = builder.createRootKey;
     createStandardKey = builder.createStandardKey;
@@ -141,10 +148,10 @@ public class InstancePolicyKeyCreateImportAccessPolicyDataAttributes extends Gen
   /**
    * Gets the createRootKey.
    *
-   * If set to `false`, the service prevents you or any authorized users from using Key Protect to  create root keys in
-   * the specified service instance. If set to `true`, Key Protect allows you or  any authorized users to create root
+   * If set to `false`, the service prevents you or any authorized users from using Key Protect to create root keys in
+   * the specified service instance. If set to `true`, Key Protect allows you or any authorized users to create root
    * keys in the instance.
-   *  **Note:** If omitted, `POST /instance/policies` will set this attribute to the default value (`true`).
+   * **Note:** If omitted, `POST /instance/policies` will set this attribute to the default value (`true`).
    *
    * @return the createRootKey
    */
@@ -155,10 +162,10 @@ public class InstancePolicyKeyCreateImportAccessPolicyDataAttributes extends Gen
   /**
    * Gets the createStandardKey.
    *
-   * If set to `false`, the service prevents you or any authorized users from using Key Protect to  create standard keys
-   * in the specified service instance. If set to `true`, Key Protect allows you  or any authorized users to create
-   * standard keys in the instance. **Note:** If omitted, `POST /instance/policies` will set this attribute to the
-   * default value (`true`).
+   * If set to `false`, the service prevents you or any authorized users from using Key Protect to create standard keys
+   * in the specified service instance. If set to `true`, Key Protect allows you or any authorized users to create
+   * standard keys in the instance.
+   * **Note:** If omitted, `POST /instance/policies` will set this attribute to the default value (`true`).
    *
    * @return the createStandardKey
    */
@@ -169,9 +176,10 @@ public class InstancePolicyKeyCreateImportAccessPolicyDataAttributes extends Gen
   /**
    * Gets the importRootKey.
    *
-   * If set to `false`, the service prevents you or any authorized users from importing root keys  into the specified
-   * service instance. If set to `true`, Key Protect allows you or any authorized  users to import root keys into the
-   * instance. **Note:** If omitted, `POST /instance/policies` will set this attribute to the default value (`true`).
+   * If set to `false`, the service prevents you or any authorized users from importing root keys into the specified
+   * service instance. If set to `true`, Key Protect allows you or any authorized users to import root keys into the
+   * instance.
+   * **Note:** If omitted, `POST /instance/policies` will set this attribute to the default value (`true`).
    *
    * @return the importRootKey
    */
@@ -182,10 +190,10 @@ public class InstancePolicyKeyCreateImportAccessPolicyDataAttributes extends Gen
   /**
    * Gets the importStandardKey.
    *
-   * If set to `false`, the service prevents you or any authorized users from importing standard keys  into the
-   * specified service instance. If set to `true`, Key Protect allows you or any authorized  users to import standard
-   * keys into the instance. **Note:** If omitted, `POST /instance/policies` will set this attribute to the default
-   * value (`true`).
+   * If set to `false`, the service prevents you or any authorized users from importing standard keys into the specified
+   * service instance. If set to `true`, Key Protect allows you or any authorized users to import standard keys into the
+   * instance.
+   * **Note:** If omitted, `POST /instance/policies` will set this attribute to the default value (`true`).
    *
    * @return the importStandardKey
    */
@@ -196,10 +204,10 @@ public class InstancePolicyKeyCreateImportAccessPolicyDataAttributes extends Gen
   /**
    * Gets the enforceToken.
    *
-   * If set to `true`, the service prevents you or any authorized users from importing key material  into the specified
-   * service instance without using an import token. If set to `false`, Key Protect  allows you or any authorized users
-   * to import key material into the instance without the use of an import token. **Note:** If omitted, `POST
-   * /instance/policies` will set this attribute to the default value (`false`).
+   * If set to `true`, the service prevents you or any authorized users from importing key material into the specified
+   * service instance without using an import token. If set to `false`, Key Protect allows you or any authorized users
+   * to import key material into the instance without the use of an import token.
+   * **Note:** If omitted, `POST /instance/policies` will set this attribute to the default value (`false`).
    *
    * @return the enforceToken
    */

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -37,6 +37,11 @@ public class KeyPolicyRotation extends GenericModel {
     private String type;
     private KeyPolicyRotationRotation rotation;
 
+    /**
+     * Instantiates a new Builder from an existing KeyPolicyRotation instance.
+     *
+     * @param keyPolicyRotation the instance to initialize the Builder with
+     */
     private Builder(KeyPolicyRotation keyPolicyRotation) {
       this.type = keyPolicyRotation.type;
       this.rotation = keyPolicyRotation.rotation;
@@ -91,6 +96,8 @@ public class KeyPolicyRotation extends GenericModel {
     }
   }
 
+  protected KeyPolicyRotation() { }
+
   protected KeyPolicyRotation(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.type,
       "type cannot be null");
@@ -123,7 +130,7 @@ public class KeyPolicyRotation extends GenericModel {
   /**
    * Gets the rotation.
    *
-   * Specifies the key rotation time interval in months, with a minimum of 1, and a maximum of 12.
+   * Data associated with the automatic key rotation policy.
    *
    * @return the rotation
    */

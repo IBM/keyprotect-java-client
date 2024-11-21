@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -21,8 +21,6 @@ import com.ibm.cloud.ibm_key_protect_api.v2.model.SetMultipleInstancePoliciesRes
 import com.ibm.cloud.ibm_key_protect_api.v2.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import org.testng.annotations.Test;
@@ -38,28 +36,30 @@ public class SetInstancePoliciesOneOfSetMultipleInstancePoliciesTest {
   @Test
   public void testSetInstancePoliciesOneOfSetMultipleInstancePolicies() throws Throwable {
     CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
-      .collectionType("application/vnd.ibm.kms.crn+json")
+      .collectionType("application/vnd.ibm.kms.allowed_ip_metadata+json")
       .collectionTotal(Long.valueOf("1"))
       .build();
-    assertEquals(collectionMetadataModel.collectionType(), "application/vnd.ibm.kms.crn+json");
+    assertEquals(collectionMetadataModel.collectionType(), "application/vnd.ibm.kms.allowed_ip_metadata+json");
     assertEquals(collectionMetadataModel.collectionTotal(), Long.valueOf("1"));
 
     SetMultipleInstancePoliciesResourcesItemPolicyDataAttributes setMultipleInstancePoliciesResourcesItemPolicyDataAttributesModel = new SetMultipleInstancePoliciesResourcesItemPolicyDataAttributes.Builder()
       .allowedNetwork("public-and-private")
-      .allowedIp(new java.util.ArrayList<String>(java.util.Arrays.asList("10.1.0.0/32", "10.0.0.0/24", "192.0.2.0/32", "198.51.100.0/24", "2001:db8::/60")))
+      .allowedIp(java.util.Arrays.asList("10.1.0.0/32", "10.0.0.0/24", "192.0.2.0/32", "198.51.100.0/24", "2001:db8::/60"))
       .createRootKey(true)
       .createStandardKey(true)
       .importRootKey(true)
       .importStandardKey(true)
       .enforceToken(true)
+      .intervalMonth(Long.valueOf("3"))
       .build();
     assertEquals(setMultipleInstancePoliciesResourcesItemPolicyDataAttributesModel.allowedNetwork(), "public-and-private");
-    assertEquals(setMultipleInstancePoliciesResourcesItemPolicyDataAttributesModel.allowedIp(), new java.util.ArrayList<String>(java.util.Arrays.asList("10.1.0.0/32", "10.0.0.0/24", "192.0.2.0/32", "198.51.100.0/24", "2001:db8::/60")));
+    assertEquals(setMultipleInstancePoliciesResourcesItemPolicyDataAttributesModel.allowedIp(), java.util.Arrays.asList("10.1.0.0/32", "10.0.0.0/24", "192.0.2.0/32", "198.51.100.0/24", "2001:db8::/60"));
     assertEquals(setMultipleInstancePoliciesResourcesItemPolicyDataAttributesModel.createRootKey(), Boolean.valueOf(true));
     assertEquals(setMultipleInstancePoliciesResourcesItemPolicyDataAttributesModel.createStandardKey(), Boolean.valueOf(true));
     assertEquals(setMultipleInstancePoliciesResourcesItemPolicyDataAttributesModel.importRootKey(), Boolean.valueOf(true));
     assertEquals(setMultipleInstancePoliciesResourcesItemPolicyDataAttributesModel.importStandardKey(), Boolean.valueOf(true));
     assertEquals(setMultipleInstancePoliciesResourcesItemPolicyDataAttributesModel.enforceToken(), Boolean.valueOf(true));
+    assertEquals(setMultipleInstancePoliciesResourcesItemPolicyDataAttributesModel.intervalMonth(), Long.valueOf("3"));
 
     SetMultipleInstancePoliciesResourcesItemPolicyData setMultipleInstancePoliciesResourcesItemPolicyDataModel = new SetMultipleInstancePoliciesResourcesItemPolicyData.Builder()
       .enabled(true)
@@ -77,10 +77,10 @@ public class SetInstancePoliciesOneOfSetMultipleInstancePoliciesTest {
 
     SetInstancePoliciesOneOfSetMultipleInstancePolicies setInstancePoliciesOneOfSetMultipleInstancePoliciesModel = new SetInstancePoliciesOneOfSetMultipleInstancePolicies.Builder()
       .metadata(collectionMetadataModel)
-      .resources(new java.util.ArrayList<SetMultipleInstancePoliciesResourcesItem>(java.util.Arrays.asList(setMultipleInstancePoliciesResourcesItemModel)))
+      .resources(java.util.Arrays.asList(setMultipleInstancePoliciesResourcesItemModel))
       .build();
     assertEquals(setInstancePoliciesOneOfSetMultipleInstancePoliciesModel.metadata(), collectionMetadataModel);
-    assertEquals(setInstancePoliciesOneOfSetMultipleInstancePoliciesModel.resources(), new java.util.ArrayList<SetMultipleInstancePoliciesResourcesItem>(java.util.Arrays.asList(setMultipleInstancePoliciesResourcesItemModel)));
+    assertEquals(setInstancePoliciesOneOfSetMultipleInstancePoliciesModel.resources(), java.util.Arrays.asList(setMultipleInstancePoliciesResourcesItemModel));
 
     String json = TestUtilities.serialize(setInstancePoliciesOneOfSetMultipleInstancePoliciesModel);
 

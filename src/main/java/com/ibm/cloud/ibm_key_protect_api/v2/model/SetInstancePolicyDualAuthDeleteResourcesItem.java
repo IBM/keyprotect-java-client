@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -40,6 +40,11 @@ public class SetInstancePolicyDualAuthDeleteResourcesItem extends GenericModel {
     private String policyType;
     private DualAuthDeleteProperties policyData;
 
+    /**
+     * Instantiates a new Builder from an existing SetInstancePolicyDualAuthDeleteResourcesItem instance.
+     *
+     * @param setInstancePolicyDualAuthDeleteResourcesItem the instance to initialize the Builder with
+     */
     private Builder(SetInstancePolicyDualAuthDeleteResourcesItem setInstancePolicyDualAuthDeleteResourcesItem) {
       this.policyType = setInstancePolicyDualAuthDeleteResourcesItem.policyType;
       this.policyData = setInstancePolicyDualAuthDeleteResourcesItem.policyData;
@@ -93,6 +98,8 @@ public class SetInstancePolicyDualAuthDeleteResourcesItem extends GenericModel {
       return this;
     }
   }
+
+  protected SetInstancePolicyDualAuthDeleteResourcesItem() { }
 
   protected SetInstancePolicyDualAuthDeleteResourcesItem(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.policyType,

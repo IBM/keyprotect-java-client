@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -32,17 +32,17 @@ public class CollectionMetadataTest {
   @Test
   public void testCollectionMetadata() throws Throwable {
     CollectionMetadata collectionMetadataModel = new CollectionMetadata.Builder()
-      .collectionType("application/vnd.ibm.kms.crn+json")
+      .collectionType("application/vnd.ibm.kms.allowed_ip_metadata+json")
       .collectionTotal(Long.valueOf("1"))
       .build();
-    assertEquals(collectionMetadataModel.collectionType(), "application/vnd.ibm.kms.crn+json");
+    assertEquals(collectionMetadataModel.collectionType(), "application/vnd.ibm.kms.allowed_ip_metadata+json");
     assertEquals(collectionMetadataModel.collectionTotal(), Long.valueOf("1"));
 
     String json = TestUtilities.serialize(collectionMetadataModel);
 
     CollectionMetadata collectionMetadataModelNew = TestUtilities.deserialize(json, CollectionMetadata.class);
     assertTrue(collectionMetadataModelNew instanceof CollectionMetadata);
-    assertEquals(collectionMetadataModelNew.collectionType(), "application/vnd.ibm.kms.crn+json");
+    assertEquals(collectionMetadataModelNew.collectionType(), "application/vnd.ibm.kms.allowed_ip_metadata+json");
     assertEquals(collectionMetadataModelNew.collectionTotal(), Long.valueOf("1"));
   }
 

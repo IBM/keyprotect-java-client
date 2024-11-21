@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -40,6 +40,11 @@ public class SetInstancePoliciesOneOfSetInstancePolicyMetricsResourcesItem exten
     private String policyType;
     private MetricsProperties policyData;
 
+    /**
+     * Instantiates a new Builder from an existing SetInstancePoliciesOneOfSetInstancePolicyMetricsResourcesItem instance.
+     *
+     * @param setInstancePoliciesOneOfSetInstancePolicyMetricsResourcesItem the instance to initialize the Builder with
+     */
     private Builder(SetInstancePoliciesOneOfSetInstancePolicyMetricsResourcesItem setInstancePoliciesOneOfSetInstancePolicyMetricsResourcesItem) {
       this.policyType = setInstancePoliciesOneOfSetInstancePolicyMetricsResourcesItem.policyType;
       this.policyData = setInstancePoliciesOneOfSetInstancePolicyMetricsResourcesItem.policyData;
@@ -93,6 +98,8 @@ public class SetInstancePoliciesOneOfSetInstancePolicyMetricsResourcesItem exten
       return this;
     }
   }
+
+  protected SetInstancePoliciesOneOfSetInstancePolicyMetricsResourcesItem() { }
 
   protected SetInstancePoliciesOneOfSetInstancePolicyMetricsResourcesItem(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.policyType,
