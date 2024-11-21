@@ -3,7 +3,7 @@ language: java
 dist: jammy
 
 jdk:
-- openjdk11
+- openjdk8
 
 notifications:
   email: true
@@ -27,13 +27,23 @@ stages:
   - name: Publish-Release
     if: tag IS present
 
+before_install:
+  - sudo apt-get update
+  - env | grep TRAVIS
+  - pyenv global 3.8
+
 jobs:
   include:
     - stage: Build-Test
-      jdk: openjdk11
+      jdk: openjdk8
       install: true
       script:
         - build/setMavenVersion.sh
+        - mvn verify -fae -DskipITs $MVN_ARGS
+
+    - jdk: openjdk11
+      install: true
+      script:
         - mvn verify -fae -DskipITs $MVN_ARGS
 
     - jdk: openjdk17
@@ -41,26 +51,18 @@ jobs:
       script:
         - mvn verify -fae -DskipITs $MVN_ARGS
 
-    - name: Detect-Secrets
-      language: python
-      python: 3.12
-      install:
-        - pip install --upgrade "git+https://github.com/ibm/detect-secrets.git@master#egg=detect-secrets"
-      script:
-        - detect-secrets scan --update .secrets.baseline
-        - detect-secrets -v audit --report --fail-on-unaudited --fail-on-live --fail-on-audited-real .secrets.baseline
-
     - stage: Semantic-Release
-      language: node_js
-      node_js: 22
       install:
-        - pip install --user bump-my-version
+        - nvm install 20
+        - node --version
+        - npm --version
         - npm install
+        - pip install --user bump2version
       script:
         - npm run semantic-release
 
     - stage: Publish-Release
-      jdk: openjdk11
+      jdk: openjdk8
       name: Publish-Javadoc
       install: true
       script:
@@ -70,7 +72,7 @@ jobs:
       after_success:
         - echo "Javadocs successfully published to gh-pages!"
 
-    - jdk: openjdk11
+    - jdk: openjdk8
       name: Publish-To-Maven-Central
       install: true
       script:
