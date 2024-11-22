@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/IBM/keyprotect-java-client/compare/1.0.2...1.0.3) (2024-11-22)
+
+
+### Bug Fixes
+
+* **build:** replace GPG key ([#51](https://github.com/IBM/keyprotect-java-client/issues/51)) ([2ef9ae1](https://github.com/IBM/keyprotect-java-client/commit/2ef9ae11223f68a6fb095eddac4232b7744d5ee3))
+
 ## [1.0.2](https://github.com/IBM/keyprotect-java-client/compare/1.0.1...1.0.2) (2024-11-22)
 
 
