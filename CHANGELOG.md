@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/IBM/keyprotect-java-client/compare/1.0.1...1.0.2) (2024-11-22)
+
+
+### Bug Fixes
+
+* **build:** update testng ([#50](https://github.com/IBM/keyprotect-java-client/issues/50)) ([1f8d6b0](https://github.com/IBM/keyprotect-java-client/commit/1f8d6b0183d974301da0001aa2904f7105365368))
+
 ## [1.0.1](https://github.com/IBM/keyprotect-java-client/compare/1.0.0...1.0.1) (2024-11-22)
 
 
