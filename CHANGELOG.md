@@ -1,3 +1,13 @@
+## [1.0.1](https://github.com/IBM/keyprotect-java-client/compare/1.0.0...1.0.1) (2024-11-22)
+
+
+### Bug Fixes
+
+* **build:** bump my version ([#49](https://github.com/IBM/keyprotect-java-client/issues/49)) ([a2a661d](https://github.com/IBM/keyprotect-java-client/commit/a2a661d6b102660a6b0c959fbb4e26b546fb02bb))
+* **build:** Bump testng from 7.4.0 to 7.5.1 ([#38](https://github.com/IBM/keyprotect-java-client/issues/38)) ([b58b040](https://github.com/IBM/keyprotect-java-client/commit/b58b04006e7788b2953c3553772875e80f91ef93))
+* **build:** Update Travis CI file ([#48](https://github.com/IBM/keyprotect-java-client/issues/48)) ([ab23abc](https://github.com/IBM/keyprotect-java-client/commit/ab23abccf47cd80f3cda1fe436f92885fcafa8e1))
+* **build:** update version of java sdk-core ([#47](https://github.com/IBM/keyprotect-java-client/issues/47)) ([7b4a874](https://github.com/IBM/keyprotect-java-client/commit/7b4a8747ba2fe8100f8455dfb61c4de552a58341))
+
 # [1.0.0](https://github.com/IBM/keyprotect-java-client/compare/0.2.4...1.0.0) (2024-06-24)
 
 
