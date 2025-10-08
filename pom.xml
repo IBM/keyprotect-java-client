@@ -89,7 +89,7 @@
     <jacoco-plugin-version>0.8.8</jacoco-plugin-version>
     <ic-rc-version>0.69.0</ic-rc-version>
     <gson-version>2.13.2</gson-version>
-    <slf4j-version>1.7.12</slf4j-version>
+    <slf4j-version>2.1.0</slf4j-version>
     <javax-json-version>1.1.4</javax-json-version>
     <glassfish-version>1.1.4</glassfish-version>    
 
