@@ -83,7 +83,7 @@
     <maven-buildnumber-plugin-version>3.0.0</maven-buildnumber-plugin-version>
     <powermock-version>2.0.9</powermock-version>
     <mockito-version>3.2.4</mockito-version>
-    <nexus-staging-plugin-version>1.6.13</nexus-staging-plugin-version>
+    <central-publish-plugin-version>0.8.0</central-publish-plugin-version>
     <maven-gpg-plugin-version>3.0.1</maven-gpg-plugin-version>
     <slf4j-version>2.0.0</slf4j-version>
     <jacoco-plugin-version>0.8.8</jacoco-plugin-version>
@@ -182,9 +182,9 @@
           <version>${maven-deploy-plugin-version}</version>
         </plugin>
         <plugin>
-          <groupId>org.sonatype.plugins</groupId>
-          <artifactId>nexus-staging-maven-plugin</artifactId>
-          <version>${nexus-staging-plugin-version}</version>
+            <groupId>org.sonatype.central</groupId>
+            <artifactId>central-publishing-maven-plugin</artifactId>
+            <version>${central-publish-plugin-version}</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -508,15 +508,13 @@
       <build>
         <plugins>
           <plugin>
-            <groupId>org.sonatype.plugins</groupId>
-            <artifactId>nexus-staging-maven-plugin</artifactId>
-            <extensions>true</extensions>
-            <configuration>
-              <serverId>ossrh</serverId>
-              <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-              <autoReleaseAfterClose>true</autoReleaseAfterClose>
-              <keepStagingRepositoryOnCloseRuleFailure>true</keepStagingRepositoryOnCloseRuleFailure>
-            </configuration>
+              <groupId>org.sonatype.central</groupId>
+              <artifactId>central-publishing-maven-plugin</artifactId>
+              <extensions>true</extensions>
+              <configuration>
+                  <publishingServerId>central</publishingServerId>
+                  <autoPublish>true</autoPublish>
+              </configuration>
           </plugin>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
