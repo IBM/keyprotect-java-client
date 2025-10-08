@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/IBM/keyprotect-java-client/compare/1.0.3...1.0.4) (2025-10-08)
+
+
+### Bug Fixes
+
+* **build:** Update Dependencies Oct 2025 ([#55](https://github.com/IBM/keyprotect-java-client/issues/55)) ([0809f8a](https://github.com/IBM/keyprotect-java-client/commit/0809f8a557daa7b783aa36b7102d05593c58a5de))
+
 ## [1.0.3](https://github.com/IBM/keyprotect-java-client/compare/1.0.2...1.0.3) (2024-11-22)
 
 
