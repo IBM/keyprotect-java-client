@@ -95,11 +95,6 @@
             <id>na-artifactory-ibmcloud-sdks</id>
             <url>https://na.artifactory.swg-devops.com:443/artifactory/wcp-ibmcloud-sdks-team-maven-local/</url>
         </repository>
-
-        <repository>
-            <id>jcenter</id>
-            <url>https://jcenter.bintray.com/</url>
-        </repository>
     </repositories>
 
     <!-- This section is commented out because we use an alternate deploy plugin. 
