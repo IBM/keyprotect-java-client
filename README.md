@@ -110,7 +110,7 @@ Following examples use the service(testService) created above.
             InputStream inputstream = new FileInputStream(<PATH_TO_Create_Key_Body>)
             CreateKeyOptions createKeyOptionsModel = new CreateKeyOptions.Builder()
                     .bluemixInstance(bluemixInstance)
-                    .createKeyOneOf(inputstream)
+                    .keyCreateBody(inputstream)
                     .correlationId("testString")
                     .prefer("return=representation")
                     .build();
