@@ -17,7 +17,7 @@ echo '<!DOCTYPE html>
         <h1>IBM Cloud Key Protect Service Java SDK Documentation</h1>
     </div>
 
-    <p><a href="https://cloud.ibm.com/apidocs?category=security&subCategory=key-protect">Key Protect Service Info</a>
+    <p><a href="https://cloud.ibm.com/apidocs?category=security&subCategory=key-protect">IBM Cloud Key Protect Service Info</a>
         | <a href="https://github.com/IBM/keyprotect-java-client">GitHub</a>
     </p>
 
