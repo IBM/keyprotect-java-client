@@ -1,3 +1,10 @@
+## [1.0.6](https://github.com/IBM/keyprotect-java-client/compare/1.0.5...1.0.6) (2026-10-15)
+
+
+### Bug Fixes
+
+* **deps:** Update dependencies to addres vulnerabilities, add permissions to GHActions workflows ([#61](https://github.com/IBM/keyprotect-java-client/issues/61)) ([cde5b8d](https://github.com/IBM/keyprotect-java-client/commit/cde5b8d110fee8c409b877365cf1c80743d69b1d))
+
 ## [1.0.5](https://github.com/IBM/keyprotect-java-client/compare/1.0.4...1.0.5) (2025-10-08)
 
 
