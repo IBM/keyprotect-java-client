@@ -9,3 +9,4 @@ if [[ -n "${TRAVIS_TAG}" ]]; then
 else
     printf "\n>>>>> Bypassing artifact version setting for non-tagged build\n"
 fi
+     
