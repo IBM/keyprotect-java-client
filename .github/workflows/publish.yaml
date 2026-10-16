@@ -29,7 +29,7 @@ jobs:
         uses: actions/setup-java@v6
         with:
           java-version: 11
-          distribution: 'semeru'
+          distribution: 'temurin'
           cache: 'maven'
           # Configure ~/.m2/settings.xml
           server-id: central
