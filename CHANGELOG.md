@@ -1,3 +1,10 @@
+## [1.0.8](https://github.com/IBM/keyprotect-java-client/compare/1.0.7...1.0.8) (2026-10-16)
+
+
+### Bug Fixes
+
+* **build:** Debugging publish GHA Workflow ([#63](https://github.com/IBM/keyprotect-java-client/issues/63)) ([cb4d94e](https://github.com/IBM/keyprotect-java-client/commit/cb4d94e83aa8ea184d53bba6ecd0c16ca2ed29eb))
+
 ## [1.0.7](https://github.com/IBM/keyprotect-java-client/compare/1.0.6...1.0.7) (2026-10-16)
 
 
