@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Required environment variables:
 # GH_TOKEN
@@ -21,7 +22,7 @@ pushd gh-pages
 printf "\n>>>>> Copying javadocs to new directory: docs/%s\n" ${GH_TAG}
 rm -rf docs/${GH_TAG}
 mkdir -p docs/${GH_TAG}
-cp -rf ../target/site/apidocs/* docs/${GH_TAG}
+cp -rf ../target/reports/apidocs/* docs/${GH_TAG}
 
 printf "\n>>>>> Generating gh-pages index.html...\n"
 ../build/generateJavadocIndex.sh > index.html
