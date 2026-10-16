@@ -1,3 +1,10 @@
+## [1.0.7](https://github.com/IBM/keyprotect-java-client/compare/1.0.6...1.0.7) (2026-10-16)
+
+
+### Bug Fixes
+
+* **build:** update build scripts for GHA, remove signing key enc ([#62](https://github.com/IBM/keyprotect-java-client/issues/62)) ([b5c0220](https://github.com/IBM/keyprotect-java-client/commit/b5c02201eb4f2785c9698a25c6baa2e56ffca8d1))
+
 ## [1.0.6](https://github.com/IBM/keyprotect-java-client/compare/1.0.5...1.0.6) (2026-10-15)
 
 
