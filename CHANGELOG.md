@@ -1,3 +1,10 @@
+## [1.0.9](https://github.com/IBM/keyprotect-java-client/compare/1.0.8...1.0.9) (2026-10-16)
+
+
+### Bug Fixes
+
+* **build:** GHActions SetupJava distribution update ([#64](https://github.com/IBM/keyprotect-java-client/issues/64)) ([859d0b1](https://github.com/IBM/keyprotect-java-client/commit/859d0b12c02aa573c155a45b4f69c7eef77aace3))
+
 ## [1.0.8](https://github.com/IBM/keyprotect-java-client/compare/1.0.7...1.0.8) (2026-10-16)
 
 
