@@ -26,18 +26,19 @@ jobs:
           persist-credentials: false
 
       - name: Setup Java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v6
         with:
           java-version: 11
           distribution: 'adopt'
           cache: 'maven'
           # Configure ~/.m2/settings.xml
           server-id: central
-          server-username: CP_USERNAME
-          server-password: CP_PASSWORD
+          server-username-env-var: CP_USERNAME
+          server-password-env-var: CP_PASSWORD
           # Import GPG key into build agent's local keystore
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
-          gpg-passphrase: ${{ secrets.GPG_PASSPHRASE }}
+          # Name of the env var holding the passphrase (set in the publish step below)
+          gpg-passphrase-env-var: MAVEN_GPG_PASSPHRASE
 
       - name: Set artifact version to ${{ github.ref_name }}
         run: mvn -B versions:set -DnewVersion=${{ github.ref_name}} -DgenerateBackupPoms=false
@@ -56,6 +57,17 @@ jobs:
           CP_USERNAME: ${{ secrets.CP_USERNAME }}
           CP_PASSWORD: ${{ secrets.CP_PASSWORD }}
           GPG_KEYNAME: ${{ secrets.GPG_KEYNAME }}
-          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
         run: |
           mvn -B deploy -DskipTests -P central
+
+      # Diagnostic: show exactly what was bundled and uploaded to Central.
+      # Runs even if the deploy step fails, since validation happens inside it.
+      # TODO: remove once debugging is done.
+      - name: Inspect Central bundle
+        if: always()
+        run: |
+          echo "--- central-staging tree"
+          find target/central-staging -print | sort
+          echo "--- central-bundle.zip contents"
+          unzip -l target/central-publishing/central-bundle.zip

@@ -539,7 +539,6 @@
       <properties>
         <!-- Configure the gpg plugin to use the env vars defined in the Travis build settings -->
         <gpg.keyname>${env.GPG_KEYNAME}</gpg.keyname>
-        <gpg.passphrase>${env.GPG_PASSPHRASE}</gpg.passphrase>
       </properties>
     </profile>
 
