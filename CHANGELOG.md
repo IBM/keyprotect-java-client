@@ -1,3 +1,10 @@
+## [1.0.10](https://github.com/IBM/keyprotect-java-client/compare/1.0.9...1.0.10) (2026-10-16)
+
+
+### Bug Fixes
+
+* **build:** local repro with central-publish-plugin-version ([#65](https://github.com/IBM/keyprotect-java-client/issues/65)) ([25c54f1](https://github.com/IBM/keyprotect-java-client/commit/25c54f11207e688ba503ab90c3c95c4b93911306))
+
 ## [1.0.9](https://github.com/IBM/keyprotect-java-client/compare/1.0.8...1.0.9) (2026-10-16)
 
 
