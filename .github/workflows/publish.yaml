@@ -60,3 +60,14 @@ jobs:
           MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
         run: |
           mvn -B deploy -DskipTests -P central
+
+      # Diagnostic: show exactly what was bundled and uploaded to Central.
+      # Runs even if the deploy step fails, since validation happens inside it.
+      # TODO: remove once debugging is done.
+      - name: Inspect Central bundle
+        if: always()
+        run: |
+          echo "--- central-staging tree"
+          find target/central-staging -print | sort
+          echo "--- central-bundle.zip contents"
+          unzip -l target/central-publishing/central-bundle.zip
